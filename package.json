@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Application for the ASD-Fri-Group-05 project",
   "scripts": {
+    "start": "cd server && npm install && node server.js",
+    "build": "echo RUNNING BUILD",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
