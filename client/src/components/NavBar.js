@@ -2,11 +2,12 @@ import React from "react";
 import "../assets/css/navbar.scss";
 import { Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/images/stocking-up.png";
+import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
   return (
     <Navbar className="navbar">
-      <Navbar.Brand className="" href="#home">
+      <Navbar.Brand className="Logo" href="#home">
         <img
           src={logo}
           width="30"
@@ -27,9 +28,9 @@ const NavBar = () => {
         </Nav.Link>
       </Nav>
       <Navbar.Brand className="navitem justify-content-end" href="#profile">
-        <p id="myProfile">My Profile</p>
+        <p id="myProfile">My Profile </p>
         <img
-          src=""
+          src={profileIcon}
           width="30"
           height="30"
           className="align-top"
