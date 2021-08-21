@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* make the customizations */
+$theme-colors: (
+  "background-color-1": #1c0f51,
+  "background-color-2": #120930,
+  "navbar-color": #2b1f66,
+  "font-color": #ffffff,
+);
+
+$font-family: Roboto, sans-serif;
+
+@function theme-color($key: "color") {
+  @return map-get($theme-colors, $key);
+}
+
+html body {
+  background: linear-gradient(
+    theme-color("background-color-1"),
+    theme-color("background-color-2")
+  );
+}
+
+.navbar {
+  background-color: theme-color("navbar-color");
+  padding-left: 0;
+}
+
+.navitem {
+  color: theme-color("font-color") !important;
+  font: $font-family;
+}
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
