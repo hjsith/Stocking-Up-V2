@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/css/navbar.scss";
 import { Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/images/stocking-up.png";
 
@@ -26,6 +27,7 @@ const NavBar = () => {
         </Nav.Link>
       </Nav>
       <Navbar.Brand className="navitem justify-content-end" href="#profile">
+        <p id="myProfile">My Profile</p>
         <img
           src=""
           width="30"

@@ -14,13 +14,6 @@ $font-family: Roboto, sans-serif;
   @return map-get($theme-colors, $key);
 }
 
-html body {
-  background: linear-gradient(
-    theme-color("background-color-1"),
-    theme-color("background-color-2")
-  );
-}
-
 .navbar {
   background-color: theme-color("navbar-color");
   padding-left: 0;
