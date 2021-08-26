@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+.BackgroundPanel1 {
+    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+    height: 40em;
+    width: 36.125em;
+    border-radius: 0.625em;
+    margin-top: 1.25em;
+    margin-left: 1.25em;
+    display: inline-block;
+    vertical-align: top
+}
+
+.BackgroundPanel2 {
+    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+    height: 40em;
+    width: 51.25em;
+    border-radius: 0.625em;
+    margin-top: 1.25em;
+    margin-left: 1.25em;
+    display: inline-block;
+    vertical-align: top
+}
+
+.PanelTitle {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.25em;
+    color: white;
+    padding: 1.25em 1.25em 0em 1.25em;
+}
+
+.TableTitleFont > tr > th{
+    font-family: "Roboto", sans-serif;
+    font-size:  0.625em;
+    color:#C2BEBE;
+    padding: 1.25em;
+    font-weight: normal;
+}
+
+.TableTitleFont {
+    margin-left: 0.9em;
+}
+
+.line{
+    // border: 0.5em solid white;
+    height: 0.05em;
+    margin: 1.25em 1.25em 0em 1.25em;;
+    width:93%;
+    background-color: white;
+}
+
+.OrderRowPanel{
+    height: 3em;
+    width: 95%;
+    background-color:#140F37;
+    margin-left: 1.25em;
+    margin-bottom: 1.25em;
+    border-radius: 0.625em;
+}
+
+.table > tr > th{
+    font-family: "Roboto", sans-serif;
+    font-size:  0.625em;
+    color:#C2BEBE;
+    font-weight: normal;
+}
+
+.RedCancelButton {
+
+}
+
+.GreyCancelledButton {
+    height: 3em;
+    width: 7em;
+    background-color: rgb(51, 51, 51);
+    border-radius: 2em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.GreenCompletedButton{
+    height: 3em;
+    width: 7em;
+    background-color: green;
+    border-radius: 2em;
+    text-align: center;
+    vertical-align: middle;
+}

@@ -1,18 +1,14 @@
 import "./assets/css/App.scss";
 import UserProfileIcon from "./components/UserProfileIcon";
 import NavBar from "./components/NavBar";
+import PortfolioPage from "./components/PortfolioPage";
 
 function App() {
   return (
     <>
       <NavBar />
-      <UserProfileIcon name="Vishaal Kumar" />
-      <UserProfileIcon name="Hasith Jayasekera" />
-      <UserProfileIcon name="Jasmin Narisetty" />
-      <UserProfileIcon name="Sanya Dua" />
-      <UserProfileIcon name="Aiswaryalakshmi Rajeev" />
-      <UserProfileIcon name="James Lee" />
-      <UserProfileIcon name="Gemly" />
+      {/* <UserProfileIcon name="Vishaal Kumar" /> */}
+      <PortfolioPage />
     </>
   );
 }
