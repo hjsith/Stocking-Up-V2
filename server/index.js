@@ -4,15 +4,20 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const staticDir = path.join(__dirname, "../client/build/");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.static(path.resolve(__dirname, "../client", "build")));
+app.use(express.static(staticDir));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile("index.html", { root: staticDir });
 });
+
+// app.get("/", (req, res) => {
+//   res.sendFile("index.html", { root: staticDir });
+// });
 
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);

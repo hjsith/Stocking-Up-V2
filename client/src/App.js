@@ -1,20 +1,28 @@
 import "./assets/css/App.scss";
-import UserProfileIcon from "./components/UserProfileIcon";
-import NavBar from "./components/NavBar";
+import React from "react";
+import Profile from "./pages/Profile";
+import temp from "./pages/temp";
+import {
+  Switch,
+  Route,
+  BrowserRouter as Router,
+  Redirect,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <>
-      <NavBar />
-      <UserProfileIcon name="Vishaal Kumar" />
-      <UserProfileIcon name="Hasith Jayasekera" />
-      <UserProfileIcon name="Jasmin Narisetty" />
-      <UserProfileIcon name="Sanya Dua" />
-      <UserProfileIcon name="Aiswaryalakshmi Rajeev" />
-      <UserProfileIcon name="James Lee" />
-      <UserProfileIcon name="Gemly" />
-    </>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/Profile" component={Profile} />
+          <Route path="/temp" component={temp} />
+          <Route exact path="/">
+            <Redirect to="/temp" />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;
