@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/css/navbar.scss";
 import { Navbar, Nav } from "react-bootstrap";
-import logo from "../assets/images/stocking-up.png";
+import logo from "../assets/images/Lightlogo.png";
 import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
@@ -10,8 +10,8 @@ const NavBar = () => {
       <Navbar.Brand className="Logo" href="#home">
         <img
           src={logo}
-          width="30"
-          height="30"
+          width="45"
+          height="45"
           className="align-top"
           alt="Logo"
         />
@@ -31,8 +31,8 @@ const NavBar = () => {
         <p id="myProfile">My Profile </p>
         <img
           src={profileIcon}
-          width="30"
-          height="30"
+          width="35"
+          height="35"
           className="align-top"
           alt="Profile"
         />
