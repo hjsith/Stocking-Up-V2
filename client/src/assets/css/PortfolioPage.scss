@@ -65,7 +65,16 @@
 .OrderRowPanel{
     height: 5em;
     width: 97%;
-    background-color:#140F37;
+    background-color:#140f37bb;
+    margin-left: 1.25em;
+    margin-bottom: 1.25em;
+    border-radius: 0.625em;
+}
+
+.HoldingsRowPanel{
+    height: 5em;
+    width: 97%;
+    background-color:#261e56b4;
     margin-left: 1.25em;
     margin-bottom: 1.25em;
     border-radius: 0.625em;

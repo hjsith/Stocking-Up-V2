@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
+import HoldingsRowPanel from "./HoldingsRowPanel";
 import OrderRowPanel from "./OrderRowPanel";
 import PanelTitle from "./PanelTitle";
 import UserProfileIcon from "./UserProfileIcon";
@@ -15,6 +16,20 @@ class PortfolioPage extends React.Component {
           <UserProfileIcon name="Hjsith" />
           <WhiteLine />
           <PanelTitle title="My Holdings" />
+          <table className="TableTitleFont">
+            <tr>
+              <th>Company Code</th>
+              <th>Company Name</th>
+              <th>Price Bought</th>
+              <th>Current Price</th>
+              <th>Quantity (units)</th>
+              <th>Total ($)</th>
+              <th>Actions</th>
+            </tr>
+          </table>
+          <HoldingsRowPanel />
+          <HoldingsRowPanel />
+          <HoldingsRowPanel />
         </div>
         <div className="BackgroundPanel2">
           {" "}
