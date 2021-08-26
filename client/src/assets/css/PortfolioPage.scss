@@ -2,8 +2,8 @@
 
 .BackgroundPanel1 {
     background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 40em;
-    width: 36.125em;
+    height: 75em;
+    width: 66em;
     border-radius: 0.625em;
     margin-top: 1.25em;
     margin-left: 1.25em;
@@ -13,8 +13,8 @@
 
 .BackgroundPanel2 {
     background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 40em;
-    width: 51.25em;
+    height: 75em;
+    width: 90em;
     border-radius: 0.625em;
     margin-top: 1.25em;
     margin-left: 1.25em;
@@ -24,22 +24,35 @@
 
 .PanelTitle {
     font-family: "Roboto", sans-serif;
-    font-size: 1.25em;
+    font-size: 1.5em;
     color: white;
     padding: 1.25em 1.25em 0em 1.25em;
 }
 
-.TableTitleFont > tr > th{
+.TableTitleFont2 > tr > th{
     font-family: "Roboto", sans-serif;
-    font-size:  0.625em;
+    font-size:  0.9em;
     color:#C2BEBE;
     padding: 1.25em;
     font-weight: normal;
+    width:1000px
+}
+
+
+.TableTitleFont > tr > th{
+    font-family: "Roboto", sans-serif;
+    font-size:  0.9em;
+    color:#C2BEBE;
+    padding: 1.25em;
+    font-weight: normal;
+    width:1000px
 }
 
 .TableTitleFont {
     margin-left: 0.9em;
 }
+
+
 
 .line{
     // border: 0.5em solid white;
@@ -50,39 +63,38 @@
 }
 
 .OrderRowPanel{
-    height: 3em;
-    width: 95%;
+    height: 5em;
+    width: 97%;
     background-color:#140F37;
     margin-left: 1.25em;
     margin-bottom: 1.25em;
     border-radius: 0.625em;
 }
 
-.table > tr > th{
-    font-family: "Roboto", sans-serif;
-    font-size:  0.625em;
-    color:#C2BEBE;
-    font-weight: normal;
-}
+// .table > tr > th{
+//     font-family: "Roboto", sans-serif;
+//     font-size:  0.625em;
+//     color:#C2BEBE;
+//     font-weight: normal;
+// }
 
-.RedCancelButton {
-
-}
 
 .GreyCancelledButton {
     height: 3em;
     width: 7em;
     background-color: rgb(51, 51, 51);
     border-radius: 2em;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .GreenCompletedButton{
     height: 3em;
-    width: 7em;
+    width: 8em;
     background-color: green;
     border-radius: 2em;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -24,24 +24,13 @@ class PortfolioPage extends React.Component {
               <th>Company Code</th>
               <th>Company Name</th>
               <th>Price Bought</th>
+              <th>Current Price</th>
               <th>Quantity (units)</th>
-              <th>Total</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>Total ($)</th>
               <th>Status</th>
             </tr>
           </table>
+          <OrderRowPanel />
           <OrderRowPanel />
           <OrderRowPanel />
           <OrderRowPanel />

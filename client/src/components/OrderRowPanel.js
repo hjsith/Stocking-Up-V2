@@ -8,30 +8,19 @@ import UserProfileIcon from "./UserProfileIcon";
 class OrderRowPanel extends React.Component {
   render() {
     return <div className="OrderRowPanel"> 
-     <table className="table">
-     <tr>
-              <th><UserProfileIcon name="A2M" /></th>
-              <th>A2M</th>
-              <th>Price Bought</th>
-              <th>Quantity (units)</th>
-              <th>Total</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th><GreenCompletedButton/> </th>
+     <table className="TableTitleFont2">
+            <tr>
+              <th><UserProfileIcon name="A2M" /> </th>
+              
+              <th>A2 Milk</th>
+              <th>$6.52</th>
+              <th>$7.02</th>
+              <th>150</th>
+              <th>$975</th>
+              <th><GreenCompletedButton /></th>
             </tr>
           </table>
-          <GreenCompletedButton/>
+          
     </div>;
   }
 }
