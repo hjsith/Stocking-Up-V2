@@ -33,6 +33,10 @@ const NavBar = () => {
             Discussion Board Search
           </NavDropdown.Item>
         </NavDropdown>
+        <NavDropdown title="Companies" id="basic-nav-dropdown">
+          <NavDropdown.Item href="/CompanySearch">Search</NavDropdown.Item>
+          <NavDropdown.Item href="#Order">Order</NavDropdown.Item>
+        </NavDropdown>
       </Nav>
       <Nav>
         <NavDropdown
