@@ -3,6 +3,7 @@ import React from "react";
 import Profile from "./pages/Profile";
 import CompanySearch from "./pages/CompanySearch";
 import temp from "./pages/temp";
+import Portfolio from "./pages/Portfolio";
 import {
   Switch,
   Route,
@@ -17,6 +18,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/Profile" component={Profile} />
           <Route path="/CompanySearch" component={CompanySearch} />
+          <Route path="/Portfolio" component={Portfolio} />
           <Route path="/temp" component={temp} />
           <Route exact path="/">
             <Redirect to="/temp" />

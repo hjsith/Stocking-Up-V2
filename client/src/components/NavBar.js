@@ -17,7 +17,7 @@ const NavBar = () => {
         />
       </Navbar.Brand>
       <Nav className="me-auto">
-        <Nav.Link className="navitem" href="#portfolio">
+        <Nav.Link className="navitem" href="/Portfolio">
           Portfolio
         </Nav.Link>
         <NavDropdown title="Markets" id="basic-nav-dropdown">

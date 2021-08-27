@@ -1,15 +1,17 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
-import HoldingsRowPanel from "./HoldingsRowPanel";
-import OrderRowPanel from "./OrderRowPanel";
-import PanelTitle from "./PanelTitle";
-import UserProfileIcon from "./UserProfileIcon";
-import WhiteLine from "./WhiteLine";
+import HoldingsRowPanel from "../components/HoldingsRowPanel";
+import OrderRowPanel from "../components/OrderRowPanel";
+import PanelTitle from "../components/PanelTitle";
+import UserProfileIcon from "../components/UserProfileIcon";
+import WhiteLine from "../components/WhiteLine";
+import NavBar from "../components/NavBar";
 
-class PortfolioPage extends React.Component {
+class Portfolio extends React.Component {
   render() {
     return (
       <>
+      <NavBar />
         <div className="BackgroundPanel1">
           {" "}
           <PanelTitle title="Hjsith" />{" "}
@@ -56,4 +58,4 @@ class PortfolioPage extends React.Component {
   }
 }
 
-export default PortfolioPage;
+export default Portfolio;
