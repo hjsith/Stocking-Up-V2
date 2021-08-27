@@ -1,16 +1,30 @@
 import "./assets/css/App.scss";
-import UserProfileIcon from "./components/UserProfileIcon";
-import NavBar from "./components/NavBar";
-import PortfolioPage from "./components/PortfolioPage";
+import React from "react";
+import Profile from "./pages/Profile";
+import CompanySearch from "./pages/CompanySearch";
+import temp from "./pages/temp";
+import {
+  Switch,
+  Route,
+  BrowserRouter as Router,
+  Redirect,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <>
-      <NavBar />
-      {/* <UserProfileIcon name="Vishaal Kumar" /> */}
-      <PortfolioPage />
-    </>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route path="/Profile" component={Profile} />
+          <Route path="/CompanySearch" component={CompanySearch} />
+          <Route path="/temp" component={temp} />
+          <Route exact path="/">
+            <Redirect to="/temp" />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;
