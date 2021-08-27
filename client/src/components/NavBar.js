@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/css/navbar.scss";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import logo from "../assets/images/stocking-up.png";
+import logo from "../assets/images/LogowithoutB.png";
 import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
@@ -10,8 +10,8 @@ const NavBar = () => {
       <Navbar.Brand className="Logo" href="/temp">
         <img
           src={logo}
-          width="45"
-          height="45"
+          width="50"
+          height="50"
           className="align-top"
           alt="Logo"
         />
