@@ -24,7 +24,7 @@ const NavBar = () => {
           <NavDropdown.Item href="#Markets Overview">
             Markets Overview
           </NavDropdown.Item>
-          <NavDropdown.Item href="#NewsFeed">News Feed</NavDropdown.Item>
+          <NavDropdown.Item href="/quotemgmt">News Feed</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
           <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>

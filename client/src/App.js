@@ -2,6 +2,8 @@ import "./assets/css/App.scss";
 import React from "react";
 import Profile from "./pages/Profile";
 import temp from "./pages/temp";
+import quotemgmt from "./pages/quotemgmt";
+
 import {
   Switch,
   Route,
@@ -15,6 +17,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/Profile" component={Profile} />
+          <Route path="/quotemgmt" component={quotemgmt} />
           <Route path="/temp" component={temp} />
           <Route exact path="/">
             <Redirect to="/temp" />
