@@ -10,7 +10,7 @@ import NavBar from "../components/NavBar";
 class Portfolio extends React.Component {
   render() {
     return (
-      <>
+      <div className="test">
       <NavBar />
         <div className="BackgroundPanel1">
           {" "}
@@ -53,7 +53,7 @@ class Portfolio extends React.Component {
           <OrderRowPanel />
           <WhiteLine />
         </div>
-      </>
+      </div>
     );
   }
 }
