@@ -2,7 +2,9 @@ import React from "react";
 import "../assets/css/PortfolioPage.scss";
 import HoldingsRowPanel from "../components/HoldingsRowPanel";
 import OrderRowPanel from "../components/OrderRowPanel";
+import WatchlistRowPannel from "../components/WatchlistRowPanel"
 import PanelTitle from "../components/PanelTitle";
+import PortfolioOverviewPanel from "../components/PortfolioOverviewPanel";
 import UserProfileIcon from "../components/UserProfileIcon";
 import WhiteLine from "../components/WhiteLine";
 import NavBar from "../components/NavBar";
@@ -14,8 +16,13 @@ class Portfolio extends React.Component {
       <NavBar />
         <div className="BackgroundPanel1">
           {" "}
-          <PanelTitle title="Hjsith" />{" "}
-          <UserProfileIcon name="Hjsith" />
+          <table className="TableTitleFont3">
+            <tr>
+            <th><UserProfileIcon name="Hjsith" /></th>
+              <th><PanelTitle title="Hjsith" /></th>
+              </tr>
+          </table>
+          <PortfolioOverviewPanel />
           <WhiteLine />
           <PanelTitle title="My Holdings" />
           <table className="TableTitleFont">
@@ -29,6 +36,7 @@ class Portfolio extends React.Component {
               <th>Actions</th>
             </tr>
           </table>
+          <HoldingsRowPanel />
           <HoldingsRowPanel />
           <HoldingsRowPanel />
           <HoldingsRowPanel />
@@ -50,8 +58,20 @@ class Portfolio extends React.Component {
           <OrderRowPanel />
           <OrderRowPanel />
           <OrderRowPanel />
-          <OrderRowPanel />
           <WhiteLine />
+          <PanelTitle title="Watchlist" />
+          <table className="TableTitleFont">
+            <tr>
+              <th>Company Code</th>
+              <th>Company Name</th>
+              <th>Current Price</th>
+              <th>Industry</th>
+            </tr>
+          </table>
+          <WatchlistRowPannel />
+          <WatchlistRowPannel />
+          <WatchlistRowPannel />
+          <WatchlistRowPannel />
         </div>
       </div>
     );
