@@ -11,7 +11,7 @@ const Funds = (props) => {
 }
 
 Funds.defaultProps = {
-    funds: 5000,
+    funds: 5000.00,
 }
 
 export default Funds

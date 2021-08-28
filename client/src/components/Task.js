@@ -1,21 +1,25 @@
 
+import "../assets/css/QuoteMan.scss";
 
 const Task = ( { task }) => {
     return (
-        <div className = 'task'>
+            <table className = 'shareInfo'>
+                <tr className = 'headingTable'>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Volume</th>
+                </tr>
+                    <tr className = 'infoTable'>
+                        <td>{task.open}</td>
+                        <td>{task.high}</td>
+                        <td>{task.low}</td>
+                        <td>{task.volume}</td>
+                    </tr>
+
+
+            </table>
             
-            <h4>Open</h4>
-            <p>{task.open}</p>
-            
-            <h4>High</h4>
-            <p>{task.high}</p>
-            
-            <h4>Low</h4>
-            <p>{task.low}</p>
-            
-            <h4>Volume</h4>
-            <p>{task.volume}</p>
-        </div>
     )
 }
 

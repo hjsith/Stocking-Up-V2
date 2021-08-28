@@ -9,11 +9,14 @@ import Header from '../components/Header';
 import Tasks from '../components/Tasks';
 import Funds from '../components/Funds';
 import NavBar from '../components/NavBar';
+import Change from '../components/Change';
+import "../assets/css/QuoteMan.scss";
+import Graph from '../components/Graph';
 
 
 const Quotemgmt = () => {
   
-  var sharePrice = 150;
+  var sharePrice = 1.50;
 
 
     const [counter, setCounter] = useState(0)
@@ -63,20 +66,53 @@ const Quotemgmt = () => {
 
 
   return (
+   
     <div>
         <NavBar />
-        <Header x={sharePrice} title={"A2 MILK"}/>
+        <div className="side1">
+        <div className="BackgroundPanel1">
+        <Header x={sharePrice} title={"A2 MILK - A2M"}/>
+        </div>
+        <div className="Panel2">
+        <Change />
         <Tasks />
-        <Button className="quantity-input__modifier quantity-input__modifier--left" handleClick={decrease} text="-"/>
+        <div/>
+        
+        <div className="Panel3">
+        <h2>Quantity:</h2>
+
+        <div className="quantityBtn1">
+        <Button style handleClick={decrease} text="-"/>
+        </div>
+        <div className="quantityNumber">
         <Display number = {counter}/>
+        </div>
+        <div className="quantityBtn1">
         <Button handleClick={increase} text="+"/>
-        <Button handleClick={buyButton} text="Buy" />
+        </div>
+        </div>
+
+        <div className="order">
+        
+        <Button handleClick={buyButton} text="Buy"/>
+        
+        
         <Button text="Add to Watchlist"/>
+        
+        
         <Button handleClick={sellButton} text="Sell"/>
-
         <p>{message}</p>
-
+        </div>
+        <div className="funds">
+        <Funds funds={funds}/>
+        </div>
+        </div>
+        </div>
+        <div className="BackgroundPanel2">
+          <Graph />
+        </div>
     </div>
+    
   );
 }
 
