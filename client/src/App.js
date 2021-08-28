@@ -1,5 +1,6 @@
 import "./assets/css/App.scss";
 import React from "react";
+import UpdatePassword from "./pages/UpdatePassword";
 import Profile from "./pages/Profile";
 import temp from "./pages/temp";
 import {
@@ -16,6 +17,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/Profile" component={Profile} />
           <Route path="/temp" component={temp} />
+          <Route path="/UpdatePassword" component={UpdatePassword} />
           <Route exact path="/">
             <Redirect to="/temp" />
           </Route>
