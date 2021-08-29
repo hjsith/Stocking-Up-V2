@@ -18,13 +18,13 @@ class Portfolio extends React.Component {
           {" "}
           <table className="TableNormalTitle">
             <tr>
-              <th>
+              <th width="2%">
                 <UserProfileIcon name="Hjsith" />
               </th>
-              <th>
+              <th width="75%">
                 <th className="NormalPanelTitle">Hjisth</th>
               </th>
-              <th>
+              <th width="20%">
                 <div className="ButtonContainer">
                   <a href="/Leaderboard" className="GoldRankButton">
                     Current Rank: 152 (+10)
@@ -80,8 +80,10 @@ class Portfolio extends React.Component {
           <WhiteLine />
           <table className="TableWatchlistTitle">
             <tr>
-              <th className="NormalPanelTitle">Watchlist</th>
-              <th>
+              <th width="78%">
+                <th className="NormalPanelTitle2">Watchlist</th>
+              </th>
+              <th th width="19%">
                 <div className="ButtonContainer">
                   <a href="/Search" className="BlueWatchlistButton">
                     + Add Company
