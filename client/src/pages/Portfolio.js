@@ -34,6 +34,7 @@ class Portfolio extends React.Component {
               <th>Quantity (units)</th>
               <th>Total ($)</th>
               <th>Actions</th>
+              <th></th>
             </tr>
           </table>
           <HoldingsRowPanel />

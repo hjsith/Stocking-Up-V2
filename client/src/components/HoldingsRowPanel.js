@@ -15,7 +15,18 @@ class HoldingsRowPanel extends React.Component {
               <th>$7.02</th>
               <th>150</th>
               <th>$975</th>
-              <th><GreenCompletedButton /></th>
+              <th>
+              <div className="ButtonContainer"/>
+              <a className="GreenBuyButton">
+                Buy
+              </a>
+              </th>
+              <th>
+              <div className="ButtonContainer"/>
+              <a className="RedSellButton">
+                Sell
+              </a>
+              </th>
             </tr>
           </table>
           

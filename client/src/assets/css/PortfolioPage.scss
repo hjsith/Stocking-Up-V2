@@ -38,6 +38,52 @@
     width:17.8%;
 }
 
+.ButtonContainer {
+
+}
+  
+
+.CancelButton{
+    height: 3em;
+    width: 7em;
+    background-color: #ff4b4b;
+    color: white;
+    border-radius: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+.GreenBuyButton{
+    height: 3em;
+    width: 7em;
+    background-color: green;
+    color: white;
+    border-radius: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+
+  .RedSellButton{
+    height: 3em;
+    width: 7em;
+    background-color: #ff4b4b;
+    color: white;
+    border-radius: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  
+
+  
+
 
 .TableTitleFont3 > tr > th{
     font-family: "Roboto", sans-serif;
@@ -116,6 +162,8 @@
     margin-bottom: 1.25em;
     border-radius: 0.625em;
 }
+
+
 // .table > tr > th{
 //     font-family: "Roboto", sans-serif;
 //     font-size:  0.625em;
@@ -143,3 +191,5 @@
     justify-content: center;
     align-items: center;
 }
+
+

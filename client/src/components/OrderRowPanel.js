@@ -17,7 +17,13 @@ class OrderRowPanel extends React.Component {
               <th>$7.02</th>
               <th>150</th>
               <th>$975</th>
-              <th><GreenCompletedButton /></th>
+              <th>
+              <div className="ButtonContainer">
+              <a className="CancelButton">
+                Cancel
+              </a>
+            </div>
+              </th>
             </tr>
           </table>
           
