@@ -2,30 +2,42 @@ import React from "react";
 import "../assets/css/UserProfileIcon.scss";
 
 class UserProfileIcon extends React.Component {
-  makeObjectNameShorter(objectName) {
+  makeObjectNameShorter(objectName, company) {
     const splitName = objectName.split(" ");
     let shortenedName = "";
-    if (splitName.length >= 2) {
-      shortenedName = splitName[0][0] + splitName[1][0];
+    if (company) {
+      for (let i = 0; i < splitName.length; i++) {
+        shortenedName += splitName[i][0];
+      }
     } else {
-      shortenedName = splitName[0].substring(0, 2);
+      if (splitName.length >= 2) {
+        shortenedName = splitName[0][0] + splitName[1][0];
+      } else {
+        shortenedName = splitName[0].substring(0, 2);
+      }
     }
     return shortenedName;
   }
 
   render() {
-    let shortenedName = this.makeObjectNameShorter(this.props.name);
+    let shortenedName = this.makeObjectNameShorter(
+      this.props.name,
+      this.props.company
+    );
     return (
       <>
         <div className="UserProfileIcon" id={shortenedName}>
-          {shortenedName}
+          <div className="IconText">{shortenedName}</div>
         </div>
       </>
     );
   }
 
   componentDidMount() {
-    let shortenedName = this.makeObjectNameShorter(this.props.name);
+    let shortenedName = this.makeObjectNameShorter(
+      this.props.name,
+      this.props.company
+    );
     var hexArray = [
       "#a01edd",
       "#2EA4D7",
@@ -35,7 +47,12 @@ class UserProfileIcon extends React.Component {
       "#DE3838",
     ];
     document.getElementById(shortenedName).style.backgroundColor =
-      hexArray[this.props.number];
+      hexArray[this.props.colorNumber];
+    document.getElementById(shortenedName).style.height =
+      this.props.size + "px";
+    document.getElementById(shortenedName).style.width = this.props.size + "px";
+    document.getElementById(shortenedName).style.fontSize =
+      this.props.size / 2.5 + "px";
   }
 }
 

@@ -12,7 +12,12 @@ class Profile extends React.Component {
         <NavBar />
         <div className="BackgroundPanel1">
           <div className="ProfileBlock">
-            <UserProfileIcon name="Hjsith" number={1} />
+            <UserProfileIcon
+              name="Hjsith"
+              colorNumber={1}
+              company={false}
+              size={100}
+            />
             <p className="Title Username">Hjsith</p>
             <div className="ButtonContainer">
               <a href="#Friends" className="ProfileFriendButton">
