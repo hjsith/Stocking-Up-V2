@@ -25,7 +25,7 @@ class UserProfileIcon extends React.Component {
   }
 
   componentDidMount() {
-    let shortenedName = makeObjectNameShorter(this.props.name);
+    let shortenedName = this.makeObjectNameShorter(this.props.name);
     var hexArray = [
       "#a01edd",
       "#2EA4D7",
