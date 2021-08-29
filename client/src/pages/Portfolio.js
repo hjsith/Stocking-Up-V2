@@ -2,7 +2,7 @@ import React from "react";
 import "../assets/css/PortfolioPage.scss";
 import HoldingsRowPanel from "../components/HoldingsRowPanel";
 import OrderRowPanel from "../components/OrderRowPanel";
-import WatchlistRowPannel from "../components/WatchlistRowPanel"
+import WatchlistRowPannel from "../components/WatchlistRowPanel";
 import PanelTitle from "../components/PanelTitle";
 import PortfolioOverviewPanel from "../components/PortfolioOverviewPanel";
 import UserProfileIcon from "../components/UserProfileIcon";
@@ -13,21 +13,25 @@ class Portfolio extends React.Component {
   render() {
     return (
       <div className="test">
-      <NavBar />
+        <NavBar />
         <div className="BackgroundPanel1">
           {" "}
           <table className="TableTitleFont3">
             <tr>
-            <th><UserProfileIcon name="Hjsith" /></th>
-              <th><PanelTitle title="Hjsith" /></th>
               <th>
-              <div className="ButtonContainer">
-              <a href="/Leaderboard" className="GoldRankButton">
-                Current Rank: 152 (+10)
-              </a>
-            </div>
+                <UserProfileIcon name="Hjsith" />
               </th>
-              </tr>
+              <th>
+                <PanelTitle title="Hjsith" />
+              </th>
+              <th>
+                <div className="ButtonContainer">
+                  <a href="/Leaderboard" className="GoldRankButton">
+                    Current Rank: 152 (+10)
+                  </a>
+                </div>
+              </th>
+            </tr>
           </table>
           <PortfolioOverviewPanel />
           <WhiteLine />
@@ -44,12 +48,13 @@ class Portfolio extends React.Component {
               <th></th>
             </tr>
           </table>
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
+          <div className="divholding">
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+          </div>
         </div>
         <div className="BackgroundPanel2">
           {" "}
@@ -65,23 +70,28 @@ class Portfolio extends React.Component {
               <th>Status</th>
             </tr>
           </table>
-          <OrderRowPanel />
-          <OrderRowPanel />
-          <OrderRowPanel />
+          <div className="divorder">
+            <OrderRowPanel />
+            <OrderRowPanel />
+            <OrderRowPanel />
+            <OrderRowPanel />
+            <OrderRowPanel />
+          </div>
           <WhiteLine />
           <table className="TableTitleFont3">
             <tr>
-              <th><PanelTitle title="Watchlist" /></th>
               <th>
-              <div className="ButtonContainer">
-              <a href="/Search" className="BlueWatchlistButton">
-                + Add Company
-              </a>
-            </div>
+                <PanelTitle title="Watchlist" />
               </th>
-              </tr>
+              <th>
+                <div className="ButtonContainer">
+                  <a href="/Search" className="BlueWatchlistButton">
+                    + Add Company
+                  </a>
+                </div>
+              </th>
+            </tr>
           </table>
-          
           <table className="TableTitleFont">
             <tr>
               <th>Company Code</th>
@@ -92,10 +102,15 @@ class Portfolio extends React.Component {
               <th>Actions</th>
             </tr>
           </table>
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
+          <div className="divwatchlist">
+            <WatchlistRowPannel />
+            <WatchlistRowPannel />
+            <WatchlistRowPannel />
+            <WatchlistRowPannel />
+            <WatchlistRowPannel />
+            <WatchlistRowPannel />
+            <WatchlistRowPannel />
+          </div>
         </div>
       </div>
     );
