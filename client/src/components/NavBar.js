@@ -10,8 +10,8 @@ const NavBar = () => {
       <Navbar.Brand className="Logo" href="/temp">
         <img
           src={logo}
-          width="50"
-          height="50"
+          width="45"
+          height="45"
           className="align-top"
           alt="Logo"
         />

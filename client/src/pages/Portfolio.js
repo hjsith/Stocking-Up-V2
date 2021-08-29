@@ -54,6 +54,11 @@ class Portfolio extends React.Component {
             <HoldingsRowPanel />
             <HoldingsRowPanel />
             <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
+            <HoldingsRowPanel />
           </div>
         </div>
         <div className="BackgroundPanel2">
