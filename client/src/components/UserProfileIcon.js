@@ -25,11 +25,9 @@ class UserProfileIcon extends React.Component {
       this.props.company
     );
     return (
-      <>
-        <div className="UserProfileIcon" id={shortenedName}>
-          <div className="IconText">{shortenedName}</div>
-        </div>
-      </>
+      <div className="UserProfileIcon" id={shortenedName}>
+        <div className="IconText">{shortenedName}</div>
+      </div>
     );
   }
 

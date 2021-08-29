@@ -73,37 +73,38 @@
   overflow: auto;
 }
 
-.ButtonContainer {
+.PasswordButtonContainer {
   position: relative;
 }
 
 .ProfileFriendButton {
-  height: 35px;
-  width: 125px;
+  width: 150px;
+  height: 40px;
   background-color: white;
+  text-align: center;
   color: black;
   border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
+  margin-left: 50px;
+  line-height: 40px;
 }
 
 .ProfilePasswordButton {
-  height: 35px;
-  width: 200px;
+  height: 40px;
+  width: 250px;
   background-color: #ff4b4b;
   color: white;
   border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  text-align: center;
   text-decoration: none;
-  font-size: 14px;
-  position: absolute;
+  font-size: 16px;
+  line-height: 40px;
+  // position: absolute;
   // bottom: -20;
-  right: 50px;
+  // right: 50px;
 }
 
 .ProfileStat {
@@ -133,6 +134,23 @@
 
 .Username {
   font-size: 64px;
+  display: inline;
+  vertical-align: top;
+  padding-top: 30px;
+  margin-left: 30px;
+}
+
+.ProfileIconContainer {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.test {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  height: 150px;
 }
 
 ::-webkit-scrollbar {

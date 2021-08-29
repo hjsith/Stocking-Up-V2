@@ -12,17 +12,21 @@ class Profile extends React.Component {
         <NavBar />
         <div className="BackgroundPanel1">
           <div className="ProfileBlock">
-            <UserProfileIcon
-              name="Hjsith"
-              colorNumber={1}
-              company={false}
-              size={100}
-            />
-            <p className="Title Username">Hjsith</p>
-            <div className="ButtonContainer">
-              <a href="#Friends" className="ProfileFriendButton">
-                My Friends &gt;
-              </a>
+            <div>
+              <div className="ProfileIconContainer">
+                <UserProfileIcon
+                  name="Hjsith"
+                  colorNumber={1}
+                  company={false}
+                  size={150}
+                />
+              </div>
+              <div className="test">
+                <p className="Title Username">Hjsith</p>
+                <a href="#Friends" className="ProfileFriendButton">
+                  My Friends &gt;
+                </a>
+              </div>
             </div>
             <div className="ProfileStat">
               <ProjectStat title="Net Worth" value="$130 Billion" />
@@ -36,7 +40,7 @@ class Profile extends React.Component {
                 value="122 Days"
               />
             </div>
-            <div className="ButtonContainer">
+            <div className="PasswordButtonContainer">
               <a href="/UpdatePassword" className="ProfilePasswordButton">
                 Change your password
               </a>
