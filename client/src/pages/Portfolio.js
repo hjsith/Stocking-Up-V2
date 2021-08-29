@@ -20,6 +20,13 @@ class Portfolio extends React.Component {
             <tr>
             <th><UserProfileIcon name="Hjsith" /></th>
               <th><PanelTitle title="Hjsith" /></th>
+              <th>
+              <div className="ButtonContainer">
+              <a href="/Leaderboard" className="GoldRankButton">
+                Current Rank: 152 (+10)
+              </a>
+            </div>
+              </th>
               </tr>
           </table>
           <PortfolioOverviewPanel />
@@ -60,7 +67,19 @@ class Portfolio extends React.Component {
           <OrderRowPanel />
           <OrderRowPanel />
           <WhiteLine />
-          <PanelTitle title="Watchlist" />
+          <table className="TableTitleFont3">
+            <tr>
+              <th><PanelTitle title="Watchlist" /></th>
+              <th>
+              <div className="ButtonContainer">
+              <a href="/Search" className="BlueWatchlistButton">
+                + Add Company
+              </a>
+            </div>
+              </th>
+              </tr>
+          </table>
+          
           <table className="TableTitleFont">
             <tr>
               <th>Company Code</th>
