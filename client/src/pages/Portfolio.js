@@ -16,13 +16,13 @@ class Portfolio extends React.Component {
         <NavBar />
         <div className="BackgroundPanel1">
           {" "}
-          <table className="TableTitleFont3">
+          <table className="TableNormalTitle">
             <tr>
               <th>
                 <UserProfileIcon name="Hjsith" />
               </th>
               <th>
-                <PanelTitle title="Hjsith" />
+                <th className="NormalPanelTitle">Hjisth</th>
               </th>
               <th>
                 <div className="ButtonContainer">
@@ -78,11 +78,9 @@ class Portfolio extends React.Component {
             <OrderRowPanel />
           </div>
           <WhiteLine />
-          <table className="TableTitleFont3">
+          <table className="TableWatchlistTitle">
             <tr>
-              <th>
-                <PanelTitle title="Watchlist" />
-              </th>
+              <th className="NormalPanelTitle">Watchlist</th>
               <th>
                 <div className="ButtonContainer">
                   <a href="/Search" className="BlueWatchlistButton">
