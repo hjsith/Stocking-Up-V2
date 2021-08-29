@@ -6,6 +6,11 @@ import GreyCancelledButton from "./GreyCancelledButton";
 import UserProfileIcon from "./UserProfileIcon";
 
 class OrderRowPanel extends React.Component {
+
+  handelCancel() {
+    console.log("Cancelled!")
+  } 
+
   render() {
     return <div className="OrderRowPanel"> 
      <table className="TableTitleFont2">
@@ -19,9 +24,9 @@ class OrderRowPanel extends React.Component {
               <th>$975</th>
               <th>
               <div className="ButtonContainer">
-              <a className="CancelButton">
+              <button className="CancelButton"  onClick={this.handelCancel}>
                 Cancel
-              </a>
+              </button>
             </div>
               </th>
             </tr>

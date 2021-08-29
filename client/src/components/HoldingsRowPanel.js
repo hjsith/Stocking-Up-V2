@@ -4,6 +4,15 @@ import GreenCompletedButton from "./GreenCompletedButton"
 import UserProfileIcon from "./UserProfileIcon";
 
 class HoldingsRowPanel extends React.Component {
+
+  handelSell() {
+    console.log("Sold!")
+  } 
+
+  handelBuy() {
+    console.log("Bought!")
+  } 
+
   render() {
     return <div className="HoldingsRowPanel"> 
      <table className="TableTitleFont2">
@@ -17,15 +26,15 @@ class HoldingsRowPanel extends React.Component {
               <th>$975</th>
               <th>
               <div className="ButtonContainer"/>
-              <a className="GreenBuyButton">
+              <button className="GreenBuyButton" onClick={this.handelBuy}>
                 Buy
-              </a>
+              </button>
               </th>
               <th>
               <div className="ButtonContainer"/>
-              <a className="RedSellButton">
+              <button className="RedSellButton" onClick={this.handelSell}>
                 Sell
-              </a>
+              </button>
               </th>
             </tr>
           </table>

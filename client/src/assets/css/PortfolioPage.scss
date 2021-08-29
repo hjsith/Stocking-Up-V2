@@ -29,6 +29,29 @@
     padding: 1.25em 1.25em 0em 1.25em;
 }
 
+.PortfolioOverviewTitle {
+    font-family: "Roboto", sans-serif;
+    font-size: 1em;
+    color: white;
+    padding: 1.25em 1.25em 0em 1.25em;
+    font-weight: normal;
+}
+
+.PortfolioOverviewValue {
+    font-family: "Roboto", sans-serif;
+    font-size: 2em;
+    color: white;
+    padding: 0em 1.25em 0em 1.25em;
+}
+
+.PortfolioPriceIncrease {
+    font-family: "Roboto", sans-serif;
+    font-size: 2em;
+    color: white;
+    padding: 1.25em 1.25em 0em 1.25em;
+}
+
+
 .TableTitleFont4 > tr > th{
     font-family: "Roboto", sans-serif;
     font-size:  0.7em;
@@ -177,9 +200,9 @@
 
 .PortfolioOverviewPanel{
     height: 16em;
-    width: 96%;
+    width: 95%;
     background-color:#31237762;
-    margin-left: 1.25em;
+    margin-left: 1.5em;
     margin-bottom: 1.25em;
     border-radius: 0.625em;
 }
