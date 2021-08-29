@@ -94,13 +94,15 @@ const Quotemgmt = () => {
 
         <div className="order">
         
+        <div className="button1">
         <Button handleClick={buyButton} text="Buy"/>
-        
-        
+        </div>
+        <div className="button2">
         <Button text="Add to Watchlist"/>
-        
-        
+        </div>
+        <div className="button3">
         <Button handleClick={sellButton} text="Sell"/>
+        </div>
         <p>{message}</p>
         </div>
         <div className="funds">
