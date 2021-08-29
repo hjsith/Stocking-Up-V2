@@ -40,16 +40,35 @@
 .PortfolioOverviewValue {
     font-family: "Roboto", sans-serif;
     font-size: 2em;
-    color: white;
-    padding: 0em 1.25em 0em 1.25em;
+    color: #ffffff;
+    padding: 0.5em 1.25em 0em 1.25em;
 }
+
+
+.PortfolioBalanceFont {
+    font-family: "Roboto", sans-serif;
+    font-size:  0.7em;
+    color:#C2BEBE;
+    padding: 1.25em 1.25em 0em 1.25em;
+}
+
+.PortfolioDateFont {
+    font-family: "Roboto", sans-serif;
+    font-size:  0.7em;
+    color:#C2BEBE;
+    padding: 1.25em 1.25em 0em 1.25em;
+    font-weight: normal;
+}
+
 
 .PortfolioPriceIncrease {
     font-family: "Roboto", sans-serif;
-    font-size: 2em;
-    color: white;
+    font-size: 1em;
+    color: #00FF94;
     padding: 1.25em 1.25em 0em 1.25em;
 }
+
+
 
 
 .TableTitleFont4 > tr > th{

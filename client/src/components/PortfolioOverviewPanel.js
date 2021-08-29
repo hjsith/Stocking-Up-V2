@@ -14,17 +14,17 @@ class PortfolioOverviewPanel extends React.Component {
               <th className ="PortfolioOverviewValue">$10,978</th>
             </tr>
             <tr>
-              <th>(+978)</th>
+              <th className ="PortfolioPriceIncrease">(+ $978.00 )</th>
             </tr>
             <tr>
-              <th>Today 20 August 2021</th>
+              <th className = "PortfolioDateFont"> Today 20 August 2021</th>
             </tr>
             </table>
             <WhiteLine />
             <table className>
             <tr>
-              <th>Account Balance</th>
-              <th>$9,022.00</th>
+              <th className = "PortfolioBalanceFont">Account Balance</th>
+              <th className = "PortfolioBalanceFont">$9,022.00</th>
             </tr>
           </table>
     </div>;
