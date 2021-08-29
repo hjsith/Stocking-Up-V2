@@ -65,7 +65,9 @@ class Portfolio extends React.Component {
               <th>Company Code</th>
               <th>Company Name</th>
               <th>Current Price</th>
+              <th>% Change</th>
               <th>Industry</th>
+              <th>Actions</th>
             </tr>
           </table>
           <WatchlistRowPannel />

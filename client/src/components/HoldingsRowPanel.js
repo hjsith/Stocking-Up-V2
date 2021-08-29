@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
+import GreenCompletedButton from "./GreenCompletedButton"
 import UserProfileIcon from "./UserProfileIcon";
 
 class HoldingsRowPanel extends React.Component {
@@ -14,7 +15,7 @@ class HoldingsRowPanel extends React.Component {
               <th>$7.02</th>
               <th>150</th>
               <th>$975</th>
-              <th></th>
+              <th><GreenCompletedButton /></th>
             </tr>
           </table>
           

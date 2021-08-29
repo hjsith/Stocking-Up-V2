@@ -29,6 +29,15 @@
     padding: 1.25em 1.25em 0em 1.25em;
 }
 
+.TableTitleFont4 > tr > th{
+    font-family: "Roboto", sans-serif;
+    font-size:  0.7em;
+    color:#C2BEBE;
+    padding: 1.25em;
+    font-weight: normal;
+    width:17.8%;
+}
+
 
 .TableTitleFont3 > tr > th{
     font-family: "Roboto", sans-serif;
@@ -44,7 +53,7 @@
     color:#C2BEBE;
     padding: 1.25em;
     font-weight: normal;
-    width:2000px
+    width:14.9%;
 }
 
 
@@ -54,7 +63,7 @@
     color:#C2BEBE;
     padding: 1.25em;
     font-weight: normal;
-    width:1000px
+    width:10%;
 }
 
 .TableTitleFont {
@@ -74,7 +83,7 @@
 
 .OrderRowPanel{
     height: 4.6em;
-    width: 97%;
+    width: 96%;
     background-color:#140f37bb;
     margin-left: 1.25em;
     margin-bottom: 1.25em;
@@ -83,7 +92,7 @@
 
 .WatchlistRowPannel {
     height: 4.6em;
-    width: 97%;
+    width: 96%;
     background-color:#140f37bb;
     margin-left: 1.25em;
     margin-bottom: 1.25em;
@@ -92,7 +101,7 @@
 
 .HoldingsRowPanel{
     height: 4.6em;
-    width: 97%;
+    width: 96%;
     background-color:#140f376e;
     margin-left: 1.25em;
     margin-bottom: 1.25em;
@@ -127,7 +136,7 @@
 
 .GreenCompletedButton{
     height: 3em;
-    width: 8em;
+    width: 7em;
     background-color: green;
     border-radius: 2em;
     display: flex;
