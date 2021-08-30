@@ -29,16 +29,43 @@ class Profile extends React.Component {
               </div>
             </div>
             <div className="ProfileStat">
-              <ProjectStat title="Net Worth" value="$130 Billion" />
-              <ProjectStat title="Difficulty" value="Easy" />
-              <ProjectStat title="Title" value="Veteran" />
-              <ProjectStat title="Friends" value="243" />
-              <ProjectStat title="Posts" value="51" />
-              <ProjectStat title="Date Joined" value="01/01/2021" />
-              <ProjectStat
-                title="Days till next simulator wipe"
-                value="122 Days"
-              />
+              <table className="ProfileStatTable">
+                <tr>
+                  <td>
+                    <ProjectStat title="Rank" value="#20" />
+                  </td>
+                  <td>
+                    <ProjectStat title="Net Worth" value="$130 Billion" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ProjectStat title="Difficulty" value="Easy" />{" "}
+                  </td>
+                  <td>
+                    <ProjectStat title="Title" value="Veteran" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ProjectStat title="Friends" value="243" />{" "}
+                  </td>
+                  <td>
+                    <ProjectStat title="Posts" value="51" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <ProjectStat title="Date Joined" value="01/01/2021" />{" "}
+                  </td>
+                  <td>
+                    <ProjectStat
+                      title="Days till next simulator wipe"
+                      value="122 Days"
+                    />
+                  </td>
+                </tr>
+              </table>
             </div>
             <div className="PasswordButtonContainer">
               <a href="/UpdatePassword" className="ProfilePasswordButton">
@@ -52,7 +79,7 @@ class Profile extends React.Component {
           <div className="AchievementBlock">
             <p className="Title">Achievements!</p>
             <div className="UserAchievement">
-              <AchievementBlock loop={10} />
+              <AchievementBlock loop={16} />
             </div>
           </div>
         </div>

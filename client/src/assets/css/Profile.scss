@@ -19,9 +19,9 @@
   margin-left: 2%;
   height: 92%;
   width: 45%;
-  background-color: green;
   display: inline-block;
   vertical-align: top;
+  position: relative;
 }
 
 .VerticalLineBlock {
@@ -38,7 +38,7 @@
   margin-top: 2%;
   margin-left: 2%;
   height: 92%;
-  width: 40%;
+  width: 47%;
   display: inline-block;
   vertical-align: top;
 }
@@ -74,7 +74,9 @@
 }
 
 .PasswordButtonContainer {
-  position: relative;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
 }
 
 .ProfileFriendButton {
@@ -87,8 +89,12 @@
   display: block;
   text-decoration: none;
   font-size: 16px;
-  margin-left: 50px;
+  margin-left: 80px;
   line-height: 40px;
+}
+
+.ProfileFriendButton:hover {
+  color: #ff4b4b;
 }
 
 .ProfilePasswordButton {
@@ -102,34 +108,48 @@
   text-decoration: none;
   font-size: 16px;
   line-height: 40px;
-  // position: absolute;
-  // bottom: -20;
-  // right: 50px;
+}
+
+.ProfilePasswordButton:hover {
+  color: black;
 }
 
 .ProfileStat {
-  background-color: pink;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.ProfileStatTable {
+  margin: auto;
+}
+
+.ProfileStatTable > tr {
+  border-radius: 25%;
+}
+
+.ProfileStatTable > tr > td {
+  width: 300px;
 }
 
 .ProfileStatBlock {
   display: inline-block;
   margin-left: 30px;
-  background-color: red;
 }
 
 .ProjectStatTitle {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: #c1c1c1;
   font-style: italic;
   text-decoration: underline;
+  text-align: center;
 }
 
 .ProjectStatValue {
   font-weight: bold;
-  font-size: 36px;
+  font-size: 48px;
   color: white;
-  margin-left: 20px;
+  text-align: center;
 }
 
 .Username {
