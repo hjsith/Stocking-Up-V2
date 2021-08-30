@@ -1,10 +1,10 @@
 import React from "react";
 import "../assets/css/Profile.scss";
 
-class ProjectStatTitle extends React.Component {
+class ProfileStatTitle extends React.Component {
   render() {
-    return <div className="ProjectStatTitle">{this.props.title}</div>;
+    return <div className="ProfileStatTitle">{this.props.title}</div>;
   }
 }
 
-export default ProjectStatTitle;
+export default ProfileStatTitle;

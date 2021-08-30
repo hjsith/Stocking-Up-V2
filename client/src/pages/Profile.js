@@ -3,8 +3,9 @@ import NavBar from "../components/NavBar";
 import "../assets/css/Profile.scss";
 import AchievementBlock from "../components/AchievementBlock";
 import UserProfileIcon from "../components/UserProfileIcon";
-import ProjectStat from "../components/ProfileStat";
+import ProfileStatTable from "../components/ProfileStatTable";
 import Popup from "../components/Popup";
+import VerticalLine from "../components/VerticalLine";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -44,54 +45,14 @@ class Profile extends React.Component {
                 </a>
               </div>
             </div>
-            <div className="ProfileStat">
-              <table className="ProfileStatTable">
-                <tr>
-                  <td>
-                    <ProjectStat title="Rank" value="#20" />
-                  </td>
-                  <td>
-                    <ProjectStat title="Net Worth" value="$130 Billion" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ProjectStat title="Difficulty" value="Easy" />{" "}
-                  </td>
-                  <td>
-                    <ProjectStat title="Title" value="Veteran" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ProjectStat title="Friends" value="243" />{" "}
-                  </td>
-                  <td>
-                    <ProjectStat title="Posts" value="51" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <ProjectStat title="Date Joined" value="01/01/2021" />{" "}
-                  </td>
-                  <td>
-                    <ProjectStat
-                      title="Days till next simulator wipe"
-                      value="122 Days"
-                    />
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <ProfileStatTable />
             <div className="PasswordButtonContainer">
               <a href="/UpdatePassword" className="ProfilePasswordButton">
                 Change your password
               </a>
             </div>
           </div>
-          <div className="VerticalLineBlock">
-            <div className="VerticalLine"></div>
-          </div>
+          <VerticalLine />
           <div className="AchievementBlock">
             <p className="ProfileTitles">Achievements!</p>
             <div className="UserAchievement">
