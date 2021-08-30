@@ -2,6 +2,11 @@ import React from "react";
 import "../assets/css/UserProfileIcon.scss";
 
 class UserProfileIcon extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+
   makeObjectNameShorter(objectName, company) {
     const splitName = objectName.split(" ");
     let shortenedName = "";
@@ -23,17 +28,13 @@ class UserProfileIcon extends React.Component {
       this.props.company
     );
     return (
-      <div className="UserProfileIcon" id={shortenedName}>
+      <div className="UserProfileIcon" ref={this.myRef}>
         <div className="IconText">{shortenedName}</div>
       </div>
     );
   }
 
   componentDidMount() {
-    let shortenedName = this.makeObjectNameShorter(
-      this.props.name,
-      this.props.company
-    );
     var hexArray = [
       "#a01edd",
       "#2EA4D7",
@@ -42,13 +43,10 @@ class UserProfileIcon extends React.Component {
       "#E1D245",
       "#DE3838",
     ];
-    document.getElementById(shortenedName).style.backgroundColor =
-      hexArray[this.props.colorNumber];
-    document.getElementById(shortenedName).style.height =
-      this.props.size + "px";
-    document.getElementById(shortenedName).style.width = this.props.size + "px";
-    document.getElementById(shortenedName).style.fontSize =
-      this.props.size / 2.5 + "px";
+    this.myRef.current.style.backgroundColor = hexArray[this.props.colorNumber];
+    this.myRef.current.style.height = this.props.size + "px";
+    this.myRef.current.style.width = this.props.size + "px";
+    this.myRef.current.style.fontSize = this.props.size / 2.5 + "px";
   }
 }
 
