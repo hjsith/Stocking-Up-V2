@@ -4,8 +4,24 @@ import "../assets/css/Profile.scss";
 import AchievementBlock from "../components/AchievementBlock";
 import UserProfileIcon from "../components/UserProfileIcon";
 import ProjectStat from "../components/ProfileStat";
+import Popup from "../components/Popup";
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      snackBarMessage: "",
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.location.state) {
+      this.setState({
+        snackBarMessage: this.props.location.state.snackBarMessage,
+      });
+    }
+  }
+
   render() {
     return (
       <div className="ProfileContainer">
@@ -83,6 +99,7 @@ class Profile extends React.Component {
             </div>
           </div>
         </div>
+        <Popup message={this.state.snackBarMessage} />
       </div>
     );
   }
