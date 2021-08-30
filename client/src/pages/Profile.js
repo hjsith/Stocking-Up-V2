@@ -8,7 +8,7 @@ import ProjectStat from "../components/ProfileStat";
 class Profile extends React.Component {
   render() {
     return (
-      <div className="Container">
+      <div className="ProfileContainer">
         <NavBar />
         <div className="BackgroundPanel1">
           <div className="ProfileBlock">
@@ -21,8 +21,8 @@ class Profile extends React.Component {
                   size={150}
                 />
               </div>
-              <div className="test">
-                <p className="Title Username">Hjsith</p>
+              <div className="NameButtonContainer">
+                <p className="ProfileTitles Username">Hjsith</p>
                 <a href="#Friends" className="ProfileFriendButton">
                   My Friends &gt;
                 </a>
@@ -77,7 +77,7 @@ class Profile extends React.Component {
             <div className="VerticalLine"></div>
           </div>
           <div className="AchievementBlock">
-            <p className="Title">Achievements!</p>
+            <p className="ProfileTitles">Achievements!</p>
             <div className="UserAchievement">
               <AchievementBlock loop={16} />
             </div>

@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
-.Container {
+.ProfileContainer {
   height: 100%;
   width: 100%;
 }
-.BackgroundPanel1 {
+.ProfileContainer .BackgroundPanel1 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
   height: 86%;
   width: 96%;
@@ -14,7 +14,7 @@
   font-family: "Roboto", sans-serif;
 }
 
-.ProfileBlock {
+.BackgroundPanel1 .ProfileBlock {
   margin-top: 2%;
   margin-left: 2%;
   height: 92%;
@@ -24,7 +24,7 @@
   position: relative;
 }
 
-.VerticalLineBlock {
+.BackgroundPanel1 .VerticalLineBlock {
   margin-top: 2%;
   margin-left: 2%;
   height: 92%;
@@ -34,7 +34,7 @@
   position: relative;
 }
 
-.AchievementBlock {
+.BackgroundPanel1 .AchievementBlock {
   margin-top: 2%;
   margin-left: 2%;
   height: 92%;
@@ -43,7 +43,7 @@
   vertical-align: top;
 }
 
-.VerticalLine {
+.VerticalLineBlock .VerticalLine {
   height: 92%;
   width: 2px;
   background-color: white;
@@ -56,7 +56,20 @@
   margin: auto;
 }
 
-.Title {
+.ProfileIconContainer {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.NameButtonContainer {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  height: 150px;
+}
+
+.ProfileTitles {
   margin-left: 10%;
   margin-top: 6%;
   margin-bottom: 2px;
@@ -71,12 +84,6 @@
   width: 90%;
   height: 80%;
   overflow: auto;
-}
-
-.PasswordButtonContainer {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
 }
 
 .ProfileFriendButton {
@@ -97,6 +104,12 @@
   color: #ff4b4b;
 }
 
+.PasswordButtonContainer {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
 .ProfilePasswordButton {
   height: 40px;
   width: 250px;
@@ -114,16 +127,16 @@
   color: black;
 }
 
-.ProfileStat {
+.ProfileBlock .ProfileStat {
   margin-top: 30px;
   text-align: center;
 }
 
-.ProfileStatTable {
+.ProfileStat .ProfileStatTable {
   margin: auto;
 }
 
-.ProfileStatTable > tr {
+.ProfileStat .ProfileStatTable > tr {
   border-radius: 25%;
 }
 
@@ -133,7 +146,6 @@
 
 .ProfileStatBlock {
   display: inline-block;
-  margin-left: 30px;
 }
 
 .ProjectStatTitle {
@@ -158,19 +170,6 @@
   vertical-align: top;
   padding-top: 30px;
   margin-left: 30px;
-}
-
-.ProfileIconContainer {
-  display: inline-block;
-  margin-left: 40px;
-  margin-top: 20px;
-}
-
-.test {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 20px;
-  height: 150px;
 }
 
 ::-webkit-scrollbar {

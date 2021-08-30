@@ -37,7 +37,7 @@ const NavBar = () => {
       <Nav>
         <NavDropdown
           title={
-            <div className="temp">
+            <div className="navbarProfile">
               <p id="myProfile">Profile</p>
               <img src={profileIcon} className="ProfileIcon" alt="Profile" />
             </div>
