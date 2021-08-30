@@ -6,9 +6,7 @@ class UserProfileIcon extends React.Component {
     const splitName = objectName.split(" ");
     let shortenedName = "";
     if (company) {
-      for (let i = 0; i < splitName.length; i++) {
-        shortenedName += splitName[i][0];
-      }
+      return splitName[0];
     } else {
       if (splitName.length >= 2) {
         shortenedName = splitName[0][0] + splitName[1][0];
