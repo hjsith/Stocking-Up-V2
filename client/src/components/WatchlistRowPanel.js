@@ -1,13 +1,9 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
+import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "./UserProfileIcon";
-import GreenCompletedButton from "./GreenCompletedButton";
 
 class WatchlistRowPannel extends React.Component {
-  handelBuy() {
-    console.log("Bought!");
-  }
-
   render() {
     return (
       <div className="WatchlistRowPannel">
@@ -21,9 +17,7 @@ class WatchlistRowPannel extends React.Component {
             <th>+ 0.2%</th>
             <th>Consumer Staple</th>
             <th>
-              <button className="GreenBuyButton" onClick={this.handelBuy}>
-                Buy
-              </button>
+              <GreenBuyButton />
             </th>
           </tr>
         </table>

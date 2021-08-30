@@ -1,16 +1,19 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
 
-// const Button = (props) => {
-//   return <button onClick={props.handleClick}>{props.text}</button>
-// }
-
 class RedCancelButton extends React.Component {
+  handelCancel() {
+    console.log("Cancelled!");
+  }
+
   render() {
-    return <div className="RedCancelButton"> Cancel </div>;
-//      const Button = (props) => {
-//     // return <button onClick={props.handleClick}>{props.text}</button>
-//   }
+    return (
+      <div className="ButtonContainer">
+        <button className="CancelButton" onClick={this.handelCancel}>
+          Cancel
+        </button>
+      </div>
+    );
   }
 }
 

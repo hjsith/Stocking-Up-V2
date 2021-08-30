@@ -16,7 +16,7 @@ class Portfolio extends React.Component {
         <NavBar />
         <div className="BackgroundPanel1">
           {" "}
-          <table className="TableNormalTitle">
+          <table className="TableNormalNoFormat">
             <tr>
               <th width="2%">
                 <UserProfileIcon name="Hjsith" />
