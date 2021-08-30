@@ -6,13 +6,13 @@ class Popup extends React.Component {
     document.getElementById("Popup").style.display = "none";
   }
   componentDidUpdate() {
-    if (this.props.message != "") {
+    if (this.props.message !== "") {
       setTimeout(this.hideElement, 3000);
     }
   }
 
   render() {
-    if (this.props.message == "") {
+    if (this.props.message === "") {
       return <></>;
     }
     return <div id="Popup">{this.props.message}</div>;

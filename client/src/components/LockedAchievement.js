@@ -6,7 +6,11 @@ class LockedAchievement extends React.Component {
   render() {
     return (
       <div className="achievementIconContainer">
-        <img src={AchievementIcon} className="AchievementIcon" />
+        <img
+          src={AchievementIcon}
+          className="AchievementIcon"
+          alt=" Locked Achievement Icon"
+        />
       </div>
     );
   }

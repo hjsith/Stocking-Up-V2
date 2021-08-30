@@ -86,7 +86,7 @@ class UpdatePassword extends React.Component {
         <NavBar />
         <div className="PageContainer">
           <div className="PasswordChangeContainer">
-            <img src={Logo} className="Logo" />
+            <img src={Logo} className="Logo" alt="Stocking Up Logo" />
             <div className="PasswordTitle">Update Your Password?</div>
             <div className="FormContainer">
               <form onSubmit={this.handleSubmit} className="PasswordUpdateForm">
