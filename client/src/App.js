@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/Profile" component={Profile} />
+          <Route path="/Profile" render={(props) => <Profile {...props} />} />
           <Route path="/temp" component={temp} />
           <Route path="/UpdatePassword" component={UpdatePassword} />
           <Route exact path="/">
