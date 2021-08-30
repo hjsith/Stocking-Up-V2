@@ -2,6 +2,7 @@ import "./assets/css/App.scss";
 import React from "react";
 import UpdatePassword from "./pages/UpdatePassword";
 import Profile from "./pages/Profile";
+import CompanySearch from "./pages/CompanySearch";
 import temp from "./pages/temp";
 import {
   Switch,
@@ -15,6 +16,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
+          <Route path="/CompanySearch" component={CompanySearch} />
           <Route path="/Profile" render={(props) => <Profile {...props} />} />
           <Route path="/temp" component={temp} />
           <Route path="/UpdatePassword" component={UpdatePassword} />
