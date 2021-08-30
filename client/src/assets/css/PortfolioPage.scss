@@ -202,7 +202,6 @@
 }
 
 .line {
-  // border: 0.5em solid white;
   height: 0.05em;
   margin: 1.25em 1.25em 0em 1.25em;
   width: 97%;
@@ -245,14 +244,7 @@
   border-radius: 0.625em;
 }
 
-// .table > tr > th{
-//     font-family: "Roboto", sans-serif;
-//     font-size:  0.625em;
-//     color:#C2BEBE;
-//     font-weight: normal;
-// }
-
-.GreyCancelledButton {
+.GreyCancelledState {
   height: 3em;
   width: 7em;
   background-color: rgb(51, 51, 51);
@@ -262,7 +254,7 @@
   align-items: center;
 }
 
-.GreenCompletedButton {
+.GreenCompletedState {
   height: 3em;
   width: 7em;
   background-color: #2ac811;

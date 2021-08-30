@@ -8,6 +8,9 @@ import PortfolioOverviewPanel from "../components/PortfolioOverviewPanel";
 import UserProfileIcon from "../components/UserProfileIcon";
 import WhiteLine from "../components/WhiteLine";
 import NavBar from "../components/NavBar";
+import MyHoldings from "../components/MyHoldings";
+import RecentOrders from "../components/RecentOrders";
+import Watchlist from "../components/Watchlist";
 
 class Portfolio extends React.Component {
   render() {
@@ -35,87 +38,13 @@ class Portfolio extends React.Component {
           </table>
           <PortfolioOverviewPanel />
           <WhiteLine />
-          <PanelTitle title="My Holdings" />
-          <table className="TableTitleFont">
-            <tr>
-              <th>Company Code</th>
-              <th>Company Name</th>
-              <th>Price Bought</th>
-              <th>Current Price</th>
-              <th>Quantity (units)</th>
-              <th>Total ($)</th>
-              <th>Actions</th>
-              <th></th>
-            </tr>
-          </table>
-          <div className="divholding">
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-            <HoldingsRowPanel />
-          </div>
+          <MyHoldings />
         </div>
         <div className="BackgroundPanel2">
           {" "}
-          <PanelTitle title="Recent Orders" />
-          <table className="TableTitleFont">
-            <tr>
-              <th>Company Code</th>
-              <th>Company Name</th>
-              <th>Price Bought</th>
-              <th>Current Price</th>
-              <th>Quantity (units)</th>
-              <th>Total ($)</th>
-              <th>Status</th>
-            </tr>
-          </table>
-          <div className="divorder">
-            <OrderRowPanel />
-            <OrderRowPanel />
-            <OrderRowPanel />
-            <OrderRowPanel />
-            <OrderRowPanel />
-          </div>
+          <RecentOrders />
           <WhiteLine />
-          <table className="TableWatchlistTitle">
-            <tr>
-              <th width="78%">
-                <th className="NormalPanelTitle2">Watchlist</th>
-              </th>
-              <th th width="19%">
-                <div className="ButtonContainer">
-                  <a href="/Search" className="BlueWatchlistButton">
-                    + Add Company
-                  </a>
-                </div>
-              </th>
-            </tr>
-          </table>
-          <table className="TableTitleFont">
-            <tr>
-              <th>Company Code</th>
-              <th>Company Name</th>
-              <th>Current Price</th>
-              <th>% Change</th>
-              <th>Industry</th>
-              <th>Actions</th>
-            </tr>
-          </table>
-          <div className="divwatchlist">
-            <WatchlistRowPannel />
-            <WatchlistRowPannel />
-            <WatchlistRowPannel />
-            <WatchlistRowPannel />
-            <WatchlistRowPannel />
-            <WatchlistRowPannel />
-            <WatchlistRowPannel />
-          </div>
+          <Watchlist />
         </div>
       </div>
     );
