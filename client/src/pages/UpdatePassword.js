@@ -44,8 +44,8 @@ class UpdatePassword extends React.Component {
           initalErrorMessage:
             "Password is not in the specified format. Please follow the tooltip.",
         });
-        determineRedirect = false;
       }
+      determineRedirect = false;
     }
 
     if (this.state.InitialPassword === this.state.PasswordToConfirm) {
@@ -58,8 +58,8 @@ class UpdatePassword extends React.Component {
           ConfirmErrorMessage:
             "Provided passwords do not match. Please type them in again.",
         });
-        determineRedirect = false;
       }
+      determineRedirect = false;
     }
 
     if (determineRedirect) {
