@@ -3,17 +3,11 @@
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
   font-size: 14px;
   font-family: "Roboto", sans-serif;
-  height: 60px;
+  height: 6%;
+  margin-bottom: 2%;
 }
 
-#myProfile {
-  display: inline-block;
-  height: 10px;
-  padding-right: 15px;
-  font-size: 14px;
-}
-
-.Logo {
+.navbar .Logo {
   padding-left: 20px;
 }
 
@@ -29,7 +23,7 @@
   color: white;
 }
 
-.temp {
+.navbar .navbarProfile {
   display: inline;
   margin-right: 2px;
 }
@@ -42,6 +36,13 @@
   margin-right: 10px;
 }
 
-.ProfileIcon {
+.navbarProfile .ProfileIcon {
   height: 35px;
+}
+
+.navbarProfile #myProfile {
+  display: inline-block;
+  height: 10px;
+  padding-right: 15px;
+  font-size: 18px;
 }
