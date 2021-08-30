@@ -1,31 +1,39 @@
 import React from "react";
 import "../assets/css/UserProfileIcon.scss";
 
-function makeNameShorter(name) {
-  const splitName = name.split(" ");
-  let shortenedName = "";
-  if (splitName.length >= 2) {
-    shortenedName = splitName[0][0] + splitName[1][0];
-  } else {
-    shortenedName = splitName[0].substring(0, 2);
-  }
-  return shortenedName;
-}
-
 class UserProfileIcon extends React.Component {
+  makeObjectNameShorter(objectName, company) {
+    const splitName = objectName.split(" ");
+    let shortenedName = "";
+    if (company) {
+      return splitName[0];
+    } else {
+      if (splitName.length >= 2) {
+        shortenedName = splitName[0][0] + splitName[1][0];
+      } else {
+        shortenedName = splitName[0].substring(0, 2);
+      }
+    }
+    return shortenedName;
+  }
+
   render() {
-    let shortenedName = makeNameShorter(this.props.name);
+    let shortenedName = this.makeObjectNameShorter(
+      this.props.name,
+      this.props.company
+    );
     return (
-      <>
-        <div className="UserProfileIcon" id={shortenedName}>
-          {shortenedName}
-        </div>
-      </>
+      <div className="UserProfileIcon" id={shortenedName}>
+        <div className="IconText">{shortenedName}</div>
+      </div>
     );
   }
 
   componentDidMount() {
-    let shortenedName = makeNameShorter(this.props.name);
+    let shortenedName = this.makeObjectNameShorter(
+      this.props.name,
+      this.props.company
+    );
     var hexArray = [
       "#a01edd",
       "#2EA4D7",
@@ -34,8 +42,13 @@ class UserProfileIcon extends React.Component {
       "#E1D245",
       "#DE3838",
     ];
-    var randomColour = hexArray[Math.floor(Math.random() * hexArray.length)];
-    document.getElementById(shortenedName).style.backgroundColor = randomColour;
+    document.getElementById(shortenedName).style.backgroundColor =
+      hexArray[this.props.colorNumber];
+    document.getElementById(shortenedName).style.height =
+      this.props.size + "px";
+    document.getElementById(shortenedName).style.width = this.props.size + "px";
+    document.getElementById(shortenedName).style.fontSize =
+      this.props.size / 2.5 + "px";
   }
 }
 

@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+.ProfileContainer {
+  height: 100%;
+  width: 100%;
+}
+.ProfileContainer .BackgroundPanel1 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 86%;
+  width: 96%;
+  border-radius: 0.625em;
+  margin-left: 2%;
+  display: inline-block;
+  vertical-align: top;
+  font-family: "Roboto", sans-serif;
+}
+
+.BackgroundPanel1 .ProfileBlock {
+  margin-top: 2%;
+  margin-left: 2%;
+  height: 92%;
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+
+.BackgroundPanel1 .VerticalLineBlock {
+  margin-top: 2%;
+  margin-left: 2%;
+  height: 92%;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+
+.BackgroundPanel1 .AchievementBlock {
+  margin-top: 2%;
+  margin-left: 2%;
+  height: 92%;
+  width: 47%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.VerticalLineBlock .VerticalLine {
+  height: 92%;
+  width: 2px;
+  background-color: white;
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.ProfileIconContainer {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.NameButtonContainer {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 20px;
+  height: 150px;
+}
+
+.ProfileTitles {
+  margin-left: 10%;
+  margin-top: 6%;
+  margin-bottom: 2px;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.UserAchievement {
+  margin-left: 5%;
+  width: 90%;
+  height: 80%;
+  overflow: auto;
+}
+
+.ProfileFriendButton {
+  width: 150px;
+  height: 40px;
+  background-color: white;
+  text-align: center;
+  color: black;
+  border-radius: 2em;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 80px;
+  line-height: 40px;
+}
+
+.ProfileFriendButton:hover {
+  color: #ff4b4b;
+}
+
+.PasswordButtonContainer {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+}
+
+.ProfilePasswordButton {
+  height: 40px;
+  width: 250px;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 40px;
+}
+
+.ProfilePasswordButton:hover {
+  color: black;
+}
+
+.ProfileBlock .ProfileStat {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.ProfileStat .ProfileStatTable {
+  margin: auto;
+}
+
+.ProfileStat .ProfileStatTable > tr {
+  border-radius: 25%;
+}
+
+.ProfileStatTable > tr > td {
+  width: 300px;
+}
+
+.ProfileStatBlock {
+  display: inline-block;
+}
+
+.ProjectStatTitle {
+  font-weight: bold;
+  font-size: 16px;
+  color: #c1c1c1;
+  font-style: italic;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.ProjectStatValue {
+  font-weight: bold;
+  font-size: 48px;
+  color: white;
+  text-align: center;
+}
+
+.Username {
+  font-size: 64px;
+  display: inline;
+  vertical-align: top;
+  padding-top: 30px;
+  margin-left: 30px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #535353;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #535353;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: white;
+}
