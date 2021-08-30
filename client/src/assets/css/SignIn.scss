@@ -36,46 +36,77 @@
 }
 .NoAccount {
   color: #3789fd;
-  font-size: 13px;
+  font-size: 15px;
   font-family: "Roboto", sans-serif;
-  margin-top: 30px;
-}
-.ForgotPassword {
-  color: #3789fd;
-  font-size: 13px;
-  font-family: "Roboto", sans-serif;
-  margin-top: 30px;
-}
-
-.SignInButton {
-  background: #3789FD;
-  color:white;
-  border-radius: 25px;
-  font-family: "Roboto", sans-serif;
-  border:0px;
-  font-size: 18px;
- font-weight: bold;
- display:Block;
- height:55px;
- width:207px;
- margin:auto;
-}
-.Usernametext{
-
-display:Block;
-margin:auto;
-}
-.FormContainer{
-width: 100%;
-text-align: center;
-position:relative;
-
-}
+  margin-top: 80px;
+  vertical-align:bottom;
+    position:relative;
+    top:30px;
   
 
-.Passwordtext{
 
-display:Block;
-margin : 30px auto 0 auto;
+}
+.ForgotPassword {
+    color: #3789fd;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    margin-top: 150px;
+    vertical-align:bottom;
+    position:relative;
+    top:35px;
+  }
 
+.SignInButton {
+  background: #3789fd;
+  color: white;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  display: Block;
+  height: 55px;
+  width: 207px;
+  margin: auto;
+  margin-top:38px
+  
+  
+}
+
+
+.Usernametext {
+  display: Block;
+  margin: auto;
+  background: #2e3558;
+  color: white;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 59px;
+  width: 480px;
+  margin-top:45px
+  
+  
+}
+.FormContainer {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.Passwordtext {
+  display: Block;
+  margin: 30px auto 0 auto;
+  background: #2e3558;
+  border-radius: 25px;
+  color: white;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 59px;
+  width: 480px;
 }

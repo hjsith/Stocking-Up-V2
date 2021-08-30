@@ -1,6 +1,8 @@
 import React from "react";
 import "../assets/css/SignIn.scss";
 import logo from "../assets/images/stocking-up.png";
+import lock from "../assets/images/lock.png";
+import profile from "../assets/images/profile.png";
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -33,9 +35,12 @@ class SignIn extends React.Component {
                
                 <input className="Usernametext"
                   type="text"
+                  
                   value={this.state.Username}
                   onChange={this.handleUsernameChange}
                   placeholder="Username"
+                
+                  
                 
                 />
            
