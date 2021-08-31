@@ -108,6 +108,15 @@
   align-items: center;
   text-decoration: none;
   border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.CancelButton:hover {
+  opacity: 1;
 }
 
 .GreenBuyButton {
@@ -121,6 +130,15 @@
   align-items: center;
   text-decoration: none;
   border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.GreenBuyButton:hover {
+  opacity: 1;
 }
 
 .RedSellButton {
@@ -134,6 +152,15 @@
   align-items: center;
   text-decoration: none;
   border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.RedSellButton:hover {
+  opacity: 1;
 }
 
 .GoldRankButton {
@@ -229,7 +256,7 @@
 .HoldingsRowPanel {
   height: 4.6em;
   width: 96%;
-  background-color: #140f376e;
+  background-color: #140f372f;
   margin-left: 1.25em;
   margin-bottom: 1em;
   border-radius: 0.625em;
