@@ -1,12 +1,15 @@
 import React from "react";
 import "../assets/css/SignIn.scss";
-import logo from "../assets/images/stocking-up.png";
 import lock from "../assets/images/lock.png";
+import SignInLogo from "../components/SignInLogo";
+import authenticationTitle from "../components/authenticationTitle";
 import profile from "../assets/images/profile.png";
+import { Redirect } from "react-router-dom";
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { Username: "", Password: "" };
+    this.state = { Username: "", Password: "", Redirect: false };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,7 +19,9 @@ class SignIn extends React.Component {
     this.setState({ Username: event.target.value });
   }
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.Username + " " + this.state.Password);
+    if (this.state.Username != "" && this.state.Password != "") {
+      this.setState({ Redirect: true });
+    }
     event.preventDefault();
   }
 
@@ -24,37 +29,42 @@ class SignIn extends React.Component {
     this.setState({ Password: event.target.value });
   }
   render() {
+    if (this.state.Redirect == true) {
+      return <Redirect to="/temp" />;
+    }
     return (
       <div className="LoginContainer">
         <div className="Login">
-          <img src={logo} width="114" height="114" className="Logo" />
-          <div className="Welcome">Welcome!</div>
-          <div className ="FormContainer">
+          <SignInLogo />
+
+          <authenticationTitle />
+          <div className="FormContainer">
             <form onSubmit={this.handleSubmit}>
-            
-               
-                <input className="Usernametext"
+              <div>
+                {" "}
+                <input
+                  className="Usernametext"
                   type="text"
-                  
                   value={this.state.Username}
                   onChange={this.handleUsernameChange}
                   placeholder="Username"
-                
-                  
-                
                 />
-           
-              <input className="Passwordtext"
-                type="password"
-                value={this.state.Password}
-                onChange={this.handlePasswordChange}
-                placeholder="Password"
-              />
-
+                <img src={profile} className="profile" />
+              </div>
+              <div>
+                <input
+                  className="Passwordtext"
+                  type="password"
+                  value={this.state.Password}
+                  onChange={this.handlePasswordChange}
+                  placeholder="Password"
+                />
+                <img src={lock} className="lock" />
+              </div>
               <input className="SignInButton" type="submit" value="SIGN IN" />
-
             </form>
           </div>
+
           <div>
             <a href="/SignUp" className="NoAccount">
               {" "}
