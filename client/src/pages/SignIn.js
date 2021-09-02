@@ -2,7 +2,8 @@ import React from "react";
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
 import SignInLogo from "../components/SignInLogo";
-import authenticationTitle from "../components/authenticationTitle";
+import SignInLink from "../components/SignInLink";
+import AuthenticationTitle from "../components/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
 
@@ -37,7 +38,7 @@ class SignIn extends React.Component {
         <div className="Login">
           <SignInLogo />
 
-          <authenticationTitle />
+          <AuthenticationTitle message="Welcome!" />
           <div className="FormContainer">
             <form onSubmit={this.handleSubmit}>
               <div>
@@ -64,19 +65,12 @@ class SignIn extends React.Component {
               <input className="SignInButton" type="submit" value="SIGN IN" />
             </form>
           </div>
+          <SignInLink
+            message="Don't have an account? Sign up here!"
+            link="/SignUp"
+          />
 
-          <div>
-            <a href="/SignUp" className="NoAccount">
-              {" "}
-              Don't have an account? Sign up here!
-            </a>
-          </div>
-          <div>
-            <a href="/ForgotPassword" className="ForgotPassword">
-              {" "}
-              Forgot your password?
-            </a>
-          </div>
+          <SignInLink message=" Forgot your password?" link="/ForgotPassword" />
         </div>
       </div>
     );

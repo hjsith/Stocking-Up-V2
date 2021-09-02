@@ -1,14 +1,14 @@
 import React from "react";
 import "../assets/css/SignIn.scss";
 
-class authenticationTitle extends React.Component {
+class AuthenticationTitle extends React.Component {
   render() {
     return (
       <>
-        <div className="Welcome">Welcome!</div>
+        <div className="Welcome">{this.props.message}</div>
       </>
     );
   }
 }
 
-export default authenticationTitle;
+export default AuthenticationTitle;

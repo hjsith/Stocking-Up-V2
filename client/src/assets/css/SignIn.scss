@@ -38,19 +38,7 @@
   color: #3789fd;
   font-size: 15px;
   font-family: "Roboto", sans-serif;
-  margin-top: 80px;
-  vertical-align: bottom;
-  position: relative;
-  top: 30px;
-}
-.ForgotPassword {
-  color: #3789fd;
-  font-size: 15px;
-  font-family: "Roboto", sans-serif;
-  margin-top: 150px;
-  vertical-align: bottom;
-  position: relative;
-  top: 35px;
+  margin-top: 10px;
 }
 
 .SignInButton {
@@ -87,6 +75,7 @@
   width: 100%;
   text-align: center;
   position: relative;
+  margin-bottom: 30px;
 }
 
 .Passwordtext {
@@ -121,4 +110,43 @@
 input:focus,
 textarea:focus {
   outline: none;
+}
+
+.Additionaltext {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  margin-top: 12px;
+}
+
+.SignUpInput {
+  display: Block;
+  margin: auto;
+  background: #2e3558;
+  color: white;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  height: 59px;
+  width: 480px;
+  margin-top: 10px;
+  padding-left: 65px;
+}
+.ForgotPasswordInput{
+    display: Block;
+    margin: auto;
+    background: #2e3558;
+    color: white;
+    border-radius: 25px;
+    font-family: "Roboto", sans-serif;
+    border: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 59px;
+    width: 480px;
+    margin-top: 10px;
+    padding-left: 65px;
+
 }
