@@ -11,7 +11,12 @@ class HoldingsRowPanel extends React.Component {
         <table className="TableTitleFont2">
           <tr>
             <th>
-              <UserProfileIcon name="A2M" />{" "}
+              <UserProfileIcon
+                name="A2M"
+                colorNumber={0}
+                company={true}
+                size={50}
+              />
             </th>
 
             <th>A2 Milk</th>

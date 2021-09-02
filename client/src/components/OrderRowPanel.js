@@ -3,6 +3,8 @@ import "../assets/css/PortfolioPage.scss";
 import RedCancelButton from "./RedCancelButton";
 import UserProfileIcon from "./UserProfileIcon";
 
+let counter = 0;
+
 class OrderRowPanel extends React.Component {
   render() {
     return (
@@ -10,7 +12,12 @@ class OrderRowPanel extends React.Component {
         <table className="TableTitleFont2">
           <tr>
             <th>
-              <UserProfileIcon name="A2M" />{" "}
+              <UserProfileIcon
+                name="A2M"
+                colorNumber={2}
+                company={true}
+                size={50}
+              />
             </th>
 
             <th>A2 Milk</th>

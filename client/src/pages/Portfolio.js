@@ -22,10 +22,15 @@ class Portfolio extends React.Component {
           <table className="TableNormalNoFormat">
             <tr>
               <th width="2%">
-                <UserProfileIcon name="Hjsith" />
+                <UserProfileIcon
+                  name="Hjsith"
+                  colorNumber={1}
+                  company={false}
+                  size={60}
+                />
               </th>
               <th width="75%">
-                <th className="NormalPanelTitle">Hjisth</th>
+                <th className="NormalPanelTitle">Hjsith</th>
               </th>
               <th width="20%">
                 <div className="ButtonContainer">

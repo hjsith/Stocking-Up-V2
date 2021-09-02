@@ -10,7 +10,12 @@ class WatchlistRowPannel extends React.Component {
         <table className="TableTitleFont4">
           <tr>
             <th>
-              <UserProfileIcon name="A2M" />{" "}
+              <UserProfileIcon
+                name="A2M"
+                colorNumber={1}
+                company={true}
+                size={50}
+              />
             </th>
             <th>A2 Milk</th>
             <th>$6.52</th>
