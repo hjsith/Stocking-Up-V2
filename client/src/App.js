@@ -4,6 +4,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import Profile from "./pages/Profile";
 import CompanySearch from "./pages/CompanySearch";
 import temp from "./pages/temp";
+import Portfolio from "./pages/Portfolio";
 import {
   Switch,
   Route,
@@ -17,6 +18,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/CompanySearch" component={CompanySearch} />
+          <Route path="/Portfolio" component={Portfolio} />
           <Route path="/Profile" render={(props) => <Profile {...props} />} />
           <Route path="/temp" component={temp} />
           <Route path="/UpdatePassword" component={UpdatePassword} />
