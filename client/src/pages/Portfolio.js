@@ -1,9 +1,5 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
-import HoldingsRowPanel from "../components/PortfolioComponents/HoldingsRowPanel";
-import OrderRowPanel from "../components/PortfolioComponents/OrderRowPanel";
-import WatchlistRowPannel from "../components/PortfolioComponents/WatchlistRowPanel";
-import PanelTitle from "../components/PortfolioComponents/PanelTitle";
 import PortfolioOverviewPanel from "../components/PortfolioComponents/PortfolioOverviewPanel";
 import UserProfileIcon from "../components/UserProfileIcon";
 import WhiteLine from "../components/WhiteLine";

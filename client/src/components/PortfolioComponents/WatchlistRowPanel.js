@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/Achievement.scss";
+import "../../assets/css/PortfolioPage.scss";
 import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "../UserProfileIcon";
 

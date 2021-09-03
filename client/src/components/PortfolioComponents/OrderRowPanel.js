@@ -1,9 +1,7 @@
 import React from "react";
-import "../../assets/css/Achievement.scss";
+import "../../assets/css/PortfolioPage.scss";
 import RedCancelButton from "./RedCancelButton";
 import UserProfileIcon from "../UserProfileIcon";
-
-let counter = 0;
 
 class OrderRowPanel extends React.Component {
   render() {

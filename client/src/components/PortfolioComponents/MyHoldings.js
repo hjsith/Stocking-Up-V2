@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/Achievement.scss";
+import "../../assets/css/PortfolioPage.scss";
 import PanelTitle from "./PanelTitle";
 import HoldingsRowPanel from "./HoldingsRowPanel";
 

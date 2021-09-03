@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/Achievement.scss";
+import "../../assets/css/PortfolioPage.scss";
 
 class GreenUpArrow extends React.Component {
   render() {
