@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/PortfolioPage.scss";
+import "../../assets/css/Achievement.scss";
 
 class GreenBuyButton extends React.Component {
   handelBuy() {

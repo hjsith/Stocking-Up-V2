@@ -1,7 +1,7 @@
 import React from "react";
-import "../assets/css/PortfolioPage.scss";
+import "../../assets/css/Achievement.scss";
 import GreenBuyButton from "./GreenBuyButton";
-import UserProfileIcon from "./UserProfileIcon";
+import UserProfileIcon from "../UserProfileIcon";
 
 class WatchlistRowPannel extends React.Component {
   render() {

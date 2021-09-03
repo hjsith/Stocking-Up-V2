@@ -1,7 +1,6 @@
 import React from "react";
-import "../assets/css/PortfolioPage.scss";
-import UserProfileIcon from "./UserProfileIcon";
-import WhiteLine from "./WhiteLine";
+import "../../assets/css/Achievement.scss";
+import WhiteLine from "../WhiteLine";
 
 class PortfolioOverviewPanel extends React.Component {
   render() {

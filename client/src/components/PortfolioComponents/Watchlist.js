@@ -1,6 +1,5 @@
 import React from "react";
-import "../assets/css/PortfolioPage.scss";
-import GreenBuyButton from "./GreenBuyButton";
+import "../../assets/css/Achievement.scss";
 import RedSellButton from "./RedSellButton";
 import PanelTitle from "./PanelTitle";
 import WatchlistRowPannel from "./WatchlistRowPanel";

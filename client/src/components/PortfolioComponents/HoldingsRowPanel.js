@@ -1,20 +1,19 @@
 import React from "react";
-import "../assets/css/PortfolioPage.scss";
-import RedCancelButton from "./RedCancelButton";
-import UserProfileIcon from "./UserProfileIcon";
+import "../../assets/css/Achievement.scss";
+import GreenBuyButton from "./GreenBuyButton";
+import RedSellButton from "./RedSellButton";
+import UserProfileIcon from "../UserProfileIcon";
 
-let counter = 0;
-
-class OrderRowPanel extends React.Component {
+class HoldingsRowPanel extends React.Component {
   render() {
     return (
-      <div className="OrderRowPanel">
+      <div className="HoldingsRowPanel">
         <table className="TableTitleFont2">
           <tr>
             <th>
               <UserProfileIcon
                 name="A2M"
-                colorNumber={2}
+                colorNumber={0}
                 company={true}
                 size={50}
               />
@@ -26,7 +25,10 @@ class OrderRowPanel extends React.Component {
             <th>150</th>
             <th>$975</th>
             <th>
-              <RedCancelButton />
+              <GreenBuyButton />
+            </th>
+            <th>
+              <RedSellButton />
             </th>
           </tr>
         </table>
@@ -35,4 +37,4 @@ class OrderRowPanel extends React.Component {
   }
 }
 
-export default OrderRowPanel;
+export default HoldingsRowPanel;

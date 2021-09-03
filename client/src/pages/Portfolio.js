@@ -1,16 +1,16 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
-import HoldingsRowPanel from "../components/HoldingsRowPanel";
-import OrderRowPanel from "../components/OrderRowPanel";
-import WatchlistRowPannel from "../components/WatchlistRowPanel";
-import PanelTitle from "../components/PanelTitle";
-import PortfolioOverviewPanel from "../components/PortfolioOverviewPanel";
+import HoldingsRowPanel from "../components/PortfolioComponents/HoldingsRowPanel";
+import OrderRowPanel from "../components/PortfolioComponents/OrderRowPanel";
+import WatchlistRowPannel from "../components/PortfolioComponents/WatchlistRowPanel";
+import PanelTitle from "../components/PortfolioComponents/PanelTitle";
+import PortfolioOverviewPanel from "../components/PortfolioComponents/PortfolioOverviewPanel";
 import UserProfileIcon from "../components/UserProfileIcon";
 import WhiteLine from "../components/WhiteLine";
 import NavBar from "../components/NavBar";
-import MyHoldings from "../components/MyHoldings";
-import RecentOrders from "../components/RecentOrders";
-import Watchlist from "../components/Watchlist";
+import MyHoldings from "../components/PortfolioComponents/MyHoldings";
+import RecentOrders from "../components/PortfolioComponents/RecentOrders";
+import Watchlist from "../components/PortfolioComponents/Watchlist";
 
 class Portfolio extends React.Component {
   render() {

@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/PortfolioPage.scss";
+import "../../assets/css/Achievement.scss";
 
 class RedSellButton extends React.Component {
   handelSell() {
