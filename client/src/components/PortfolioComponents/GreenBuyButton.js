@@ -2,14 +2,14 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 
 class GreenBuyButton extends React.Component {
-  handelBuy() {
+  handleBuy() {
     console.log("Bought!!");
   }
 
   render() {
     return (
       <div className="ButtonContainer">
-        <button className="GreenBuyButton" onClick={this.handelBuy}>
+        <button className="GreenBuyButton" onClick={this.handleBuy}>
           Buy
         </button>
       </div>
