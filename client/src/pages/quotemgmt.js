@@ -91,7 +91,7 @@ const Quotemgmt = () => {
           </div>
         </div>
       </div>
-      <div className="BackgroundPanel2">
+      <div className="side2">
         <Graph />
       </div>
     </>
