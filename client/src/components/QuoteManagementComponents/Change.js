@@ -10,4 +10,7 @@ const Change = (props) => {
   );
 };
 
+Change.defaultProps = {
+  change: "2.75%",
+};
 export default Change;
