@@ -1,17 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Funds = (props) => {
-    
-    
-    return (
-        <div>
-           <h1> Funds Available: {props.funds}</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1> Funds Available: ${parseFloat(props.funds).toFixed(2)}</h1>
+    </div>
+  );
+};
 
-Funds.defaultProps = {
-    funds: 5000.00,
-}
-
-export default Funds
+export default Funds;

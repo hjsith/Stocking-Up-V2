@@ -1,257 +1,258 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
-
 .side1 {
-    width: 50%;
-    float: left;
+  width: 50%;
+  float: left;
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+  margin-top: 2%;
+  margin-left: 2%;
 }
 
 .BackgroundPanel1 {
-    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 15em;
-    width: 80em;
-    border-radius: 0.625em;
-    margin-top: 3em;
-    margin-left: 5em;
-    display: inline-block;
-    vertical-align: top;
-    color: white;
-    padding-left: 1%;
-    padding-top: 1%;
-    float: left;
-
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 15em;
+  width: 100%;
+  border-radius: 0.625em;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  padding-left: 1%;
+  padding-top: 1%;
+  float: left;
 }
 
 .BackgroundPanel1 h1 {
-    font-size: 72px;
+  font-size: 72px;
 }
 
 .BackgroundPanel1 p {
-    font-size: 62px;
+  font-size: 62px;
 }
 
 .Panel2 {
-    height: 15em;
-    width: 80em;
-    margin-top: 3em;
-    margin-left: 5em;
-    padding: 1%;
-    
-    
+  height: 15em;
+  width: 100%;
+  padding: 1%;
 }
 
 .secondpanel h4 {
-    font-size: 40px;
-    color:lightgray;
+  font-size: 40px;
+  color: lightgray;
 }
 
 .secondpanel p {
-    font-size: 40px;
-    color:green; 
+  font-size: 40px;
+  color: green;
 }
 
 .headingTable {
-    color: lightgray;
+  color: lightgray;
 }
 
 .infoTable {
-    color: white;
+  color: white;
 }
 
 .shareInfo {
-    font-size: 40px;
-    width: 100%
+  font-size: 40px;
+  width: 100%;
 }
 
-
 .Panel3 {
-    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 15em;
-    width: 100%;
-    border-radius: 0.625em;
-    margin-top: 3em;
-    display: inline-block;
-    vertical-align: top;
-    color: white;
-    padding-top: 3%;
-    padding-left: 3%;
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 15em;
+  width: 100%;
+  border-radius: 0.625em;
+  margin-top: 3em;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  padding-top: 3%;
+  padding-left: 3%;
 }
 
 .Panel3 h2 {
-    color:#ffffff;
-    font-size:45px;
-    
+  color: #ffffff;
+  font-size: 45px;
 }
 
-.Panel3 button{
-    background-color: gray;
-    color: white;
-    font-size: 30px;
-    font-weight: bolder;
-
+.Panel3 button {
+  background-color: gray;
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+  width: 30%;
+  height: 100%;
 }
 
-.quantityNumber{
-    width: 40%;
-    height: 30%;
-    background-color: white;
-    color: black;
-    text-align: center;
-    display: inline-block;
+.quantityNumber {
+  width: 30%;
+  height: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  display: inline;
+}
+
+.quantityNumber h1 {
+  width: 40%;
+  margin-right: 0;
+}
+
+.quantityContainer {
+  text-align: center;
+  height: 120px;
+  width: 100%;
 }
 
 .quantityBtn1 {
-    display: inline-block;
-    
+  display: inline;
+  width: 30%;
+  height: 100%;
 }
 
-.quantityBtn2{
-    display: inline-block;
+.order {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
 }
 
-.order{
-    width: 100%;    
+.order button {
+  border-radius: 0.725em;
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+  height: 2em;
+  width: 27%;
+  margin-right: 30px;
 }
 
-.order button{
-    border-radius: 0.725em;
-    color: white;
-    font-size: 30px;
-    font-weight: bolder;
-    height: 2em;
-    width: 33%;
+.button1 {
+  display: inline;
+}
+
+.button2 {
+  display: inline;
+}
+
+.button3 {
+  display: inline;
 }
 
 .button1 button {
-    background-color: green;
-    float: left;
-    display: inline-block;
-
+  background-color: green;
+  border: none;
 }
 
 .button2 button {
-    background-color: blue;
-    display: inline-block;
-
+  background-color: blue;
+  width: 33%;
+  border: none;
 }
 
 .button3 button {
-    background-color: red;
-    float: right;
-    display: inline-block;
-
+  background-color: red;
+  border: none;
 }
 
 .funds {
-    color: yellow;
-    padding-top: 15%;
-    font-size: 45px;
+  color: yellow;
+  padding-top: 15%;
+  font-size: 45px;
 }
 
-
 .BackgroundPanel2 {
-    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 70em;
-    width: 40%;
-    border-radius: 0.625em;
-    margin-top: 3em;
-    margin-right: 5em;
-    display: inline-block;
-    vertical-align: top;
-    color: white;
-    padding-right: 1%;
-    padding-top: 1%;
-    float: right;
-    align-content: center;
-
-
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 70em;
+  width: 40%;
+  border-radius: 0.625em;
+  margin-top: 3em;
+  margin-right: 5em;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  padding-right: 1%;
+  padding-top: 1%;
+  float: right;
+  align-content: center;
 }
 
 .image img {
-    width: 70em;
+  width: 70em;
 }
 
 .PanelTitle {
-    font-family: "Roboto", sans-serif;
-    font-size: 1.5em;
-    color: white;
-    padding: 1.25em 1.25em 0em 1.25em;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  color: white;
+  padding: 1.25em 1.25em 0em 1.25em;
 }
 
-.TableTitleFont2 > tr > th{
-    font-family: "Roboto", sans-serif;
-    font-size:  0.9em;
-    color:#C2BEBE;
-    padding: 1.25em;
-    font-weight: normal;
-    width:1000px
+.TableTitleFont2 > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 1000px;
 }
 
-
-.TableTitleFont > tr > th{
-    font-family: "Roboto", sans-serif;
-    font-size:  0.9em;
-    color:#C2BEBE;
-    padding: 1.25em;
-    font-weight: normal;
-    width:1000px
+.TableTitleFont > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 1000px;
 }
 
 .TableTitleFont {
-    margin-left: 0.9em;
+  margin-left: 0.9em;
 }
 
-
-.line{
-    // border: 0.5em solid white;
-    height: 0.05em;
-    margin: 1.25em 1.25em 0em 1.25em;;
-    width:97%;
-    background-color: white;
+.line {
+  // border: 0.5em solid white;
+  height: 0.05em;
+  margin: 1.25em 1.25em 0em 1.25em;
+  width: 97%;
+  background-color: white;
 }
 
-.OrderRowPanel{
-    height: 5em;
-    width: 97%;
-    background-color:#140f37bb;
-    margin-left: 1.25em;
-    margin-bottom: 1.25em;
-    border-radius: 0.625em;
+.OrderRowPanel {
+  height: 5em;
+  width: 97%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1.25em;
+  border-radius: 0.625em;
 }
 
-.HoldingsRowPanel{
-    height: 5em;
-    width: 97%;
-    background-color:#140f376e;
-    margin-left: 1.25em;
-    margin-bottom: 1.25em;
-    border-radius: 0.625em;
+.HoldingsRowPanel {
+  height: 5em;
+  width: 97%;
+  background-color: #140f376e;
+  margin-left: 1.25em;
+  margin-bottom: 1.25em;
+  border-radius: 0.625em;
 }
-
-// .table > tr > th{
-//     font-family: "Roboto", sans-serif;
-//     font-size:  0.625em;
-//     color:#C2BEBE;
-//     font-weight: normal;
-// }
-
 
 .GreyCancelledButton {
-    height: 3em;
-    width: 7em;
-    background-color: rgb(51, 51, 51);
-    border-radius: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 3em;
+  width: 7em;
+  background-color: rgb(51, 51, 51);
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.GreenCompletedButton{
-    height: 3em;
-    width: 8em;
-    background-color: green;
-    border-radius: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.GreenCompletedButton {
+  height: 3em;
+  width: 8em;
+  background-color: green;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

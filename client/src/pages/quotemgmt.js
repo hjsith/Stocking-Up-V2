@@ -1,124 +1,110 @@
 //import logo from './logo.svg';
 // react logo
 //import './App.css';
-// basic styling 
+// basic styling
 
-// below is gonna be functions 
-import  { useState } from 'react';
-import Header from '../components/Header';
-import Tasks from '../components/Tasks';
-import Funds from '../components/Funds';
-import NavBar from '../components/NavBar';
-import Change from '../components/Change';
+// below is gonna be functions
+import { useState } from "react";
+import Header from "../components/Header";
+import Tasks from "../components/Tasks";
+import Funds from "../components/Funds";
+import NavBar from "../components/NavBar";
+import Change from "../components/Change";
 import "../assets/css/QuoteMan.scss";
-import Graph from '../components/Graph';
-
+import Graph from "../components/Graph";
 
 const Quotemgmt = () => {
-  
-  var sharePrice = 1.50;
+  var sharePrice = 1.5;
 
+  const [counter, setCounter] = useState(0);
 
-    const [counter, setCounter] = useState(0)
+  const Button = (props) => {
+    return <button onClick={props.handleClick}>{props.text}</button>;
+  };
 
-    const Button = (props) => {
-      return <button onClick ={props.handleClick}>{props.text}</button>
+  const Display = (props) => {
+    return <h1>{props.number}</h1>;
+  };
+
+  const increase = () => setCounter(counter + 1);
+  const decrease = () => {
+    if (counter >= 1) {
+      setCounter(counter - 1);
     }
+  };
 
-    const Display = (props) =>
-    {
-      return (<h1>{props.number}</h1>)
-    }
+  const [funds, setFunds] = useState(5000);
 
-    const increase =() => setCounter(counter + 1);
-    const decrease =() => 
-          {
-            if (counter >= 1)
-             {setCounter(counter - 1)}
-          };
-
-
-  
-    const [funds, setFunds] = useState(5000)
-    
-
-    const buyButton = () => {
-      
-        if (funds < (counter * sharePrice))
-         {setMessage("You do not have enough funds!")}
-       else
-      {setFunds(funds - (counter * sharePrice));
-        setCounter(0);
-        setMessage("")
-      }
-    }
-
-
-    const sellButton = () => {
-      setFunds(funds + (counter * sharePrice));
+  const buyButton = () => {
+    if (funds < counter * sharePrice) {
+      setMessage("You do not have enough funds!");
+    } else {
+      setFunds(funds - counter * sharePrice);
       setCounter(0);
-      setMessage("")
-  }
+      setMessage("");
+    }
+  };
 
-  const [message, setMessage] = useState(" ")
+  const sellButton = () => {
+    setFunds(funds + counter * sharePrice);
+    setCounter(0);
+    setMessage("");
+  };
 
-
-
+  const [message, setMessage] = useState(" ");
 
   return (
-   
-    <div>
-        <NavBar />
-        <div className="side1">
+    <>
+      <NavBar />
+      <div className="side1">
         <div className="BackgroundPanel1">
-        <Header x={sharePrice} title={"A2 MILK - A2M"}/>
+          <Header x={sharePrice} title={"A2 MILK - A2M"} />
         </div>
         <div className="Panel2">
-        <Change />
-        <Tasks />
-        <div/>
-        
-        <div className="Panel3">
-        <h2>Quantity:</h2>
+          <Change />
+          <Tasks />
+          <div />
 
-        <div className="quantityBtn1">
-        <Button style handleClick={decrease} text="-"/>
-        </div>
-        <div className="quantityNumber">
-        <Display number = {counter}/>
-        </div>
-        <div className="quantityBtn1">
-        <Button handleClick={increase} text="+"/>
-        </div>
-        </div>
+          <div className="Panel3">
+            <h2>Quantity:</h2>
+            <div className="quantityContainer">
+              <div className="quantityBtn1">
+                <Button style handleClick={decrease} text="-" />
+              </div>
 
-        <div className="order">
-        
-        <div className="button1">
-        <Button handleClick={buyButton} text="Buy"/>
+              <div className="quantityNumber">
+                <Display number={counter} />
+              </div>
+              <div className="quantityBtn1">
+                <Button handleClick={increase} text="+" />
+              </div>
+            </div>
+            <div className="order">
+              <div className="button1">
+                <Button handleClick={buyButton} text="Buy" />
+              </div>
+              <div className="button2">
+                <Button text="Add to Watchlist" />
+              </div>
+              <div className="button3">
+                <Button handleClick={sellButton} text="Sell" />
+              </div>
+              <p>{message}</p>
+            </div>
+          </div>
+
+          <div className="funds">
+            <Funds funds={funds} />
+          </div>
         </div>
-        <div className="button2">
-        <Button text="Add to Watchlist"/>
-        </div>
-        <div className="button3">
-        <Button handleClick={sellButton} text="Sell"/>
-        </div>
-        <p>{message}</p>
-        </div>
-        <div className="funds">
-        <Funds funds={funds}/>
-        </div>
-        </div>
-        </div>
-        <div className="BackgroundPanel2">
-          <Graph />
-        </div>
-    </div>
-    
+      </div>
+      <div className="BackgroundPanel2">
+        <Graph />
+      </div>
+    </>
   );
-}
+};
 
-export default Quotemgmt ;
-
+export default Quotemgmt;
 
 // this is the root component, called in index.js from index.html
