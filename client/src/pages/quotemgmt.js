@@ -5,16 +5,16 @@
 
 // below is gonna be functions
 import { useState } from "react";
-import Header from "../components/Header";
-import Tasks from "../components/Tasks";
-import Funds from "../components/Funds";
+import Header from "../components/quotemgmtComponents/Header";
+import Tasks from "../components/quotemgmtComponents/Tasks";
+import Funds from "../components/quotemgmtComponents/Funds";
 import NavBar from "../components/NavBar";
-import Change from "../components/Change";
+import Change from "../components/quotemgmtComponents/Change";
 import "../assets/css/QuoteMan.scss";
-import Graph from "../components/Graph";
+import Graph from "../components/quotemgmtComponents/Graph";
 
 const Quotemgmt = () => {
-  var sharePrice = 1.5;
+  var sharePrice = 5.73;
 
   const [counter, setCounter] = useState(0);
 
@@ -68,16 +68,9 @@ const Quotemgmt = () => {
           <div className="Panel3">
             <h2>Quantity:</h2>
             <div className="quantityContainer">
-              <div className="quantityBtn1">
-                <Button style handleClick={decrease} text="-" />
-              </div>
-
-              <div className="quantityNumber">
-                <Display number={counter} />
-              </div>
-              <div className="quantityBtn1">
-                <Button handleClick={increase} text="+" />
-              </div>
+              <Button style handleClick={decrease} text="-" />
+              <div className="quantityNumber">{counter}</div>
+              <Button handleClick={increase} text="+" />
             </div>
             <div className="order">
               <div className="button1">

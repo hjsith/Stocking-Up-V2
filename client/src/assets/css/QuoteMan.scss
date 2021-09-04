@@ -6,12 +6,12 @@
   font-family: "Roboto", sans-serif;
   margin-top: 2%;
   margin-left: 2%;
-  height: 90%;
+  height: 87%;
 }
 
 .BackgroundPanel1 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 15em;
+  height: 25%;
   width: 100%;
   border-radius: 0.625em;
   display: inline-block;
@@ -19,7 +19,6 @@
   color: white;
   padding-left: 1%;
   padding-top: 1%;
-  float: left;
 }
 
 .BackgroundPanel1 h1 {
@@ -31,9 +30,10 @@
 }
 
 .Panel2 {
-  height: 15em;
+  height: 73%;
   width: 100%;
   padding: 1%;
+  display: block;
 }
 
 .secondpanel h4 {
@@ -61,12 +61,11 @@
 
 .Panel3 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 15em;
+  height: 16em;
   width: 100%;
   border-radius: 0.625em;
   margin-top: 3em;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
   color: white;
   padding-top: 3%;
   padding-left: 3%;
@@ -77,31 +76,39 @@
   font-size: 45px;
 }
 
-.Panel3 button {
-  background-color: gray;
+.Panel3 .quantityContainer button {
+  background-color: darkgrey;
   color: white;
   font-size: 30px;
   font-weight: bolder;
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  padding: 0px;
+  border: none;
+}
+
+.Panel3 .quantityContainer button:hover {
+  background-color: grey;
+}
+.quantityContainer {
+  text-align: center;
+  height: 20%;
   width: 100%;
+  margin-top: 20px;
 }
 
 .quantityNumber {
-  width: 40%;
   height: 100%;
+  width: 20%;
   background-color: white;
   color: black;
   text-align: center;
   display: inline-block;
-}
-
-.quantityContainer {
-  text-align: center;
-  height: 90px;
-}
-
-.quantityBtn1 {
-  display: inline-block;
-  width: 30%;
+  vertical-align: top;
+  line-height: 45px;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .order {
@@ -137,10 +144,18 @@
   border: none;
 }
 
+.button1 button:hover {
+  background-color: darkgreen;
+}
+
 .button2 button {
   background-color: blue;
   width: 33%;
   border: none;
+}
+
+.button2 button:hover {
+  background-color: darkblue;
 }
 
 .button3 button {
@@ -148,15 +163,19 @@
   border: none;
 }
 
+.button3 button:hover {
+  background-color: darkred;
+}
+
 .funds {
   color: yellow;
-  padding-top: 15%;
+  padding-top: 10px;
   font-size: 45px;
 }
 
 .BackgroundPanel2 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 90%;
+  height: 87%;
   width: 45%;
   border-radius: 0.625em;
   margin-top: 2%;
