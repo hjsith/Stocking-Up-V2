@@ -4,9 +4,9 @@
   width: 50%;
   float: left;
   font-family: "Roboto", sans-serif;
-  height: 100%;
   margin-top: 2%;
   margin-left: 2%;
+  height: 90%;
 }
 
 .BackgroundPanel1 {
@@ -82,34 +82,26 @@
   color: white;
   font-size: 30px;
   font-weight: bolder;
-  width: 30%;
-  height: 100%;
+  width: 100%;
 }
 
 .quantityNumber {
-  width: 30%;
+  width: 40%;
   height: 100%;
   background-color: white;
   color: black;
   text-align: center;
-  display: inline;
-}
-
-.quantityNumber h1 {
-  width: 40%;
-  margin-right: 0;
+  display: inline-block;
 }
 
 .quantityContainer {
   text-align: center;
-  height: 120px;
-  width: 100%;
+  height: 90px;
 }
 
 .quantityBtn1 {
-  display: inline;
+  display: inline-block;
   width: 30%;
-  height: 100%;
 }
 
 .order {
@@ -164,7 +156,7 @@
 
 .BackgroundPanel2 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 70em;
+  height: 90%;
   width: 40%;
   border-radius: 0.625em;
   margin-top: 3em;
