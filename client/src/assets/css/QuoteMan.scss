@@ -157,21 +157,20 @@
 .BackgroundPanel2 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
   height: 90%;
-  width: 40%;
+  width: 45%;
   border-radius: 0.625em;
-  margin-top: 3em;
-  margin-right: 5em;
+  margin-top: 2%;
   display: inline-block;
   vertical-align: top;
   color: white;
   padding-right: 1%;
   padding-top: 1%;
-  float: right;
   align-content: center;
+  margin-left: 2%;
 }
 
 .image img {
-  width: 70em;
+  width: 100%;
 }
 
 .PanelTitle {
