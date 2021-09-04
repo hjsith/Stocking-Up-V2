@@ -1,4 +1,4 @@
-import "../../assets/css/QuoteMan.scss";
+import "../../assets/css/QuoteManagement.scss";
 
 const Task = ({ task }) => {
   return (

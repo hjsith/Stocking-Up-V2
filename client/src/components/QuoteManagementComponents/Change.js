@@ -1,5 +1,5 @@
 import React from "react";
-import "../../assets/css/QuoteMan.scss";
+import "../../assets/css/QuoteManagement.scss";
 
 const Change = (props) => {
   return (
@@ -10,7 +10,4 @@ const Change = (props) => {
   );
 };
 
-Change.defaultProps = {
-  change: "2.75%",
-};
 export default Change;

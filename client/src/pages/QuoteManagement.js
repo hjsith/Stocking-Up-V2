@@ -1,29 +1,19 @@
-//import logo from './logo.svg';
-// react logo
-//import './App.css';
-// basic styling
-
-// below is gonna be functions
 import { useState } from "react";
-import Header from "../components/quotemgmtComponents/Header";
-import Tasks from "../components/quotemgmtComponents/Tasks";
-import Funds from "../components/quotemgmtComponents/Funds";
+import Header from "../components/QuoteManagementComponents/Header";
+import Tasks from "../components/QuoteManagementComponents/Tasks";
+import Funds from "../components/QuoteManagementComponents/Funds";
 import NavBar from "../components/NavBar";
-import Change from "../components/quotemgmtComponents/Change";
-import "../assets/css/QuoteMan.scss";
-import Graph from "../components/quotemgmtComponents/Graph";
+import Change from "../components/QuoteManagementComponents/Change";
+import "../assets/css/QuoteManagement.scss";
+import Graph from "../components/QuoteManagementComponents/Graph";
 
-const Quotemgmt = () => {
+const QuoteManagement = () => {
   var sharePrice = 5.73;
 
   const [counter, setCounter] = useState(0);
 
   const Button = (props) => {
     return <button onClick={props.handleClick}>{props.text}</button>;
-  };
-
-  const Display = (props) => {
-    return <h1>{props.number}</h1>;
   };
 
   const increase = () => setCounter(counter + 1);
@@ -58,7 +48,7 @@ const Quotemgmt = () => {
       <NavBar />
       <div className="side1">
         <div className="BackgroundPanel1">
-          <Header x={sharePrice} title={"A2 MILK - A2M"} />
+          <Header currentPrice={sharePrice} title={"A2 MILK - A2M"} />
         </div>
         <div className="Panel2">
           <Change />
@@ -98,6 +88,6 @@ const Quotemgmt = () => {
   );
 };
 
-export default Quotemgmt;
+export default QuoteManagement;
 
 // this is the root component, called in index.js from index.html
