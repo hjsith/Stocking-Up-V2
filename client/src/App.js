@@ -4,6 +4,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import Profile from "./pages/Profile";
 import CompanySearch from "./pages/CompanySearch";
 import temp from "./pages/temp";
+import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
 import {
   Switch,
@@ -17,6 +18,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
+          <Route path="/QuoteManagement" component={QuoteManagement} />
           <Route path="/CompanySearch" component={CompanySearch} />
           <Route path="/Portfolio" component={Portfolio} />
           <Route path="/Profile" render={(props) => <Profile {...props} />} />

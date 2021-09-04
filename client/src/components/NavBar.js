@@ -24,7 +24,7 @@ const NavBar = () => {
           <NavDropdown.Item href="#Markets Overview">
             Markets Overview
           </NavDropdown.Item>
-          <NavDropdown.Item href="#NewsFeed">News Feed</NavDropdown.Item>
+          <NavDropdown.Item href="#Newsfeed">News Feed</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
           <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>
@@ -35,7 +35,7 @@ const NavBar = () => {
         </NavDropdown>
         <NavDropdown title="Companies" id="basic-nav-dropdown">
           <NavDropdown.Item href="/CompanySearch">Search</NavDropdown.Item>
-          <NavDropdown.Item href="#Order">Order</NavDropdown.Item>
+          <NavDropdown.Item href="/QuoteManagement">Order</NavDropdown.Item>
         </NavDropdown>
       </Nav>
       <Nav>
