@@ -3,6 +3,59 @@ import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
 
 class Watchlist extends React.Component {
+  state = {
+    watchlistArray: [
+      {
+        colourNumber: 1,
+        companyCode: "A2M",
+        companyName: "A2 Milk",
+        currentPrice: "$7.02",
+        percentChange: "0.2%",
+        industry: "Consumer Staples",
+      },
+      {
+        colourNumber: 4,
+        companyCode: "CBA",
+        companyName: "Commonwealth Bank",
+        currentPrice: "$7.02",
+        percentChange: "0.2%",
+        industry: "Consumer Staples",
+      },
+      {
+        colourNumber: 2,
+        companyCode: "WIS",
+        companyName: "Wisetech Global",
+        currentPrice: "$7.02",
+        percentChange: "0.2%",
+        industry: "Consumer Staples",
+      },
+      {
+        colourNumber: 3,
+        companyCode: "MQG",
+        companyName: "Macquarie Group",
+        currentPrice: "$7.02",
+        percentChange: "0.2%",
+        industry: "Consumer Staples",
+      },
+      {
+        colourNumber: 5,
+        companyCode: "BRK",
+        companyName: "Brickworks",
+        currentPrice: "$7.02",
+        percentChange: "0.2%",
+        industry: "Consumer Staples",
+      },
+    ],
+  };
+
+  cancelEvent = (index) => {
+    const copyWatchlistArray = Object.assign([], this.state.watchlistArray);
+    copyWatchlistArray.splice(index, 1);
+    this.setState({
+      watchlistArray: copyWatchlistArray,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -13,7 +66,7 @@ class Watchlist extends React.Component {
             </th>
             <th th width="19%">
               <div className="ButtonContainer">
-                <a href="/Search" className="BlueWatchlistButton">
+                <a href="/CompanySearch" className="BlueWatchlistButton">
                   + Add Company
                 </a>
               </div>
@@ -31,14 +84,22 @@ class Watchlist extends React.Component {
           </tr>
         </table>
         <div className="divwatchlist">
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
-          <WatchlistRowPannel />
+          {this.state.watchlistArray.map((watchlist, index) => {
+            return (
+              <WatchlistRowPannel
+                key={watchlist.companyCode}
+                colourNumber={watchlist.colourNumber}
+                companyCode={watchlist.companyCode}
+                companyName={watchlist.companyName}
+                currentPrice={watchlist.currentPrice}
+                percentChange={watchlist.percentChange}
+                industry={watchlist.industry}
+                cancel={this.cancelEvent.bind(this, index)}
+              />
+            );
+          })}
         </div>
+        <br />
       </div>
     );
   }

@@ -9,7 +9,7 @@ class RedCancelButton extends React.Component {
   render() {
     return (
       <div className="ButtonContainer">
-        <button className="CancelButton" onClick={this.handleCancel}>
+        <button className="CancelButton" onClick={this.props.cancel}>
           Cancel
         </button>
       </div>

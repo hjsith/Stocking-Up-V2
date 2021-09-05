@@ -1,6 +1,5 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import RedCancelButton from "./RedCancelButton";
 import UserProfileIcon from "../UserProfileIcon";
 
 class OrderRowPanel extends React.Component {
@@ -11,20 +10,23 @@ class OrderRowPanel extends React.Component {
           <tr>
             <th>
               <UserProfileIcon
-                name="A2M"
-                colorNumber={2}
+                name={this.props.companyCode}
+                colorNumber={this.props.colourNumber}
                 company={true}
                 size={50}
               />
             </th>
-
-            <th>A2 Milk</th>
-            <th>$6.52</th>
-            <th>$7.02</th>
-            <th>150</th>
-            <th>$975</th>
+            <th>{this.props.companyName}</th>
+            <th>{this.props.priceBought}</th>
+            <th>{this.props.currentPrice}</th>
+            <th>{this.props.units}</th>
+            <th>{this.props.total}</th>
             <th>
-              <RedCancelButton />
+              <div className="ButtonContainer">
+                <button className="CancelButton" onClick={this.props.cancel}>
+                  Cancel
+                </button>
+              </div>
             </th>
           </tr>
         </table>
