@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
+import letter from "../assets/images/letter.png";
 import SignInLogo from "../components/SignInLogo";
 import SignInLink from "../components/SignInLink";
 import AuthenticationTitle from "../components/AuthenticationTitle";
@@ -19,7 +20,7 @@ class SignUp extends React.Component {
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleEmail = this.handleEmailChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
       this
     );
@@ -37,9 +38,14 @@ class SignUp extends React.Component {
   handleConfirmPasswordChange(event) {
     this.setState({ ConfirmPassword: event.target.value });
   }
-  
+
   handleSubmit(event) {
-    if (this.state.Username != "" && this.state.Password != "" && this.state.Email != ""  && this.state.ConfirmPassword != "" ) {
+    if (
+      this.state.Username != "" &&
+      this.state.Password != "" &&
+      this.state.Email != "" &&
+      this.state.ConfirmPassword != ""
+    ) {
       this.setState({ Redirect: true });
     }
     event.preventDefault();
@@ -53,14 +59,14 @@ class SignUp extends React.Component {
       return <Redirect to="/temp" />;
     }
     return (
-      <div className="LoginContainer">
-        <div className="Login">
+      <div className="SignUpContainer">
+        <div className="SignUp">
           <SignInLogo />
 
           <AuthenticationTitle message="Welcome!" />
           <div className="Additionaltext">
             {" "}
-            Please fill in the following details to sign up:
+            Please fill in the following details to Sign Up:
           </div>
           <div className="FormContainer">
             <form onSubmit={this.handleSubmit}>
@@ -84,7 +90,7 @@ class SignUp extends React.Component {
                   placeholder="Email"
                 />
 
-                <img src={lock} className="lock" />
+                <img src={letter} className="letter" />
               </div>
               <div>
                 {" "}
@@ -95,7 +101,7 @@ class SignUp extends React.Component {
                   onChange={this.handlePasswordChange}
                   placeholder="Password"
                 />
-                <img src={profile} className="profile" />
+                <img src={lock} className="lock" />
               </div>
 
               <div>
@@ -107,10 +113,10 @@ class SignUp extends React.Component {
                   onChange={this.handleConfirmPasswordChange}
                   placeholder="Confirm Password"
                 />
-                <img src={profile} className="profile" />
+                <img src={lock} className="lock" />
               </div>
 
-              <input className="SignInButton" type="submit" value="SIGN IN" />
+              <input className="SignInButton" type="submit" value="SIGN UP" />
             </form>
           </div>
           <SignInLink

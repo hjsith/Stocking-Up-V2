@@ -51,14 +51,14 @@ class ForgotPassword extends React.Component {
       return <Redirect to="/SignIn" />;
     }
     return (
-      <div className="LoginContainer">
-        <div className="Login">
+      <div className="ForgotPasswordContainer">
+        <div className="ForgotPassword">
           <SignInLogo />
 
-          <AuthenticationTitle message="Welcome!" />
+          <AuthenticationTitle message="Forgot Your Password?" />
           <div className="Additionaltext">
             {" "}
-            Please fill in the following details to sign up:
+            Please fill in the following details to create a new password:
           </div>
           <div className="FormContainer">
             <form onSubmit={this.handleSubmit}>
@@ -83,7 +83,7 @@ class ForgotPassword extends React.Component {
                   onChange={this.handlePasswordChange}
                   placeholder=" New Password"
                 />
-                <img src={profile} className="profile" />
+                <img src={lock} className="lock" />
               </div>
 
               <div>
@@ -95,7 +95,7 @@ class ForgotPassword extends React.Component {
                   onChange={this.handleConfirmPasswordChange}
                   placeholder="Confirm Password"
                 />
-                <img src={profile} className="profile" />
+                <img src={lock} className="lock" />
               </div>
 
               <input className="SignInButton" type="submit" value="CONFIRM" />
