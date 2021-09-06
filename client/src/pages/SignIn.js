@@ -31,7 +31,7 @@ class SignIn extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/temp" />;
+      return <Redirect to="/Portfolio" />;
     }
     return (
       <div className="LoginContainer">
