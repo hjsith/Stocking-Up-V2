@@ -1,108 +1,339 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 .BackgroundPanel1 {
-    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 75em;
-    width: 66em;
-    border-radius: 0.625em;
-    margin-top: 1.25em;
-    margin-left: 1.25em;
-    display: inline-block;
-    vertical-align: top
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 100%;
+  width: 45%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .BackgroundPanel2 {
-    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 75em;
-    width: 90em;
-    border-radius: 0.625em;
-    margin-top: 1.25em;
-    margin-left: 1.25em;
-    display: inline-block;
-    vertical-align: top
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 100%;
+  width: 52%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.NormalPanelTitle {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  color: white;
+  font-weight: normal;
+  padding: 0em 0em 0em 0em;
+  font-weight: bold;
+}
+
+.NormalPanelTitle2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  color: white;
+  font-weight: normal;
+  padding: 0em 0em 0em 0.5em;
+  font-weight: bold;
 }
 
 .PanelTitle {
-    font-family: "Roboto", sans-serif;
-    font-size: 1.5em;
-    color: white;
-    padding: 1.25em 1.25em 0em 1.25em;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  color: white;
+  padding: 1.25em 1.25em 0em 1.25em;
+  font-weight: bold;
 }
 
-.TableTitleFont2 > tr > th{
-    font-family: "Roboto", sans-serif;
-    font-size:  0.9em;
-    color:#C2BEBE;
-    padding: 1.25em;
-    font-weight: normal;
-    width:1000px
+.PortfolioOverviewTitle {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: white;
+  padding: 1.25em 1.25em 0em 1.25em;
+  font-weight: normal;
 }
 
+.PortfolioOverviewValue {
+  font-family: "Roboto", sans-serif;
+  font-size: 2em;
+  color: #ffffff;
+  padding: 0.5em 1.25em 0em 0.5em;
+}
 
-.TableTitleFont > tr > th{
-    font-family: "Roboto", sans-serif;
-    font-size:  0.9em;
-    color:#C2BEBE;
-    padding: 1.25em;
-    font-weight: normal;
-    width:1000px
+.PortfolioBalanceFont {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8em;
+  color: #c2bebe;
+  padding: 1.25em 1.25em 0em 1.25em;
+}
+
+.PortfolioDateFont {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8em;
+  color: #c2bebe;
+  padding: 1.25em 1.25em 0em 1.25em;
+  font-weight: normal;
+}
+
+.PortfolioPriceIncrease {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #00ff94;
+  padding: 1.25em 1.25em 0em 1.25em;
+}
+
+.TableTitleFont4 > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 17.8%;
+}
+
+.ButtonContainer {
+}
+
+.CancelButton {
+  height: 3em;
+  width: 7em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.CancelButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.GreenBuyButton {
+  height: 3em;
+  width: 7em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.GreenBuyButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.RedSellButton {
+  height: 3em;
+  width: 7em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.RedSellButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.GoldRankButton {
+  height: 3em;
+  width: 15em;
+  background-color: #ffc737;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.BlueWatchlistButton {
+  height: 3em;
+  width: 10em;
+  background-color: #3789fd;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.TableNormalNoFormat > tr > th {
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+  padding: 1.25em 1.25em 1.25em 1.25em;
+}
+
+.TableWatchlistTitle > tr > th {
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+  padding: 1.25em 1.25em 0.5em 1.25em;
+}
+
+.TableTitleFont3 > tr > th {
+  font-family: "Roboto", sans-serif;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+}
+
+.TableTitleFont2 > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 14.9%;
+}
+
+.TableTitleFont > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 10%;
 }
 
 .TableTitleFont {
-    margin-left: 0.9em;
+  margin-left: 0.9em;
 }
 
-
-.line{
-    // border: 0.5em solid white;
-    height: 0.05em;
-    margin: 1.25em 1.25em 0em 1.25em;;
-    width:97%;
-    background-color: white;
+.line {
+  height: 0.05em;
+  margin: 1.25em 1.25em 0em 1.25em;
+  width: 97%;
+  background-color: white;
 }
 
-.OrderRowPanel{
-    height: 5em;
-    width: 97%;
-    background-color:#140f37bb;
-    margin-left: 1.25em;
-    margin-bottom: 1.25em;
-    border-radius: 0.625em;
+.OrderRowPanel {
+  height: 4.6em;
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
 }
 
-.HoldingsRowPanel{
-    height: 5em;
-    width: 97%;
-    background-color:#140f376e;
-    margin-left: 1.25em;
-    margin-bottom: 1.25em;
-    border-radius: 0.625em;
+.WatchlistRowPannel {
+  height: 4.6em;
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
 }
 
-// .table > tr > th{
-//     font-family: "Roboto", sans-serif;
-//     font-size:  0.625em;
-//     color:#C2BEBE;
-//     font-weight: normal;
-// }
-
-
-.GreyCancelledButton {
-    height: 3em;
-    width: 7em;
-    background-color: rgb(51, 51, 51);
-    border-radius: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.HoldingsRowPanel {
+  height: 4.6em;
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
 }
 
-.GreenCompletedButton{
-    height: 3em;
-    width: 8em;
-    background-color: green;
-    border-radius: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.PortfolioOverviewPanel {
+  height: 16em;
+  width: 95%;
+  background-color: #31237762;
+  margin-left: 1.5em;
+  margin-bottom: 1.25em;
+  border-radius: 0.625em;
+}
+
+.GreyCancelledState {
+  height: 3em;
+  width: 7em;
+  background-color: rgb(51, 51, 51);
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.GreenCompletedState {
+  height: 3em;
+  width: 7em;
+  background-color: #2ac811;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0px;
+}
+
+.divholding {
+  height: 22.8em;
+  width: 97%;
+  overflow: auto;
+}
+
+.divorder {
+  height: 15.7em;
+  width: 97%;
+  overflow: auto;
+}
+
+.divwatchlist {
+  height: 23.1em;
+  width: 97%;
+  overflow: auto;
+}
+
+.ArrowUp {
+  width: 0;
+  height: 0;
+  border-left: 2x solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid black;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #535353;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #535353;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: white;
 }
