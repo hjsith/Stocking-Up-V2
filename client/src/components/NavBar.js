@@ -51,7 +51,7 @@ const NavBar = () => {
         >
           <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#Logout">Logout</NavDropdown.Item>
+          <NavDropdown.Item href="/SignIn">Logout</NavDropdown.Item>
         </NavDropdown>
       </Nav>
     </Navbar>
