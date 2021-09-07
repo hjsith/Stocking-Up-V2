@@ -1,7 +1,7 @@
 import React from "react";
-import "../assets/css/Achievement.scss";
-import UnlockedAchievement from "../components/UnlockedAchievement";
-import LockedAchievement from "../components/LockedAchievement";
+import "../../assets/css/Achievement.scss";
+import UnlockedAchievement from "./UnlockedAchievement";
+import LockedAchievement from "./LockedAchievement";
 
 class Achievement extends React.Component {
   render() {

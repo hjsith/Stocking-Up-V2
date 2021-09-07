@@ -2,9 +2,9 @@ import React from "react";
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
 import letter from "../assets/images/letter.png";
-import SignInLogo from "../components/SignInLogo";
-import SignInLink from "../components/SignInLink";
-import AuthenticationTitle from "../components/AuthenticationTitle";
+import SignInLogo from "../components/UserAuthenticationComponents/SignInLogo";
+import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
+import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
 
@@ -16,14 +16,13 @@ class SignUp extends React.Component {
       Password: "",
       Email: "",
       ConfirmPassword: "",
-      Redirect: false
+      Redirect: false,
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
-      this
-    );
+    this.handleConfirmPasswordChange =
+      this.handleConfirmPasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -56,7 +55,7 @@ class SignUp extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/Portfolio" />;
+      return <Redirect to="/Profile" />;
     }
     return (
       <div className="SignUpContainer">

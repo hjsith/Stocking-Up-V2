@@ -1,9 +1,9 @@
 import React from "react";
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
-import SignInLogo from "../components/SignInLogo";
-import SignInLink from "../components/SignInLink";
-import AuthenticationTitle from "../components/AuthenticationTitle";
+import SignInLogo from "../components/UserAuthenticationComponents/SignInLogo";
+import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
+import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
 
@@ -14,13 +14,12 @@ class ForgotPassword extends React.Component {
       Username: "",
       Password: "",
       ConfirmPassword: "",
-      Redirect: false
+      Redirect: false,
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
-      this
-    );
+    this.handleConfirmPasswordChange =
+      this.handleConfirmPasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 

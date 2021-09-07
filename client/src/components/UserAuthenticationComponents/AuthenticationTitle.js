@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/SignIn.scss";
+import "../../assets/css/SignIn.scss";
 
 class AuthenticationTitle extends React.Component {
   render() {

@@ -1,6 +1,6 @@
 import React from "react";
-import "../assets/css/Achievement.scss";
-import AchievementIcon from "../assets/images/GreyAchievementTrophyIcon.png";
+import "../../assets/css/Achievement.scss";
+import AchievementIcon from "../../assets/images/GreyAchievementTrophyIcon.png";
 
 class LockedAchievement extends React.Component {
   render() {
