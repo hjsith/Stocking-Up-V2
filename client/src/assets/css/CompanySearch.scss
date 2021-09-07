@@ -1,0 +1,24 @@
+h1 {
+    color: white;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
+}
+
+.searchbar {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#search-form {
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+input {
+    padding-left: 10px;
+}
