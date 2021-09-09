@@ -32,6 +32,7 @@ class MyHoldings extends React.Component {
           <HoldingsRowPanel />
           <HoldingsRowPanel />
         </div>
+        <br />
       </div>
     );
   }

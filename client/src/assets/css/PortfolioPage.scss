@@ -115,6 +115,29 @@
   cursor: pointer;
 }
 
+.CancelCrossButton {
+  height: 3em;
+  width: 3em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.CancelCrossButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
 .CancelButton:hover {
   opacity: 1;
   font-weight: bold;
@@ -168,7 +191,7 @@
 
 .GoldRankButton {
   height: 3em;
-  width: 15em;
+  width: 13em;
   background-color: #ffc737;
   color: white;
   border-radius: 2em;
@@ -296,7 +319,7 @@
 }
 
 .divholding {
-  height: 22.8em;
+  height: 21.5em;
   width: 97%;
   overflow: auto;
 }
@@ -308,7 +331,7 @@
 }
 
 .divwatchlist {
-  height: 23.1em;
+  height: 21.9em;
   width: 97%;
   overflow: auto;
 }

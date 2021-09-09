@@ -11,7 +11,7 @@ import Watchlist from "../components/PortfolioComponents/Watchlist";
 class Portfolio extends React.Component {
   render() {
     return (
-      <div className="test">
+      <div>
         <NavBar />
         <div className="BackgroundPanel1">
           {" "}
@@ -31,7 +31,7 @@ class Portfolio extends React.Component {
               <th width="20%">
                 <div className="ButtonContainer">
                   <a href="/Leaderboard" className="GoldRankButton">
-                    Current Rank: 152 (+10)
+                    Current Rank: 152
                   </a>
                 </div>
               </th>
