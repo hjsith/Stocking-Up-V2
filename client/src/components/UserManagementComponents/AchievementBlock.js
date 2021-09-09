@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/Achievement.scss";
+import "../../assets/css/Achievement.scss";
 import Achievement from "./Achievement";
 
 class AchievementBlock extends React.Component {

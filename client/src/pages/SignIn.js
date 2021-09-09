@@ -1,9 +1,9 @@
 import React from "react";
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
-import SignInLogo from "../components/SignInLogo";
-import SignInLink from "../components/SignInLink";
-import AuthenticationTitle from "../components/AuthenticationTitle";
+import SignInLogo from "../components/UserAuthenticationComponents/SignInLogo";
+import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
+import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
 
@@ -31,7 +31,7 @@ class SignIn extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/Portfolio" />;
+      return <Redirect to="/Profile" />;
     }
     return (
       <div className="LoginContainer">

@@ -6,15 +6,17 @@ class CompanySearch extends React.Component {
     return (
       <>
         <NavBar />
-        <h1>Company Search</h1>
-      <div class="searchbar">
-          <input type="text"
-          name="search-form"
-          id="search-form"
-          placeholder="Type a Company name or ASX Code here..."
+        <h1 className="companySearchTitle">Company Search</h1>
+        <div class="searchbar">
+          <input
+            type="text"
+            name="search-form"
+            id="search-form"
+            placeholder="Type a Company name or ASX Code here..."
+            className="companySearchInput"
           />
         </div>
-        </>
+      </>
     );
   }
 }

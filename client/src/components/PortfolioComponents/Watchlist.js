@@ -13,7 +13,7 @@ class Watchlist extends React.Component {
             </th>
             <th th width="19%">
               <div className="ButtonContainer">
-                <a href="/Search" className="BlueWatchlistButton">
+                <a href="/CompanySearch" className="BlueWatchlistButton">
                   + Add Company
                 </a>
               </div>
