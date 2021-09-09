@@ -11,7 +11,7 @@ import Watchlist from "../components/PortfolioComponents/Watchlist";
 class Portfolio extends React.Component {
   render() {
     return (
-      <div className="test">
+      <div>
         <NavBar />
         <div className="BackgroundPanel1">
           {" "}

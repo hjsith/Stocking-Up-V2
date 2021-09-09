@@ -41,6 +41,7 @@ class RecentOrders extends React.Component {
     copyOrderArray.splice(index, 1);
     this.setState({
       orderArray: copyOrderArray,
+      // snackBarMessage: "Password has been successfully updated!",
     });
   };
 
