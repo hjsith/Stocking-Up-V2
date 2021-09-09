@@ -1,11 +1,11 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import "../assets/css/Profile.scss";
-import AchievementBlock from "../components/AchievementBlock";
+import AchievementBlock from "../components/UserManagementComponents/AchievementBlock";
 import UserProfileIcon from "../components/UserProfileIcon";
-import ProfileStatTable from "../components/ProfileStatTable";
+import ProfileStatTable from "../components/UserManagementComponents/ProfileStatTable";
 import Popup from "../components/Popup";
-import VerticalLine from "../components/VerticalLine";
+import VerticalLine from "../components/UserManagementComponents/VerticalLine";
 
 class Profile extends React.Component {
   constructor(props) {

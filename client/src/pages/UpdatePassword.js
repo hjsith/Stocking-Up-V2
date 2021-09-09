@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import "../assets/css/UpdatePassword.scss";
 import Logo from "../assets/images/stocking-up.png";
-import PasswordErrorMessage from "../components/PasswordErrorMessage";
+import PasswordErrorMessage from "../components/UserManagementComponents/PasswordErrorMessage";
 import { Redirect } from "react-router-dom";
 
 const passwordRegex = new RegExp(

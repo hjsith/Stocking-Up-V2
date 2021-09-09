@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap%22");
+.companySearchTitle {
+  color: white;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.searchbar {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#search-form {
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.companySearchInput {
+  padding-left: 10px;
+  font-family: "Roboto", sans-serif;
+}
