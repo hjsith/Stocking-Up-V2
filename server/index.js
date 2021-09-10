@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const cookieParser = require("express");
 const helmet = require("helmet");
@@ -10,6 +11,7 @@ const app = express();
 const PORT = env.port;
 const staticDir = path.join(__dirname, "../client/build/");
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(staticDir));
