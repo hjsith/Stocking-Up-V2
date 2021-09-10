@@ -1,8 +1,8 @@
-const { Router } = require("express");
+const express = require("express");
 const ListingRouter = require("./Listing");
 const PriceRouter = require("./Price");
 
-const router = Router();
+const router = express.Router();
 
 // Add sub-routes
 router.use(PriceRouter);
