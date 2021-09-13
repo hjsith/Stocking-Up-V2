@@ -10,13 +10,16 @@ const staticDir = path.join(__dirname, "../client/build/");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
 app.use(express.static(staticDir));
 
 app.use("/api", BaseRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile("index.html", { root: staticDir });
+  if (req.url.startsWith("/api")) {
+    res.status(404).end();
+  } else {
+    res.sendFile("index.html", { root: staticDir });
+  }
 });
 
 async function dbconnect() {
