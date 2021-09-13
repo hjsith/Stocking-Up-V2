@@ -1,5 +1,5 @@
 import React from "react";
-import "../assets/css/Profile.scss";
+import "../../assets/css/Profile.scss";
 
 class VerticalLine extends React.Component {
   render() {

@@ -1,7 +1,7 @@
 import React from "react";
-import "../assets/css/Profile.scss";
-import ProfileStatTitle from "../components/ProfileStatTitle";
-import ProfileStatValue from "../components/ProfileStatValue";
+import "../../assets/css/Profile.scss";
+import ProfileStatTitle from "./ProfileStatTitle";
+import ProfileStatValue from "./ProfileStatValue";
 
 class ProfileStat extends React.Component {
   render() {
