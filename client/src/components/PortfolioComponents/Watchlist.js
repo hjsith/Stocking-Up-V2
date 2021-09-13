@@ -3,50 +3,53 @@ import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
 
 class Watchlist extends React.Component {
-  state = {
-    watchlistArray: [
-      {
-        colourNumber: 1,
-        companyCode: "A2M",
-        companyName: "A2 Milk",
-        currentPrice: "$7.02",
-        percentChange: "0.2%",
-        industry: "Consumer Staples",
-      },
-      {
-        colourNumber: 4,
-        companyCode: "CBA",
-        companyName: "Commonwealth Bank",
-        currentPrice: "$7.02",
-        percentChange: "0.2%",
-        industry: "Consumer Staples",
-      },
-      {
-        colourNumber: 2,
-        companyCode: "WIS",
-        companyName: "Wisetech Global",
-        currentPrice: "$7.02",
-        percentChange: "0.2%",
-        industry: "Consumer Staples",
-      },
-      {
-        colourNumber: 3,
-        companyCode: "MQG",
-        companyName: "Macquarie Group",
-        currentPrice: "$7.02",
-        percentChange: "0.2%",
-        industry: "Consumer Staples",
-      },
-      {
-        colourNumber: 5,
-        companyCode: "BRK",
-        companyName: "Brickworks",
-        currentPrice: "$7.02",
-        percentChange: "0.2%",
-        industry: "Consumer Staples",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      watchlistArray: [
+        {
+          colourNumber: 1,
+          companyCode: "A2M",
+          companyName: "A2 Milk",
+          currentPrice: "$7.02",
+          percentChange: "0.2%",
+          industry: "Consumer Staples",
+        },
+        {
+          colourNumber: 4,
+          companyCode: "CBA",
+          companyName: "Commonwealth Bank",
+          currentPrice: "$7.02",
+          percentChange: "0.2%",
+          industry: "Consumer Staples",
+        },
+        {
+          colourNumber: 2,
+          companyCode: "WIS",
+          companyName: "Wisetech Global",
+          currentPrice: "$7.02",
+          percentChange: "0.2%",
+          industry: "Consumer Staples",
+        },
+        {
+          colourNumber: 3,
+          companyCode: "MQG",
+          companyName: "Macquarie Group",
+          currentPrice: "$7.02",
+          percentChange: "0.2%",
+          industry: "Consumer Staples",
+        },
+        {
+          colourNumber: 5,
+          companyCode: "BRK",
+          companyName: "Brickworks",
+          currentPrice: "$7.02",
+          percentChange: "0.2%",
+          industry: "Consumer Staples",
+        },
+      ],
+    };
+  }
 
   cancelEvent = (index) => {
     const copyWatchlistArray = Object.assign([], this.state.watchlistArray);
