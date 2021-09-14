@@ -1,24 +1,59 @@
-import React from "react";
-import NavBar from "../components/NavBar";
+import React, {useState} from "react";
+//import NavBar from "../components/NavBar"; - need to add this in, not sure where/how
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/CompanySearch.scss";
-class CompanySearch extends React.Component {
-  render() {
-    return (
-      <>
-        <NavBar />
-        <h1 className="companySearchTitle">Company Search</h1>
-        <div class="searchbar">
-          <input
-            type="text"
-            name="search-form"
-            id="search-form"
-            placeholder="Type a Company name or ASX Code here..."
-            className="companySearchInput"
-          />
-        </div>
-      </>
+
+const SearchBar = (props) => {
+  const { options, onInputChange } = props;
+  return (
+    <div className="searchbar"> 
+      <input 
+        type="text" 
+        className="form-control" 
+        placeholder="Type an ASX-listed company code or name here..."
+        onChange={onInputChange}
+      />
+      <ul className="list-group">
+        {options.map((option, index) => {
+          return ( 
+            <button 
+             type="button" 
+              key={index}
+             className="list-group-item list-group-item-action"
+            >
+              {option}
+            </button>
+          );
+        })} 
+      </ul>
+  </div>
+  );
+};
+
+const dummyOptions = [] //fake data for now, an array of strings
+{
+  dummyOptions.push('A2M - The A2 Milk Company');
+  dummyOptions.push('WTC - WiseTech Global');
+  dummyOptions.push('CBA - Commonwealth Bank');
+}
+
+function CompanySearch() {
+  const [options, setOptions] = useState([]);
+  const onInputChange = (event) => {
+    setOptions(
+      dummyOptions.filter((option) => option.includes(event.target.value))
     );
-  }
+  };
+  
+  return (
+    <div className="companySearchTitle">
+      <h1>Company Search</h1>
+      <SearchBar 
+        options={options}
+        onInputChange={onInputChange} 
+      />
+    </div>
+    );
 }
 
 export default CompanySearch;
