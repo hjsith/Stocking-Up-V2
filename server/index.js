@@ -15,11 +15,7 @@ app.use(express.static(staticDir));
 app.use("/api", BaseRouter);
 
 app.get("*", (req, res) => {
-  if (req.url.startsWith("/api")) {
-    res.status(404).end();
-  } else {
-    res.sendFile("index.html", { root: staticDir });
-  }
+  res.sendFile("index.html", { root: staticDir });
 });
 
 async function dbconnect() {
