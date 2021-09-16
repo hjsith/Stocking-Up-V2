@@ -63,7 +63,29 @@ class UpdatePassword extends React.Component {
     }
 
     if (determineRedirect) {
-      this.setState({ redirect: true });
+      fetch("/api/updatePassword", {
+        method: "PUT",
+        body: JSON.stringify({
+          userID: "1ad0df57-12ae-494f-81ec-34fcc5acf38e",
+          newPassword: this.state.InitialPassword,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            // Successful login 200
+            this.setState({ redirect: true });
+          } else if (res.status === 409) {
+            console.log("Failed to update password. Wat the heck?!");
+          } else {
+            console.log("Something unexpeceted went wrong ._.");
+          }
+        })
+        .catch((exception) => {
+          console.log("Error:", exception);
+        });
     }
     event.preventDefault();
   }
