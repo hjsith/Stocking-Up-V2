@@ -16,6 +16,12 @@ margin-right: auto;
 padding-top: 1em;
 }
 
-.companySearchInput {
-font-family: "Roboto", sans-serif;
+#companySearchInput {
+  width: inherit;
+  font-family: "Roboto", sans-serif;
+}
+
+#results {
+  position: absolute;
+  width: inherit;
 }
