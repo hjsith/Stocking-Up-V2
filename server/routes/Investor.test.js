@@ -1,7 +1,7 @@
 const { app } = require("../index");
 const { request } = require("supertest");
 const db = require("./DBInstance");
-const { getInvestor } = require("../daos/Investor");
+const { getInvestor } = require("../functions/Investor");
 
 describe("Investor endpoint", () => {
   it("Successfully retrieved user", async () => {

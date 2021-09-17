@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { createInvestor } = require("../daos/Investor");
+const { createInvestor } = require("../functions/Investor");
 
 // Init shared
 const router = Router();

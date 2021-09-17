@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getAllObtainedAchievements } = require("../daos/ObtainedAchievements");
+const { getAllObtainedAchievements } = require("../functions/ObtainedAchievements");
 
 // Init shared
 const router = Router();
