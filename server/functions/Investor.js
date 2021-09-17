@@ -1,39 +1,4 @@
-const { DataTypes, Op } = require("sequelize");
-const db = require("./DBInstance");
-
-const Investor = db.define(
-  "Investor",
-  {
-    InvestorID: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    InvestorFName: DataTypes.TEXT,
-    InvestorLName: DataTypes.TEXT,
-    InvestorEmail: DataTypes.STRING,
-    InvestorPassword: DataTypes.TEXT,
-    Username: DataTypes.TEXT,
-    NetWorth: DataTypes.BIGINT,
-    InvestorRanking: DataTypes.INTEGER,
-    InvestorDifficulty: DataTypes.TEXT,
-    DateJoined: DataTypes.DATEONLY,
-    Title: DataTypes.TEXT,
-  },
-  { sequelize: db, tableName: "Investor", timestamps: false }
-);
-
-//Relationships
-Investor.hasMany(Watchlist, { foreignKey: "InvestorID" });
-Investor.hasMany(Holding, { foreignKey: "InvestorID" });
-Investor.hasMany(ObtainedAchievements, { foreignKey: "InvestorID" });
-Investor.hasMany(Order, { foreignKey: "InvestorID" });
-Investor.hasMany(Friends, { foreignKey: "RequestingUsername" });
-Investor.hasMany(Friends, { foreignKey: "AcceptingUsername" });
-Investor.hasMany(Comments, { foreignKey: "InvestorID" });
-Investor.hasMany(AuthenticationTokens, { foreignKey: "InvestorID" });
-
-// Investor CRUD
+const { Investor } = require("../db/Models");
 
 async function getAllInvestors() {
   return await Investor.findAll();
@@ -110,7 +75,6 @@ async function updateInvestorPassword(userID, username, password) {
 }
 
 module.exports = {
-  Investor,
   getAllInvestors,
   getInvestor,
   createInvestor,

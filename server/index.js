@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const db = require("./daos/DBInstance");
+const db = require("./db/DBInstance");
 const env = require("./Environment");
 const BaseRouter = require("./routes/Router");
 const { StatusCodes } = require("http-status-codes");
@@ -11,7 +11,7 @@ const PORT = env.port;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/api", BaseRouter);
+app.use("/api", BaseRouter);
 
 const staticDir = path.join(__dirname, "../client/build/");
 app.use(express.static(staticDir));

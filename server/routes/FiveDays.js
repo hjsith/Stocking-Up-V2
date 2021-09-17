@@ -3,7 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const {
   getAllFiveDaysPrices,
   getFiveDaysPricesForListing,
-} = require("../daos/FiveDays");
+} = require("../functions/FiveDays");
 
 // Init shared
 const router = Router();

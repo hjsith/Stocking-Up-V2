@@ -3,7 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const {
   getAllOneDayPrices,
   getOneDayPricesForListing,
-} = require("../daos/OneDay");
+} = require("../functions/OneDay");
 
 // Init shared
 const router = Router();
