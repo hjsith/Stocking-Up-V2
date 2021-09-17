@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("./DBInstance");
 
-const Watchlist = sequelize.define(
+const Watchlist = db.define(
   "Watchlist",
   {
     InvestorID: {

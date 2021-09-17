@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("./DBInstance");
 
-const Holding = sequelize.define(
+const Holding = db.define(
   "Holding",
   {
     HoldingID: {
