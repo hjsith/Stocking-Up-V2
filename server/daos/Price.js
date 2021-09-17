@@ -17,6 +17,7 @@ const Price = db.define(
   { sequelize: db, tableName: "Price", timestamps: false }
 );
 
+//Relationships
 Price.belongsTo(Listing, { foreignKey: "ListingID" });
 
 async function getAllCurrentPrices() {
