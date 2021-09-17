@@ -4,7 +4,7 @@ const PriceRouter = require("./Price");
 const InvestorRouter = require("./Investor");
 const SignUpRouter = require("./SignUp");
 const HoldingRouter = require("./Holding");
-const WatchlistRouter = require("../daos/Watchlist");
+const WatchlistRouter = require("./Watchlist");
 
 const router = express.Router();
 
