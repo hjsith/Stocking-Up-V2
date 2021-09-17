@@ -34,7 +34,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: '$(System.DefaultWorkingDirectory)'
-        customCommand: 'npm run build && cd server && npm install'
+        customCommand: 'pwd && npm run build && pwd && cd server && npm install'
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
