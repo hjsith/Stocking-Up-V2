@@ -5,7 +5,9 @@ const InvestorRouter = require("./Investor");
 const SignUpRouter = require("./SignUp");
 const OrderRouter = require("./Order");
 const ArticleRouter = require("./Article");
-
+const AchievementsRouter = require("./Achievements");
+const ObtainedAchievementsRouter = require("./ObtainedAchievements");
+const FriendsRouter = require("./Friends");
 const router = express.Router();
 
 // Add sub-routes
@@ -15,5 +17,8 @@ router.use(InvestorRouter);
 router.use(SignUpRouter);
 router.use(OrderRouter);
 router.use(ArticleRouter);
+router.use(AchievementsRouter);
+router.use(ObtainedAchievementsRouter);
+router.use(FriendsRouter);
 
 module.exports = router;
