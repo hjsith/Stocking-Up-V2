@@ -11,6 +11,9 @@ const ArticleRouter = require("./Article");
 const AchievementsRouter = require("./Achievements");
 const ObtainedAchievementsRouter = require("./ObtainedAchievements");
 const FriendsRouter = require("./Friends");
+const ThreadsRouter = require("./Threads");
+const CommentsRouter = require("./Comments");
+
 const router = express.Router();
 
 // Add sub-routes
@@ -26,5 +29,7 @@ router.use(ArticleRouter);
 router.use(AchievementsRouter);
 router.use(ObtainedAchievementsRouter);
 router.use(FriendsRouter);
+router.use(ThreadsRouter);
+router.use(CommentsRouter);
 
 module.exports = router;

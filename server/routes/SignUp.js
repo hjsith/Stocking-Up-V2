@@ -5,7 +5,7 @@ const { createInvestor } = require("../daos/Investor");
 // Init shared
 const router = Router();
 
-router.get("/SignUp", async (req, res) => {
+router.post("/SignUp", async (req, res) => {
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
       .status(StatusCodes.BAD_REQUEST)

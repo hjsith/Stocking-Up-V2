@@ -66,7 +66,7 @@ class UpdatePassword extends React.Component {
       fetch("/api/updatePassword", {
         method: "PUT",
         body: JSON.stringify({
-          userID: "1ad0df57-12ae-494f-81ec-34fcc5acf38e",
+          userID: "BADUSERID",
           newPassword: this.state.InitialPassword,
         }),
         headers: {
