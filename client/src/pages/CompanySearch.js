@@ -71,8 +71,8 @@ function CompanySearch() {
   
   return (
     <div className="companySearchTitle">
-      <h1>Company Search</h1>
       <NavBar />
+      <h1>Company Search</h1>
       <SearchBar 
         results={results}
         onInputChange={onInputChange} 

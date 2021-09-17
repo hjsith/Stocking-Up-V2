@@ -6,7 +6,7 @@ const { getAllCurrentFriends } = require("../daos/Friends");
 const friends = Router();
 
 router.get("/friends", async (req, res) => {
-  const price = await getAllCurrentFriends();
+  const friends = await getAllCurrentFriends();
 
   return res.status(StatusCodes.OK).json(friends);
 });

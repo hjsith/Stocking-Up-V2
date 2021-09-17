@@ -6,7 +6,7 @@ const { getAllCurrentAchievements } = require("../daos/Achievements");
 const achievements = Router();
 
 router.get("/achievements", async (req, res) => {
-  const price = await getAllCurrentAchievements();
+  const achievements = await getAllCurrentAchievements();
 
   return res.status(StatusCodes.OK).json(achievements);
 });
