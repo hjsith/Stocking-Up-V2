@@ -33,7 +33,8 @@ stages:
     - task: Npm@1
       inputs:
         command: 'custom'
-        customCommand: 'npm run build && npm run install'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+        customCommand: 'npm run build && cd server && npm install'
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
