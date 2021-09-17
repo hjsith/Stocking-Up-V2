@@ -30,6 +30,10 @@ stages:
       vmImage: $(vmImageName)
 
     steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'npm run build && cd server && npm install'
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
@@ -64,5 +68,3 @@ stages:
               WebAppName: $(webAppName)
               packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               RuntimeStack: 'NODE|14-lts'
-              StartupCommand: 'npm run build && cd server && npm install'
-              ScriptType: 'Inline Script'
