@@ -33,7 +33,7 @@ stages:
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
-        script: 'npm run build && cd server && npm install'
+        script: 'sudo npm run build && cd server && sudo npm install -g'
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
