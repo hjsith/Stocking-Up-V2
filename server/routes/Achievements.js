@@ -3,7 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const { getAllCurrentAchievements } = require("../daos/Achievements");
 
 // Init shared
-const achievements = Router();
+const router = Router();
 
 router.get("/achievements", async (req, res) => {
   const achievements = await getAllCurrentAchievements();
