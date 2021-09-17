@@ -6,23 +6,22 @@
   margin-left: auto;
   margin-right: auto;
   padding-top: 5%;
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
 }
 
 .searchbar {
-  padding-top: 10px;
-  display: flex;
-  justify-content: center;
+width: 30em;
+text-align: left;
+margin-left: auto;
+margin-right: auto;
+padding-top: 1em;
 }
 
-#search-form {
-  width: 500px;
-  height: 40px;
-  border-radius: 10px;
-}
-
-.companySearchInput {
-  padding-left: 10px;
+#companySearchInput {
+  width: inherit;
   font-family: "Roboto", sans-serif;
+}
+
+#results {
+  position: absolute;
+  width: inherit;
 }

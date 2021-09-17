@@ -23,6 +23,16 @@ const Investor = db.define(
   { sequelize: db, tableName: "Investor", timestamps: false }
 );
 
+//Relationships
+Investor.hasMany(Watchlist, { foreignKey: "InvestorID" });
+Investor.hasMany(Holding, { foreignKey: "InvestorID" });
+Investor.hasMany(ObtainedAchievements, { foreignKey: "InvestorID" });
+Investor.hasMany(Order, { foreignKey: "InvestorID" });
+Investor.hasMany(Friends, { foreignKey: "RequestingUsername" });
+Investor.hasMany(Friends, { foreignKey: "AcceptingUsername" });
+Investor.hasMany(Comments, { foreignKey: "InvestorID" });
+Investor.hasMany(AuthenticationTokens, { foreignKey: "InvestorID" });
+
 // Investor CRUD
 
 async function getAllInvestors() {
