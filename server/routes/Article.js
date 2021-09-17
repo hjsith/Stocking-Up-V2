@@ -6,7 +6,7 @@ const { getAllArticles } = require("../daos/Article");
 const router = Router();
 
 router.get("/article", async (req, res) => {
-  const orders = await getAllArticles();
+  const article = await getAllArticles();
 
   return res.status(StatusCodes.OK).json(article);
 });
