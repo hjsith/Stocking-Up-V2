@@ -4,37 +4,40 @@ import PanelTitle from "./PanelTitle";
 import OrderRowPanel from "./OrderRowPanel";
 
 class RecentOrders extends React.Component {
-  state = {
-    orderArray: [
-      {
-        colourNumber: 1,
-        companyCode: "A2M",
-        companyName: "A2 Milk",
-        priceBought: "$6.52",
-        currentPrice: "$7.02",
-        units: "150",
-        total: "$975",
-      },
-      {
-        colourNumber: 2,
-        companyCode: "WIS",
-        companyName: "Wistech Global",
-        priceBought: "$43.52",
-        currentPrice: "$47.02",
-        units: "150",
-        total: "$2200",
-      },
-      {
-        colourNumber: 4,
-        companyCode: "CBA",
-        companyName: "Commonwealth Bank",
-        priceBought: "$62.52",
-        currentPrice: "$64.02",
-        units: "150",
-        total: "$2,865.98",
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      orderArray: [
+        {
+          colourNumber: 1,
+          companyCode: "A2M",
+          companyName: "A2 Milk",
+          priceBought: "$6.52",
+          currentPrice: "$7.02",
+          units: "150",
+          total: "$975",
+        },
+        {
+          colourNumber: 2,
+          companyCode: "WIS",
+          companyName: "Wistech Global",
+          priceBought: "$43.52",
+          currentPrice: "$47.02",
+          units: "150",
+          total: "$2200",
+        },
+        {
+          colourNumber: 4,
+          companyCode: "CBA",
+          companyName: "Commonwealth Bank",
+          priceBought: "$62.52",
+          currentPrice: "$64.02",
+          units: "150",
+          total: "$2,865.98",
+        },
+      ],
+    };
+  }
 
   cancelEvent = (index) => {
     const copyOrderArray = Object.assign([], this.state.orderArray);
