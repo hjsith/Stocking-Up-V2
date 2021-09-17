@@ -30,6 +30,10 @@ stages:
       vmImage: $(vmImageName)
 
     steps:
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        customCommand: 'npm run build && npm run install'
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
@@ -66,6 +70,3 @@ stages:
               RuntimeStack: 'NODE|14-lts'
               StartupCommand: 'npm run start'
               ScriptType: 'Inline Script'
-              InlineScript: |
-                npm install
-                npm run build --if-present
