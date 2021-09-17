@@ -3,6 +3,8 @@ const ListingRouter = require("./Listing");
 const PriceRouter = require("./Price");
 const InvestorRouter = require("./Investor");
 const SignUpRouter = require("./SignUp");
+const HoldingRouter = require("./Holding");
+const WatchlistRouter = require("../daos/Watchlist");
 
 const router = express.Router();
 
@@ -11,5 +13,7 @@ router.use(PriceRouter);
 router.use(ListingRouter);
 router.use(InvestorRouter);
 router.use(SignUpRouter);
+router.use(HoldingRouter);
+router.use(WatchlistRouter);
 
 module.exports = router;
