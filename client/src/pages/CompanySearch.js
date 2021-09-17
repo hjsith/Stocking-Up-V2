@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-//import NavBar from "../components/NavBar"; - need to add this in, not sure where/how
+import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/CompanySearch.scss";
 
@@ -72,6 +72,7 @@ function CompanySearch() {
   return (
     <div className="companySearchTitle">
       <h1>Company Search</h1>
+      <NavBar />
       <SearchBar 
         results={results}
         onInputChange={onInputChange} 
