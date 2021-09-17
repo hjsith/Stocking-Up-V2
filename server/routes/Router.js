@@ -1,6 +1,10 @@
 const express = require("express");
 const ListingRouter = require("./Listing");
 const PriceRouter = require("./Price");
+const OneDayRouter = require("./OneDay");
+const FiveDaysRouter = require("./FiveDays");
+const TwoWeeksRouter = require("./TwoWeeks");
+const OneMonthRouter = require("./OneMonth");
 const InvestorRouter = require("./Investor");
 const SignUpRouter = require("./SignUp");
 const AuthenticationTokensRouter = require("./AuthenticationTokens");
@@ -31,5 +35,9 @@ router.use(ObtainedAchievementsRouter);
 router.use(FriendsRouter);
 router.use(ThreadsRouter);
 router.use(CommentsRouter);
+router.use(OneDayRouter);
+router.use(FiveDaysRouter);
+router.use(TwoWeeksRouter);
+router.use(OneMonthRouter);
 
 module.exports = router;
