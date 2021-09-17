@@ -37,6 +37,11 @@ const Holding = db.define(
   { sequelize: db, tableName: "Holding", timestamps: false }
 );
 
+//Relationships
+Holding.belongsTo(Listing, { foreignKey: "ListingID" });
+Holding.belongsTo(Order, { foreignKey: "OrderID" });
+Holding.belongsTo(Investor, { foreignKey: "InvestorID" });
+
 async function getAllHoldings() {
   return await Holding.findAll();
 }

@@ -23,6 +23,10 @@ const Watchlist = db.define(
   { tableName: "Watchlist", timestamps: false }
 );
 
+//Relationships
+Watchlist.belongsTo(Listing, { foreignKey: "ListingID" });
+Watchlist.belongsTo(Investor, { foreignKey: "InvestorID" });
+
 async function getAllWatchlist() {
   return await Watchlist.findAll();
 }
