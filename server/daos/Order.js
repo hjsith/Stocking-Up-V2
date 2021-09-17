@@ -27,6 +27,11 @@ const Order = db.define(
   },
   { sequelize: db, tableName: "Order", timestamps: false }
 );
+
+//Relationships
+Order.belongsTo(Listing, { foreignKey: "ListingID" });
+Order.belongsTo(Investor, { foreignKey: "InvestorID" });
+
 async function getAllOrders() {
   return await Order.findAll();
 }
