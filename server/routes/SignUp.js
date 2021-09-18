@@ -1,7 +1,8 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const { createInvestor, checkUsernameExist } = require("../functions/Investor");
-const { bcrypt } = require("bcrypt");
+const bcrypt = require("bcrypt");
+const generateNewAuthenticationTokens = require("../functions/Authenticate");
 // Init shared
 const router = Router();
 
@@ -25,14 +26,10 @@ router.post("/SignUp", async (req, res) => {
     passHash,
     data.username
   );
+  const device = req.headers.host ?? "Unknown";
+  await generateNewAuthenticationTokens(user.InvestorID, device, res);
 
-  if (user === null) {
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .send("The server failed to craete the user.");
-  } else {
-    return res.status(StatusCodes.CREATED).json(user);
-  }
+  return res.status(StatusCodes.CREATED).end();
 });
 
 module.exports = router;

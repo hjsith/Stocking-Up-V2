@@ -22,7 +22,7 @@ async function createInvestor(fName, lName, email, password, username) {
     InvestorRanking: 0,
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
-    Title: "NEEDED",
+    Title: "NEEDED"
   });
 }
 
@@ -30,21 +30,21 @@ async function getInvestorPassword(username) {
   return Investor.findOne({
     attributes: ["InvestorPassword"],
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
 }
 
 async function checkUsernameExist(username) {
   var searchedInvestor = await Investor.findOne({
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
   if (searchedInvestor === null) {
-    return true;
-  } else {
     return false;
+  } else {
+    return true;
   }
 }
 
@@ -52,9 +52,9 @@ async function getInvestorsWithUsername(username) {
   return Investor.findAll({
     where: {
       Username: {
-        [Op.substring]: username,
-      },
-    },
+        [Op.substring]: username
+      }
+    }
   });
 }
 
@@ -63,8 +63,8 @@ async function updateInvestorPassword(userID, username, password) {
     { InvestorPassword: password },
     {
       where: {
-        [Op.or]: [{ Username: username }, { InvestorID: userID }],
-      },
+        [Op.or]: [{ Username: username }, { InvestorID: userID }]
+      }
     }
   );
   if (updatedInvestorCount[0] >= 1) {
@@ -81,5 +81,5 @@ module.exports = {
   getInvestorPassword,
   checkUsernameExist,
   getInvestorsWithUsername,
-  updateInvestorPassword,
+  updateInvestorPassword
 };
