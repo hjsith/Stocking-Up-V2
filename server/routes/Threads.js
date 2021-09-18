@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getAllThreads } = require("../daos/Threads");
+const { getAllThreads } = require("../functions/Threads");
 
 // Init shared
 const router = Router();

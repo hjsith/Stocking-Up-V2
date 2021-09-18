@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getAllAuthenticationTokens } = require("../daos/AuthenticationTokens");
+const { getAllAuthenticationTokens } = require("../functions/AuthenticationTokens");
 
 // Init shared
 const router = Router();

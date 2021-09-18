@@ -1,21 +1,27 @@
 const express = require("express");
 const path = require("path");
-const db = require("./daos/DBInstance");
+const db = require("./db/DBInstance");
 const env = require("./Environment");
 const BaseRouter = require("./routes/Router");
+const { StatusCodes } = require("http-status-codes");
 
 const app = express();
 const PORT = env.port;
-const staticDir = path.join(__dirname, "../client/build/");
 
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(staticDir));
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", BaseRouter);
 
+const staticDir = path.join(__dirname, "../client/build/");
+app.use(express.static(staticDir));
+
 app.get("*", (req, res) => {
-  res.sendFile("index.html", { root: staticDir });
+  if (req.url.startsWith("/api")) {
+    res.status(StatusCodes.NOT_FOUND).end();
+  } else {
+    res.sendFile("index.html", { root: staticDir });
+  }
 });
 
 async function dbconnect() {

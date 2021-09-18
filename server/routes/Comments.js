@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getAllComments } = require("../daos/Comments");
+const { getAllComments } = require("../functions/Comments");
 
 // Init shared
 const router = Router();
