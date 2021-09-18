@@ -1,6 +1,7 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
+import Popup from "../../components/Popup";
 
 class Watchlist extends React.Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class Watchlist extends React.Component {
           industry: "Consumer Staples",
         },
       ],
+      snackBarMessage: "",
     };
   }
 
@@ -56,6 +58,8 @@ class Watchlist extends React.Component {
     copyWatchlistArray.splice(index, 1);
     this.setState({
       watchlistArray: copyWatchlistArray,
+      snackBarMessage: "Watchlist item has been successfully deleted!",
+      //Ask James on how to do it when you delete multiple things
     });
   };
 
@@ -103,6 +107,9 @@ class Watchlist extends React.Component {
           })}
         </div>
         <br />
+        <div>
+          <Popup message={this.state.snackBarMessage} />
+        </div>
       </div>
     );
   }

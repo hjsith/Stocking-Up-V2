@@ -1,6 +1,7 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import PanelTitle from "./PanelTitle";
+import Popup from "../../components/Popup";
 import OrderRowPanel from "./OrderRowPanel";
 
 class RecentOrders extends React.Component {
@@ -36,6 +37,7 @@ class RecentOrders extends React.Component {
           total: "$2,865.98",
         },
       ],
+      snackBarMessage: "",
     };
   }
 
@@ -44,14 +46,29 @@ class RecentOrders extends React.Component {
     copyOrderArray.splice(index, 1);
     this.setState({
       orderArray: copyOrderArray,
-      // snackBarMessage: "Password has been successfully updated!",
+      snackBarMessage: "Your order for has successfully been deleted!",
+      //Ask James on how to do it when you delete multiple things
     });
   };
 
   render() {
     return (
       <div>
-        <PanelTitle title="Recent Orders" />
+        <table className="TableWatchlistTitle">
+          <tr>
+            <th width="78%">
+              <th className="NormalPanelTitle2">Recent Orders</th>
+            </th>
+            <th th width="19%">
+              <div className="ButtonContainer">
+                <a href="/CompanySearch" className="BlueWatchlistButton">
+                  All My Orders
+                </a>
+              </div>
+            </th>
+          </tr>
+        </table>
+
         <table className="TableTitleFont">
           <tr>
             <th>Company Code</th>
@@ -79,6 +96,9 @@ class RecentOrders extends React.Component {
               />
             );
           })}
+        </div>
+        <div>
+          <Popup message={this.state.snackBarMessage} />
         </div>
       </div>
     );
