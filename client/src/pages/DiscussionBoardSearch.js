@@ -42,6 +42,33 @@ class DiscussionBoardSearch extends React.Component {
     event.preventDefault();
   }
 
+  fetchAllThreads() {
+    console.log("Fetched All Threads!");
+    // fetch("/api/threads", {
+    //   method: "get",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       // Successful login 200
+    //       console.log("Hi");
+    //     } else if (res.status === 409) {
+    //       console.log("Failed to update password. Wat the heck?!");
+    //     } else {
+    //       console.log("Something unexpeceted went wrong ._.");
+    //     }
+    //   })
+    //   .catch((exception) => {
+    //     console.log("Error:", exception);
+    //   });
+  }
+
+  componentDidMount() {
+    fetchAllThreads();
+  }
+
   render() {
     return (
       <>
