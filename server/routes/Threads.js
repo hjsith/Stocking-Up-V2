@@ -3,6 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const {
   getAllThreads,
   createThread,
+  // findThreadsWithName,
   createMissingThreads,
 } = require("../functions/Threads");
 const { getAllListings } = require("../functions/Listing");
@@ -32,6 +33,16 @@ router.post("/newThread", async (req, res) => {
 
   return res.status(StatusCodes.CREATED).json(newThread);
 });
+
+// router.get("/thread", async (req, res) => {
+//   const threads = await findThreadsWithName(req.query.search);
+//   if (threads === null) {
+//     return res
+//       .status(StatusCodes.BAD_REQUEST)
+//       .json({ errors: "Thread could not be found." });
+//   }
+//   return res.status(StatusCodes.OK).json(threads);
+// });
 
 // router.get("/CreateAllThreads", async (req, res) => {
 //   const listings = await getAllListings();

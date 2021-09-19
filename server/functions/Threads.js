@@ -4,6 +4,16 @@ async function getAllThreads() {
   return await Threads.findAll();
 }
 
+// async function findThreadsWithName(searchString) {
+//   return Threads.findAll({
+//     where: {
+//       Username: {
+//         [Op.substring]: searchString,
+//       },
+//     },
+//   });
+// }
+
 async function createThread(inputListingID, inputTitle, inputDescription) {
   return Threads.create({
     ListingID: inputListingID,
@@ -50,6 +60,7 @@ async function createMissingThreads(listings) {
 
 module.exports = {
   getAllThreads,
+  // findThreadsWithName,
   createThread,
   deleteThread,
   archiveThread,
