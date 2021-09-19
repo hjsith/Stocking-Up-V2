@@ -44,10 +44,25 @@ async function archiveThread(threadID, inputTitle) {
   }
 }
 
+async function createMissingThreads(listings) {
+  for (const element of listings) {
+    await Threads.findOrCreate({
+      where: { ListingID: element.ListingID },
+      defaults: {
+        ThreadID: "TH-" + element.ListingID,
+        ListingID: element.ListingID,
+        Title: element.ListingName,
+        Description: "A discussion board for " + element.ListingName,
+      },
+    });
+  }
+}
+
 module.exports = {
   getAllThreads,
   findThreadsWithName,
   createThread,
   deleteThread,
   archiveThread,
+  createMissingThreads,
 };

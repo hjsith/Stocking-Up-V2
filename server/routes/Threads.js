@@ -4,7 +4,10 @@ const {
   getAllThreads,
   createThread,
   findThreadsWithName,
+  createMissingThreads,
 } = require("../functions/Threads");
+
+const { getAllListings } = require("../functions/Listing");
 
 // Init shared
 const router = Router();
@@ -41,5 +44,11 @@ router.get("/thread", async (req, res) => {
   }
   return res.status(StatusCodes.OK).json(threads);
 });
+
+// router.get("/CreateAllThreads", async (req, res) => {
+//   const listings = await getAllListings();
+//   await createMissingThreads(listings);
+//   return res.status(StatusCodes.OK).send();
+// });
 
 module.exports = router;
