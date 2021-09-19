@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+.BackgroundPanel1 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 3%;
+  width: 40%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  padding: 1em 1em 1em 1em;
+  vertical-align: top;
+}
+
+.BackgroundPanel2 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 80%;
+  width: 52%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.FriendsTitlePanel h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 4em;
+  color: white;
+  font-weight: bold;
+}
+
+.FriendsTitlePanel p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: rgb(100, 99, 99);
+  font-weight: bold;
+}
+
+.ButtonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.Button {
+  height: 2em;
+  width: 11em;
+  background-color: #3789fd;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.Button:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.Button > img {
+  width: 1em;
+  height: 1em;
+  margin-top: -0.2em;
+}

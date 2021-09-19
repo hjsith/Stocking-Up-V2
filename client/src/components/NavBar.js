@@ -27,7 +27,7 @@ const NavBar = () => {
           <NavDropdown.Item href="#Newsfeed">News Feed</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>
+          <NavDropdown.Item href="/Friends">Friends</NavDropdown.Item>
           <NavDropdown.Item href="#Leaderboard">Leaderboard</NavDropdown.Item>
           <NavDropdown.Item href="#DiscussionBoard">
             Discussion Board Search
