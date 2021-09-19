@@ -12,7 +12,81 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       snackBarMessage: "",
+      userRank: "",
+      userNetWorth: "",
+      userDifficulty: "",
+      userTitle: "",
+      userFriendCount: "0",
+      userPostCount: "0",
+      userDatejoined: "",
+      SimulationEndDate: "0",
+      userName: "",
     };
+  }
+
+  fetchUser() {
+    fetch("/api/investor?id=" + "4cf0b21d-360e-45f0-ba69-425a6e913d44", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) =>
+          this.setState({
+            userRank: body.InvestorRanking,
+            userNetWorth: "" + body.NetWorth,
+            userDifficulty: body.InvestorDifficulty,
+            userTitle: body.Title,
+            userDatejoined: body.DateJoined,
+            userName: body.InvestorFName + " " + body.InvestorLName,
+          })
+        );
+      } else {
+        console.log(res.status);
+      }
+    });
+  }
+
+  fetchFriendCount() {
+    this.setState({ userFriendCount: 0 });
+    //   fetch("/api/investor", {
+    //     method: "PUT",
+    //     body: JSON.stringify({
+    //       userID: "BADUSERID",
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    // }
+  }
+
+  fetchPostCount() {
+    this.setState({ userPostCount: 0 });
+    //   fetch("/api/investor", {
+    //     method: "PUT",
+    //     body: JSON.stringify({
+    //       userID: "BADUSERID",
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    // }
+  }
+
+  fetchAchievements() {
+    //   fetch("/api/investor", {
+    //     method: "PUT",
+    //     body: JSON.stringify({
+    //       userID: "BADUSERID",
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    // }
   }
 
   componentDidMount() {
@@ -21,6 +95,10 @@ class Profile extends React.Component {
         snackBarMessage: this.props.location.state.snackBarMessage,
       });
     }
+    this.fetchUser();
+    this.fetchFriendCount();
+    this.fetchPostCount();
+    this.fetchAchievements();
   }
 
   render() {
@@ -32,20 +110,29 @@ class Profile extends React.Component {
             <div>
               <div className="ProfileIconContainer">
                 <UserProfileIcon
-                  name="Hjsith"
+                  name={this.state.userName}
                   colorNumber={1}
                   company={false}
                   size={150}
                 />
               </div>
               <div className="NameButtonContainer">
-                <p className="ProfileTitles Username">Hjsith</p>
+                <p className="ProfileTitles Username">{this.state.userName}</p>
                 <a href="#Friends" className="ProfileFriendButton">
                   My Friends &gt;
                 </a>
               </div>
             </div>
-            <ProfileStatTable />
+            <ProfileStatTable
+              rank={this.state.userRank}
+              netWorth={this.state.userNetWorth}
+              userDifficulty={this.state.userDifficulty}
+              title={this.state.userTitle}
+              dateJoined={this.state.userDatejoined}
+              friendCount={this.state.userFriendCount}
+              postCount={this.state.userPostCount}
+              simualationDate={this.state.SimulationEndDate}
+            />
             <div className="PasswordButtonContainer">
               <a href="/UpdatePassword" className="ProfilePasswordButton">
                 Change your password

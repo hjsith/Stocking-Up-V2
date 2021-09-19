@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getInvestor, updateInvestorPassword } = require("../functions/Investor");
+const {
+  getInvestor,
+  updateInvestorPassword,
+} = require("../functions/Investor");
 
 // Init shared
 const router = Router();
@@ -35,18 +38,7 @@ router.put("/updatePassword", async (req, res) => {
 });
 
 router.get("/investor", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
-  }
-
-  //May need validation here to check if req body is appriopriate, datatypes wise
-  //Perhaps use express validator package
-
-  var data = req.body;
-
-  const user = await getInvestor(data.userID);
+  const user = await getInvestor(req.query.id);
   if (user === null) {
     return res
       .status(StatusCodes.BAD_REQUEST)
