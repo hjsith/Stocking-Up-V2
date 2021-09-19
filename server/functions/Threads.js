@@ -50,7 +50,6 @@ async function createMissingThreads(listings) {
 
 module.exports = {
   getAllThreads,
-  findThreadsWithName,
   createThread,
   deleteThread,
   archiveThread,

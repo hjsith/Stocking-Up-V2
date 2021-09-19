@@ -3,7 +3,6 @@ const { StatusCodes } = require("http-status-codes");
 const {
   getAllThreads,
   createThread,
-  findThreadsWithName,
   createMissingThreads,
 } = require("../functions/Threads");
 const { getAllListings } = require("../functions/Listing");
