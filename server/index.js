@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const db = require("./db/DBInstance");
 const env = require("./Environment");
+const cron = require("node-cron");
+const { pendingOrderCheck } = require("./functions/Order");
 const BaseRouter = require("./routes/Router");
 const { StatusCodes } = require("http-status-codes");
 
@@ -37,6 +39,10 @@ dbconnect();
 
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
+});
+
+cron.schedule("* * * * *", async function () {
+  await pendingOrderCheck();
 });
 
 module.exports = { app };

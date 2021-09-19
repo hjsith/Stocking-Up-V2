@@ -58,6 +58,19 @@ async function getInvestorsWithUsername(username) {
   });
 }
 
+async function updateInvestorBalanceAfterPurchase(investorID, total) {
+  let investor = await Investor.findByPk(investorID);
+  let balance = investor.NetWorth;
+
+  if (total < balance) {
+    investor.NetWorth -= total;
+    await investor.save();
+    return true;
+  } else {
+    return false;
+  }
+}
+
 async function updateInvestorPassword(userID, username, password) {
   var updatedInvestorCount = await Investor.update(
     { InvestorPassword: password },
@@ -82,4 +95,5 @@ module.exports = {
   checkUsernameExist,
   getInvestorsWithUsername,
   updateInvestorPassword,
+  updateInvestorBalanceAfterPurchase,
 };
