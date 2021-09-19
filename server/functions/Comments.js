@@ -1,7 +1,21 @@
 const { Comments } = require("../db/Models");
 
-async function getAllComments() {
-  return await Comments.findAll();
+async function getAllComments(threadID) {
+  return await Comments.findAll({
+    where: {
+      ThreadID: threadID,
+    },
+  });
+}
+
+async function getUserCommentCount(investorID, threadID) {
+  var comments = await Comments.findAll({
+    where: {
+      ThreadID: threadID,
+      InvestorID: investorID,
+    },
+  });
+  return comments.length;
 }
 
 async function createComment(
@@ -22,7 +36,7 @@ async function createComment(
 }
 
 async function increaseLike(commentID) {
-  var commentLikes = Comments.findOne({
+  var commentLikes = await Comments.findOne({
     attributes: ["Likes"],
     where: {
       CommentID: commentID,
@@ -45,7 +59,7 @@ async function increaseLike(commentID) {
 }
 
 async function decreaseLike(commentID) {
-  var commentLikes = Comments.findOne({
+  var commentLikes = await Comments.findOne({
     attributes: ["Likes"],
     where: {
       CommentID: commentID,
@@ -85,6 +99,7 @@ async function updateCommentMessage(commentID, newMessage) {
 
 module.exports = {
   getAllComments,
+  getUserCommentCount,
   createComment,
   increaseLike,
   decreaseLike,
