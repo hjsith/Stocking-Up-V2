@@ -9,11 +9,14 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
+import DiscussionBoardSearch from "./pages/DiscussionBoardSearch";
+import DiscussionBoard from "./pages/DiscussionBoard";
+
 import {
   Switch,
   Route,
   BrowserRouter as Router,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -29,9 +32,13 @@ class App extends React.Component {
           <Route path="/ForgotPassword" component={ForgotPassword} />
 
           <Route path="/Portfolio" component={Portfolio} />
-          <Route path="/Profile" render={props => <Profile {...props} />} />
-
+          <Route path="/Profile" render={(props) => <Profile {...props} />} />
           <Route path="/UpdatePassword" component={UpdatePassword} />
+          <Route
+            path="/DiscussionBoardSearch"
+            component={DiscussionBoardSearch}
+          />
+          <Route path="/DiscussionBoard" component={DiscussionBoard} />
           <Route exact path="/">
             <Redirect to="/SignIn" />
           </Route>
