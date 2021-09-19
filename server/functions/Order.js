@@ -8,6 +8,23 @@ async function getOrdersByInvestor(investorID) {
   });
 }
 
+async function getAllPendingOrders() {
+  return await Order.findAll({
+    where: {
+      Status: "PENDING",
+    },
+  });
+}
+
+async function getAllPendingOrdersByInvestor(investorID) {
+  return await Order.findAll({
+    where: {
+      Status: "PENDING",
+      InvestorID: investorID,
+    },
+  });
+}
+
 async function createOrder(
   investorID,
   quantityOrder,
@@ -36,4 +53,9 @@ async function createOrder(
   });
 }
 
-module.exports = { getOrdersByInvestor, createOrder };
+module.exports = {
+  getOrdersByInvestor,
+  createOrder,
+  getAllPendingOrders,
+  getAllPendingOrdersByInvestor,
+};

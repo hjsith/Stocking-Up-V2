@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import Change from "../components/QuoteManagementComponents/Change";
 import "../assets/css/QuoteManagement.scss";
 import Graph from "../components/QuoteManagementComponents/Graph";
-import { buyOrder } from "../connection/orders";
+import { buyOrder } from "../connection/Orders";
 
 const QuoteManagement = () => {
   var sharePrice = 5.73;
