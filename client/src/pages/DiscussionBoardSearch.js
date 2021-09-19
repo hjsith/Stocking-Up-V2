@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/DiscussionBoardSearch.scss";
+import DBoardSearchResults from "../components/DiscussionBoardComponents/DBoardSearchResults";
 
 class DiscussionBoardSearch extends React.Component {
   constructor(props) {
@@ -46,9 +47,9 @@ class DiscussionBoardSearch extends React.Component {
       <>
         <NavBar />
         <div className="discussionBoardSearchTitle">
-          <h1>Company Search</h1>
+          <h1>Company Discussion Board Search</h1>
         </div>
-
+        <br />
         <form
           onSubmit={this.handleSubmit}
           className="DiscussionBoardSearchForm"
@@ -60,14 +61,15 @@ class DiscussionBoardSearch extends React.Component {
             onChange={this.handleSearchStringChange}
             placeholder="Type an ASX-listed company code or name here..."
           />
+          <br />
           <input
             className="btn btn-primary discussionBoardSearchButton"
             type="submit"
             value="Search"
           />
         </form>
-
         <br />
+        <DBoardSearchResults />
       </>
     );
   }
