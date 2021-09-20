@@ -22,3 +22,16 @@ export async function buyOrder(investorID, quantityOrder, listingID) {
   });
   return results;
 }
+
+export async function getPendingOrders(investorID) {
+  let results = await fetch(
+    "/api/orders/pending" + "?investorID=" + investorID,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return results;
+}
