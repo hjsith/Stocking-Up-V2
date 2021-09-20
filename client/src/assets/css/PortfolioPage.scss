@@ -94,12 +94,21 @@
   width: 17.8%;
 }
 
+.TableTitleFont5 > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 21%;
+}
+
 .ButtonContainer {
 }
 
 .CancelButton {
   height: 3em;
-  width: 7em;
+  width: 6em;
   background-color: #ff4b4b;
   color: white;
   border-radius: 2em;
@@ -113,6 +122,29 @@
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+}
+
+.GreenConfirmButton {
+  height: 3em;
+  width: 6em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.GreenConfirmButton:hover {
+  opacity: 1;
+  font-weight: bold;
 }
 
 .CancelCrossButton {
@@ -145,7 +177,7 @@
 
 .GreenBuyButton {
   height: 3em;
-  width: 7em;
+  width: 5em;
   background-color: #2ac811;
   color: white;
   border-radius: 2em;
@@ -168,7 +200,7 @@
 
 .RedSellButton {
   height: 3em;
-  width: 7em;
+  width: 5em;
   background-color: #ff4b4b;
   color: white;
   border-radius: 2em;
