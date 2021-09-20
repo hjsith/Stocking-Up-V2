@@ -3,7 +3,6 @@ import "../../assets/css/PortfolioPage.scss";
 import PanelTitle from "./PanelTitle";
 import Popup from "../../components/Popup";
 import OrderRowPanel from "./OrderRowPanel";
-import { getPendingOrders } from "../../connection/Orders";
 
 class RecentOrders extends React.Component {
   constructor(props) {
@@ -17,7 +16,12 @@ class RecentOrders extends React.Component {
   componentDidMount() {
     let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
     setInterval(() => {
-      getPendingOrders(investorID).then((res) => {
+      fetch("/api/orders/pending" + "?investorID=" + investorID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         res.json().then((body) => {
           this.setState({
             orderArray: body,
