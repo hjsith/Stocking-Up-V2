@@ -38,7 +38,7 @@ class App extends React.Component {
             path="/DiscussionBoardSearch"
             component={DiscussionBoardSearch}
           />
-          <Route path="/DiscussionBoard" component={DiscussionBoard} />
+          <Route path="/DiscussionBoard/:id" component={DiscussionBoard} />
           <Route exact path="/">
             <Redirect to="/SignIn" />
           </Route>

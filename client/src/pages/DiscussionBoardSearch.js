@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/DiscussionBoardSearch.scss";
@@ -10,16 +10,28 @@ class DiscussionBoardSearch extends React.Component {
     this.state = {
       results: [],
       searchString: "",
+      toDisplay: [],
     };
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleSearchStringChange(event) {
     this.setState({ searchString: event.target.value });
   }
-  handleSubmit(event) {
-    console.log("Submitted!");
+
+  handleSearch(event) {
+    let temp = [];
+    for (const element of this.state.results) {
+      if (
+        element.ThreadID.includes(this.state.searchString) ||
+        element.ListingID.includes(this.state.searchString) ||
+        element.Title.includes(this.state.searchString)
+      ) {
+        temp.push(element);
+      }
+    }
+    this.setState({ toDisplay: temp });
     // fetch("/api/thread" + "?search=" + this.state.searchString, {
     //   method: "get",
     //   headers: {
@@ -43,44 +55,40 @@ class DiscussionBoardSearch extends React.Component {
   }
 
   fetchAllThreads() {
-    console.log("Fetched All Threads!");
-    // fetch("/api/threads", {
-    //   method: "get",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       // Successful login 200
-    //       console.log("Hi");
-    //     } else if (res.status === 409) {
-    //       console.log("Failed to update password. Wat the heck?!");
-    //     } else {
-    //       console.log("Something unexpeceted went wrong ._.");
-    //     }
-    //   })
-    //   .catch((exception) => {
-    //     console.log("Error:", exception);
-    //   });
+    fetch("/api/threads", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          // Successful login 200
+          res.json().then((body) => {
+            this.setState({ results: body, toDisplay: body });
+          });
+        } else {
+          console.log("Something unexpected went wrong ._.");
+        }
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
   }
 
   componentDidMount() {
-    fetchAllThreads();
+    this.fetchAllThreads();
   }
 
   render() {
     return (
-      <>
+      <div className="DiscussionBoardSearch">
         <NavBar />
         <div className="discussionBoardSearchTitle">
           <h1>Company Discussion Board Search</h1>
         </div>
         <br />
-        <form
-          onSubmit={this.handleSubmit}
-          className="DiscussionBoardSearchForm"
-        >
+        <div className="DiscussionBoardSearchForm">
           <input
             className="searchTextfield form-control"
             type="text"
@@ -89,15 +97,19 @@ class DiscussionBoardSearch extends React.Component {
             placeholder="Type an ASX-listed company code or name here..."
           />
           <br />
-          <input
+          <button
             className="btn btn-primary discussionBoardSearchButton"
-            type="submit"
-            value="Search"
-          />
-        </form>
+            onClick={this.handleSearch}
+          >
+            Search
+          </button>
+        </div>
         <br />
-        <DBoardSearchResults />
-      </>
+        <br />
+        <DBoardSearchResults threads={this.state.toDisplay} />
+        <br />
+        <br />
+      </div>
     );
   }
 }
