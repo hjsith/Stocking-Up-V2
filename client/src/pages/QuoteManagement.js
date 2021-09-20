@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import Change from "../components/QuoteManagementComponents/Change";
 import "../assets/css/QuoteManagement.scss";
 import Graph from "../components/QuoteManagementComponents/Graph";
-import { buyOrder } from "../connection/Orders";
+import { buyOrder, sellOrder } from "../connection/Orders";
 
 const QuoteManagement = () => {
   var sharePrice = 5.73;
@@ -52,9 +52,28 @@ const QuoteManagement = () => {
   };
 
   const sellButton = () => {
-    setFunds(funds + counter * sharePrice);
-    setCounter(0);
-    setMessage("");
+    if (funds < counter * sharePrice) {
+      setMessage("You do not have enough funds!");
+    } else {
+      let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+      let listingID = "A2M";
+      sellOrder(investorID, counter, listingID)
+        .then((res) => {
+          if (res.status === 201) {
+            // Successful orderCreation 201
+            res.json().then((body) => {
+              setFunds(funds + body.OrderTotal);
+            });
+          } else {
+            console.log("Something unexpeceted went wrong ._.");
+          }
+        })
+        .catch((exception) => {
+          console.log("Error:", exception);
+        });
+      setCounter(0);
+      setMessage("");
+    }
   };
 
   const [message, setMessage] = useState(" ");
