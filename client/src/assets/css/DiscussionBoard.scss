@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap%22");
+.DiscussionBoardTitlePanel {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #140f37;
+  margin-top: 30px;
+  border-radius: 30px;
+  color: white;
+  padding: 30px;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+}
+
+.DiscussionBoardTitle {
+  font-size: 56px;
+  font-weight: bold;
+}
+
+.DiscussionBoardDescription {
+  margin-top: 5px;
+}
+
+.ToCompanyButton {
+  position: absolute;
+  right: 40px;
+  bottom: 47px;
+  background-color: #3789fd;
+  padding: 10px;
+  border-radius: 40px;
+  width: 15%;
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+  height: 40%;
+}
+
+.CompanyButtonText {
+  width: 50%;
+  display: inline-block;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.CompanyButtonListingPrice {
+  display: inline-block;
+  padding-left: 15px;
+  margin-top: 5%;
+  position: absolute;
+}
+
+.ToCompanyButton:hover {
+  background-color: #166eea;
+  color: white;
+}
+
+.CompanyButtonListingChange {
+  color: #00ff94;
+}

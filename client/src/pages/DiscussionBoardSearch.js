@@ -8,9 +8,23 @@ class DiscussionBoardSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
+      results: [
+        {
+          ThreadID: "TH-14D",
+          ListingID: "14D",
+          Title: "1414 DEGREES LIMITED",
+          Description: "A discussion board for 1414 DEGREES LIMITED",
+        },
+      ],
       searchString: "",
-      toDisplay: [],
+      toDisplay: [
+        {
+          ThreadID: "TH-14D",
+          ListingID: "14D",
+          Title: "1414 DEGREES LIMITED",
+          Description: "A discussion board for 1414 DEGREES LIMITED",
+        },
+      ],
     };
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -77,7 +91,7 @@ class DiscussionBoardSearch extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAllThreads();
+    // this.fetchAllThreads();
   }
 
   render() {
