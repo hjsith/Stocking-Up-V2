@@ -27,7 +27,7 @@ router.post("/SignUp", async (req, res) => {
     data.username
   );
   const device = req.headers.host ?? "Unknown";
-  await generateNewAuthenticationTokens(user.InvestorID, device, res);
+  await generateNewAuthenticationTokens(user.Username, device, res);
 
   return res.status(StatusCodes.CREATED).end();
 });
