@@ -9,11 +9,12 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
+import Newsfeed from "./pages/Newsfeed";
 import {
   Switch,
   Route,
   BrowserRouter as Router,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -27,9 +28,10 @@ class App extends React.Component {
           <Route path="/temp" component={temp} />
           <Route path="/SignUp" component={SignUp} />
           <Route path="/ForgotPassword" component={ForgotPassword} />
+          <Route path="/Newsfeed" component={Newsfeed} />
 
           <Route path="/Portfolio" component={Portfolio} />
-          <Route path="/Profile" render={props => <Profile {...props} />} />
+          <Route path="/Profile" render={(props) => <Profile {...props} />} />
 
           <Route path="/UpdatePassword" component={UpdatePassword} />
           <Route exact path="/">

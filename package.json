@@ -12,5 +12,8 @@
     "url": "https://dev.azure.com/ASD-Fri-Group-05/Stocking%20Up/_git/Stocking%20Up"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.4"
+  }
 }
