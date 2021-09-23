@@ -7,6 +7,7 @@ import Change from "../components/QuoteManagementComponents/Change";
 import "../assets/css/QuoteManagement.scss";
 import Graph from "../components/QuoteManagementComponents/Graph";
 import { buyOrder, sellOrder } from "../connection/Orders";
+import { addToWatchlist } from "../connection/Watchlist";
 
 const QuoteManagement = () => {
   var sharePrice = 5.73;
@@ -76,6 +77,22 @@ const QuoteManagement = () => {
     }
   };
 
+  const watchlistButton = () => {
+    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    let listingID = "A2M";
+    addToWatchlist(investorID, listingID)
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("Watchlist added succesfully");
+        } else {
+          console.log("Something unexpeceted went wrong ._.");
+        }
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
+  };
+
   const [message, setMessage] = useState(" ");
 
   return (
@@ -102,7 +119,7 @@ const QuoteManagement = () => {
                 <Button handleClick={buyButton} text="Buy" />
               </div>
               <div className="button2">
-                <Button text="Add to Watchlist" />
+                <Button handleClick={watchlistButton} text="Add to Watchlist" />
               </div>
               <div className="button3">
                 <Button handleClick={sellButton} text="Sell" />
