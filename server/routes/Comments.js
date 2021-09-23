@@ -30,7 +30,7 @@ router.post("/newComment", async (req, res) => {
   const comment = await createComment(
     data.InvestorID,
     data.ThreadID,
-    "2016-01-01 00:00:00+00:00", //Waiting for merge from Order with moment package to use
+    data.DateAdded,
     data.Comment,
     data.ListingPrice
   );

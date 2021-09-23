@@ -134,7 +134,10 @@ class DiscussionBoard extends React.Component {
           <DiscussionBoardComments comments={this.state.comments} />
         </div>
         <div className="CommentInputContainer">
-          <CommentInput />
+          <CommentInput
+            threadID={this.props.match.params.id}
+            updateComments={this.fetchAllComments}
+          />
         </div>
       </>
     );
