@@ -7,10 +7,6 @@ const {
   deleteAuthenticationTokens
 } = require("./AuthenticationTokens");
 const { getInvestorsWithUsername } = require("./Investor");
-const {
-  getAuthenticationTokens,
-  deleteAuthenticationToken
-} = require("./AuthenticationTokens");
 
 async function generateNewAuthenticationTokens(user, deviceName, res) {
   const now = new Date();
@@ -46,7 +42,7 @@ async function generateNewAuthenticationTokens(user, deviceName, res) {
     refresh_token: clientRefreshToken
   });
 }
-export async function getAuthenticatedUser(req, res) {
+async function getAuthenticatedUser(req, res) {
   //checks if the user is authenticated
   const clientTokensCookie = req.cookies["access_tokens"] ?? {};
 
@@ -63,7 +59,7 @@ export async function getAuthenticatedUser(req, res) {
     );
     if (user && serverRefreshToken) {
       // existing refresh token is removed before a new one is created
-      await deleteAuthenticationToken(serverRefreshToken);
+      await deleteAuthenticationTokens(serverRefreshToken);
       await generateNewAuthenticationTokens(
         user,
         req.headers.host ?? "Unknown",
@@ -81,4 +77,4 @@ function verifyToken(token) {
     return jwt.verify(token, env.jwt_secret);
   } catch (err) {}
 }
-module.exports = generateNewAuthenticationTokens;
+module.exports = { generateNewAuthenticationTokens, getAuthenticatedUser };

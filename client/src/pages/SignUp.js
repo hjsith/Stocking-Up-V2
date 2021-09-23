@@ -7,6 +7,10 @@ import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
 import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
+const passwordRegex = new RegExp( //confirm if password is correct format
+  "(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}"
+);
+const emailRegex = new RegExp("[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+"); //email validation
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -17,12 +21,14 @@ class SignUp extends React.Component {
       Email: "",
       ConfirmPassword: "",
       Redirect: false,
+      errorMessage: ""
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleConfirmPasswordChange =
-      this.handleConfirmPasswordChange.bind(this);
+    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
+      this
+    );
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -39,15 +45,80 @@ class SignUp extends React.Component {
   }
 
   handleSubmit(event) {
+    //error message
     if (
       this.state.Username != "" &&
       this.state.Password != "" &&
       this.state.Email != "" &&
       this.state.ConfirmPassword != ""
     ) {
-      this.setState({ Redirect: true });
+      if (emailRegex.test(this.state.Email)) {
+        this.setState({ errorMessage: "" });
+        if (passwordRegex.test(this.state.Password)) {
+          //password validation
+          if (this.state.Username.length >= 3) {
+            if (this.state.Password === this.state.ConfirmPassword) {
+              this.createInvestor();
+            } else {
+              this.setState({
+                errorMessage: "Your passwords do not match"
+              });
+            }
+          } else {
+            this.setState({
+              errorMessage: "Your username must be atleast 3 characters long"
+            });
+          }
+        } else {
+          this.setState({
+            errorMessage:
+              "This password is in the incorrect format, it must contain atleast 8 characters, 1 upper case, 1 number and 1 special character. "
+          });
+        }
+      } else {
+        this.setState({
+          errorMessage: " The email is not in the correct format"
+        });
+      }
+      // this.setState({ Redirect: true });
+    } else {
+      this.setState({
+        errorMessage: "One or more fields are empty, please try again"
+      });
     }
     event.preventDefault();
+  }
+
+  createInvestor() {
+    fetch("/api/SignUp", {
+      //connects to frotnend to backend
+      method: "POST",
+      body: JSON.stringify({
+        firstName: "Sanya",
+        lastName: "Dua",
+        email: this.state.Email,
+        password: this.state.Password,
+        username: this.state.Username
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status === 201) {
+          // Successful login 200
+          this.setState({ redirect: true });
+        } else if (res.status === 422) {
+          this.setState({
+            errorMessage: "The username already exists"
+          });
+        } else {
+          console.log("Something unexpeceted went wrong ._.");
+        }
+      })
+      .catch(exception => {
+        console.log("Error:", exception);
+      });
   }
 
   handlePasswordChange(event) {
@@ -114,7 +185,9 @@ class SignUp extends React.Component {
                 />
                 <img src={lock} className="lock" />
               </div>
-
+              <div className="SignUperrorMessage">
+                {this.state.errorMessage}
+              </div>
               <input className="SignInButton" type="submit" value="SIGN UP" />
             </form>
           </div>
