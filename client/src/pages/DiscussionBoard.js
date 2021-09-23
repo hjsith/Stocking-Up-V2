@@ -66,6 +66,7 @@ class DiscussionBoard extends React.Component {
         },
       ],
       searchString: "",
+      authedPage: true,
     };
   }
 
@@ -104,11 +105,38 @@ class DiscussionBoard extends React.Component {
     console.log("Posted new comment!");
   }
 
+  verifyPage() {
+    // fetch("/api/comments" + "?ThreadID=" + this.props.match.params.id, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       // Successful login 200
+    //       res.json().then((body) => {
+    //         this.setState({ results: body, toDisplay: body });
+    //       });
+    //     } else {
+    //       console.log("Something unexpected went wrong ._.");
+    //     }
+    //   })
+    //   .catch((exception) => {
+    //     console.log("Error:", exception);
+    //   });
+  }
+
   componentDidMount() {
+    this.verifyPage();
     this.fetchAllComments();
   }
 
   render() {
+    if (this.state.authedPage == false) {
+      return <></>;
+    }
+
     return (
       <>
         <NavBar />
