@@ -18,7 +18,7 @@ router.post("/SignIn", async (req, res) => {
       .send("The request doesn't have the correct body format.");
   }
   var data = req.body;
-  var userPassword = await getInvestorPassword(data.username);
+  var userPassword = await getInvestorPassword(data.username); 
   const match = await bcrypt.compare(data.password, userPassword); //comparing passwords
   if (match == true) {
     const device = req.headers.host ?? "Unknown";

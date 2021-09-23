@@ -22,7 +22,8 @@ async function createInvestor(fName, lName, email, password, username) {
     InvestorRanking: 0,
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
-    Title: "NEEDED"
+    Title: "NEEDED",
+    Funds:0
   });
 }
 
