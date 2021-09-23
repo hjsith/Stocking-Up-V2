@@ -17,4 +17,22 @@ router.get("/listing", async (req, res) => {
   return res.status(StatusCodes.OK).json({ name: listing.ListingName });
 });
 
+router.get("/listing/industry", async (req, res) => {
+  const listing = await getListing(req.query.code);
+
+  return res.status(StatusCodes.OK).json({ name: listing.ListingIndustry });
+});
+
+router.get("/listing/priceHigh", async (req, res) => {
+  const listing = await getListing(req.query.code);
+
+  return res.status(StatusCodes.OK).json({ highPrice: listing.YearHighPrice });
+});
+
+router.get("/listing/priceLow", async (req, res) => {
+  const listing = await getListing(req.query.code);
+
+  return res.status(StatusCodes.OK).json({ lowPrice: listing.YearLowPrice });
+});
+
 module.exports = router;

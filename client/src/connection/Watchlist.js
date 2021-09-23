@@ -12,8 +12,8 @@ export async function addToWatchlist(investorID, listingID) {
   return results;
 }
 
-export async function getInvestorWatchlist(investorID) {
-  let results = await fetch("/api/watchlist", {
+export async function getWatchlistByInvestor(investorID) {
+  let results = await fetch("/api/watchlist" + "?investorID=" + investorID, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

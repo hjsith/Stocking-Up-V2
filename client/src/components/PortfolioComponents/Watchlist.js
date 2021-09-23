@@ -2,55 +2,29 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
 import Popup from "../../components/Popup";
+import { getWatchlistByInvestor } from "../../connection/Watchlist";
 
 class Watchlist extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      watchlistArray: [
-        {
-          colourNumber: 1,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          percentChange: "0.2%",
-          industry: "Consumer Staples",
-        },
-        {
-          colourNumber: 4,
-          companyCode: "CBA",
-          companyName: "Commonwealth Bank",
-          currentPrice: "$7.02",
-          percentChange: "0.2%",
-          industry: "Consumer Staples",
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wisetech Global",
-          currentPrice: "$7.02",
-          percentChange: "0.2%",
-          industry: "Consumer Staples",
-        },
-        {
-          colourNumber: 3,
-          companyCode: "MQG",
-          companyName: "Macquarie Group",
-          currentPrice: "$7.02",
-          percentChange: "0.2%",
-          industry: "Consumer Staples",
-        },
-        {
-          colourNumber: 5,
-          companyCode: "BRK",
-          companyName: "Brickworks",
-          currentPrice: "$7.02",
-          percentChange: "0.2%",
-          industry: "Consumer Staples",
-        },
-      ],
+      watchlistArray: [],
       snackBarMessage: "",
     };
+  }
+
+  componentDidMount() {
+    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    setInterval(() => {
+      getWatchlistByInvestor(investorID).then((res) => {
+        res.json().then((body) => {
+          this.setState({
+            watchlistArray: body,
+          });
+        });
+      });
+      console.log(this.state.watchlistArray);
+    }, 500);
   }
 
   cancelEvent = (index) => {
@@ -80,12 +54,13 @@ class Watchlist extends React.Component {
             </th>
           </tr>
         </table>
-        <table className="TableTitleFont">
+        <table className="TableTitleFont10">
           <tr>
             <th>Company Code</th>
             <th>Company Name</th>
             <th>Current Price</th>
-            <th>% Change</th>
+            <th>Year Low Price</th>
+            <th>Year High Price</th>
             <th>Industry</th>
             <th>Actions</th>
           </tr>
@@ -94,13 +69,10 @@ class Watchlist extends React.Component {
           {this.state.watchlistArray.map((watchlist, index) => {
             return (
               <WatchlistRowPannel
-                key={watchlist.companyCode}
-                colourNumber={watchlist.colourNumber}
-                companyCode={watchlist.companyCode}
-                companyName={watchlist.companyName}
-                currentPrice={watchlist.currentPrice}
-                percentChange={watchlist.percentChange}
-                industry={watchlist.industry}
+                key={watchlist.watchlistID}
+                colourNumber={3}
+                companyCode={watchlist.ListingID}
+                // percentChange={watchlist.percentChange}
                 cancel={this.cancelEvent.bind(this, index)}
               />
             );

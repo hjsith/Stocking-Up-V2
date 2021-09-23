@@ -91,7 +91,7 @@
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 17.8%;
+  width: 15%;
 }
 
 .TableTitleFont5 > tr > th {
@@ -280,6 +280,19 @@
   padding: 1.25em;
   font-weight: normal;
   width: 10%;
+}
+
+.TableTitleFont10 > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 2%;
+}
+
+.TableTitleFont10 {
+  margin-left: 0.9em;
 }
 
 .TableTitleFont {
