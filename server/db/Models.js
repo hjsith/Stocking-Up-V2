@@ -19,6 +19,7 @@ const Investor = db.define(
     InvestorDifficulty: DataTypes.TEXT,
     DateJoined: DataTypes.DATEONLY,
     Title: DataTypes.TEXT,
+    Funds: DataTypes.DECIMAL(20, 2),
   },
   { sequelize: db, tableName: "Investor", timestamps: false }
 );
