@@ -56,4 +56,5 @@ export async function getPendingOrders(investorID) {
       },
     }
   );
+  return results;
 }

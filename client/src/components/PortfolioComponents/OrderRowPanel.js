@@ -53,12 +53,7 @@ class OrderRowPanel extends React.Component {
             <th>{this.props.total}</th>
             <th className>
               <div className="ButtonContainer">
-                <button
-                  className="GreenConfirmButton"
-                  onClick={this.props.cancel}
-                >
-                  Confirm
-                </button>
+                <button className="GreenConfirmButton">Confirm</button>
               </div>
             </th>
             <th>
