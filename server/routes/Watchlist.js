@@ -9,25 +9,16 @@ const {
 const router = Router();
 
 router.get("/watchlist", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
-  }
-  let data = req.body;
-  const watchlist = await getWatchlistByInvestor(data.investorID);
+  const watchlist = await getWatchlistByInvestor(req.query.investorID);
 
   return res.status(StatusCodes.OK).json(watchlist);
 });
 
 router.post("/watchlist", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
-  }
-  let data = req.body;
-  const watchlist = await createWatchlist(data.investorID, data.listingID);
+  const watchlist = await createWatchlist(
+    req.query.investorID,
+    req.query.listingID
+  );
 
   return res.status(StatusCodes.CREATED).json(watchlist);
 });

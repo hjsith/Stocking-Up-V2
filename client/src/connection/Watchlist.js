@@ -11,3 +11,13 @@ export async function addToWatchlist(investorID, listingID) {
   });
   return results;
 }
+
+export async function getInvestorWatchlist(investorID) {
+  let results = await fetch("/api/watchlist", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return results;
+}
