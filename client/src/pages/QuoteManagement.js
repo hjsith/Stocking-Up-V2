@@ -6,8 +6,7 @@ import NavBar from "../components/NavBar";
 import Change from "../components/QuoteManagementComponents/Change";
 import "../assets/css/QuoteManagement.scss";
 import Graph from "../components/QuoteManagementComponents/Graph";
-import { buyOrder, sellOrder } from "../connection/Orders";
-import { addToWatchlist } from "../connection/Watchlist";
+const moment = require("moment");
 
 const QuoteManagement = () => {
   var sharePrice = 5.73;

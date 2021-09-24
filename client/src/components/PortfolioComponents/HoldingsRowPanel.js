@@ -3,10 +3,6 @@ import "../../assets/css/PortfolioPage.scss";
 import GreenBuyButton from "./GreenBuyButton";
 import RedSellButton from "./RedSellButton";
 import UserProfileIcon from "../UserProfileIcon";
-import {
-  getCurrentPriceForListing,
-  getCompanyName,
-} from "../../connection/Listing";
 
 class HoldingsRowPanel extends React.Component {
   constructor(props) {
