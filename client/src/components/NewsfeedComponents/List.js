@@ -8,7 +8,7 @@ const List = () => {
   useEffect(() => {
     const getArticles = async () => {
       const res = await Axios.get(
-        "https://newsapi.org/v2/top-headlines?country=au&apiKey=a2461adc51034c3c8d7fcc374949d3c2"
+        "https://newsapi.org/v2/top-headlines?country=au&category=business&apiKey=a2461adc51034c3c8d7fcc374949d3c2"
       );
 
       setArticles(res.data.articles);
