@@ -16,8 +16,8 @@ router.get("/watchlist", async (req, res) => {
 
 router.post("/watchlist", async (req, res) => {
   const watchlist = await createWatchlist(
-    req.query.investorID,
-    req.query.listingID
+    req.body.investorID,
+    req.body.listingID
   );
 
   return res.status(StatusCodes.CREATED).json(watchlist);
