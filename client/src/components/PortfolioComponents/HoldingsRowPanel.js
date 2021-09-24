@@ -35,6 +35,14 @@ class HoldingsRowPanel extends React.Component {
     });
   }
 
+  handleBuy() {
+    console.log("Bought!!");
+  }
+
+  handleSell() {
+    console.log("Sold!!");
+  }
+
   render() {
     return (
       <div className="HoldingsRowPanel">
@@ -54,10 +62,20 @@ class HoldingsRowPanel extends React.Component {
             <th>{this.props.units}</th>
             <th>{this.props.total}</th>
             <th>
-              <GreenBuyButton />
+              {/* <GreenBuyButton /> */}
+              <div className="ButtonContainer">
+                <button className="GreenBuyButton" onClick={this.handleBuy}>
+                  Buy
+                </button>
+              </div>
             </th>
             <th>
-              <RedSellButton />
+              {/* <RedSellButton /> */}
+              <div className="ButtonContainer">
+                <button className="RedSellButton" onClick={this.handleSell}>
+                  Sell
+                </button>
+              </div>
             </th>
           </tr>
         </table>
@@ -65,5 +83,7 @@ class HoldingsRowPanel extends React.Component {
     );
   }
 }
+
+// a href="/Leaderboard"
 
 export default HoldingsRowPanel;
