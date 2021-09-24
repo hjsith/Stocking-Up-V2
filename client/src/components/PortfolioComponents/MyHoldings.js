@@ -2,7 +2,6 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import PanelTitle from "./PanelTitle";
 import HoldingsRowPanel from "./HoldingsRowPanel";
-import { getAllExecutedOrdersByInvestor } from "../../connection/Holding";
 
 class MyHoldings extends React.Component {
   constructor(props) {
@@ -16,7 +15,12 @@ class MyHoldings extends React.Component {
   componentDidMount() {
     let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
     setInterval(() => {
-      getAllExecutedOrdersByInvestor(investorID).then((res) => {
+      fetch("/api/holdings" + "?investorID=" + investorID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         res.json().then((body) => {
           this.setState({
             holdingArray: body,

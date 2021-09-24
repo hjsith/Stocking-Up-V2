@@ -1,6 +1,5 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import PanelTitle from "./PanelTitle";
 import Popup from "../../components/Popup";
 import OrderRowPanel from "./OrderRowPanel";
 

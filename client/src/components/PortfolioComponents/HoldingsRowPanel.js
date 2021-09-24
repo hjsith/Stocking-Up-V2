@@ -18,7 +18,12 @@ class HoldingsRowPanel extends React.Component {
   }
 
   componentDidMount() {
-    getCompanyName(this.props.companyCode).then((res) => {
+    fetch("/api/listing" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           name: body.name,
@@ -26,7 +31,12 @@ class HoldingsRowPanel extends React.Component {
       });
     });
 
-    getCurrentPriceForListing(this.props.companyCode).then((res) => {
+    fetch("/api/price" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           price: body.price,

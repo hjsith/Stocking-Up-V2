@@ -2,7 +2,6 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
 import Popup from "../../components/Popup";
-import { getWatchlistByInvestor } from "../../connection/Watchlist";
 
 class Watchlist extends React.Component {
   constructor(props) {
@@ -16,7 +15,12 @@ class Watchlist extends React.Component {
   componentDidMount() {
     let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
     setInterval(() => {
-      getWatchlistByInvestor(investorID).then((res) => {
+      fetch("/api/watchlist" + "?investorID=" + investorID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         res.json().then((body) => {
           this.setState({
             watchlistArray: body,
