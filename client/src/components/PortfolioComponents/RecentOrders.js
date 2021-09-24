@@ -76,7 +76,6 @@ class RecentOrders extends React.Component {
             return (
               <OrderRowPanel
                 key={order.OrderID}
-                //change this to OrderID
                 colourNumber={1}
                 companyCode={order.ListingID}
                 priceBought={order.ListingPrice}

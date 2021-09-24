@@ -3,8 +3,38 @@ import "../../assets/css/PortfolioPage.scss";
 import GreenBuyButton from "./GreenBuyButton";
 import RedSellButton from "./RedSellButton";
 import UserProfileIcon from "../UserProfileIcon";
+import {
+  getCurrentPriceForListing,
+  getCompanyName,
+} from "../../connection/Listing";
 
 class HoldingsRowPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      price: 0,
+    };
+  }
+
+  componentDidMount() {
+    getCompanyName(this.props.companyCode).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          name: body.name,
+        });
+      });
+    });
+
+    getCurrentPriceForListing(this.props.companyCode).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          price: body.price,
+        });
+      });
+    });
+  }
+
   render() {
     return (
       <div className="HoldingsRowPanel">
@@ -12,18 +42,17 @@ class HoldingsRowPanel extends React.Component {
           <tr>
             <th>
               <UserProfileIcon
-                name="A2M"
-                colorNumber={0}
+                name={this.props.companyCode}
+                colorNumber={this.props.colourNumber}
                 company={true}
                 size={50}
               />
             </th>
-
-            <th>A2 Milk</th>
-            <th>$6.52</th>
-            <th>$7.02</th>
-            <th>150</th>
-            <th>$975</th>
+            <th>{this.state.name}</th>
+            <th>{this.props.priceBought}</th>
+            <th>{this.state.price}</th>
+            <th>{this.props.units}</th>
+            <th>{this.props.total}</th>
             <th>
               <GreenBuyButton />
             </th>
