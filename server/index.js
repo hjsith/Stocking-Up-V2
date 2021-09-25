@@ -39,4 +39,8 @@ app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
 
+cron.schedule("15 * * * *", async function () {
+  await updateArticles();
+});
+
 module.exports = { app };
