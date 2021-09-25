@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Article from "./Article";
+const moment = require("moment");
 
 const List = () => {
-  const [articles, setArticles] = useState([]);
+  fetch("/api/orders"),
+    {
+      method: "POST",
+    };
+
+  /*  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const getArticles = async () => {
@@ -16,7 +22,7 @@ const List = () => {
     };
 
     getArticles();
-  });
+  }); */
 
   return (
     <div>
