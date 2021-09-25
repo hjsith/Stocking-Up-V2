@@ -6,6 +6,7 @@ import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
 import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
+import { UserContext } from "../components/UserContext";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class SignIn extends React.Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  static contextType = UserContext;
   handleUsernameChange(event) {
     this.setState({ Username: event.target.value });
   }

@@ -21,41 +21,33 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { name: "" }
+      user: { name: "", id: "" },
+      updateUser: newUser => {
+        this.setState({ user: newUser });
+      }
     };
-  }
-  updateUser(username) {
-    this.setState({ user: { name: username } }); //remember who logs in
-  }
-  logout() {
-    this.setState({ user: {} });
   }
   render() {
-    const value = {
-      user: this.state.user,
-      updateUser: this.updateUser,
-      logoutUser: this.logout
-    };
     return (
       <Router>
-        {/* <userContext.Provider value={value}> */}
-        <Switch>
-          <Route path="/QuoteManagement" component={QuoteManagement} />
-          <Route path="/CompanySearch" component={CompanySearch} />
-          <Route path="/SignIn" component={SignIn} />
-          <Route path="/temp" component={temp} />
-          <Route path="/SignUp" component={SignUp} />
-          <Route path="/ForgotPassword" component={ForgotPassword} />
+        <UserContext.Provider value={this.state}>
+          <Switch>
+            <Route path="/QuoteManagement" component={QuoteManagement} />
+            <Route path="/CompanySearch" component={CompanySearch} />
+            <Route path="/SignIn" component={SignIn} />
+            <Route path="/temp" component={temp} />
+            <Route path="/SignUp" component={SignUp} />
+            <Route path="/ForgotPassword" component={ForgotPassword} />
 
-          <Route path="/Portfolio" component={Portfolio} />
-          <Route path="/Profile" render={props => <Profile {...props} />} />
+            <Route path="/Portfolio" component={Portfolio} />
+            <Route path="/Profile" render={props => <Profile {...props} />} />
 
-          <Route path="/UpdatePassword" component={UpdatePassword} />
-          <Route exact path="/">
-            <Redirect to="/SignIn" />
-          </Route>
-        </Switch>
-        {/* </userContext.Provider> */}
+            <Route path="/UpdatePassword" component={UpdatePassword} />
+            <Route exact path="/">
+              <Redirect to="/SignIn" />
+            </Route>
+          </Switch>
+        </UserContext.Provider>
       </Router>
     );
   }

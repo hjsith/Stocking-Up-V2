@@ -1,5 +1,5 @@
 const { Investor } = require("../db/Models");
-
+const { Op } = require("sequelize");
 async function getAllInvestors() {
   return await Investor.findAll();
 }
@@ -23,7 +23,7 @@ async function createInvestor(fName, lName, email, password, username) {
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
     Title: "NEEDED",
-    Funds:0
+    Funds: 0
   });
 }
 
@@ -75,6 +75,14 @@ async function updateInvestorPassword(userID, username, password) {
   }
 }
 
+async function getOneInvestorWithUsername(username) {
+  return Investor.findAll({
+    where: {
+      Username: username
+    }
+  });
+}
+
 module.exports = {
   getAllInvestors,
   getInvestor,
@@ -82,5 +90,6 @@ module.exports = {
   getInvestorPassword,
   checkUsernameExist,
   getInvestorsWithUsername,
-  updateInvestorPassword
+  updateInvestorPassword,
+  getOneInvestorWithUsername
 };

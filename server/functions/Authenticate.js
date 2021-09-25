@@ -15,14 +15,14 @@ async function generateNewAuthenticationTokens(user, deviceName, res) {
   const refreshToken = v4();
   const serverRefreshToken = await createAuthenticationTokens(
     refreshToken,
-    user,
+    user.InvestorID,
     deviceName,
     now,
     monthFromNow
   );
   const clientRefreshToken = jwt.sign(
     {
-      username: user,
+      username: user.Username,
       token: refreshToken
     },
     env.jwt_secret,
@@ -30,7 +30,7 @@ async function generateNewAuthenticationTokens(user, deviceName, res) {
   );
   const clientAccessToken = jwt.sign(
     {
-      username: user,
+      username: user.Username,
       token: v4()
     },
     env.jwt_secret,

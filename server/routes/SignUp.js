@@ -2,7 +2,9 @@ const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const { createInvestor, checkUsernameExist } = require("../functions/Investor");
 const bcrypt = require("bcrypt");
-const generateNewAuthenticationTokens = require("../functions/Authenticate");
+const {
+  generateNewAuthenticationTokens
+} = require("../functions/Authenticate");
 // Init shared
 const router = Router();
 
@@ -27,9 +29,11 @@ router.post("/SignUp", async (req, res) => {
     data.username
   );
   const device = req.headers.host ?? "Unknown";
-  await generateNewAuthenticationTokens(user.Username, device, res);
+  await generateNewAuthenticationTokens(user, device, res);
 
-  return res.status(StatusCodes.CREATED).end();
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ id: user.InvestorID, username: user.Username });
 });
 
 module.exports = router;

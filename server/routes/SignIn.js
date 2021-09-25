@@ -1,11 +1,14 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const bcrypt = require("bcrypt"); //hashed password
-const generateNewAuthenticationTokens = require("../functions/Authenticate");
+const {
+  generateNewAuthenticationTokens
+} = require("../functions/Authenticate");
 const {
   getInvestorPassword,
   checkUsernameExist,
-  updateInvestorPassword
+  updateInvestorPassword,
+  getOneInvestorWithUsername
 } = require("../functions/Investor");
 
 // Init shared
@@ -18,13 +21,21 @@ router.post("/SignIn", async (req, res) => {
       .send("The request doesn't have the correct body format.");
   }
   var data = req.body;
-  var userPassword = await getInvestorPassword(data.username); 
-  const match = await bcrypt.compare(data.password, userPassword); //comparing passwords
-  if (match == true) {
-    const device = req.headers.host ?? "Unknown";
-    await generateNewAuthenticationTokens(data.username, device, res);
+  var userPassword = await getInvestorPassword(data.username);
 
-    return res.status(StatusCodes.OK).end();
+  const match = await bcrypt.compare(
+    data.password,
+    userPassword.InvestorPassword
+  ); //comparing passwords
+  if (match == true) {
+    const user = await getOneInvestorWithUsername(data.username);
+    console.log(user);
+    const device = req.headers.host ?? "Unknown";
+    await generateNewAuthenticationTokens(user, device, res);
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ id: user.InvesorID, username: user.Username });
   } else {
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
@@ -36,7 +47,7 @@ router.get("/logout", async (req, res) => {
     .end();
 });
 
-router.post("/ForgotPassword", async (rec, res) => {
+router.post("/ForgotPassword", async (req, res) => {
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
       .status(StatusCodes.BAD_REQUEST)

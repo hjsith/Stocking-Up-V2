@@ -6,6 +6,7 @@ import SignInLogo from "../components/UserAuthenticationComponents/SignInLogo";
 import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
 import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
+import { UserContext } from "../components/UserContext";
 import { Redirect } from "react-router-dom";
 const passwordRegex = new RegExp( //confirm if password is correct format
   "(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}"
@@ -31,7 +32,7 @@ class SignUp extends React.Component {
     );
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  static contextType = UserContext;
   handleUsernameChange(event) {
     this.setState({ Username: event.target.value });
   }
@@ -80,7 +81,6 @@ class SignUp extends React.Component {
           errorMessage: " The email is not in the correct format"
         });
       }
-      // this.setState({ Redirect: true });
     } else {
       this.setState({
         errorMessage: "One or more fields are empty, please try again"
@@ -107,7 +107,11 @@ class SignUp extends React.Component {
       .then(res => {
         if (res.status === 201) {
           // Successful login 200
-          this.setState({ redirect: true });
+          res.json().then(body => {
+            this.context.updateUser({ name: body.username, id: body.id });
+          });
+
+          this.setState({ Redirect: true });
         } else if (res.status === 422) {
           this.setState({
             errorMessage: "The username already exists"
