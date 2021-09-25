@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
+import MarketsOverview from "./pages/MarketsOverview";
 import {
   Switch,
   Route,
@@ -32,6 +33,7 @@ class App extends React.Component {
           <Route path="/Profile" render={props => <Profile {...props} />} />
 
           <Route path="/UpdatePassword" component={UpdatePassword} />
+          <Route path="/MarketsOverview" component={MarketsOverview} />
           <Route exact path="/">
             <Redirect to="/SignIn" />
           </Route>
