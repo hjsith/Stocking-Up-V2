@@ -1,6 +1,4 @@
 .UserProfileIcon {
-  height: 50px;
-  width: 50px;
   background-color: #a01edd;
   border-radius: 50%;
   display: inline-block;
@@ -8,4 +6,15 @@
   line-height: 50px;
   text-align: center;
   font-weight: bold;
+  position: relative;
+}
+
+.UserProfileIcon .IconText {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 50px;
 }
