@@ -4,9 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/CompanySearch.scss";
 
 /* need to fix:
-- Navbar
-- adding links to the dropdown results
-- toggle dropdown on type, not click
+- search button needs to send listing ID to Vishaal's order page
 */
 
 const SearchBar = (props) => {
@@ -53,19 +51,29 @@ const SearchBar = (props) => {
   );
 };
 
-const dummyresults = [] //fake data for now, an array of strings
+const searchresults = [] //DB Connection
 {
-  dummyresults.push('A2M The A2 Milk Company');
-  dummyresults.push('WTC WiseTech Global');
-  dummyresults.push('CBA Commonwealth Bank');
-  dummyresults.push('ANZ Australia and New Zealand Banking Group Ltd');
+  fetch("/api/listings", {
+    method: "GET", //get
+    headers: {
+      "Content-Type": "application/json", //expect JSON
+    },
+  })
+  .then((res) => {
+    res.json().then((body) => {
+      for (let i=0; i<body.length; ++i) {
+        searchresults.push(`${body[i].ListingID}` + " " + `${body[i].ListingName}`); //search result format: ID Name      
+      }
+    })
+    
+  })
 }
 
 function CompanySearch() {
   const [results, setresults] = useState([]);
   const onInputChange = (event) => {
     setresults(
-      dummyresults.filter((result) => result.includes(event.target.value)) //filters through dummyresults
+      searchresults.filter((result) => result.includes(event.target.value)).slice(0,5) //filters through searchresults, limits result list to 5 entries
     );
   };
   
