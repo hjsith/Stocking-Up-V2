@@ -2,13 +2,6 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "../UserProfileIcon";
-import {
-  getCurrentPriceForListing,
-  getCompanyName,
-  getCompanyIndustry,
-  getCompanyHighPrice,
-  getCompanyLowPrice,
-} from "../../connection/Listing";
 
 class WatchlistRowPannel extends React.Component {
   constructor(props) {
@@ -23,7 +16,12 @@ class WatchlistRowPannel extends React.Component {
   }
 
   componentDidMount() {
-    getCompanyIndustry(this.props.companyCode).then((res) => {
+    fetch("/api/listing/industry" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           industry: body.name,
@@ -31,7 +29,12 @@ class WatchlistRowPannel extends React.Component {
       });
     });
 
-    getCompanyName(this.props.companyCode).then((res) => {
+    fetch("/api/listing" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           name: body.name,
@@ -39,7 +42,12 @@ class WatchlistRowPannel extends React.Component {
       });
     });
 
-    getCompanyHighPrice(this.props.companyCode).then((res) => {
+    fetch("/api/listing/priceHigh" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           highPrice: body.highPrice,
@@ -47,7 +55,12 @@ class WatchlistRowPannel extends React.Component {
       });
     });
 
-    getCurrentPriceForListing(this.props.companyCode).then((res) => {
+    fetch("/api/price" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           price: body.price,
@@ -55,7 +68,12 @@ class WatchlistRowPannel extends React.Component {
       });
     });
 
-    getCompanyLowPrice(this.props.companyCode).then((res) => {
+    fetch("/api/listing/priceLow" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           lowPrice: body.lowPrice,
