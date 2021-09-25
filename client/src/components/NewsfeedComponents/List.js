@@ -4,7 +4,7 @@ import Article from "./Article";
 const moment = require("moment");
 
 const List = () => {
-  fetch("/api/orders"),
+  fetch("/api/articles"),
     {
       method: "POST",
     };

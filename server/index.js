@@ -4,6 +4,8 @@ const db = require("./db/DBInstance");
 const env = require("./Environment");
 const BaseRouter = require("./routes/Router");
 const { StatusCodes } = require("http-status-codes");
+const cron = require("node-cron");
+const { updateArticles } = require("./functions/Articles");
 
 const app = express();
 const PORT = env.port;
