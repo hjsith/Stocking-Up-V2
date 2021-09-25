@@ -46,6 +46,8 @@ async function createOrder(
   });
   let orderTotal = currentPriceObject.CurrentPrice * parseInt(quantityOrder);
 
+  if (typeOfOrder == "SELL")
+    await updateInvestorBalanceAfterPurchase(investorID, orderTotal);
   return await Order.create({
     InvestorID: investorID,
     QuantityOrder: parseInt(quantityOrder),
@@ -72,7 +74,7 @@ async function pendingOrderCheck() {
         let investorID = elem.InvestorID;
         let hasExecuted = await updateInvestorBalanceAfterPurchase(
           investorID,
-          orderTotal
+          -orderTotal
         );
         if (hasExecuted) {
           elem.Status = "EXECUTED";

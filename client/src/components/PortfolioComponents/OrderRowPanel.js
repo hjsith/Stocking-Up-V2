@@ -1,10 +1,6 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
-import {
-  getCurrentPriceForListing,
-  getCompanyName,
-} from "../../connection/Listing";
 
 class OrderRowPanel extends React.Component {
   constructor(props) {
@@ -16,7 +12,12 @@ class OrderRowPanel extends React.Component {
   }
 
   componentDidMount() {
-    getCompanyName(this.props.companyCode).then((res) => {
+    fetch("/api/listing" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           name: body.name,
@@ -24,7 +25,12 @@ class OrderRowPanel extends React.Component {
       });
     });
 
-    getCurrentPriceForListing(this.props.companyCode).then((res) => {
+    fetch("/api/price" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           price: body.price,
