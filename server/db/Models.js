@@ -345,6 +345,8 @@ const Articles = db.define(
     ArticleName: DataTypes.TEXT,
     ArticleDate: DataTypes.DATE,
     ArticleInfo: DataTypes.TEXT,
+    ArticleImage: DataTypes.TEXT,
+    ArticleURL: DataTypes.TEXT,
   },
   { sequelize: db, tableName: "Articles", timestamps: false }
 );

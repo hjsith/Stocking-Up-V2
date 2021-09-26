@@ -4,34 +4,28 @@ import Article from "./Article";
 const moment = require("moment");
 
 const List = () => {
-  fetch("/api/articles"),
-    {
-      method: "POST",
-    };
+  const [articles, setArticles] = useState([]);
 
-  /*  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    const getArticles = async () => {
-      const res = await Axios.get(
-        "https://newsapi.org/v2/top-headlines?country=au&category=business&apiKey=a2461adc51034c3c8d7fcc374949d3c2"
-      );
-
-      setArticles(res.data.articles);
-      console.log(res);
-    };
-
-    getArticles();
-  }); */
+  fetch("/api/articles", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    res.json().then((body) => {
+      setArticles(body);
+    });
+  });
 
   return (
     <div>
-      {articles.map(({ title, description, url, publishedAt }) => (
+      {articles.map((article) => (
         <Article
-          title={title}
-          description={description}
-          url={url}
-          publishedAt={publishedAt}
+          title={article.ArticleName}
+          description={article.ArticleInfo}
+          url={article.ArticleURL}
+          publishedAt={article.ArticleDate}
+          urlToImage={article.ArticleImage}
         />
       ))}
     </div>

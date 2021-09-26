@@ -1,12 +1,12 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
+import NavBar from "../components/NavBar";
 import List from "../components/NewsfeedComponents/List";
 import "../assets/css/Newsfeed.scss";
 
 const Newsfeed = () => {
   return (
     <>
-      <Navbar />
+      <NavBar />
       <div className="newsTitle">
         <h1>News Feed</h1>
       </div>
