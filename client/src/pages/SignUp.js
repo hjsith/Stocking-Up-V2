@@ -38,15 +38,14 @@ class SignUp extends React.Component {
   }
   static contextType = UserContext;
 
-
   handleFirstNameChange(event) {
-    this.setState({FirstName: event.target.value});
+    this.setState({ FirstName: event.target.value });
   }
-    handleLastNameChange(event) {
-      this.setState({LastName: event.target.value});
-    }
+  handleLastNameChange(event) {
+    this.setState({ LastName: event.target.value });
+  }
   handleUsernameChange(event) {
-    this.setState({Username: event.target.value });
+    this.setState({ Username: event.target.value });
   }
 
   handleEmailChange(event) {
@@ -57,7 +56,6 @@ class SignUp extends React.Component {
     this.setState({ ConfirmPassword: event.target.value });
   }
 
-  
   handleSubmit(event) {
     //error message
     if (
@@ -109,8 +107,8 @@ class SignUp extends React.Component {
       //connects to frotnend to backend
       method: "POST",
       body: JSON.stringify({
-        FirstName: this.state.FirstName,
-        LastName: this.state.LastName,
+        firstName: this.state.FirstName,
+        lastName: this.state.LastName,
         email: this.state.Email,
         password: this.state.Password,
         username: this.state.Username
@@ -159,74 +157,76 @@ class SignUp extends React.Component {
           </div>
           <div className="FormContainer">
             <form onSubmit={this.handleSubmit}>
-            <div>
+              <div>
                 {" "}
                 <input
-                  className="SignupInput"
+                  className="SignUpInput"
                   type="text"
                   value={this.state.FirstName}
                   onChange={this.handleFirstNameChange}
                   placeholder="First Name"
                 />
-                <div>
-                {" "}
-                <input
-                  className="SignUpInput"
-                  type="text"
-                  value={this.state.LastName}
-                  onChange={this.handleLastNameChange}
-                  placeholder="Last Name"
-                />
-
-              <div>
-                {" "}
-                <input
-                  className="SignUpInput"
-                  type="text"
-                  value={this.state.Username}
-                  onChange={this.handleUsernameChange}
-                  placeholder="Username"
-                />
                 <img src={profile} className="profile" />
-              </div>
-              <div>
-                <input
-                  className="SignUpInput"
-                  type="text"
-                  value={this.state.Email}
-                  onChange={this.handleEmailChange}
-                  placeholder="Email"
-                />
+                <div>
+                  {" "}
+                  <input
+                    className="SignUpInput"
+                    type="text"
+                    value={this.state.LastName}
+                    onChange={this.handleLastNameChange}
+                    placeholder="Last Name"
+                  />
+                  <img src={profile} className="profile" />
+                </div>
+                <div>
+                  {" "}
+                  <input
+                    className="SignUpInput"
+                    type="text"
+                    value={this.state.Username}
+                    onChange={this.handleUsernameChange}
+                    placeholder="Username"
+                  />
+                  <img src={profile} className="profile" />
+                </div>
+                <div>
+                  <input
+                    className="SignUpInput"
+                    type="text"
+                    value={this.state.Email}
+                    onChange={this.handleEmailChange}
+                    placeholder="Email"
+                  />
 
-                <img src={letter} className="letter" />
+                  <img src={letter} className="letter" />
+                </div>
+                <div>
+                  {" "}
+                  <input
+                    className="SignUpInput"
+                    type="password"
+                    value={this.state.Password}
+                    onChange={this.handlePasswordChange}
+                    placeholder="Password"
+                  />
+                  <img src={lock} className="lock" />
+                </div>
+                <div>
+                  {" "}
+                  <input
+                    className="SignUpInput"
+                    type="password"
+                    value={this.state.ConfirmPassword}
+                    onChange={this.handleConfirmPasswordChange}
+                    placeholder="Confirm Password"
+                  />
+                  <img src={lock} className="lock" />
+                </div>
+                <div className="SignUperrorMessage">
+                  {this.state.errorMessage}
+                </div>
+                <input className="SignInButton" type="submit" value="SIGN UP" />
               </div>
-              <div>
-                {" "}
-                <input
-                  className="SignUpInput"
-                  type="password"
-                  value={this.state.Password}
-                  onChange={this.handlePasswordChange}
-                  placeholder="Password"
-                />
-                <img src={lock} className="lock" />
-              </div>
-
-              <div>
-                {" "}
-                <input
-                  className="SignUpInput"
-                  type="password"
-                  value={this.state.ConfirmPassword}
-                  onChange={this.handleConfirmPasswordChange}
-                  placeholder="Confirm Password"
-                />
-                <img src={lock} className="lock" />
-              </div>
-              <div className="SignUperrorMessage">
-                {this.state.errorMessage}
-              </div>
-              <input className="SignInButton" type="submit" value="SIGN UP" />
             </form>
           </div>
           <SignInLink
@@ -234,9 +234,6 @@ class SignUp extends React.Component {
             link="/SignIn"
           />
         </div>
-        
-      
-      
       </div>
     );
   }
