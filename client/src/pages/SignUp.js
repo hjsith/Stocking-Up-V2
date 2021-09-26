@@ -17,6 +17,8 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      FirstName: "",
+      LastName: "",
       Username: "",
       Password: "",
       Email: "",
@@ -24,6 +26,8 @@ class SignUp extends React.Component {
       Redirect: false,
       errorMessage: ""
     };
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -33,8 +37,16 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   static contextType = UserContext;
+
+
+  handleFirstNameChange(event) {
+    this.setState({FirstName: event.target.value});
+  }
+    handleLastNameChange(event) {
+      this.setState({LastName: event.target.value});
+    }
   handleUsernameChange(event) {
-    this.setState({ Username: event.target.value });
+    this.setState({Username: event.target.value });
   }
 
   handleEmailChange(event) {
@@ -45,9 +57,12 @@ class SignUp extends React.Component {
     this.setState({ ConfirmPassword: event.target.value });
   }
 
+  
   handleSubmit(event) {
     //error message
     if (
+      this.state.FirstName != "" &&
+      this.state.LastName != "" &&
       this.state.Username != "" &&
       this.state.Password != "" &&
       this.state.Email != "" &&
@@ -94,8 +109,8 @@ class SignUp extends React.Component {
       //connects to frotnend to backend
       method: "POST",
       body: JSON.stringify({
-        firstName: "Sanya",
-        lastName: "Dua",
+        FirstName: this.state.FirstName,
+        LastName: this.state.LastName,
         email: this.state.Email,
         password: this.state.Password,
         username: this.state.Username
@@ -144,6 +159,25 @@ class SignUp extends React.Component {
           </div>
           <div className="FormContainer">
             <form onSubmit={this.handleSubmit}>
+            <div>
+                {" "}
+                <input
+                  className="SignupInput"
+                  type="text"
+                  value={this.state.FirstName}
+                  onChange={this.handleFirstNameChange}
+                  placeholder="First Name"
+                />
+                <div>
+                {" "}
+                <input
+                  className="SignUpInput"
+                  type="text"
+                  value={this.state.LastName}
+                  onChange={this.handleLastNameChange}
+                  placeholder="Last Name"
+                />
+
               <div>
                 {" "}
                 <input
@@ -200,6 +234,9 @@ class SignUp extends React.Component {
             link="/SignIn"
           />
         </div>
+        
+      
+      
       </div>
     );
   }
