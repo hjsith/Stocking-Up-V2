@@ -5,6 +5,50 @@ import RedSellButton from "./RedSellButton";
 import UserProfileIcon from "../UserProfileIcon";
 
 class HoldingsRowPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      price: 0,
+    };
+  }
+
+  componentDidMount() {
+    fetch("/api/listing" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          name: body.name,
+        });
+      });
+    });
+
+    fetch("/api/price" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          price: body.price,
+        });
+      });
+    });
+  }
+
+  handleBuy() {
+    console.log("Bought!!");
+  }
+
+  handleSell() {
+    console.log("Sold!!");
+  }
+
   render() {
     return (
       <div className="HoldingsRowPanel">
@@ -12,23 +56,32 @@ class HoldingsRowPanel extends React.Component {
           <tr>
             <th>
               <UserProfileIcon
-                name="A2M"
-                colorNumber={0}
+                name={this.props.companyCode}
+                colorNumber={this.props.colourNumber}
                 company={true}
                 size={50}
               />
             </th>
-
-            <th>A2 Milk</th>
-            <th>$6.52</th>
-            <th>$7.02</th>
-            <th>150</th>
-            <th>$975</th>
+            <th>{this.state.name}</th>
+            <th>{this.props.priceBought}</th>
+            <th>{this.state.price}</th>
+            <th>{this.props.units}</th>
+            <th>{this.props.total}</th>
             <th>
-              <GreenBuyButton />
+              {/* <GreenBuyButton /> */}
+              <div className="ButtonContainer">
+                <button className="GreenBuyButton" onClick={this.handleBuy}>
+                  Buy
+                </button>
+              </div>
             </th>
             <th>
-              <RedSellButton />
+              {/* <RedSellButton /> */}
+              <div className="ButtonContainer">
+                <button className="RedSellButton" onClick={this.handleSell}>
+                  Sell
+                </button>
+              </div>
             </th>
           </tr>
         </table>
@@ -36,5 +89,7 @@ class HoldingsRowPanel extends React.Component {
     );
   }
 }
+
+// a href="/Leaderboard"
 
 export default HoldingsRowPanel;

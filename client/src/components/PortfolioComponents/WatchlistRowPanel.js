@@ -4,6 +4,84 @@ import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "../UserProfileIcon";
 
 class WatchlistRowPannel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      price: 0,
+      highPrice: 0,
+      lowPrice: 0,
+      industry: "",
+    };
+  }
+
+  componentDidMount() {
+    fetch("/api/listing/industry" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          industry: body.name,
+        });
+      });
+    });
+
+    fetch("/api/listing" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          name: body.name,
+        });
+      });
+    });
+
+    fetch("/api/listing/priceHigh" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          highPrice: body.highPrice,
+        });
+      });
+    });
+
+    fetch("/api/price" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          price: body.price,
+        });
+      });
+    });
+
+    fetch("/api/listing/priceLow" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        this.setState({
+          lowPrice: body.lowPrice,
+        });
+      });
+    });
+  }
+
   render() {
     return (
       <div className="WatchlistRowPannel">
@@ -17,10 +95,11 @@ class WatchlistRowPannel extends React.Component {
                 size={50}
               />
             </th>
-            <th>{this.props.companyName}</th>
-            <th>{this.props.currentPrice}</th>
-            <th>{this.props.percentChange}</th>
-            <th>{this.props.industry}</th>
+            <th>{this.state.name}</th>
+            <th>{this.state.price}</th>
+            <th>{this.state.lowPrice}</th>
+            <th>{this.state.highPrice}</th>
+            <th>{this.state.industry}</th>
             <th>
               <GreenBuyButton />
             </th>
