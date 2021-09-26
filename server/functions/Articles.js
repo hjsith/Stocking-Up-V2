@@ -13,7 +13,7 @@ async function updateArticles() {
       moment.utc(now, "YYYY-MM-DD HH:mm:ss").format()
   );
   const res = await Axios.get(
-    "https://newsapi.org/v2/top-headlines?country=au&category=business&apiKey=a2461adc51034c3c8d7fcc374949d3c2"
+    "https://newsapi.org/v2/everything?q=%22ASX%22&sources=abc-news-au,%20ABC%20News%20(AU)&apiKey=a2461adc51034c3c8d7fcc374949d3c2"
   );
   for (let i = 0; i < res.data.articles.length; ++i) {
     const articleFound = await Articles.findOne({
@@ -28,6 +28,7 @@ async function updateArticles() {
         ArticleInfo: res.data.articles[i].description,
         ArticleImage: res.data.articles[i].urlToImage,
         ArticleURL: res.data.articles[i].url,
+        ArticleSource: res.data.articles[i].source.name,
       });
     }
   }

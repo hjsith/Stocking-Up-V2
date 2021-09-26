@@ -11,7 +11,7 @@ const Newsfeed = () => {
         <h1>News Feed</h1>
       </div>
       <div className="introPara">
-        <p>"See below for the latest business and finance related news!"</p>
+        <p>See below for the latest business and finance related news!</p>
       </div>
 
       <div className="articleList">
