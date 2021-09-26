@@ -19,8 +19,18 @@ async function createWatchlist(investorID, listingID) {
   });
 }
 
+//used destroy to remove Watchlist check if correct
+
+async function deleteWatchlist(investorID, listingID) {
+  return await Watchlist.destroy({
+    InvestorID: investorID,
+    ListingID: listingID,
+  });
+}
+
 module.exports = {
   getAllWatchlist,
   createWatchlist,
   getWatchlistByInvestor,
+  deleteWatchlist,
 };
