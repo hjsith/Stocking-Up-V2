@@ -21,3 +21,109 @@
   display: inline-block;
   vertical-align: top;
 }
+
+.TitlePanel {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  color: white;
+  padding: 1.25em 1.25em 0em 1.25em;
+  font-weight: bold;
+}
+
+.GainsPanel {
+  height: 4.6em;
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
+}
+.TitleTableFont2 > tr > th {
+  font-family: "Roboto", sans-serif;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+}
+
+.DeclinesPanel {
+  height: 4.6em;
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
+}
+
+.TitleTableFont3 > tr > th {
+  font-family: "Roboto", sans-serif;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+}
+
+.TableTitleFont > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 10%;
+}
+
+.WhiteLine {
+  height: 0.05em;
+  margin: 1.25em 1.25em 0em 1.25em;
+  width: 97%;
+  background-color: white;
+}
+.TableTitleFont {
+  margin-left: 0.9em;
+}
+
+.divOrder {
+  height: 15.7em;
+  width: 97%;
+  overflow: auto;
+}
+
+.AsxPricePanel {
+  height: 4.6em;
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
+}
+
+.TitleTableFont4 > tr > th {
+  font-family: "Roboto", sans-serif;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+}
+
+.TitleTableFont > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 10%;
+}
+
+.divholding {
+  height: 21.5em;
+  width: 97%;
+  overflow: auto;
+}
+
+.UpArrow {
+  width: 0;
+  height: 0;
+  border-left: 2x solid transparent;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid black;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
