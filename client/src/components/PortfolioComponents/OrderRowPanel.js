@@ -8,6 +8,7 @@ class OrderRowPanel extends React.Component {
     this.state = {
       name: "",
       price: 0,
+      disable: false,
     };
   }
 
@@ -59,12 +60,27 @@ class OrderRowPanel extends React.Component {
             <th>{this.props.total}</th>
             <th className>
               <div className="ButtonContainer">
-                <button className="GreenConfirmButton">Confirm</button>
+                <button
+                  disabled={this.state.disable}
+                  className="GreenConfirmButton"
+                  onClick={() => {
+                    this.props.confirm(this.props.orderID);
+                    this.setState({ disable: true });
+                  }}
+                >
+                  Confirm
+                </button>
               </div>
             </th>
             <th>
               <div className="ButtonContainer">
-                <button className="CancelButton" onClick={this.props.cancel}>
+                <button
+                  disabled={this.state.disable}
+                  className="CancelButton"
+                  onClick={() => {
+                    this.props.cancel(this.props.orderID);
+                  }}
+                >
                   Cancel
                 </button>
               </div>

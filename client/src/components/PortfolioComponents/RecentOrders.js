@@ -31,13 +31,42 @@ class RecentOrders extends React.Component {
     }, 500);
   }
 
-  cancelEvent = (index) => {
-    const copyOrderArray = Object.assign([], this.state.orderArray);
-    copyOrderArray.splice(index, 1);
-    this.setState({
-      orderArray: copyOrderArray,
-      snackBarMessage: "Your order for has successfully been deleted!",
-      //Ask James on how to do it when you delete multiple things
+  cancelEvent = (index, ID) => {
+    fetch("/api/cancelOrders", {
+      method: "PUT",
+      body: JSON.stringify({
+        orderID: ID,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      const copyOrderArray = Object.assign([], this.state.orderArray);
+      copyOrderArray.splice(index, 1);
+      this.setState({
+        orderArray: copyOrderArray,
+        snackBarMessage: "Please wait 1 minute for your order to be cancelled",
+        //Ask James on how to do it when you delete multiple things
+      });
+    });
+  };
+
+  confirmEvent = (index, ID) => {
+    fetch("/api/confirmedOrders", {
+      method: "PUT",
+      body: JSON.stringify({
+        orderID: ID,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      const copyOrderArray = Object.assign([], this.state.orderArray);
+      this.setState({
+        orderArray: copyOrderArray,
+        snackBarMessage: "Your order has been confirmed",
+        //Ask James on how to do it when you delete multiple things
+      });
     });
   };
 
@@ -81,6 +110,8 @@ class RecentOrders extends React.Component {
                 units={order.QuantityOrder}
                 total={order.OrderTotal}
                 cancel={this.cancelEvent.bind(this, index)}
+                confirm={this.confirmEvent.bind(this, index)}
+                orderID={order.OrderID}
               />
             );
           })}

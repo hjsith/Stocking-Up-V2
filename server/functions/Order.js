@@ -108,10 +108,26 @@ async function pendingOrderCheck() {
     });
 }
 
+async function cancelOrder(orderID) {
+  let order = await Order.findOne({ where: { OrderID: orderID } });
+  order.Status = "CANCELLED";
+  await order.save();
+  return true;
+}
+
+async function confirmOrder(orderID) {
+  let order = await Order.findOne({ where: { OrderID: orderID } });
+  order.ExecutionTime = moment.utc();
+  await order.save();
+  return true;
+}
+
 module.exports = {
   getOrdersByInvestor,
   createOrder,
   getAllPendingOrders,
   getAllPendingOrdersByInvestor,
   pendingOrderCheck,
+  cancelOrder,
+  confirmOrder,
 };
