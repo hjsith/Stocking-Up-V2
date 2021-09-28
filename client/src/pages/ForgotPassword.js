@@ -6,7 +6,10 @@ import SignInLink from "../components/UserAuthenticationComponents/SignInLink";
 import AuthenticationTitle from "../components/UserAuthenticationComponents/AuthenticationTitle";
 import profile from "../assets/images/profile.png";
 import { Redirect } from "react-router-dom";
-
+import { rmSync } from "fs";
+const passwordRegex = new RegExp( //confirm if password is correct format
+  "(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}"
+);
 class ForgotPassword extends React.Component {
   constructor(props) {
     super(props);
@@ -15,11 +18,13 @@ class ForgotPassword extends React.Component {
       Password: "",
       ConfirmPassword: "",
       Redirect: false,
+      ErrorMessage: ""
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleConfirmPasswordChange =
-      this.handleConfirmPasswordChange.bind(this);
+    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
+      this
+    );
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -37,11 +42,66 @@ class ForgotPassword extends React.Component {
       this.state.Password != "" &&
       this.state.ConfirmPassword != ""
     ) {
-      this.setState({ Redirect: true });
+      if (this.state.Username.length >= 3) {
+        if (passwordRegex.test(this.state.Password)) {
+          if (this.state.Password === this.state.ConfirmPassword) {
+            this.updatePassword();
+            this.setState({
+              ErrorMessage: ""
+            });
+          } else {
+            this.setState({
+              ErrorMessage: "Your passwords do not match"
+            });
+          }
+        } else {
+          this.setState({
+            ErrorMessage: "Your password is in the incorrect format."
+          });
+        }
+      } else {
+        this.setState({
+          ErrorMessage: "Your username must be atleast 3 characters long"
+        });
+      }
+      //this.setState({ Redirect: true });
+    } else {
+      this.setState({ ErrorMessage: "One or more fields are empty" });
     }
     event.preventDefault();
   }
-
+  updatePassword() {
+    fetch("/api/ForgotPassword", {
+      //connects to frotnend to backend
+      method: "POST",
+      body: JSON.stringify({
+        password: this.state.Password,
+        username: this.state.Username
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status === 200) {
+          // Successful login 200
+          this.setState({ Redirect: true });
+        } else if (res.status === 409) {
+          this.setState({
+            ErrorMessage: "The password could not be updated,please try again"
+          });
+        } else if (res.status === 401) {
+          this.setState({
+            ErrorMessage: " This username is incorrect"
+          });
+        } else {
+          console.log("Something unexpeceted went wrong ._.");
+        }
+      })
+      .catch(exception => {
+        console.log("Error:", exception);
+      });
+  }
   handlePasswordChange(event) {
     this.setState({ Password: event.target.value });
   }
@@ -96,7 +156,9 @@ class ForgotPassword extends React.Component {
                 />
                 <img src={lock} className="lock" />
               </div>
-
+              <div className="ForgotPassworderrorMessage">
+                {this.state.ErrorMessage}
+              </div>
               <input className="SignInButton" type="submit" value="CONFIRM" />
             </form>
           </div>

@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { createInvestor } = require("../functions/Investor");
-
+const { createInvestor, checkUsernameExist } = require("../functions/Investor");
+const bcrypt = require("bcrypt");
+const {
+  generateNewAuthenticationTokens
+} = require("../functions/Authenticate");
 // Init shared
 const router = Router();
 
@@ -12,24 +15,25 @@ router.post("/SignUp", async (req, res) => {
       .send("The request doesn't have the correct body format.");
   }
   var data = req.body;
-
-  //Use Bcrypt package to hash password before storing
+  var checkUser = await checkUsernameExist(data.username);
+  if (checkUser === true) {
+    return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send();
+  }
+  const passHash = await bcrypt.hash(data.password, 10);
 
   const user = await createInvestor(
     data.firstName,
     data.lastName,
     data.email,
-    data.password,
+    passHash,
     data.username
   );
+  const device = req.headers.host ?? "Unknown";
+  await generateNewAuthenticationTokens(user, device, res);
 
-  if (user === null) {
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .send("The server failed to craete the user.");
-  } else {
-    return res.status(StatusCodes.CREATED).json(user);
-  }
+  return res
+    .status(StatusCodes.CREATED)
+    .json({ id: user.InvestorID, username: user.Username });
 });
 
 module.exports = router;

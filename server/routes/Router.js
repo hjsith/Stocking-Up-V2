@@ -17,6 +17,7 @@ const ObtainedAchievementsRouter = require("./ObtainedAchievements");
 const FriendsRouter = require("./Friends");
 const ThreadsRouter = require("./Threads");
 const CommentsRouter = require("./Comments");
+const SignInRouter = require("./SignIn");
 
 const router = express.Router();
 
@@ -39,5 +40,6 @@ router.use(OneDayRouter);
 router.use(FiveDaysRouter);
 router.use(TwoWeeksRouter);
 router.use(OneMonthRouter);
+router.use(SignInRouter);
 
 module.exports = router;
