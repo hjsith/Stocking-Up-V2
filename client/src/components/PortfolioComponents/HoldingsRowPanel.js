@@ -3,10 +3,6 @@ import "../../assets/css/PortfolioPage.scss";
 import GreenBuyButton from "./GreenBuyButton";
 import RedSellButton from "./RedSellButton";
 import UserProfileIcon from "../UserProfileIcon";
-import {
-  getCurrentPriceForListing,
-  getCompanyName,
-} from "../../connection/Listing";
 
 class HoldingsRowPanel extends React.Component {
   constructor(props) {
@@ -18,7 +14,12 @@ class HoldingsRowPanel extends React.Component {
   }
 
   componentDidMount() {
-    getCompanyName(this.props.companyCode).then((res) => {
+    fetch("/api/listing" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           name: body.name,
@@ -26,7 +27,12 @@ class HoldingsRowPanel extends React.Component {
       });
     });
 
-    getCurrentPriceForListing(this.props.companyCode).then((res) => {
+    fetch("/api/price" + "?code=" + this.props.companyCode, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
       res.json().then((body) => {
         this.setState({
           price: body.price,

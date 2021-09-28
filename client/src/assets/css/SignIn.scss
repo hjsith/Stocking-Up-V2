@@ -156,6 +156,7 @@
   width: 32px;
   height: 21px;
 }
+
 input:focus,
 textarea:focus {
   outline: none;
@@ -198,7 +199,6 @@ textarea:focus {
   margin-top: 20px;
   padding-left: 65px;
 }
-
-
-
-
+.SignUperrorMessage {
+  color: red;
+}
