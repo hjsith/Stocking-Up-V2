@@ -31,7 +31,25 @@ class Declines extends React.Component {
           currentPrice: "$64.02",
           percentageChange: "+3.10%",
           industry: "Banking and Financial Services"
+        },
+
+        {
+          colourNumber: 1,
+          companyCode: "A2M",
+          companyName: "A2 Milk",
+          currentPrice: "$7.02",
+          percentageChange: "+2.10%",
+          industry: "Consumer Staples"
+        },
+        {
+          colourNumber: 2,
+          companyCode: "WIS",
+          companyName: "Wistech Global",
+          currentPrice: "$47.02",
+          percentageChange: "-1.21%",
+          industry: "Logistics"
         }
+        
       ]
     };
   }
@@ -49,7 +67,7 @@ class Declines extends React.Component {
             <th>Industry</th>
           </tr>
         </table>
-        <div className="divorder">
+        <div className="divDecline">
           {this.state.declinesArray.map((declines, index) => {
             return (
               <DeclinesPanel

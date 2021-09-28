@@ -4,11 +4,13 @@ import TitlePanel from "./TitlePanel";
 import AsxPricePanel from "./AsxPricePanel";
 
 class AsxPrice extends React.Component {
+ 
+ 
   render() {
     return (
       <div>
         <TitlePanel title="ASX 200 Prices" />
-        <table className="TitleTableFont">
+        <table className="TitleTableFontAsx">
           <tr>
             <th>Company Code</th>
             <th>Company Name</th>
@@ -17,7 +19,7 @@ class AsxPrice extends React.Component {
             <th>Market Capitalisation</th>
           </tr>
         </table>
-        <div className="divholding">
+        <div className="divAsx">
           <AsxPricePanel />
           <AsxPricePanel />
           <AsxPricePanel />
