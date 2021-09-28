@@ -4,6 +4,41 @@ import PanelTitle from "./PanelTitle";
 import HoldingsRowPanel from "./HoldingsRowPanel";
 
 class MyHoldings extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      holdingArray: [],
+      snackBarMessage: "",
+    };
+  }
+
+  componentDidMount() {
+    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    setInterval(() => {
+      fetch("/api/holdings" + "?investorID=" + investorID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        res.json().then((body) => {
+          this.setState({
+            holdingArray: body,
+          });
+        });
+      });
+      console.log(this.state.holdingArray);
+    }, 500);
+  }
+
+  handleBuy() {
+    console.log("Bought!!");
+  }
+
+  handleSell() {
+    console.log("Sold!!");
+  }
+
   render() {
     return (
       <div>
@@ -21,16 +56,18 @@ class MyHoldings extends React.Component {
           </tr>
         </table>
         <div className="divholding">
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
-          <HoldingsRowPanel />
+          {this.state.holdingArray.map((holding, index) => {
+            return (
+              <HoldingsRowPanel
+                key={holding.OrderID}
+                colourNumber={2}
+                companyCode={holding.ListingID}
+                priceBought={holding.ListingPrice}
+                units={holding.QuantityOrder}
+                total={holding.OrderTotal}
+              />
+            );
+          })}
         </div>
         <br />
       </div>
