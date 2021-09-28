@@ -103,6 +103,6 @@ module.exports = {
   checkUsernameExist,
   getInvestorsWithUsername,
   updateInvestorPassword,
-  getOneInvestorWithUsername
-  updateInvestorBalanceAfterPurchase,
+  getOneInvestorWithUsername,
+  updateInvestorBalanceAfterPurchase
 };
