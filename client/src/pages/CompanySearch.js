@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/CompanySearch.scss";
 
-/* need to fix:
-- search button needs to send listing ID to Vishaal's order page
-*/
 
 const SearchBar = (props) => {
   const { results, onInputChange } = props;
@@ -34,16 +32,15 @@ const SearchBar = (props) => {
       <ul id="results" className="list-group" ref={resultsRef}>
         {results.map((result, index) => {
           return ( 
+            <Link to ={{pathname: "/QuoteManagement", state:{listingID:result.substring(0,3)}}}>
             <button 
               type="button" 
               key={index}
-              onClick={(e) => { //when dropdown result is clicked, the input bar inherits the value of that result
-                searchbarRef.current.value = result;
-              }}
               className="list-group-item list-group-item-action"
             >
               {result}
             </button>
+            </Link>
           );
         })} 
       </ul>
