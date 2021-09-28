@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getInvestor, updateInvestorPassword } = require("../functions/Investor");
-
+const {
+  getInvestor,
+  updateInvestorPassword
+} = require("../functions/Investor");
+const bcrypt = require("bcrypt");
 // Init shared
 const router = Router();
 
@@ -20,12 +23,12 @@ router.put("/updatePassword", async (req, res) => {
 
   var data = req.body;
 
-  //NewPassword needs to be hashed using bcrypt package
+  const passHash = await bcrypt.hash(data.password, 10);
 
   const updateCheck = await updateInvestorPassword(
     data.userID ?? "",
     data.username ?? "",
-    data.newPassword
+    passHash
   );
 
   if (updateCheck) {

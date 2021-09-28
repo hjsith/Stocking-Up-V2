@@ -14,11 +14,12 @@ const Investor = db.define(
     InvestorEmail: DataTypes.STRING,
     InvestorPassword: DataTypes.TEXT,
     Username: DataTypes.TEXT,
-    NetWorth: DataTypes.BIGINT,
+    NetWorth: DataTypes.DECIMAL(20, 2),
     InvestorRanking: DataTypes.INTEGER,
     InvestorDifficulty: DataTypes.TEXT,
     DateJoined: DataTypes.DATEONLY,
     Title: DataTypes.TEXT,
+    Funds: DataTypes.DECIMAL(20, 2),
   },
   { sequelize: db, tableName: "Investor", timestamps: false }
 );
