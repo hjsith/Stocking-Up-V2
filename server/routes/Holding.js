@@ -29,4 +29,10 @@ router.post("/holdings", async (req, res) => {
   return res.status(StatusCodes.CREATED).json(holding);
 });
 
+router.delete("/holdings", async (req, res) => {
+  const holdings = await getAllSoldOrdersbyInvestor(req.query.investorID);
+
+  return res.status(StatusCodes.OK).json(holdings);
+});
+
 module.exports = router;
