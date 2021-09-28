@@ -31,7 +31,7 @@ const QuoteManagement = () => {
       setMessage("You do not have enough funds!");
     } else {
       let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
-      let listingID = "A2M";
+      let listingID = "TPW";
       let now = moment();
       let future = moment().add(15, "minutes");
       let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
@@ -74,7 +74,7 @@ const QuoteManagement = () => {
       setMessage("You do not have enough funds!");
     } else {
       let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
-      let listingID = "A2M";
+      let listingID = "TPW";
       let now = moment();
       let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
 
@@ -112,7 +112,7 @@ const QuoteManagement = () => {
 
   const watchlistButton = () => {
     let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
-    let listingID = "A2M";
+    let listingID = "TPW";
     fetch("/api/watchlist", {
       method: "POST",
       body: JSON.stringify({

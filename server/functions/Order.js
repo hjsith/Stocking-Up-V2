@@ -46,7 +46,13 @@ async function createOrder(
   });
   let orderTotal = currentPriceObject.CurrentPrice * parseInt(quantityOrder);
 
-  if (typeOfOrder == "SELL")
+  let checkHolding = await Holding.findOne({
+    where: {
+      ListingID: listingID,
+    },
+  });
+
+  if (typeOfOrder == "SELL" && checkHolding != null)
     await updateInvestorBalanceAfterPurchase(investorID, orderTotal);
   return await Order.create({
     InvestorID: investorID,
