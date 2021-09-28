@@ -7,6 +7,10 @@ async function createAuthenticationTokens(
   InputCreatedTime,
   InputExpiryTime
 ) {
+  await AuthenticationTokens.destroy({
+    //only one refresh token is made
+    where: { InvestorID: InputInvestorID }
+  });
   return AuthenticationTokens.create({
     RefreshToken: InputRefreshToken,
     InvestorID: InputInvestorID,

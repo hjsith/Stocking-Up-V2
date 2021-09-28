@@ -17,16 +17,18 @@ import {
   Redirect
 } from "react-router-dom";
 
-class App extends React.Component {
+class App extends React.Component {     //refresh remembering details of user
   constructor(props) {
     super(props);
     this.state = {
-      user: { name: "", id: "" },
+      user: window.localStorage.getItem("user") ?? { name: "", id: "" },
       updateUser: newUser => {
         this.setState({ user: newUser });
+        window.localStorage.setItem("user", JSON.stringify(newUser));
       }
     };
   }
+
   render() {
     return (
       <Router>

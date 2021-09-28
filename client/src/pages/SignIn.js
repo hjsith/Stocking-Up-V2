@@ -54,7 +54,13 @@ class SignIn extends React.Component {
       .then(res => {
         if (res.status === 200) {
           // Successful login 200
-          this.setState({ Redirect: true });
+          res.json().then(body => {
+            this.context.updateUser({
+              name: body.username,
+              id: body.id
+            });
+            this.setState({ Redirect: true });
+          });
         } else if (res.status === 401) {
           this.setState({
             ErrorMessage: " This username or password is incorrect"

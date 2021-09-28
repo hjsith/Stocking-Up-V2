@@ -29,20 +29,20 @@ router.post("/SignIn", async (req, res) => {
   ); //comparing passwords
   if (match == true) {
     const user = await getOneInvestorWithUsername(data.username);
-    console.log(user);
+
     const device = req.headers.host ?? "Unknown";
     await generateNewAuthenticationTokens(user, device, res);
 
     return res
       .status(StatusCodes.OK)
-      .json({ id: user.InvesorID, username: user.Username });
+      .json({ id: user.InvestorID, username: user.Username });
   } else {
     return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 });
 router.get("/logout", async (req, res) => {
   return res
-    .status(OK)
+    .status(StatusCodes.OK)
     .clearCookie("access_tokens")
     .end();
 });

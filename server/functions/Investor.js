@@ -76,7 +76,7 @@ async function updateInvestorPassword(userID, username, password) {
 }
 
 async function getOneInvestorWithUsername(username) {
-  return Investor.findAll({
+  return Investor.findOne({
     where: {
       Username: username
     }

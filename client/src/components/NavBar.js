@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 import "../assets/css/navbar.scss";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../assets/images/LogowithoutB.png";
 import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
-  const Logout = () => {
+  const cont = useContext(UserContext);
+  const Logout = () => {             //Logout
     fetch("/api/logout", {
       //connects to frotnend to backend
       method: "GET",
@@ -13,7 +15,7 @@ const NavBar = () => {
         "Content-Type": "application/json"
       }
     });
-    console.log("Logged out Succesful");
+    cont.updateUser({ name: "", id: "" });
   };
   return (
     <Navbar className="navbar">
