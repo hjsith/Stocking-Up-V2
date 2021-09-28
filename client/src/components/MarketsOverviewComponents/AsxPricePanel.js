@@ -9,18 +9,18 @@ class AsxPricePanel extends React.Component {
         <table className="TitleTableFont4">
           <tr>
             <th>
-              <UserProfileIcon
-                name="A2M"
-                colorNumber={0}
+             <UserProfileIcon
+                name={this.props.companyCode}
+                colorNumber={this.props.colourNumber}
                 company={true}
                 size={50}
               />
             </th>
-
-            <th>A2 Milk</th>
-            <th>$6.52</th>
-            <th>Consumer Staples</th>
-            <th>$4,469,110,680</th>
+            <th>{this.props.companyName}</th>
+            <th>{this.props.currentPrice}</th>
+            <th>{this.props.industry}</th>
+         <th>{this.props.marketsCapitalisation}</th>
+            <th></th>
           </tr>
         </table>
       </div>
