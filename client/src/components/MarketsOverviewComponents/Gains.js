@@ -45,7 +45,7 @@ class Gains extends React.Component {
             <th>Company Code</th>
             <th>Company Name</th>
             <th>Current Price</th>
-            <th>% change</th>
+            <th>% Change</th>
             <th>Industry</th>
           </tr>
         </table>
