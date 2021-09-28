@@ -2,9 +2,11 @@ const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const {
   getInvestor,
-  updateInvestorPassword
+  updateInvestorPassword,
 } = require("../functions/Investor");
 const bcrypt = require("bcrypt");
+const { getAuthenticatedUser } = require("../functions/Authenticate");
+
 // Init shared
 const router = Router();
 
@@ -38,13 +40,18 @@ router.put("/updatePassword", async (req, res) => {
 });
 
 router.get("/investor", async (req, res) => {
-  const user = await getInvestor(req.query.id);
-  if (user === null) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ errors: "User could not be found." });
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const user = await getInvestor(req.query.id);
+    if (user === null) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: "User could not be found." });
+    }
+    return res.status(StatusCodes.OK).json(user);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-  return res.status(StatusCodes.OK).json(user);
 });
 
 module.exports = router;

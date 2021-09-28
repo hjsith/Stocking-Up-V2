@@ -6,6 +6,8 @@ import UserProfileIcon from "../components/UserProfileIcon";
 import ProfileStatTable from "../components/UserManagementComponents/ProfileStatTable";
 import Popup from "../components/Popup";
 import VerticalLine from "../components/UserManagementComponents/VerticalLine";
+import { UserContext } from "../components/UserContext";
+import { Redirect } from "react-router-dom";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -21,11 +23,14 @@ class Profile extends React.Component {
       userDatejoined: "",
       SimulationEndDate: "0",
       userName: "",
+      unauth: false,
     };
   }
 
+  static contextType = UserContext;
+
   fetchUser() {
-    fetch("/api/investor?id=" + "4cf0b21d-360e-45f0-ba69-425a6e913d44", {
+    fetch("/api/investor?id=" + this.context.user.id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -42,6 +47,8 @@ class Profile extends React.Component {
             userName: body.InvestorFName + " " + body.InvestorLName,
           })
         );
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
       } else {
         console.log(res.status);
       }
@@ -102,6 +109,16 @@ class Profile extends React.Component {
   }
 
   render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+
     return (
       <div className="ProfileContainer">
         <NavBar />

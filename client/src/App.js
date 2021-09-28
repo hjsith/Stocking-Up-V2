@@ -14,18 +14,22 @@ import {
   Switch,
   Route,
   BrowserRouter as Router,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
-class App extends React.Component {     //refresh remembering details of user
+class App extends React.Component {
+  //refresh remembering details of user
   constructor(props) {
     super(props);
     this.state = {
-      user: window.localStorage.getItem("user") ?? { name: "", id: "" },
-      updateUser: newUser => {
+      user: JSON.parse(window.localStorage.getItem("user")) ?? {
+        name: "",
+        id: "",
+      },
+      updateUser: (newUser) => {
         this.setState({ user: newUser });
         window.localStorage.setItem("user", JSON.stringify(newUser));
-      }
+      },
     };
   }
 
@@ -42,7 +46,7 @@ class App extends React.Component {     //refresh remembering details of user
             <Route path="/ForgotPassword" component={ForgotPassword} />
 
             <Route path="/Portfolio" component={Portfolio} />
-            <Route path="/Profile" render={props => <Profile {...props} />} />
+            <Route path="/Profile" render={(props) => <Profile {...props} />} />
 
             <Route path="/UpdatePassword" component={UpdatePassword} />
             <Route exact path="/">
