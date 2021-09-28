@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import Change from "../components/QuoteManagementComponents/Change";
 import "../assets/css/QuoteManagement.scss";
 import Graph from "../components/QuoteManagementComponents/Graph";
-import { buyOrder, sellOrder } from "../connection/Orders";
+const moment = require("moment");
 
 const QuoteManagement = () => {
   var sharePrice = 5.73;
@@ -32,7 +32,25 @@ const QuoteManagement = () => {
     } else {
       let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
       let listingID = "A2M";
-      buyOrder(investorID, counter, listingID)
+      let now = moment();
+      let future = moment().add(15, "minutes");
+      let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
+      let futureUTCTime = moment.utc(future, "YYYY-MM-DD HH:mm:ss");
+
+      fetch("/api/orders", {
+        method: "POST",
+        body: JSON.stringify({
+          investorID: investorID,
+          quantityOrder: counter,
+          listingID: listingID,
+          typeOfOrder: "BUY",
+          orderTime: currentUTCTime,
+          executionTime: futureUTCTime,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((res) => {
           if (res.status === 201) {
             // Successful orderCreation 201
@@ -57,12 +75,28 @@ const QuoteManagement = () => {
     } else {
       let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
       let listingID = "A2M";
-      sellOrder(investorID, counter, listingID)
+      let now = moment();
+      let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
+
+      fetch("/api/orders", {
+        method: "POST",
+        body: JSON.stringify({
+          investorID: investorID,
+          quantityOrder: counter,
+          listingID: listingID,
+          typeOfOrder: "SELL",
+          orderTime: currentUTCTime,
+          executionTime: currentUTCTime,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((res) => {
           if (res.status === 201) {
             // Successful orderCreation 201
             res.json().then((body) => {
-              setFunds(funds + body.OrderTotal);
+              setFunds(funds - body.OrderTotal);
             });
           } else {
             console.log("Something unexpeceted went wrong ._.");
@@ -74,6 +108,31 @@ const QuoteManagement = () => {
       setCounter(0);
       setMessage("");
     }
+  };
+
+  const watchlistButton = () => {
+    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    let listingID = "A2M";
+    fetch("/api/watchlist", {
+      method: "POST",
+      body: JSON.stringify({
+        investorID: investorID,
+        listingID: listingID,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("Watchlist added succesfully");
+        } else {
+          console.log("Something unexpeceted went wrong ._.");
+        }
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
   };
 
   const [message, setMessage] = useState(" ");
@@ -102,7 +161,7 @@ const QuoteManagement = () => {
                 <Button handleClick={buyButton} text="Buy" />
               </div>
               <div className="button2">
-                <Button text="Add to Watchlist" />
+                <Button handleClick={watchlistButton} text="Add to Watchlist" />
               </div>
               <div className="button3">
                 <Button handleClick={sellButton} text="Sell" />
@@ -124,5 +183,3 @@ const QuoteManagement = () => {
 };
 
 export default QuoteManagement;
-
-// this is the root component, called in index.js from index.html

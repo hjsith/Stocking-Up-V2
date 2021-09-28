@@ -1,5 +1,5 @@
 const { Investor } = require("../db/Models");
-
+const { Op } = require("sequelize");
 async function getAllInvestors() {
   return await Investor.findAll();
 }
@@ -23,28 +23,41 @@ async function createInvestor(fName, lName, email, password, username) {
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
     Title: "NEEDED",
+    Funds: 0
   });
+}
+
+async function updateInvestorBalanceAfterPurchase(investorID, total) {
+  let investor = await Investor.findByPk(investorID);
+  let balance = investor.NetWorth;
+  if (total < balance) {
+    investor.NetWorth += total;
+    await investor.save();
+    return true;
+  } else {
+    return false;
+  }
 }
 
 async function getInvestorPassword(username) {
   return Investor.findOne({
     attributes: ["InvestorPassword"],
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
 }
 
 async function checkUsernameExist(username) {
   var searchedInvestor = await Investor.findOne({
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
   if (searchedInvestor === null) {
-    return true;
-  } else {
     return false;
+  } else {
+    return true;
   }
 }
 
@@ -52,9 +65,9 @@ async function getInvestorsWithUsername(username) {
   return Investor.findAll({
     where: {
       Username: {
-        [Op.substring]: username,
-      },
-    },
+        [Op.substring]: username
+      }
+    }
   });
 }
 
@@ -63,8 +76,8 @@ async function updateInvestorPassword(userID, username, password) {
     { InvestorPassword: password },
     {
       where: {
-        [Op.or]: [{ Username: username }, { InvestorID: userID }],
-      },
+        [Op.or]: [{ Username: username }, { InvestorID: userID }]
+      }
     }
   );
   if (updatedInvestorCount[0] >= 1) {
@@ -72,6 +85,14 @@ async function updateInvestorPassword(userID, username, password) {
   } else {
     return false;
   }
+}
+
+async function getOneInvestorWithUsername(username) {
+  return Investor.findOne({
+    where: {
+      Username: username
+    }
+  });
 }
 
 module.exports = {
@@ -82,4 +103,6 @@ module.exports = {
   checkUsernameExist,
   getInvestorsWithUsername,
   updateInvestorPassword,
+  getOneInvestorWithUsername,
+  updateInvestorBalanceAfterPurchase
 };

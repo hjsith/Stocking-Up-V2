@@ -6,6 +6,7 @@ const BaseRouter = require("./routes/Router");
 const { StatusCodes } = require("http-status-codes");
 const cron = require("node-cron");
 const { updateArticles } = require("./functions/Articles");
+const { pendingOrderCheck } = require("./functions/Order");
 
 const app = express();
 const PORT = env.port;
@@ -41,8 +42,14 @@ app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
 
-cron.schedule("* * * * *", async function () {
+cron.schedule("30 * * * *", async function () {
   await updateArticles();
 });
+
+cron.schedule("* * * * *", async function () {
+
+    await pendingOrderCheck();
+
+  });
 
 module.exports = { app };
