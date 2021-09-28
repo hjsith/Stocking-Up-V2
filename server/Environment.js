@@ -8,5 +8,5 @@ module.exports = {
   db_password: process.env.DB_PASSWORD ?? "",
   db_name: process.env.DB_NAME ?? "su_db",
   node_env: process.env.NODE_ENV,
-  persistent: process.env.PERSISTENT ?? "true",
+  persistent: process.env.PERSISTENT ?? "true"
 };
