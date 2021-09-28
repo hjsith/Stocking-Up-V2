@@ -107,7 +107,12 @@ class WatchlistRowPannel extends React.Component {
               <div className="ButtonContainer">
                 <button
                   className="CancelCrossButton"
-                  onClick={this.props.cancel}
+                  onClick={() => {
+                    this.props.cancel(
+                      this.props.ID
+                      // this.props.listingID
+                    );
+                  }}
                 >
                   X
                 </button>

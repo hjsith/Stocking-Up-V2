@@ -10,6 +10,7 @@ class HoldingsRowPanel extends React.Component {
     this.state = {
       name: "",
       price: 0,
+      NumberHolder: 0,
     };
   }
 
@@ -47,6 +48,14 @@ class HoldingsRowPanel extends React.Component {
 
   handleSell() {
     console.log("Sold!!");
+  }
+
+  generateRandomNumber() {
+    var RandomNumber = Math.floor(Math.random() * 6) + 1;
+
+    this.setState({
+      NumberHolder: RandomNumber,
+    });
   }
 
   render() {

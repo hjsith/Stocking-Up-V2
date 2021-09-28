@@ -31,13 +31,25 @@ class Watchlist extends React.Component {
     }, 500);
   }
 
-  cancelEvent = (index) => {
-    const copyWatchlistArray = Object.assign([], this.state.watchlistArray);
-    copyWatchlistArray.splice(index, 1);
-    this.setState({
-      watchlistArray: copyWatchlistArray,
-      snackBarMessage: "Watchlist item has been successfully deleted!",
-      //Ask James on how to do it when you delete multiple things
+  cancelEvent = (index, watchID) => {
+    fetch("/api/watchlistremoved", {
+      method: "DELETE",
+      body: JSON.stringify({
+        // investorID: investID,
+        // listingID: listID,
+        ID: watchID,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      const copyWatchlistArray = Object.assign([], this.state.watchlistArray);
+      copyWatchlistArray.splice(index, 1);
+      this.setState({
+        watchlistArray: copyWatchlistArray,
+        snackBarMessage: "Your watchlist item has been successfully deleted",
+        //Ask James on how to do it when you delete multiple things
+      });
     });
   };
 
@@ -76,6 +88,9 @@ class Watchlist extends React.Component {
                 key={watchlist.watchlistID}
                 colourNumber={3}
                 companyCode={watchlist.ListingID}
+                listingID={watchlist.ListingID}
+                investorID={watchlist.InvestorID}
+                ID={watchlist.id}
                 // percentChange={watchlist.percentChange}
                 cancel={this.cancelEvent.bind(this, index)}
               />

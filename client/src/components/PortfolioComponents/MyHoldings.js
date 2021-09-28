@@ -9,6 +9,7 @@ class MyHoldings extends React.Component {
     this.state = {
       holdingArray: [],
       snackBarMessage: "",
+      NumberHolder: 0,
     };
   }
 
@@ -39,6 +40,14 @@ class MyHoldings extends React.Component {
     console.log("Sold!!");
   }
 
+  generateRandomNumber() {
+    var RandomNumber = Math.floor(Math.random() * 5) + 1;
+
+    this.setState({
+      NumberHolder: RandomNumber,
+    });
+  }
+
   render() {
     return (
       <div>
@@ -60,7 +69,7 @@ class MyHoldings extends React.Component {
             return (
               <HoldingsRowPanel
                 key={holding.OrderID}
-                colourNumber={2}
+                colourNumber={this.state.NumberHolder}
                 companyCode={holding.ListingID}
                 priceBought={holding.ListingPrice}
                 units={holding.QuantityOrder}

@@ -24,14 +24,20 @@ router.post("/watchlist", async (req, res) => {
   return res.status(StatusCodes.CREATED).json(watchlist);
 });
 
-//used the same route to post is that right?
-router.post("/watchlist", async (req, res) => {
-  const watchlist = await deleteWatchlist(
-    req.body.investorID,
-    req.body.listingID
+router.delete("/watchlistremoved", async (req, res) => {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send("The request doesn't have the correct body format.");
+  }
+  let data = req.body;
+  const removedwatchlist = await deleteWatchlist(
+    data.ID
+    // data.listingID,
+    // data.investorID
   );
 
-  return res.status(StatusCodes.CREATED).json(watchlist);
+  return res.status(StatusCodes.OK).end();
 });
 
 module.exports = router;

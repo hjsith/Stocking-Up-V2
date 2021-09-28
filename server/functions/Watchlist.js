@@ -21,12 +21,22 @@ async function createWatchlist(investorID, listingID) {
 
 //used destroy to remove Watchlist check if correct
 
-async function deleteWatchlist(investorID, listingID) {
-  return await Watchlist.destroy({
-    InvestorID: investorID,
-    ListingID: listingID,
-  });
+// async function deleteWatchlist(investorID, listingID) {
+//   return await Watchlist.destroy({
+//     InvestorID: investorID,
+//     ListingID: listingID,
+//   });
+// }
+
+async function deleteWatchlist(ID) {
+  return await Watchlist.destroy({ where: { id: ID } });
 }
+
+// let watchlistdeleted = await Watchlist.findOne({ where: { id: ID } });
+// order.ExecutionTime = moment.utc();
+// await order.save();
+// return true;
+// }
 
 module.exports = {
   getAllWatchlist,
