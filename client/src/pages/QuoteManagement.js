@@ -54,6 +54,8 @@ const QuoteManagement = () => {
         .then((res) => {
           if (res.status === 201) {
             // Successful orderCreation 201
+            setMessage("Your order will be executed in 15minutes!");
+
             res.json().then((body) => {
               setFunds(funds - body.OrderTotal);
             });

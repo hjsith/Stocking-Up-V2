@@ -46,14 +46,21 @@ async function createOrder(
   });
   let orderTotal = currentPriceObject.CurrentPrice * parseInt(quantityOrder);
 
-  let checkHolding = await Holding.findOne({
-    where: {
-      ListingID: listingID,
-    },
-  });
+  //let checkHolding = await Holding.findOne({
+  // where: {
+  //  ListingID: listingID,
+  // },
+  // });
+  // console.log(checkHolding);
 
-  if (typeOfOrder == "SELL" && checkHolding != null)
-    await updateInvestorBalanceAfterPurchase(investorID, orderTotal);
+  if (typeOfOrder == "SELL")
+    await sellOrder(
+      investorID,
+      quantityOrder,
+      orderTime,
+      listingID,
+      executionTime
+    );
   return await Order.create({
     InvestorID: investorID,
     QuantityOrder: parseInt(quantityOrder),
@@ -64,6 +71,36 @@ async function createOrder(
     TypeOfOrder: typeOfOrder,
     ListingID: listingID,
     Status: typeOfOrder == "BUY" ? "PENDING" : "EXECUTED",
+  });
+}
+
+async function sellOrder(
+  investorID,
+  quantityOrder,
+  orderTime,
+  listingID,
+  executionTime
+) {
+  const currentHoldings = await Holding.findAll({
+    where: {
+      InvestorID: investorID,
+      Current: 1,
+    },
+  });
+  let orders = [];
+  currentHoldings.forEach(async (holding) => {
+    orders.push(
+      await Order.findOne({
+        where: {
+          ListingID: listingID,
+          OrderID: holding.OrderID,
+        },
+      })
+    );
+  });
+  let totalQuantity = 0;
+  orders.forEach((order) => {
+    totalQuantity += order.QuantityOrder;
   });
 }
 
