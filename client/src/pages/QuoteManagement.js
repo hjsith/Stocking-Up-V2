@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../components/UserContext";
 import Header from "../components/QuoteManagementComponents/Header";
 import Tasks from "../components/QuoteManagementComponents/Tasks";
 import Funds from "../components/QuoteManagementComponents/Funds";
@@ -13,6 +14,8 @@ const QuoteManagement = () => {
   const location = useLocation();
   const { listingID } = location.state;
   const [sharePrice, setSharePrice] = useState("");
+  const context = useContext(UserContext);
+  const investorID = context.user.id;
 
   setInterval(() => {
     fetch("/api/price" + "?code=" + listingID, {
@@ -46,7 +49,6 @@ const QuoteManagement = () => {
     if (funds < counter * sharePrice) {
       setMessage("You do not have enough funds!");
     } else {
-      let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
       let now = moment();
       let future = moment().add(15, "minutes");
       let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
@@ -87,7 +89,6 @@ const QuoteManagement = () => {
   };
 
   const sellButton = () => {
-    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
     let now = moment();
     let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
 
@@ -124,7 +125,6 @@ const QuoteManagement = () => {
   };
 
   const watchlistButton = () => {
-    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
     fetch("/api/watchlist", {
       method: "POST",
       body: JSON.stringify({

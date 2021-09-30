@@ -31,7 +31,7 @@ async function investorBuy(investorID, total) {
   let investor = await Investor.findByPk(investorID);
   let balance = investor.Funds;
   if (total < balance) {
-    investor.NetWorth -= total;
+    investor.Funds -= total;
     await investor.save();
     return true;
   } else {
