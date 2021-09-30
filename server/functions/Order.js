@@ -1,5 +1,5 @@
 const { Order, Price, Holding } = require("../db/Models");
-const { updateInvestorBalanceAfterPurchase } = require("./Investor");
+const { investorSell, investorBuy } = require("./Investor");
 const { Op } = require("sequelize");
 const moment = require("moment");
 
@@ -53,14 +53,22 @@ async function createOrder(
   // });
   // console.log(checkHolding);
 
-  if (typeOfOrder == "SELL")
-    await sellOrder(
-      investorID,
-      quantityOrder,
-      orderTime,
-      listingID,
-      executionTime
-    );
+  if (typeOfOrder == "SELL") {
+    let canSell = false;
+    (async () => {
+      canSell = await sellOrder(
+        investorID,
+        quantityOrder,
+        orderTotal,
+        listingID,
+        orderTime
+      );
+    })();
+
+    if (!canSell) {
+      return "Error";
+    }
+  }
   return await Order.create({
     InvestorID: investorID,
     QuantityOrder: parseInt(quantityOrder),
@@ -73,13 +81,12 @@ async function createOrder(
     Status: typeOfOrder == "BUY" ? "PENDING" : "EXECUTED",
   });
 }
-
 async function sellOrder(
   investorID,
   quantityOrder,
-  orderTime,
+  orderTotal,
   listingID,
-  executionTime
+  orderTime
 ) {
   const currentHoldings = await Holding.findAll({
     where: {
@@ -87,20 +94,66 @@ async function sellOrder(
       Current: 1,
     },
   });
+
+  let currentPriceObject = await Price.findOne({
+    where: {
+      ListingID: listingID,
+    },
+  });
+
   let orders = [];
-  currentHoldings.forEach(async (holding) => {
-    orders.push(
+
+  var values = new Promise((resolve, reject) => {
+    currentHoldings.forEach(async (holding, index, currentHoldings) => {
       await Order.findOne({
         where: {
           ListingID: listingID,
           OrderID: holding.OrderID,
         },
-      })
-    );
+      }).then((order) => {
+        if (order != null) orders.push(order);
+        if (index === currentHoldings.length - 1) resolve();
+      });
+    });
   });
+
   let totalQuantity = 0;
-  orders.forEach((order) => {
-    totalQuantity += order.QuantityOrder;
+
+  values.then(async () => {
+    orders.forEach((order) => {
+      totalQuantity += order.QuantityOrder;
+    });
+
+    if (quantityOrder > totalQuantity) return false;
+    else {
+      await investorSell(investorID, orderTotal);
+      if (totalQuantity - quantityOrder != 0) {
+        await Order.create({
+          InvestorID: investorID,
+          QuantityOrder: totalQuantity - quantityOrder,
+          ListingPrice: currentPriceObject.CurrentPrice,
+          OrderTotal:
+            currentPriceObject.CurrentPrice * (totalQuantity - quantityOrder),
+          ExecutionTime: orderTime,
+          OrderTime: orderTime,
+          TypeOfOrder: "BUY",
+          ListingID: listingID,
+          Status: "EXECUTED",
+        }).then(async (order) => {
+          await Holding.create({
+            InvestorID: investorID,
+            ListingID: listingID,
+            OrderID: order.OrderID,
+            Current: 1,
+          });
+        });
+      }
+
+      currentHoldings.forEach(async (holding) => {
+        holding.Current = 0;
+        await holding.save();
+      });
+    }
   });
 }
 
@@ -115,10 +168,7 @@ async function pendingOrderCheck() {
       pendingOrders.forEach(async (elem) => {
         let orderTotal = elem.OrderTotal;
         let investorID = elem.InvestorID;
-        let hasExecuted = await updateInvestorBalanceAfterPurchase(
-          investorID,
-          -orderTotal
-        );
+        let hasExecuted = await investorBuy(investorID, orderTotal);
         if (hasExecuted) {
           elem.Status = "EXECUTED";
           await Holding.create({

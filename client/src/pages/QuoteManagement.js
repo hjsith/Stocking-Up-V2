@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/QuoteManagementComponents/Header";
 import Tasks from "../components/QuoteManagementComponents/Tasks";
 import Funds from "../components/QuoteManagementComponents/Funds";
@@ -9,7 +10,22 @@ import Graph from "../components/QuoteManagementComponents/Graph";
 const moment = require("moment");
 
 const QuoteManagement = () => {
-  var sharePrice = 5.73;
+  const location = useLocation();
+  const { listingID } = location.state;
+  const [sharePrice, setSharePrice] = useState("");
+
+  setInterval(() => {
+    fetch("/api/price" + "?code=" + listingID, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        setSharePrice(body.price);
+      });
+    });
+  }, 500000);
 
   const [counter, setCounter] = useState(0);
 
@@ -31,7 +47,6 @@ const QuoteManagement = () => {
       setMessage("You do not have enough funds!");
     } else {
       let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
-      let listingID = "TPW";
       let now = moment();
       let future = moment().add(15, "minutes");
       let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
@@ -72,49 +87,44 @@ const QuoteManagement = () => {
   };
 
   const sellButton = () => {
-    if (funds < counter * sharePrice) {
-      setMessage("You do not have enough funds!");
-    } else {
-      let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
-      let listingID = "TPW";
-      let now = moment();
-      let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
+    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    let now = moment();
+    let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
 
-      fetch("/api/orders", {
-        method: "POST",
-        body: JSON.stringify({
-          investorID: investorID,
-          quantityOrder: counter,
-          listingID: listingID,
-          typeOfOrder: "SELL",
-          orderTime: currentUTCTime,
-          executionTime: currentUTCTime,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    fetch("/api/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        investorID: investorID,
+        quantityOrder: counter,
+        listingID: listingID,
+        typeOfOrder: "SELL",
+        orderTime: currentUTCTime,
+        executionTime: currentUTCTime,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          // Successful orderCreation 201
+          res.json().then((body) => {
+            console.log(body);
+            if (body == "Error") setMessage("You do not have enough funds");
+            else setFunds(funds - body.OrderTotal);
+          });
+        } else {
+          console.log("Something unexpeceted went wrong ._.");
+        }
       })
-        .then((res) => {
-          if (res.status === 201) {
-            // Successful orderCreation 201
-            res.json().then((body) => {
-              setFunds(funds - body.OrderTotal);
-            });
-          } else {
-            console.log("Something unexpeceted went wrong ._.");
-          }
-        })
-        .catch((exception) => {
-          console.log("Error:", exception);
-        });
-      setCounter(0);
-      setMessage("");
-    }
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
+    setCounter(0);
   };
 
   const watchlistButton = () => {
     let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
-    let listingID = "TPW";
     fetch("/api/watchlist", {
       method: "POST",
       body: JSON.stringify({
@@ -144,7 +154,7 @@ const QuoteManagement = () => {
       <NavBar />
       <div className="side1">
         <div className="BackgroundPanel1">
-          <Header currentPrice={sharePrice} title={"A2 MILK - A2M"} />
+          <Header currentPrice={sharePrice} title={listingID} />
         </div>
         <div className="Panel2">
           <Change />

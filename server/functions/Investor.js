@@ -27,16 +27,22 @@ async function createInvestor(fName, lName, email, password, username) {
   });
 }
 
-async function updateInvestorBalanceAfterPurchase(investorID, total) {
+async function investorBuy(investorID, total) {
   let investor = await Investor.findByPk(investorID);
-  let balance = investor.NetWorth;
+  let balance = investor.Funds;
   if (total < balance) {
-    investor.NetWorth += total;
+    investor.NetWorth -= total;
     await investor.save();
     return true;
   } else {
     return false;
   }
+}
+
+async function investorSell(investorID, total) {
+  let investor = await Investor.findByPk(investorID);
+  investor.Funds += total;
+  await investor.save();
 }
 
 async function getInvestorPassword(username) {
@@ -104,5 +110,6 @@ module.exports = {
   getInvestorsWithUsername,
   updateInvestorPassword,
   getOneInvestorWithUsername,
-  updateInvestorBalanceAfterPurchase,
+  investorBuy,
+  investorSell,
 };
