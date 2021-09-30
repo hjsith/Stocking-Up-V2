@@ -7,6 +7,7 @@ const {
   getAllPendingOrdersByInvestor,
   cancelOrder,
   confirmOrder,
+  getAllOrdersByInvestor,
 } = require("../functions/Order");
 
 // Init shared
@@ -20,6 +21,12 @@ router.get("/orders", async (req, res) => {
   }
   let data = req.body;
   const orders = await getOrdersByInvestor(data.investorID);
+
+  return res.status(StatusCodes.OK).json(orders);
+});
+
+router.get("/orders/all", async (req, res) => {
+  const orders = await getAllOrdersByInvestor(req.query.investorID);
 
   return res.status(StatusCodes.OK).json(orders);
 });

@@ -48,7 +48,7 @@ class Portfolio extends React.Component {
           <WhiteLine />
           <Watchlist />
         </div>
-        <Snackbar />
+        {/* <Snackbar /> */}
       </div>
     );
   }

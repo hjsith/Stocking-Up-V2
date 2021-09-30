@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
+import AllOrders from "./pages/AllOrders";
 import { UserContext } from "./components/UserContext";
 import {
   Switch,
@@ -41,6 +42,7 @@ class App extends React.Component {
             <Route path="/temp" component={temp} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/ForgotPassword" component={ForgotPassword} />
+            <Route path="/AllOrders" component={AllOrders} />
 
             <Route path="/Portfolio" component={Portfolio} />
             <Route path="/Profile" render={(props) => <Profile {...props} />} />

@@ -78,9 +78,9 @@ class RecentOrders extends React.Component {
             <th width="78%">
               <th className="NormalPanelTitle2">Recent Orders</th>
             </th>
-            <th th width="19%">
+            <th width="19%">
               <div className="ButtonContainer">
-                <a href="/CompanySearch" className="BlueWatchlistButton">
+                <a href="/AllOrders" className="BlueWatchlistButton">
                   All My Orders
                 </a>
               </div>

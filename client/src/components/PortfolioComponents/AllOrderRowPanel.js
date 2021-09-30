@@ -41,25 +41,9 @@ class HoldingsRowPanel extends React.Component {
     });
   }
 
-  handleBuy() {
-    console.log("Bought!!");
-  }
-
-  handleSell() {
-    console.log("Sold!!");
-  }
-
-  generateRandomNumber() {
-    var RandomNumber = Math.floor(Math.random() * 6) + 1;
-
-    this.setState({
-      NumberHolder: RandomNumber,
-    });
-  }
-
   render() {
     return (
-      <div className="HoldingsRowPanel">
+      <div className="AllOrderRowPanel">
         <table className="TableTitleFont2">
           <tr>
             <th>
@@ -71,24 +55,13 @@ class HoldingsRowPanel extends React.Component {
               />
             </th>
             <th>{this.state.name}</th>
-            <th>{this.props.priceBought}</th>
-            <th>{this.state.price}</th>
-            <th>{this.props.units}</th>
-            <th>{this.props.total}</th>
-            <th>
-              <div className="ButtonContainer">
-                <button className="GreenBuyButton" onClick={this.handleBuy}>
-                  Buy
-                </button>
-              </div>
-            </th>
-            <th>
-              <div className="ButtonContainer">
-                <button className="RedSellButton" onClick={this.handleSell}>
-                  Sell
-                </button>
-              </div>
-            </th>
+            <th>{this.props.typeofOrder}</th>
+            <th>{this.props.status}</th>
+            <th>{this.props.listingPrice}</th>
+            <th>{this.props.quantityOrder}</th>
+            <th>{this.props.orderTotal}</th>
+            <th>{this.props.orderTime}</th>
+            <th>{this.props.executedTime}</th>
           </tr>
         </table>
       </div>

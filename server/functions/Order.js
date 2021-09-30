@@ -11,6 +11,14 @@ async function getOrdersByInvestor(investorID) {
   });
 }
 
+async function getAllOrdersByInvestor(investorID) {
+  return await Order.findAll({
+    where: {
+      InvestorID: investorID,
+    },
+  });
+}
+
 async function getAllPendingOrders() {
   return await Order.findAll({
     where: {
@@ -130,4 +138,5 @@ module.exports = {
   pendingOrderCheck,
   cancelOrder,
   confirmOrder,
+  getAllOrdersByInvestor,
 };
