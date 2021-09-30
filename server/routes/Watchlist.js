@@ -4,6 +4,7 @@ const {
   createWatchlist,
   getWatchlistByInvestor,
   deleteWatchlist,
+  checkIfWatchlistExists,
 } = require("../functions/Watchlist");
 
 // Init shared
@@ -16,12 +17,21 @@ router.get("/watchlist", async (req, res) => {
 });
 
 router.post("/watchlist", async (req, res) => {
-  const watchlist = await createWatchlist(
+  let watchlistCheck = await checkIfWatchlistExists(
     req.body.investorID,
     req.body.listingID
   );
 
-  return res.status(StatusCodes.CREATED).json(watchlist);
+  if (watchlistCheck == false) {
+    const watchlist = await createWatchlist(
+      req.body.investorID,
+      req.body.listingID
+    );
+
+    return res.status(StatusCodes.CREATED).json(watchlist);
+  } else {
+    return res.status(StatusCodes.CONFLICT).end();
+  }
 });
 
 router.delete("/watchlistremoved", async (req, res) => {

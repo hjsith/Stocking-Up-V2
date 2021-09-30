@@ -126,6 +126,8 @@ const QuoteManagement = () => {
       .then((res) => {
         if (res.status === 201) {
           console.log("Watchlist added succesfully");
+        } else if (res.status === 409) {
+          console.log("Watchlist was not added as already exist");
         } else {
           console.log("Something unexpeceted went wrong ._.");
         }

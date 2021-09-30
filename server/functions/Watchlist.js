@@ -19,6 +19,20 @@ async function createWatchlist(investorID, listingID) {
   });
 }
 
+async function checkIfWatchlistExists(investorID, listingID) {
+  let watchlistExist = await Watchlist.findOne({
+    where: {
+      InvestorID: investorID,
+      ListingID: listingID,
+    },
+  });
+
+  if (watchlistExist) {
+    return true;
+  }
+  return false;
+}
+
 //used destroy to remove Watchlist check if correct
 
 // async function deleteWatchlist(investorID, listingID) {
@@ -43,4 +57,5 @@ module.exports = {
   createWatchlist,
   getWatchlistByInvestor,
   deleteWatchlist,
+  checkIfWatchlistExists,
 };
