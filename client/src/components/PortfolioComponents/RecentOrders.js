@@ -116,9 +116,7 @@ class RecentOrders extends React.Component {
             );
           })}
         </div>
-        <div>
-          <Popup message={this.state.snackBarMessage} />
-        </div>
+        <div>{/* <Popup message={this.state.snackBarMessage} /> */}</div>
       </div>
     );
   }

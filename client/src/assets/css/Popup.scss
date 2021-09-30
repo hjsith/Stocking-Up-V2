@@ -1,19 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 #Popup {
-  height: 5%;
   padding-left: 20px;
   padding-right: 20px;
   background-color: darkorchid;
   margin-left: 10px;
   margin-bottom: 10px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   color: white;
   font-family: "Roboto", sans-serif;
   border-radius: 25px 25px 25px 0px;
   line-height: 50px;
-  display: inherit;
+  display: inline-block;
 }
 
 .popUpVisibility {
@@ -25,4 +21,11 @@
   -ms-transition: opacity 3s ease-in-out;
   -o-transition: opacity 3s ease-in-out;
   opacity: 0;
+}
+
+.PopupBlock {
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
 }

@@ -98,9 +98,7 @@ class Watchlist extends React.Component {
           })}
         </div>
         <br />
-        <div>
-          <Popup message={this.state.snackBarMessage} />
-        </div>
+        <div>{/* <Popup message={this.state.snackBarMessage} /> */}</div>
       </div>
     );
   }

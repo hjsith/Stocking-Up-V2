@@ -10,7 +10,6 @@ class HoldingsRowPanel extends React.Component {
     this.state = {
       name: "",
       price: 0,
-      NumberHolder: 0,
     };
   }
 

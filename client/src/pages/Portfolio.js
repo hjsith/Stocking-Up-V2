@@ -7,6 +7,7 @@ import NavBar from "../components/NavBar";
 import MyHoldings from "../components/PortfolioComponents/MyHoldings";
 import RecentOrders from "../components/PortfolioComponents/RecentOrders";
 import Watchlist from "../components/PortfolioComponents/Watchlist";
+import Snackbar from "../components/Snackbar";
 
 class Portfolio extends React.Component {
   render() {
@@ -47,6 +48,7 @@ class Portfolio extends React.Component {
           <WhiteLine />
           <Watchlist />
         </div>
+        <Snackbar />
       </div>
     );
   }
