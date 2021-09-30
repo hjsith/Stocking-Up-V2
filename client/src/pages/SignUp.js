@@ -127,7 +127,7 @@ class SignUp extends React.Component {
           this.setState({ Redirect: true });
         } else if (res.status === 422) {
           this.setState({
-            errorMessage: "The username already exists"
+            errorMessage: "This username already exists"
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
