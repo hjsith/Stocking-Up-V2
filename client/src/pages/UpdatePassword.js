@@ -106,6 +106,17 @@ class UpdatePassword extends React.Component {
       );
     }
 
+    //Redirect unauthenticated user back to the SignIn page
+    if (this.context.user.name == "" || this.context.user.id == "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+
     return (
       <>
         <NavBar />
