@@ -23,7 +23,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: window.localStorage.getItem("user") ?? { name: "", id: "" },
+      user: JSON.parse(window.localStorage.getItem("user")) ?? {
+        name: "",
+        id: "",
+      },
       updateUser: (newUser) => {
         this.setState({ user: newUser });
         window.localStorage.setItem("user", JSON.stringify(newUser));

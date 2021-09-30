@@ -6,12 +6,16 @@ const BaseRouter = require("./routes/Router");
 const { StatusCodes } = require("http-status-codes");
 const cron = require("node-cron");
 const { pendingOrderCheck } = require("./functions/Order");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const PORT = env.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+//Used to process cookies in requests for User Authentication
+app.use(cookieParser());
 
 app.use("/api", BaseRouter);
 
