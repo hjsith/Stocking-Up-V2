@@ -17,7 +17,8 @@ import {
   Redirect
 } from "react-router-dom";
 
-class App extends React.Component {     //refresh remembering details of user
+class App extends React.Component {
+  //refresh remembering details of user
   constructor(props) {
     super(props);
     this.state = {
