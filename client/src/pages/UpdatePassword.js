@@ -4,6 +4,7 @@ import "../assets/css/UpdatePassword.scss";
 import Logo from "../assets/images/stocking-up.png";
 import PasswordErrorMessage from "../components/UserManagementComponents/PasswordErrorMessage";
 import { Redirect } from "react-router-dom";
+import { UserContext } from "../components/UserContext";
 
 const passwordRegex = new RegExp(
   "(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}"
@@ -23,6 +24,8 @@ class UpdatePassword extends React.Component {
     this.handlePasswordConfirm = this.handlePasswordConfirm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  static contextType = UserContext;
 
   handleInitialPassword(event) {
     this.setState({ InitialPassword: event.target.value });
@@ -66,8 +69,8 @@ class UpdatePassword extends React.Component {
       fetch("/api/updatePassword", {
         method: "PUT",
         body: JSON.stringify({
-          userID: "BADUSERID",
-          newPassword: this.state.InitialPassword,
+          userID: this.context.user.id,
+          password: this.state.InitialPassword,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -98,6 +101,17 @@ class UpdatePassword extends React.Component {
             state: {
               snackBarMessage: "Password has been successfully updated!",
             },
+          }}
+        />
+      );
+    }
+
+    //Redirect unauthenticated user back to the SignIn page
+    if (this.context.user.name == "" || this.context.user.id == "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
           }}
         />
       );
