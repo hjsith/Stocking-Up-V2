@@ -2,6 +2,8 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import PanelTitle from "./PanelTitle";
 import HoldingsRowPanel from "./HoldingsRowPanel";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router-dom";
 
 class MyHoldings extends React.Component {
   constructor(props) {
@@ -9,11 +11,38 @@ class MyHoldings extends React.Component {
     this.state = {
       holdingArray: [],
       snackBarMessage: "",
+      userName: "",
+      unauth: false,
     };
   }
 
+  static contextType = UserContext;
+
+  fetchUser() {
+    fetch("/api/investor?id=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) =>
+          this.setState({
+            userName: body.InvestorFName + " " + body.InvestorLName,
+          })
+        );
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
+  }
+
   componentDidMount() {
-    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    this.fetchUser();
+
+    let investorID = this.context.user.id;
     setInterval(() => {
       fetch("/api/holdings" + "?investorID=" + investorID, {
         method: "GET",
@@ -29,6 +58,18 @@ class MyHoldings extends React.Component {
       });
       console.log(this.state.holdingArray);
     }, 500);
+  }
+
+  render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
   }
 
   handleBuy() {

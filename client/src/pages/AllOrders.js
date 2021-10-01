@@ -38,6 +38,10 @@ class Portfolio extends React.Component {
     }, 500);
   }
 
+  generateRandomNumber() {
+    return Math.floor(Math.random() * 5) + 1;
+  }
+
   render() {
     return (
       <div>
@@ -66,8 +70,7 @@ class Portfolio extends React.Component {
               <th>Listing Price</th>
               <th>Quantity (units) </th>
               <th>Total ($)</th>
-              <th>Order Time</th>
-              <th>Executed Time</th>
+              <th>Order and Executed Time</th>
             </tr>
           </table>
           <div className="divallorder">
@@ -75,7 +78,7 @@ class Portfolio extends React.Component {
               return (
                 <AllOrderRowPanel
                   key={allOrder.OrderID}
-                  colourNumber={1}
+                  colourNumber={this.generateRandomNumber()}
                   companyCode={allOrder.ListingID}
                   typeofOrder={allOrder.TypeOfOrder}
                   status={allOrder.Status}

@@ -41,6 +41,8 @@ class HoldingsRowPanel extends React.Component {
     });
   }
 
+  
+
   render() {
     return (
       <div className="AllOrderRowPanel">

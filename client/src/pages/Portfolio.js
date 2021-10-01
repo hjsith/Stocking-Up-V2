@@ -8,9 +8,62 @@ import MyHoldings from "../components/PortfolioComponents/MyHoldings";
 import RecentOrders from "../components/PortfolioComponents/RecentOrders";
 import Watchlist from "../components/PortfolioComponents/Watchlist";
 import Snackbar from "../components/Snackbar";
+import { UserContext } from "../components/UserContext";
+import { Redirect } from "react-router-dom";
 
 class Portfolio extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      snackBarMessage: "",
+      userName: "",
+      unauth: false,
+    };
+  }
+
+  static contextType = UserContext;
+
+  fetchUser() {
+    fetch("/api/investor?id=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) =>
+          this.setState({
+            userName: body.InvestorFName + " " + body.InvestorLName,
+          })
+        );
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
+  }
+
+  componentDidMount() {
+    if (this.props.location.state) {
+      this.setState({
+        snackBarMessage: this.props.location.state.snackBarMessage,
+      });
+    }
+    this.fetchUser();
+  }
+
   render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+
     return (
       <div>
         <NavBar />
@@ -20,14 +73,14 @@ class Portfolio extends React.Component {
             <tr>
               <th width="2%">
                 <UserProfileIcon
-                  name="Hjsith"
+                  name={this.state.userName}
                   colorNumber={1}
                   company={false}
                   size={60}
                 />
               </th>
               <th width="75%">
-                <th className="NormalPanelTitle">Hjsith</th>
+                <th className="NormalPanelTitle">{this.state.userName}</th>
               </th>
               <th width="20%">
                 <div className="ButtonContainer">

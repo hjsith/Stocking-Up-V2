@@ -2,6 +2,8 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
 import Popup from "../../components/Popup";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router-dom";
 
 class Watchlist extends React.Component {
   constructor(props) {
@@ -9,11 +11,38 @@ class Watchlist extends React.Component {
     this.state = {
       watchlistArray: [],
       snackBarMessage: "",
+      userName: "",
+      unauth: false,
     };
   }
 
+  static contextType = UserContext;
+
+  fetchUser() {
+    fetch("/api/investor?id=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) =>
+          this.setState({
+            userName: body.InvestorFName + " " + body.InvestorLName,
+          })
+        );
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
+  }
+
   componentDidMount() {
-    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    this.fetchUser();
+
+    let investorID = this.context.user.id;
     setInterval(() => {
       fetch("/api/watchlist" + "?investorID=" + investorID, {
         method: "GET",
@@ -31,12 +60,22 @@ class Watchlist extends React.Component {
     }, 500);
   }
 
+  render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+  }
+
   cancelEvent = (index, watchID) => {
     fetch("/api/watchlistremoved", {
       method: "DELETE",
       body: JSON.stringify({
-        // investorID: investID,
-        // listingID: listID,
         ID: watchID,
       }),
       headers: {
@@ -52,6 +91,10 @@ class Watchlist extends React.Component {
       });
     });
   };
+
+  generateRandomNumber() {
+    return Math.floor(Math.random() * 5) + 1;
+  }
 
   render() {
     return (
@@ -86,12 +129,11 @@ class Watchlist extends React.Component {
             return (
               <WatchlistRowPannel
                 key={watchlist.watchlistID}
-                colourNumber={3}
+                colourNumber={this.generateRandomNumber()}
                 companyCode={watchlist.ListingID}
                 listingID={watchlist.ListingID}
                 investorID={watchlist.InvestorID}
                 ID={watchlist.id}
-                // percentChange={watchlist.percentChange}
                 cancel={this.cancelEvent.bind(this, index)}
               />
             );

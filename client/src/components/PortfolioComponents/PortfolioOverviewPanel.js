@@ -1,12 +1,42 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import WhiteLine from "../WhiteLine";
+import { UserContext } from "../UserContext";
+import { Redirect } from "react-router-dom";
 
 class PortfolioOverviewPanel extends React.Component {
-  state = {
-    date: new Date(),
-    time: new Date(),
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      time: new Date(),
+      userName: "",
+      unauth: false,
+    };
+  }
+
+  static contextType = UserContext;
+
+  fetchUser() {
+    fetch("/api/investor?id=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) =>
+          this.setState({
+            userName: body.InvestorFName + " " + body.InvestorLName,
+          })
+        );
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
+  }
 
   currentDate() {
     setInterval(() => {
@@ -18,6 +48,10 @@ class PortfolioOverviewPanel extends React.Component {
     setInterval(() => {
       this.setState({ time: new Date() });
     }, 1000);
+  }
+
+  componentDidMount() {
+    this.fetchUser();
   }
 
   render() {

@@ -66,6 +66,7 @@ class OrderRowPanel extends React.Component {
                   onClick={() => {
                     this.props.confirm(this.props.orderID);
                     this.setState({ disable: true });
+                    // className = "GreyButton";
                   }}
                 >
                   Confirm
