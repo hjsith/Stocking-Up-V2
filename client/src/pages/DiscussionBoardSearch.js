@@ -3,32 +3,23 @@ import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/DiscussionBoardSearch.scss";
 import DBoardSearchResults from "../components/DiscussionBoardComponents/DBoardSearchResults";
+import { UserContext } from "../components/UserContext";
+import { Redirect } from "react-router-dom";
 
 class DiscussionBoardSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [
-        {
-          ThreadID: "TH-14D",
-          ListingID: "14D",
-          Title: "1414 DEGREES LIMITED",
-          Description: "A discussion board for 1414 DEGREES LIMITED",
-        },
-      ],
+      results: [],
       searchString: "",
-      toDisplay: [
-        {
-          ThreadID: "TH-14D",
-          ListingID: "14D",
-          Title: "1414 DEGREES LIMITED",
-          Description: "A discussion board for 1414 DEGREES LIMITED",
-        },
-      ],
+      toDisplay: [],
+      unauth: false,
     };
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
+
+  static contextType = UserContext;
 
   handleSearchStringChange(event) {
     this.setState({ searchString: event.target.value });
@@ -45,27 +36,6 @@ class DiscussionBoardSearch extends React.Component {
         temp.push(element);
       }
     }
-    this.setState({ toDisplay: temp });
-    // fetch("/api/thread" + "?search=" + this.state.searchString, {
-    //   method: "get",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       // Successful login 200
-    //       console.log("Hi");
-    //     } else if (res.status === 409) {
-    //       console.log("Failed to update password. Wat the heck?!");
-    //     } else {
-    //       console.log("Something unexpeceted went wrong ._.");
-    //     }
-    //   })
-    //   .catch((exception) => {
-    //     console.log("Error:", exception);
-    //   });
-    event.preventDefault();
   }
 
   fetchAllThreads() {
@@ -81,6 +51,8 @@ class DiscussionBoardSearch extends React.Component {
           res.json().then((body) => {
             this.setState({ results: body, toDisplay: body });
           });
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
         } else {
           console.log("Something unexpected went wrong ._.");
         }
@@ -91,10 +63,20 @@ class DiscussionBoardSearch extends React.Component {
   }
 
   componentDidMount() {
-    // this.fetchAllThreads();
+    this.fetchAllThreads();
   }
 
   render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+
     return (
       <div className="DiscussionBoardSearch">
         <NavBar />
@@ -112,7 +94,7 @@ class DiscussionBoardSearch extends React.Component {
           />
           <br />
           <button
-            className="btn btn-primary discussionBoardSearchButton"
+            className="discussionBoardSearchButton"
             onClick={this.handleSearch}
           >
             Search

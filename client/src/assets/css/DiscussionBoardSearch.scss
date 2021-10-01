@@ -118,3 +118,20 @@
   text-align: center;
   margin-bottom: 20px;
 }
+
+.discussionBoardSearchButton {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #1f6cd9;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border-radius: 0.725em;
+}
+
+.discussionBoardSearchButton:hover {
+  background-color: #3a88f5;
+}

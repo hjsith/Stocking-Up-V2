@@ -22,17 +22,24 @@ class DiscussionBoardComments extends React.Component {
     return (
       <>
         <div className="AllComments">
-          {this.state.comments.map((element, index) => (
-            <DiscussionBoardComment
-              key={element.CommentID}
-              comment={element.Comment}
-              listingPrice={element.ListingPrice}
-              likes={element.Likes}
-              dateAdded={element.DateAdded}
-              investorID={element.InvestorID}
-              index={index + 1}
-            />
-          ))}
+          {this.state.comments.length == 0 ? (
+            <div className="EmptyMessage">
+              There are no comments yet on this discussion board. Be the first
+              one to comment!
+            </div>
+          ) : (
+            this.state.comments.map((element, index) => (
+              <DiscussionBoardComment
+                key={element.CommentID}
+                comment={element.Comment}
+                listingPrice={element.ListingPrice}
+                likes={element.Likes}
+                dateAdded={element.DateAdded}
+                investorID={element.InvestorID}
+                index={index + 1}
+              />
+            ))
+          )}
         </div>
       </>
     );

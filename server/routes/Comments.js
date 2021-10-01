@@ -8,96 +8,126 @@ const {
   increaseLike,
   decreaseLike,
 } = require("../functions/Comments");
+const { getAuthenticatedUser } = require("../functions/Authenticate");
 
 // Init shared
 const router = Router();
 
 router.get("/comments", async (req, res) => {
-  const comments = await getAllComments(req.query.ThreadID);
-
-  return res.status(StatusCodes.OK).json(comments);
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const comments = await getAllComments("TH-" + req.query.ThreadID);
+    return res.status(StatusCodes.OK).json(comments);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
 });
 
 router.post("/newComment", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("The request doesn't have the correct body format.");
+    }
+
+    var data = req.body;
+
+    const comment = await createComment(
+      data.InvestorID,
+      data.ThreadID,
+      data.DateAdded,
+      data.Comment,
+      data.ListingPrice
+    );
+    return res.status(StatusCodes.CREATED).json(comment);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-
-  var data = req.body;
-
-  const comment = await createComment(
-    data.InvestorID,
-    data.ThreadID,
-    data.DateAdded,
-    data.Comment,
-    data.ListingPrice
-  );
-  return res.status(StatusCodes.CREATED).json(comment);
 });
 
 router.get("/commentCount", async (req, res) => {
-  const commentCount = await getUserCommentCount(req.query.userID);
-  if (commentCount === null) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ errors: "Thread could not be found." });
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const commentCount = await getUserCommentCount(req.query.userID);
+    if (commentCount === null) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: "Thread could not be found." });
+    }
+    return res.status(StatusCodes.OK).json(threads);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-  return res.status(StatusCodes.OK).json(threads);
 });
 
 router.put("/editComment", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("The request doesn't have the correct body format.");
+    }
+
+    var data = req.body;
+
+    const commentCheck = await updateCommentMessage(
+      data.CommentID,
+      data.newMessage
+    );
+
+    if (commentCheck) {
+      const comments = await getAllComments(data.ThreadID);
+      return res.status(StatusCodes.OK).json(comments);
+    }
+    return res.status(StatusCodes.CONFLICT).send();
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-
-  var data = req.body;
-
-  const commentCheck = await updateCommentMessage(
-    data.CommentID,
-    data.newMessage
-  );
-
-  if (commentCheck) {
-    const comments = await getAllComments(data.ThreadID);
-    return res.status(StatusCodes.OK).json(comments);
-  }
-  return res.status(StatusCodes.CONFLICT).send();
 });
 
 router.put("/likeComment", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
-  }
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("The request doesn't have the correct body format.");
+    }
 
-  var data = req.body;
+    var data = req.body;
 
-  const commentCheck = await increaseLike(data.CommentID);
-  if (commentCheck) {
-    return res.status(StatusCodes.OK).send();
+    const commentCheck = await increaseLike(data.CommentID);
+    if (commentCheck) {
+      return res.status(StatusCodes.OK).send();
+    }
+    return res.status(StatusCodes.CONFLICT).json({ errors: "Bad CommentID" });
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-  return res.status(StatusCodes.CONFLICT).json({ errors: "Bad CommentID" });
 });
 
 router.put("/unlikeComment", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
-  }
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("The request doesn't have the correct body format.");
+    }
 
-  var data = req.body;
+    var data = req.body;
 
-  const commentCheck = await decreaseLike(data.CommentID);
-  if (commentCheck) {
-    return res.status(StatusCodes.OK).send();
+    const commentCheck = await decreaseLike(data.CommentID);
+    if (commentCheck) {
+      return res.status(StatusCodes.OK).send();
+    }
+    return res.status(StatusCodes.CONFLICT).json({ errors: "Bad CommentID" });
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-  return res.status(StatusCodes.CONFLICT).json({ errors: "Bad CommentID" });
 });
 
 module.exports = router;

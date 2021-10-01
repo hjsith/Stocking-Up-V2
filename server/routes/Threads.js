@@ -7,13 +7,19 @@ const {
   createMissingThreads,
 } = require("../functions/Threads");
 const { getAllListings } = require("../functions/Listing");
+const { getAuthenticatedUser } = require("../functions/Authenticate");
 
 // Init shared
 const router = Router();
 
 router.get("/threads", async (req, res) => {
-  const threads = await getAllThreads();
-  return res.status(StatusCodes.OK).json(threads);
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const threads = await getAllThreads();
+    return res.status(StatusCodes.OK).json(threads);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
 });
 
 router.post("/newThread", async (req, res) => {

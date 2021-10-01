@@ -5,6 +5,7 @@ async function getAllComments(threadID) {
     where: {
       ThreadID: threadID,
     },
+    order: [["DateAdded"]],
   });
 }
 
