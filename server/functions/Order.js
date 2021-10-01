@@ -102,6 +102,7 @@ async function sellOrder(
   });
 
   let orders = [];
+  let orderIDs = [];
 
   var values = new Promise((resolve, reject) => {
     currentHoldings.forEach(async (holding, index, currentHoldings) => {
@@ -111,7 +112,10 @@ async function sellOrder(
           OrderID: holding.OrderID,
         },
       }).then((order) => {
-        if (order != null) orders.push(order);
+        if (order != null) {
+          orders.push(order);
+          orderIDs.push(order.OrderID);
+        }
         if (index === currentHoldings.length - 1) resolve();
       });
     });
@@ -149,9 +153,15 @@ async function sellOrder(
         });
       }
 
-      currentHoldings.forEach(async (holding) => {
-        holding.Current = 0;
-        await holding.save();
+      await Holding.findAll({
+        where: {
+          OrderID: orderIDs,
+        },
+      }).then(async (holdings) => {
+        holdings.forEach(async (holding) => {
+          holding.Current = 0;
+          await holding.save();
+        });
       });
     }
   });
