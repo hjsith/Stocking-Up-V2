@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
 import Friends from "./pages/Friends";
+import { UserContext } from "./components/UserContext";
 import {
   Switch,
   Route,
@@ -18,25 +19,42 @@ import {
 } from "react-router-dom";
 
 class App extends React.Component {
+  //refresh remembering details of user
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: JSON.parse(window.localStorage.getItem("user")) ?? {
+        name: "",
+        id: "",
+      },
+      updateUser: (newUser) => {
+        this.setState({ user: newUser });
+        window.localStorage.setItem("user", JSON.stringify(newUser));
+      },
+    };
+  }
+
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path="/QuoteManagement" component={QuoteManagement} />
-          <Route path="/CompanySearch" component={CompanySearch} />
-          <Route path="/SignIn" component={SignIn} />
-          <Route path="/temp" component={temp} />
-          <Route path="/SignUp" component={SignUp} />
-          <Route path="/ForgotPassword" component={ForgotPassword} />
+        <UserContext.Provider value={this.state}>
+          <Switch>
+            <Route path="/QuoteManagement" component={QuoteManagement} />
+            <Route path="/CompanySearch" component={CompanySearch} />
+            <Route path="/SignIn" component={SignIn} />
+            <Route path="/temp" component={temp} />
+            <Route path="/SignUp" component={SignUp} />
+            <Route path="/ForgotPassword" component={ForgotPassword} />
 
-          <Route path="/Portfolio" component={Portfolio} />
-          <Route path="/Profile" render={(props) => <Profile {...props} />} />
-          <Route path="/Friends" component={Friends} />
-          <Route path="/UpdatePassword" component={UpdatePassword} />
-          <Route exact path="/">
-            <Redirect to="/SignIn" />
-          </Route>
-        </Switch>
+            <Route path="/Portfolio" component={Portfolio} />
+            <Route path="/Profile" render={(props) => <Profile {...props} />} />
+            <Route path="/Friends" component={Friends} />
+            <Route path="/UpdatePassword" component={UpdatePassword} />
+            <Route exact path="/">
+              <Redirect to="/SignIn" />
+            </Route>
+          </Switch>
+        </UserContext.Provider>
       </Router>
     );
   }

@@ -1,4 +1,6 @@
 const { Investor } = require("../db/Models");
+const { Op } = require("sequelize");
+const moment = require("moment");
 
 async function getAllInvestors() {
   return await Investor.findAll();
@@ -9,9 +11,7 @@ async function getInvestor(userID) {
 }
 
 async function createInvestor(fName, lName, email, password, username) {
-  var today = new Date();
-  var date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let date = moment.utc().startOf("date");
   return Investor.create({
     InvestorFName: fName,
     InvestorLName: lName,
@@ -23,7 +23,20 @@ async function createInvestor(fName, lName, email, password, username) {
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
     Title: "NEEDED",
+    Funds: 0,
   });
+}
+
+async function updateInvestorBalanceAfterPurchase(investorID, total) {
+  let investor = await Investor.findByPk(investorID);
+  let balance = investor.NetWorth;
+  if (total < balance) {
+    investor.NetWorth += total;
+    await investor.save();
+    return true;
+  } else {
+    return false;
+  }
 }
 
 async function getInvestorPassword(username) {
@@ -42,9 +55,9 @@ async function checkUsernameExist(username) {
     },
   });
   if (searchedInvestor === null) {
-    return true;
-  } else {
     return false;
+  } else {
+    return true;
   }
 }
 
@@ -74,6 +87,14 @@ async function updateInvestorPassword(userID, username, password) {
   }
 }
 
+async function getOneInvestorWithUsername(username) {
+  return Investor.findOne({
+    where: {
+      Username: username,
+    },
+  });
+}
+
 module.exports = {
   getAllInvestors,
   getInvestor,
@@ -82,4 +103,6 @@ module.exports = {
   checkUsernameExist,
   getInvestorsWithUsername,
   updateInvestorPassword,
+  getOneInvestorWithUsername,
+  updateInvestorBalanceAfterPurchase,
 };

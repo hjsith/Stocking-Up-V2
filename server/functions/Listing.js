@@ -4,4 +4,8 @@ async function getAllListings() {
   return await Listing.findAll();
 }
 
-module.exports = { getAllListings };
+async function getListing(code) {
+  return await Listing.findByPk(code);
+}
+
+module.exports = { getAllListings, getListing };
