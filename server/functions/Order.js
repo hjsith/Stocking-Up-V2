@@ -46,13 +46,6 @@ async function createOrder(
   });
   let orderTotal = currentPriceObject.CurrentPrice * parseInt(quantityOrder);
 
-  //let checkHolding = await Holding.findOne({
-  // where: {
-  //  ListingID: listingID,
-  // },
-  // });
-  // console.log(checkHolding);
-
   if (typeOfOrder == "SELL") {
     let canSell = false;
     (async () => {
