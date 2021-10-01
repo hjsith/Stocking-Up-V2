@@ -1,4 +1,6 @@
 import React from "react";
+import "../../assets/css/DiscussionBoardSearch.scss";
+import { UserContext } from "../components/UserContext";
 
 class CommentInput extends React.Component {
   constructor(props) {
@@ -11,6 +13,8 @@ class CommentInput extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  static contextType = UserContext;
+
   handleClear() {
     document.getElementById("commentInputTextField").value = "";
   }
@@ -18,22 +22,7 @@ class CommentInput extends React.Component {
   handleSubmit() {
     console.log("Comment submitted!");
     let listingPrice;
-    let investorID;
     // fetch("/api/listing", {
-    //   method: "GET",
-    //   body: JSON.stringify({
-    //     InvestorID: "",
-    //     ThreadID: this.props.threadID,
-    //     DateAdded: "2016-01-01 00:00:00+00:00",
-    //     Comment:document.getElementById("commentInputTextField").value,
-    //     ListingPrice: "",
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-
-    // fetch("/api/investor", {
     //   method: "GET",
     //   body: JSON.stringify({
     //     InvestorID: "",
@@ -50,7 +39,7 @@ class CommentInput extends React.Component {
     fetch("/api/newComment", {
       method: "POST",
       body: JSON.stringify({
-        InvestorID: "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73",
+        InvestorID: this.context.user.id,
         ThreadID: this.props.threadID,
         DateAdded: "2016-01-01 00:00:00+00:00", //Waiting for merge from Order with moment package to use
         Comment: document.getElementById("commentInputTextField").value,
