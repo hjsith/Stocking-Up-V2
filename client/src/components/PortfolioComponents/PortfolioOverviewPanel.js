@@ -3,6 +3,23 @@ import "../../assets/css/PortfolioPage.scss";
 import WhiteLine from "../WhiteLine";
 
 class PortfolioOverviewPanel extends React.Component {
+  state = {
+    date: new Date(),
+    time: new Date(),
+  };
+
+  currentDate() {
+    setInterval(() => {
+      this.setState({ date: new Date() });
+    }, 1000);
+  }
+
+  currentTime() {
+    setInterval(() => {
+      this.setState({ time: new Date() });
+    }, 1000);
+  }
+
   render() {
     return (
       <div className="PortfolioOverviewPanel">
@@ -17,7 +34,11 @@ class PortfolioOverviewPanel extends React.Component {
             <th className="PortfolioPriceIncrease">(+ $978.00 )</th>
           </tr>
           <tr>
-            <th className="PortfolioDateFont"> Today 20 August 2021</th>
+            <th className="PortfolioDateFont">
+              {" "}
+              Today: {this.state.date.toLocaleDateString()}{" "}
+              {this.state.date.toLocaleTimeString()}
+            </th>
           </tr>
         </table>
         <WhiteLine />
