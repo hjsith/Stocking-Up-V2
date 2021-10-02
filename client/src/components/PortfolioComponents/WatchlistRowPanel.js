@@ -1,6 +1,5 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "../UserProfileIcon";
 
 class WatchlistRowPannel extends React.Component {
@@ -82,6 +81,10 @@ class WatchlistRowPannel extends React.Component {
     });
   }
 
+  handleBuy() {
+    console.log("Bought!!");
+  }
+
   render() {
     return (
       <div className="WatchlistRowPannel">
@@ -101,17 +104,18 @@ class WatchlistRowPannel extends React.Component {
             <th>{this.state.highPrice}</th>
             <th>{this.state.industry}</th>
             <th>
-              <GreenBuyButton />
+              <div className="ButtonContainer">
+                <button className="GreenBuyButton" onClick={this.handleBuy}>
+                  Buy
+                </button>
+              </div>
             </th>
             <th>
               <div className="ButtonContainer">
                 <button
                   className="CancelCrossButton"
                   onClick={() => {
-                    this.props.cancel(
-                      this.props.ID
-                      // this.props.listingID
-                    );
+                    this.props.cancel(this.props.ID);
                   }}
                 >
                   X
