@@ -25,7 +25,7 @@ router.post("/SignIn", async (req, res) => {
 
   const match = await bcrypt.compare(
     data.password,
-    userPassword.InvestorPassword
+    userPassword != null ? userPassword.InvestorPassword : ""
   ); //comparing passwords
   if (match == true) {
     const user = await getOneInvestorWithUsername(data.username);
