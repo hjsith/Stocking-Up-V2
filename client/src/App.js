@@ -16,6 +16,7 @@ import {
   BrowserRouter as Router,
   Redirect,
 } from "react-router-dom";
+import Leaderboard from "./pages/Leaderboard";
 
 class App extends React.Component {
   //refresh remembering details of user
@@ -40,6 +41,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/QuoteManagement" component={QuoteManagement} />
             <Route path="/CompanySearch" component={CompanySearch} />
+            <Route path="/Leaderboard" component={Leaderboard} />
             <Route path="/SignIn" component={SignIn} />
             <Route path="/temp" component={temp} />
             <Route path="/SignUp" component={SignUp} />
