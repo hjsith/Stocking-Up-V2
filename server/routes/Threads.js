@@ -32,6 +32,7 @@ router.post("/newThread", async (req, res) => {
   var data = req.body;
 
   const newThread = await createThread(
+    data.ThreadID,
     data.ListingID,
     data.Title,
     data.Description

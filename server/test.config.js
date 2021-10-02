@@ -16,7 +16,7 @@ async function createTestUser(
     password: inputPassword,
     username: inputUsername,
   });
-  return;
+  return resLogin.body;
 }
 
 async function getAuthenticatedUserCookie(inputUsername, inputPassword) {
@@ -27,4 +27,4 @@ async function getAuthenticatedUserCookie(inputUsername, inputPassword) {
   return resLogin.headers["set-cookie"];
 }
 
-module.exports = { getAuthenticatedUserCookie };
+module.exports = { getAuthenticatedUserCookie, createTestUser };

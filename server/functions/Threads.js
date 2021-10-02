@@ -14,8 +14,14 @@ async function getAllThreads() {
 //   });
 // }
 
-async function createThread(inputListingID, inputTitle, inputDescription) {
+async function createThread(
+  inputThreadID,
+  inputListingID,
+  inputTitle,
+  inputDescription
+) {
   return Threads.create({
+    ThreadID: inputThreadID,
     ListingID: inputListingID,
     Title: inputTitle,
     Description: inputDescription,

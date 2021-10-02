@@ -51,12 +51,7 @@ router.get("/commentCount", async (req, res) => {
   const checkAuth = await getAuthenticatedUser(req, res);
   if (checkAuth) {
     const commentCount = await getUserCommentCount(req.query.userID);
-    if (commentCount === null) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ errors: "Thread could not be found." });
-    }
-    return res.status(StatusCodes.OK).json(threads);
+    return res.status(StatusCodes.OK).json(commentCount);
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }

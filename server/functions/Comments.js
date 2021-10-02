@@ -9,10 +9,9 @@ async function getAllComments(threadID) {
   });
 }
 
-async function getUserCommentCount(investorID, threadID) {
+async function getUserCommentCount(investorID) {
   var comments = await Comments.findAll({
     where: {
-      ThreadID: threadID,
       InvestorID: investorID,
     },
   });
