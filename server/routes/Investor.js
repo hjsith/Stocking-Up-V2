@@ -1,17 +1,19 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const {
+  getAllInvestors,
   getInvestor,
-  updateInvestorPassword
+  updateInvestorPassword,
 } = require("../functions/Investor");
 const bcrypt = require("bcrypt");
+const { getAuthenticatedUser } = require("../functions/Authenticate");
+
 // Init shared
 const router = Router();
 
 router.get("/allInvestors", async (req, res) => {
-  const listings = await getAllListings();
-
-  return res.status(StatusCodes.OK).json(listings);
+  const investors = await getAllInvestors();
+  return res.status(StatusCodes.OK).json(investors);
 });
 
 router.put("/updatePassword", async (req, res) => {
@@ -38,24 +40,18 @@ router.put("/updatePassword", async (req, res) => {
 });
 
 router.get("/investor", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const user = await getInvestor(req.query.id);
+    if (user === null) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: "User could not be found." });
+    }
+    return res.status(StatusCodes.OK).json(user);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
   }
-
-  //May need validation here to check if req body is appriopriate, datatypes wise
-  //Perhaps use express validator package
-
-  var data = req.body;
-
-  const user = await getInvestor(data.userID);
-  if (user === null) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ errors: "User could not be found." });
-  }
-  return res.status(StatusCodes.OK).json(user);
 });
 
 module.exports = router;
