@@ -64,6 +64,11 @@ const Tasks = () => {
       });
     }, 50);
   }, []);
+
+  parseFloat(closingPrice).toFixed(2);
+  parseFloat(lowPrice).toFixed(2);
+  parseFloat(highPrice).toFixed(2);
+
   return (
     <>
       <table className="shareInfo">
@@ -74,9 +79,9 @@ const Tasks = () => {
           <th>Volume</th>
         </tr>
         <tr className="infoTable">
-          <td>{closingPrice}</td>
-          <td>{highPrice}</td>
-          <td>{lowPrice}</td>
+          <td>${closingPrice}</td>
+          <td>${highPrice}</td>
+          <td>${lowPrice}</td>
           <td>{volume}</td>
         </tr>
       </table>

@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
+import Popup from "../components/Popup";
+
 import Header from "../components/QuoteManagementComponents/Header";
 import Tasks from "../components/QuoteManagementComponents/Tasks";
 import Funds from "../components/QuoteManagementComponents/Funds";
@@ -18,8 +20,20 @@ const QuoteManagement = () => {
   const investorID = context.user.id;
   const [funds, setFunds] = useState(0);
   const [name, setName] = useState("");
+  const [snackBarMessage, setSnackBarMessage] = useState("");
 
   useEffect(() => {
+    fetch("/api/listing" + "?code=" + listingID, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        setName(body.name);
+        console.log(body);
+      });
+    });
     setInterval(() => {
       fetch("/api/price" + "?code=" + listingID, {
         method: "GET",
@@ -48,22 +62,6 @@ const QuoteManagement = () => {
     }, 50);
   }, []);
 
-  const companyName = () => {
-    {
-      fetch("/api/listing?id=" + listingID, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        res.json().then((body) => {
-          setName(body.name);
-          console.log(name);
-        });
-      });
-    }
-  };
-
   const [counter, setCounter] = useState(0);
 
   const Button = (props) => {
@@ -78,8 +76,10 @@ const QuoteManagement = () => {
   };
 
   const buyButton = () => {
-    if (funds < counter * sharePrice) {
-      setMessage("You do not have enough funds!");
+    if (funds < counter * sharePrice || counter == 0) {
+      setSnackBarMessage(
+        "You do not have enough funds or haven't inputted a quantity!"
+      );
     } else {
       let now = moment();
       let future = moment().add(15, "minutes");
@@ -103,7 +103,9 @@ const QuoteManagement = () => {
         .then((res) => {
           if (res.status === 201) {
             // Successful orderCreation 201
-            setMessage("Your order will be executed in 15minutes!");
+            setSnackBarMessage(
+              "Your order will be executed in 15 minutes! Go to your Portfolio to confirm or cancel this order"
+            );
 
             res.json().then((body) => {
               setFunds(funds - body.OrderTotal);
@@ -116,7 +118,7 @@ const QuoteManagement = () => {
           console.log("Error:", exception);
         });
       setCounter(0);
-      setMessage("");
+      setSnackBarMessage("");
     }
   };
 
@@ -143,8 +145,10 @@ const QuoteManagement = () => {
           // Successful orderCreation 201
           res.json().then((body) => {
             console.log(body);
-            if (body == "Error") setMessage("You do not have enough funds");
+            if (body == "Error")
+              setSnackBarMessage("You do not have shares in this company");
             else setFunds(funds - body.OrderTotal);
+            setSnackBarMessage("Sell executed!");
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
@@ -169,7 +173,7 @@ const QuoteManagement = () => {
     })
       .then((res) => {
         if (res.status === 201) {
-          console.log("Watchlist added succesfully");
+          setSnackBarMessage("Watchlist added succesfully");
         } else {
           console.log("Something unexpeceted went wrong ._.");
         }
@@ -179,18 +183,12 @@ const QuoteManagement = () => {
       });
   };
 
-  const [message, setMessage] = useState(" ");
-
   return (
     <>
       <NavBar />
       <div className="side1">
         <div className="BackgroundPanel1">
-          <Header
-            currentPrice={sharePrice}
-            title={listingID}
-            company={companyName}
-          />
+          <Header currentPrice={sharePrice} title={listingID} company={name} />
         </div>
         <div className="Panel2">
           <Tasks />
@@ -205,15 +203,19 @@ const QuoteManagement = () => {
             </div>
             <div className="order">
               <div className="button1">
-                <Button handleClick={buyButton} text="Buy" />
+                <Button handleClick={buyButton} text="BUY" />
               </div>
               <div className="button2">
-                <Button handleClick={watchlistButton} text="Add to Watchlist" />
+                <Button handleClick={watchlistButton} text="ADD TO WATCHLIST" />
               </div>
               <div className="button3">
-                <Button handleClick={sellButton} text="Sell" />
+                <Button handleClick={sellButton} text="SELL" />
               </div>
-              <p>{message}</p>
+              <p>
+                <div>
+                  <Popup message={snackBarMessage} />
+                </div>
+              </p>
             </div>
           </div>
 
