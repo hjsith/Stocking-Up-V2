@@ -16,19 +16,35 @@ const QuoteManagement = () => {
   const [sharePrice, setSharePrice] = useState("");
   const context = useContext(UserContext);
   const investorID = context.user.id;
-
-  setInterval(() => {
-    fetch("/api/price" + "?code=" + listingID, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      res.json().then((body) => {
-        setSharePrice(body.price);
+  const [funds, setFunds] = useState("");
+  useEffect(() => {
+    setInterval(() => {
+      fetch("/api/price" + "?code=" + listingID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        res.json().then((body) => {
+          setSharePrice(body.price);
+        });
       });
-    });
-  }, 500000);
+    }, 50);
+
+    setInterval(() => {
+      fetch("/api/investor?id=" + investorID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        res.json().then((body) => {
+          setFunds(body.NetWorth);
+          console.log(body.NetWorth);
+        });
+      });
+    }, 50);
+  }, []);
 
   const [counter, setCounter] = useState(0);
 
@@ -42,8 +58,6 @@ const QuoteManagement = () => {
       setCounter(counter - 1);
     }
   };
-
-  const [funds, setFunds] = useState(5000);
 
   const buyButton = () => {
     if (funds < counter * sharePrice) {

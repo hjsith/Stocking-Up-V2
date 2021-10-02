@@ -1,21 +1,31 @@
 import { useState } from "react";
 import Task from "./Task";
+import { useLocation } from "react-router-dom";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([
-    {
-      open: "$5.78",
-      high: "$5.84",
-      low: "$5.73",
-      volume: "7.975M",
-    },
-  ]);
+  const location = useLocation();
+  const { listingID } = location.state;
+  const [open, setOpen] = useState("");
+  const [close, setClose] = useState("");
+  const [volume, setVolume] = useState("");
+  const [year, setYear] = useState("");
+
+  setInterval(() => {
+    fetch("/listing/priceHigh" + "?code=" + listingID, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      res.json().then((body) => {
+        setOpen(body.highPrice);
+      });
+    });
+  }, 50);
 
   return (
     <>
-      {tasks.map((task) => (
-        <Task key={task.open} task={task} />
-      ))}
+      <h1>{open}</h1>
     </>
   );
 };
