@@ -14,6 +14,7 @@ class WatchlistRowPannel extends React.Component {
     };
   }
 
+  
   componentDidMount() {
     fetch("/api/listing/industry" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -105,8 +106,8 @@ class WatchlistRowPannel extends React.Component {
             <th>{this.state.industry}</th>
             <th>
               <div className="ButtonContainer">
-                <button className="GreenBuyButton" onClick={this.handleBuy}>
-                  Buy
+                <button className="BlueGoToCompany" onClick={this.handleBuy}>
+                  Go to {this.props.companyCode}'s page
                 </button>
               </div>
             </th>
