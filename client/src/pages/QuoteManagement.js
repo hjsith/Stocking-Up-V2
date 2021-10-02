@@ -17,6 +17,8 @@ const QuoteManagement = () => {
   const context = useContext(UserContext);
   const investorID = context.user.id;
   const [funds, setFunds] = useState(0);
+  const [name, setName] = useState("");
+
   useEffect(() => {
     setInterval(() => {
       fetch("/api/price" + "?code=" + listingID, {
@@ -39,12 +41,28 @@ const QuoteManagement = () => {
         },
       }).then((res) => {
         res.json().then((body) => {
-          setFunds(body.NetWorth);
-          console.log(body.NetWorth);
+          setFunds(body.Funds);
+          console.log(body.Funds);
         });
       });
     }, 50);
   }, []);
+
+  const companyName = () => {
+    {
+      fetch("/api/listing?id=" + listingID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        res.json().then((body) => {
+          setName(body.name);
+          console.log(name);
+        });
+      });
+    }
+  };
 
   const [counter, setCounter] = useState(0);
 
@@ -168,10 +186,13 @@ const QuoteManagement = () => {
       <NavBar />
       <div className="side1">
         <div className="BackgroundPanel1">
-          <Header currentPrice={sharePrice} title={listingID} />
+          <Header
+            currentPrice={sharePrice}
+            title={listingID}
+            company={companyName}
+          />
         </div>
         <div className="Panel2">
-          <Change />
           <Tasks />
           <div />
 

@@ -43,4 +43,12 @@ router.get("/listing/volumeShares", async (req, res) => {
     .json({ volumeShares: listing.VolumeShares });
 });
 
+router.get("/listing/priceClose", async (req, res) => {
+  const listing = await getListing(req.query.code);
+
+  return res
+    .status(StatusCodes.OK)
+    .json({ closingPrice: listing.ClosingPrice });
+});
+
 module.exports = router;
