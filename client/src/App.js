@@ -10,6 +10,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
 import AllOrders from "./pages/AllOrders";
+import DiscussionBoard from "./pages/DiscussionBoard";
+import DiscussionBoardSearch from "./pages/DiscussionBoardSearch";
 import { UserContext } from "./components/UserContext";
 import {
   Switch,
@@ -47,14 +49,18 @@ class App extends React.Component {
             <Route path="/ForgotPassword" component={ForgotPassword} />
             <Route path="/AllOrders" component={AllOrders} />
 
-            <Route path="/Portfolio" component={Portfolio} />
-            <Route path="/Profile" render={(props) => <Profile {...props} />} />
-
-            <Route path="/UpdatePassword" component={UpdatePassword} />
-            <Route exact path="/">
-              <Redirect to="/SignIn" />
-            </Route>
-          </Switch>
+          <Route path="/Portfolio" component={Portfolio} />
+          <Route path="/Profile" render={(props) => <Profile {...props} />} />
+          <Route path="/UpdatePassword" component={UpdatePassword} />
+          <Route
+            path="/DiscussionBoardSearch"
+            component={DiscussionBoardSearch}
+          />
+          <Route path="/DiscussionBoard/:id" component={DiscussionBoard} />
+          <Route exact path="/">
+            <Redirect to="/SignIn" />
+          </Route>
+        </Switch>
         </UserContext.Provider>
       </Router>
     );
