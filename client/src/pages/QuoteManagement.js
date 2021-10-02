@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
 import Header from "../components/QuoteManagementComponents/Header";
@@ -16,7 +16,7 @@ const QuoteManagement = () => {
   const [sharePrice, setSharePrice] = useState("");
   const context = useContext(UserContext);
   const investorID = context.user.id;
-  const [funds, setFunds] = useState("");
+  const [funds, setFunds] = useState(0);
   useEffect(() => {
     setInterval(() => {
       fetch("/api/price" + "?code=" + listingID, {
@@ -197,7 +197,7 @@ const QuoteManagement = () => {
           </div>
 
           <div className="funds">
-            <Funds funds={funds} />
+            <Funds currentFunds={funds} />
           </div>
         </div>
       </div>
