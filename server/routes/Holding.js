@@ -1,12 +1,13 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
-const { getAllExecutedOrdersByInvestor } = require("../functions/Holding");
+const { getAllCurrentHoldingsByInvestor } = require("../functions/Holding");
 
 // Init shared
 const router = Router();
 
 router.get("/holdings", async (req, res) => {
-  const holdings = await getAllExecutedOrdersByInvestor(req.query.investorID);
+  // const holdings = await getAllExecutedOrdersByInvestor(req.query.investorID);
+  const holdings = await getAllCurrentHoldingsByInvestor(req.query.investorID);
 
   return res.status(StatusCodes.OK).json(holdings);
 });

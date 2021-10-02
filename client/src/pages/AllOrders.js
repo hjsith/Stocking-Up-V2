@@ -1,14 +1,6 @@
 import React from "react";
 import "../assets/css/PortfolioPage.scss";
-import PortfolioOverviewPanel from "../components/PortfolioComponents/PortfolioOverviewPanel";
-import UserProfileIcon from "../components/UserProfileIcon";
-import WhiteLine from "../components/WhiteLine";
 import NavBar from "../components/NavBar";
-import MyHoldings from "../components/PortfolioComponents/MyHoldings";
-import RecentOrders from "../components/PortfolioComponents/RecentOrders";
-import Watchlist from "../components/PortfolioComponents/Watchlist";
-import Snackbar from "../components/Snackbar";
-import OrderRowPanel from "../components/PortfolioComponents/OrderRowPanel";
 import AllOrderRowPanel from "../components/PortfolioComponents/AllOrderRowPanel";
 
 class Portfolio extends React.Component {
@@ -94,6 +86,9 @@ class Portfolio extends React.Component {
                 />
               );
             })}
+          </div>
+          <div>
+            <br />
           </div>
         </div>
       </div>
