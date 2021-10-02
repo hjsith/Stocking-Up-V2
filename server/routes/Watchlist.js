@@ -41,11 +41,7 @@ router.delete("/watchlistremoved", async (req, res) => {
       .send("The request doesn't have the correct body format.");
   }
   let data = req.body;
-  const removedwatchlist = await deleteWatchlist(
-    data.ID
-    // data.listingID,
-    // data.investorID
-  );
+  const removedwatchlist = await deleteWatchlist(data.ID);
 
   return res.status(StatusCodes.OK).end();
 });
