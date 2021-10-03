@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import "../../assets/css/QuoteManagement.scss";
 import { useLocation } from "react-router-dom";
-
+// this section of the code will be part of R2
 const Change = () => {
   const location = useLocation();
   const { listingID } = location.state;

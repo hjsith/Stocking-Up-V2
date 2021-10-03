@@ -1,7 +1,6 @@
 import React from "react";
-
+// this section of the code displays the listing ID, and ASX code based on the user input.
 const Header = (props) => {
-
   return (
     <header className="header">
       <h1>

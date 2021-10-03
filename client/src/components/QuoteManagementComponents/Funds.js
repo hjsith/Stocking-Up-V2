@@ -1,5 +1,5 @@
 import React from "react";
-
+//this section of the code displays the investor's current funds on the quote management page
 const Funds = (props) => {
   return (
     <div>

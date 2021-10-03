@@ -2,17 +2,18 @@ import { useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "../../assets/css/QuoteManagement.scss";
 
-import Task from "./Task";
+// this section of the code displays the close, high, low and volume for each listing.
+const ShareInfo = () => {
+  const location = useLocation(); // the useLocation is a react hook which will show the new page view based on the results of the company search page
+  const { listingID } = location.state; // the listingID based on what the user selected in the Company Search page will be used to generate the correct details on the page per listingID
+  const [highPrice, setHighPrice] = useState(0); // the useState is made here in order to set the current high Price for the listing
+  const [lowPrice, setLowPrice] = useState(0); // the useState is made here in order to set the current low Price for the listing
+  const [closingPrice, setClosingPrice] = useState(0); // the useState is made here in order to set the current closing Price for the listing
 
-const Tasks = () => {
-  const location = useLocation();
-  const { listingID } = location.state;
-  const [highPrice, setHighPrice] = useState(0);
-  const [lowPrice, setLowPrice] = useState(0);
-  const [closingPrice, setClosingPrice] = useState(0);
-
-  const [volume, setVolume] = useState(0);
+  const [volume, setVolume] = useState(0); // the useState is made here in order to set the volume for the listing
   useEffect(() => {
+    // this section of the code retrieves the high price of shares which is updated every 50ms
+
     setInterval(() => {
       fetch("/api/listing/priceHigh" + "?code=" + listingID, {
         method: "GET",
@@ -25,6 +26,7 @@ const Tasks = () => {
         });
       });
     }, 50);
+    // this section of the code retrieves the low price of shares which is updated every 50ms
 
     setInterval(() => {
       fetch("/api/listing/priceLow" + "?code=" + listingID, {
@@ -38,6 +40,8 @@ const Tasks = () => {
         });
       });
     }, 50);
+    // this section of the code retrieves the volume of shares which is updated every 50ms
+
     setInterval(() => {
       fetch("/api/listing/volumeShares" + "?code=" + listingID, {
         method: "GET",
@@ -50,7 +54,7 @@ const Tasks = () => {
         });
       });
     }, 50);
-
+    // this section of the code retrieves the closing price which is updated every 50ms
     setInterval(() => {
       fetch("/api/listing/priceClose" + "?code=" + listingID, {
         method: "GET",
@@ -64,11 +68,11 @@ const Tasks = () => {
       });
     }, 50);
   }, []);
-
+  // this section of the code displays the price information to two decimal points
   parseFloat(closingPrice).toFixed(2);
   parseFloat(lowPrice).toFixed(2);
   parseFloat(highPrice).toFixed(2);
-
+  //the below section of the code displays the listing price information
   return (
     <>
       <table className="shareInfo">
@@ -90,4 +94,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks;
+export default ShareInfo;

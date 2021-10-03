@@ -3,6 +3,7 @@ const { investorSell, investorBuy } = require("./Investor");
 const { Op } = require("sequelize");
 const moment = require("moment");
 
+// this section of the code retrieves all the orders that an investor may have. This is used for the Portfolio feature.
 async function getOrdersByInvestor(investorID) {
   return await Order.findAll({
     where: {
@@ -11,6 +12,7 @@ async function getOrdersByInvestor(investorID) {
   });
 }
 
+// this section of the code retrieves all the orders that have a Status of "PENDING".
 async function getAllPendingOrders() {
   return await Order.findAll({
     where: {
@@ -22,6 +24,7 @@ async function getAllPendingOrders() {
   });
 }
 
+// this section of the code retrieves all the orders that have a Status of "PENDING".
 async function getAllPendingOrdersByInvestor(investorID) {
   return await Order.findAll({
     where: {
@@ -31,6 +34,7 @@ async function getAllPendingOrdersByInvestor(investorID) {
   });
 }
 
+// this section of the code creates an order, if a user clicks buy or sell in the QuoteManagement.js page.
 async function createOrder(
   investorID,
   quantityOrder,
@@ -38,17 +42,22 @@ async function createOrder(
   typeOfOrder,
   listingID,
   executionTime
+  // to create an order, the current price for the listing is retrieved in the below section of the code.
 ) {
   let currentPriceObject = await Price.findOne({
     where: {
       ListingID: listingID,
     },
   });
+
+  // the order total is calculated through the current share price and the quantity inputted by the user in the front end
   let orderTotal = currentPriceObject.CurrentPrice * parseInt(quantityOrder);
 
+  // if a user wants to Sell a share in the front end, it will check if a user currently has shares in their holdings to be able to share in the sellOrder() section further below in the code.
   if (typeOfOrder == "SELL") {
     let canSell = false;
     (async () => {
+      // if a user does have a share for that listing in their holdings, then it retrieves the order information
       canSell = await sellOrder(
         investorID,
         quantityOrder,
@@ -57,11 +66,14 @@ async function createOrder(
         orderTime
       );
     })();
+    // an error is presented if a user does not have shares in their holdings for the listing
 
     if (!canSell) {
       return "Error";
     }
   }
+
+  // in this section of the code an order is then created through retrieving the order information. The status of an order is PENDING if it is a BUY order due to the 15minute timer on all buy orders, otherwise the status is EXECUTED
   return await Order.create({
     InvestorID: investorID,
     QuantityOrder: parseInt(quantityOrder),
@@ -74,6 +86,8 @@ async function createOrder(
     Status: typeOfOrder == "BUY" ? "PENDING" : "EXECUTED",
   });
 }
+
+// this section of the code checks if a user holds shares in their holdings in order to ensure they are able to sell shares if it is in their holdings.
 async function sellOrder(
   investorID,
   quantityOrder,
@@ -81,22 +95,23 @@ async function sellOrder(
   listingID,
   orderTime
 ) {
+  //the current holdings that an investor has is retrieved
   const currentHoldings = await Holding.findAll({
     where: {
       InvestorID: investorID,
       Current: 1,
     },
   });
+  //the current price for a listing is retrieved
 
   let currentPriceObject = await Price.findOne({
     where: {
       ListingID: listingID,
     },
   });
-
   let orders = [];
   let orderIDs = [];
-
+  // this section finds an order for a listing and adds it into the order array created above
   var values = new Promise((resolve, reject) => {
     currentHoldings.forEach(async (holding, index, currentHoldings) => {
       await Order.findOne({
@@ -113,14 +128,14 @@ async function sellOrder(
       });
     });
   });
-
+  // this section chekcs the quantity for each order based on each listing for the investor to group how many shares the investor has for the listing
   let totalQuantity = 0;
 
   values.then(async () => {
     orders.forEach((order) => {
       totalQuantity += order.QuantityOrder;
     });
-
+    // the sell is performed only if the quantity that the investor wants to sell is less than their current quantity. After the sell, a new holding is created based on the updated holdings and the orders are updated to reflect the sell
     if (quantityOrder > totalQuantity) return false;
     else {
       await investorSell(investorID, orderTotal);
@@ -145,7 +160,7 @@ async function sellOrder(
           });
         });
       }
-
+      // this section of the code retrives all the orders from the orderIDs array from above and sets it to 0 to indicate that it is not a current holding anymore
       await Holding.findAll({
         where: {
           OrderID: orderIDs,
@@ -159,13 +174,14 @@ async function sellOrder(
     }
   });
 }
-
+// this section of the code checks for pending orders and shows in the console if an order is executed after 15min or if a user cancelled the order in their portfolio within the 15 min. If an order is executed, the user's funds are updated and the status of the order is 'EXECUTED'
 async function pendingOrderCheck() {
   let now = moment.utc();
   console.log(
     "Checking for pending orders prior to: " +
       moment.utc(now, "YYYY-MM-DD HH:mm:ss").format()
   );
+
   getAllPendingOrders()
     .then((pendingOrders) => {
       pendingOrders.forEach(async (elem) => {

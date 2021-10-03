@@ -23,6 +23,7 @@ beforeAll(async () => {
     username: "TestUser",
   });
 
+  //Create a listing in database
   await createListing(
     "TVK",
     "Test Name",
@@ -34,6 +35,7 @@ beforeAll(async () => {
     0.1
   );
 
+  //Create a price for the listing in database
   await createPrice("TVK", 5);
 });
 
@@ -41,6 +43,7 @@ beforeEach(async () => {
   cookie = await getAuthenticatedUserCookie("TestUser", "Password");
 });
 
+// Unit test to for a successfull order
 describe("Orders endpoint", () => {
   it("Succesfully buy", async () => {
     const res = await request(app)
@@ -58,7 +61,7 @@ describe("Orders endpoint", () => {
     expect(res.status).toEqual(201);
     expect(res.body).toEqual(expect.any(Object));
   });
-
+  //Unit test if an unauthorised user attempts to create an order
   it("Cannot create the order due to not being an authorised user", async () => {
     const res = await request(app).post("/api/orders").send({
       investorID: user.body.id,
@@ -70,6 +73,7 @@ describe("Orders endpoint", () => {
     });
     expect(res.status).toEqual(401);
   });
+  //Unit test if there is a bad request when creating an order
 
   it("Send a bad request", async () => {
     const res = await request(app).post("/api/orders").set("cookie", cookie);
