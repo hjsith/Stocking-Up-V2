@@ -12,4 +12,11 @@ async function getPriceForListing(code) {
   });
 }
 
-module.exports = { getAllCurrentPrices, getPriceForListing };
+async function createPrice(code, currentPrice) {
+  return await Price.create({
+    ListingID: code,
+    CurrentPrice: currentPrice,
+  });
+}
+
+module.exports = { getAllCurrentPrices, getPriceForListing, createPrice };
