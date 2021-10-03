@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import Article from "./Article";
 const moment = require("moment");
 
 const List = () => {
-  const [articles, setArticles] = useState([]);
-
+  const [articles, setArticles] = useState([]); // this creates an array for the articles
+  // this section fetches for all the articles from the database
   fetch("/api/articles", {
     method: "GET",
     headers: {
@@ -16,7 +15,7 @@ const List = () => {
       setArticles(body);
     });
   });
-
+  // this section maps all the articles from the database
   return (
     <div>
       {articles.map((article) => (

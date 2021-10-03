@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import List from "../components/NewsfeedComponents/List";
 import "../assets/css/Newsfeed.scss";
-
+// this section of the code displays the newsfeed page based on the articles from the List component
 const Newsfeed = () => {
   return (
     <>
