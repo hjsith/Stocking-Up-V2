@@ -95,6 +95,16 @@ async function getOneInvestorWithUsername(username) {
   });
 }
 
+async function getInvestorsWithSimilarUsernames(userId, username) {
+  return Investor.findAll({
+    where: {
+      Username: {
+        [Op.substring]: username,
+      },
+    },
+  });
+}
+
 module.exports = {
   getAllInvestors,
   getInvestor,
@@ -105,4 +115,5 @@ module.exports = {
   updateInvestorPassword,
   getOneInvestorWithUsername,
   updateInvestorBalanceAfterPurchase,
+  getInvestorsWithSimilarUsernames,
 };

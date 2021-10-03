@@ -3,6 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const {
   getInvestor,
   updateInvestorPassword,
+  getInvestorsWithSimilarUsernames,
 } = require("../functions/Investor");
 const bcrypt = require("bcrypt");
 const { getAuthenticatedUser } = require("../functions/Authenticate");
@@ -49,6 +50,22 @@ router.get("/investor", async (req, res) => {
         .json({ errors: "User could not be found." });
     }
     return res.status(StatusCodes.OK).json(user);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.get("/investor/username/similar", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.query.username == "") return res.status(StatusCodes.OK).json([]);
+    const users = await getInvestorsWithSimilarUsernames(req.query.username);
+    if (users === null) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: "User could not be found." });
+    }
+    return res.status(StatusCodes.OK).json(users);
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }

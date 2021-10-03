@@ -1,5 +1,4 @@
 import React from "react";
-import "../../assets/css/PortfolioPage.scss";
 import FriendButton from "./FriendButton";
 
 class FriendsTitlePanel extends React.Component {
@@ -12,7 +11,11 @@ class FriendsTitlePanel extends React.Component {
           </div>
           <div class="col-sm d-flex justify-content-center">
             {" "}
-            <FriendButton title="Add Friends?" />
+            <FriendButton
+              title="Add Friends?"
+              handler={this.props.handler}
+              panelNumber={this.props.panelNumber}
+            />
           </div>
           <div class="w-100"></div>
           <div class="col-sm d-flex justify-content-center">
@@ -21,7 +24,11 @@ class FriendsTitlePanel extends React.Component {
           </div>
           <div class="col-sm d-flex justify-content-center">
             {" "}
-            <FriendButton title="Pending Requests" />
+            <FriendButton
+              title="Pending Requests"
+              handler={this.props.handler}
+              panelNumber={this.props.panelNumber}
+            />
           </div>
         </div>
       </div>
