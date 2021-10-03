@@ -41,30 +41,27 @@ stages:
           - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
             artifact: drop
 
-  - stage: Tests
-    displayName: Tests stage
+  - stage: Test
+    displayName: Test stage
     dependsOn: Build
     condition: succeeded()
     jobs:
-      - job: Build
-        displayName: Build
+      - job: Test
+        displayName: Test
         pool:
           vmImage: $(vmImageName)
 
         steps:
-          - task: Npm@1
-            displayName: npm install
+          - task: NodeTool@0
             inputs:
-              command: "custom"
-              workingDir: "server"
-              customCommand: "npm install"
+              versionSpec: "14.17.6"
+            displayName: "Install Node.js"
 
-          - task: Npm@1
-            displayName: npm run test
-            inputs:
-              command: "custom"
-              workingDir: "server"
-              customCommand: "run test:ci"
+          - script: |
+              cd server
+              npm install
+              npm run test:ci
+            displayName: "npm install and output test results"
 
           - task: PublishTestResults@2
             displayName: "supply npm test results to pipelines"
