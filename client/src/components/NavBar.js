@@ -48,7 +48,6 @@ const NavBar = () => {
         </NavDropdown>
         <NavDropdown title="Companies" id="basic-nav-dropdown">
           <NavDropdown.Item href="/CompanySearch">Search</NavDropdown.Item>
-          <NavDropdown.Item href="/QuoteManagement">Order</NavDropdown.Item>
         </NavDropdown>
       </Nav>
       <Nav>
