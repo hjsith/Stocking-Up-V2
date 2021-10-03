@@ -58,9 +58,7 @@ stages:
             displayName: "Install Node.js"
 
           - script: |
-              cd server
-              npm install
-              npm run test:ci
+              cd server && npm install && npm run test:ci
             displayName: "npm install and output test results"
 
           - task: PublishTestResults@2
@@ -71,7 +69,7 @@ stages:
 
   - stage: Deploy
     displayName: Deploy stage
-    dependsOn: Tests
+    dependsOn: Test
     condition: succeeded()
     jobs:
       - deployment: Deploy
