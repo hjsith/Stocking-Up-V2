@@ -30,7 +30,17 @@ async function getAllCurrentHoldingsByInvestor(investorID) {
   return temp;
 }
 
+async function createHolding(investorID, listingID, orderID, current) {
+  return await Holding.create({
+    InvestorID: investorID,
+    ListingID: listingID,
+    OrderID: orderID,
+    Current: current,
+  });
+}
+
 module.exports = {
   getAllHoldings,
   getAllCurrentHoldingsByInvestor,
+  createHolding,
 };
