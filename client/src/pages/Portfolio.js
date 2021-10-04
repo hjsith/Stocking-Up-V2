@@ -107,13 +107,6 @@ class Portfolio extends React.Component {
           {" "}
           <RecentOrders updateSnackbar={this.AddNotification} />
           <WhiteLine />
-          <button
-            onClick={() => {
-              this.AddNotification("Whats up!");
-            }}
-          >
-            Hello
-          </button>
           <Watchlist updateSnackbar={this.AddNotification} />
         </div>
         <Snackbar messages={this.state.snackBarMessages} />
