@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const {
+  getAllInvestors,
   getInvestor,
   updateInvestorPassword,
   getInvestorsWithSimilarUsernames,
@@ -12,9 +13,8 @@ const { getAuthenticatedUser } = require("../functions/Authenticate");
 const router = Router();
 
 router.get("/allInvestors", async (req, res) => {
-  const listings = await getAllListings();
-
-  return res.status(StatusCodes.OK).json(listings);
+  const investors = await getAllInvestors();
+  return res.status(StatusCodes.OK).json(investors);
 });
 
 router.put("/updatePassword", async (req, res) => {
