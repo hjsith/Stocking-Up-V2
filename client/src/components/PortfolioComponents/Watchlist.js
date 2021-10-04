@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
 
 class Watchlist extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +15,7 @@ class Watchlist extends React.Component {
     };
   }
 
+  //Fetching and obtaining investor which is signed in to display information
   static contextType = UserContext;
 
   fetchUser() {
@@ -37,6 +39,7 @@ class Watchlist extends React.Component {
     });
   }
 
+  //On page load fetch API calls to get all orders made by the investor from the investor ID from the Order database and puts it within the allOrdersArray which is mapped to the AllOrderRowPanel component.
   componentDidMount() {
     this.fetchUser();
 
@@ -58,6 +61,7 @@ class Watchlist extends React.Component {
     }, 500);
   }
 
+  //This render checks to see whether an investor is logged into the application to allow access to this URL, if not it redirects to the Sign In page
   render() {
     if (this.state.unauth || this.context.user.name === "") {
       return (
@@ -70,6 +74,7 @@ class Watchlist extends React.Component {
     }
   }
 
+  //Remove functionality for watchlist which includes deleting the watchlist from the watchlistArray and this is deleted from the watchlistremoved API route
   cancelEvent = (index, watchID) => {
     fetch("/api/watchlistremoved", {
       method: "DELETE",
@@ -96,10 +101,10 @@ class Watchlist extends React.Component {
       <div>
         <table className="TableWatchlistTitle">
           <tr>
-            <th width="78%">
+            <th className="RecentOrdersWidth">
               <th className="NormalPanelTitle2">Watchlist</th>
             </th>
-            <th th width="19%">
+            <th className="RecentOrdersWidth1">
               <div className="ButtonContainer">
                 <a href="/CompanySearch" className="BlueWatchlistButton">
                   + Add Company
@@ -120,6 +125,7 @@ class Watchlist extends React.Component {
           </tr>
         </table>
         <div className="divwatchlist">
+          {/* Takes the array stored in watchlistArray and maps the data to the props */}
           {this.state.watchlistArray.map((watchlist, index) => {
             return (
               <WatchlistRowPannel

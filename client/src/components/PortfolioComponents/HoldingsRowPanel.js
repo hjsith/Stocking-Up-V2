@@ -4,6 +4,7 @@ import UserProfileIcon from "../UserProfileIcon";
 import { Link } from "react-router-dom";
 
 class HoldingsRowPanel extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +13,7 @@ class HoldingsRowPanel extends React.Component {
     };
   }
 
+  //On page load fetch API calls to get listing and the current price from the Listing and Price database.
   componentDidMount() {
     fetch("/api/listing" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -21,6 +23,7 @@ class HoldingsRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the company name
           name: body.name,
         });
       });
@@ -34,31 +37,17 @@ class HoldingsRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Price model using the company code obtaining the current price
           price: body.price,
         });
       });
     });
   }
 
-  handleBuy() {
-    console.log("Bought!!");
-  }
-
-  handleSell() {
-    console.log("Sold!!");
-  }
-
-  generateRandomNumber() {
-    var RandomNumber = Math.floor(Math.random() * 6) + 1;
-
-    this.setState({
-      NumberHolder: RandomNumber,
-    });
-  }
-
   render() {
     return (
       <div className="HoldingsRowPanel">
+        {/* table used to map out the information within each row seen via props retrieved from the front end (MyHoldings component) */}
         <table className="TableTitleFont2">
           <tr>
             <th>
@@ -76,6 +65,7 @@ class HoldingsRowPanel extends React.Component {
             <th>{this.props.total}</th>
             <th>
               <div>
+                {/* link used to reroute investor the listing page on click passing through the companyCode */}
                 <Link
                   to={{
                     pathname: "/QuoteManagement",
@@ -90,6 +80,7 @@ class HoldingsRowPanel extends React.Component {
             </th>
             <th>
               <div>
+                {/* link used to reroute investor the listing page on click passing through the companyCode */}
                 <Link
                   to={{
                     pathname: "/QuoteManagement",

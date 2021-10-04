@@ -3,6 +3,7 @@ import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
 
 class OrderRowPanel extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +13,7 @@ class OrderRowPanel extends React.Component {
     };
   }
 
+  //On page load fetch API calls to get listing and the current price from the Listing and Price database.
   componentDidMount() {
     fetch("/api/listing" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -21,6 +23,7 @@ class OrderRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the company name
           name: body.name,
         });
       });
@@ -34,6 +37,7 @@ class OrderRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Price model using the company code obtaining the current price
           price: body.price,
         });
       });
@@ -43,6 +47,7 @@ class OrderRowPanel extends React.Component {
   render() {
     return (
       <div className="OrderRowPanel">
+        {/* table used to map out the information within each row seen via props retrieved from the front end (RecentOrders) */}
         <table className="TableTitleFont5">
           <tr>
             <th>
@@ -58,6 +63,7 @@ class OrderRowPanel extends React.Component {
             <th>{this.state.price}</th>
             <th>{this.props.units}</th>
             <th>{this.props.total}</th>
+            {/* button functionality to confirm order and upon confirmation to disable the button */}
             <th className>
               <div className="ButtonContainer">
                 <button
@@ -66,13 +72,13 @@ class OrderRowPanel extends React.Component {
                   onClick={() => {
                     this.props.confirm(this.props.orderID);
                     this.setState({ disable: true });
-                    // className = "GreyButton";
                   }}
                 >
                   Confirm
                 </button>
               </div>
             </th>
+            {/* button functionality to cancel an order */}
             <th>
               <div className="ButtonContainer">
                 <button

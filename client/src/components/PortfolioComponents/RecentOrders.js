@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
 
 class RecentOrders extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +15,7 @@ class RecentOrders extends React.Component {
     };
   }
 
+  //Fetching and obtaining investor which is signed in to display information
   static contextType = UserContext;
 
   fetchUser() {
@@ -37,6 +39,7 @@ class RecentOrders extends React.Component {
     });
   }
 
+  //On page load fetch API calls to get all orders made by the investor from the investor ID from the Order database and puts it within the allOrdersArray which is mapped to the AllOrderRowPanel component.
   componentDidMount() {
     this.fetchUser();
 
@@ -58,6 +61,7 @@ class RecentOrders extends React.Component {
     }, 500);
   }
 
+  //This render checks to see whether an investor is logged into the application to allow access to this URL, if not it redirects to the Sign In page
   render() {
     if (this.state.unauth || this.context.user.name === "") {
       return (
@@ -70,6 +74,7 @@ class RecentOrders extends React.Component {
     }
   }
 
+  //Cancel functionality for orders which includes removing the order from the OrderArray and this is put into the cancelOrder API route
   cancelEvent = (index, ID) => {
     fetch("/api/cancelOrders", {
       method: "PUT",
@@ -89,6 +94,7 @@ class RecentOrders extends React.Component {
     });
   };
 
+  //Confirm functionality for orders which executes the order immediately on click - this executes within 1 minute in the order queue and this is put into the confirmedOrders API route
   confirmEvent = (index, ID) => {
     fetch("/api/confirmedOrders", {
       method: "PUT",
@@ -112,10 +118,10 @@ class RecentOrders extends React.Component {
       <div>
         <table className="TableWatchlistTitle">
           <tr>
-            <th width="78%">
+            <th className="RecentOrdersWidth">
               <th className="NormalPanelTitle2">Recent Orders</th>
             </th>
-            <th width="19%">
+            <th className="RecentOrdersWidth1">
               <div className="ButtonContainer">
                 <a href="/AllOrders" className="BlueWatchlistButton">
                   All My Orders
@@ -136,6 +142,7 @@ class RecentOrders extends React.Component {
           </tr>
         </table>
         <div className="divorder">
+          {/* Takes the array stored in orderArray and maps the data to the props */}
           {this.state.orderArray.map((order, index) => {
             return (
               <OrderRowPanel

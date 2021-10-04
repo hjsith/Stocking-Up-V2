@@ -6,6 +6,7 @@ import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
 
 class MyHoldings extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +17,7 @@ class MyHoldings extends React.Component {
     };
   }
 
+  //Fetching and obtaining investor which is signed in to display information
   static contextType = UserContext;
 
   fetchUser() {
@@ -39,6 +41,7 @@ class MyHoldings extends React.Component {
     });
   }
 
+  //On page load fetch API calls to get all orders made by the investor from the investor ID from the Order database and puts it within the allOrdersArray which is mapped to the AllOrderRowPanel component.
   componentDidMount() {
     this.fetchUser();
 
@@ -60,6 +63,7 @@ class MyHoldings extends React.Component {
     }, 500);
   }
 
+  //This render checks to see whether an investor is logged into the application to allow access to this URL, if not it redirects to the Sign In page
   render() {
     if (this.state.unauth || this.context.user.name === "") {
       return (
@@ -89,6 +93,7 @@ class MyHoldings extends React.Component {
           </tr>
         </table>
         <div className="divholding">
+          {/* Takes the array stored in holdingArray and maps the data to the props */}
           {this.state.holdingArray.map((holding, index) => {
             return (
               <HoldingsRowPanel
