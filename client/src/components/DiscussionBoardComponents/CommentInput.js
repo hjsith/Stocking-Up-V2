@@ -19,11 +19,14 @@ class CommentInput extends React.Component {
 
   static contextType = UserContext;
 
+  //Clears the textfield
   handleClear() {
     document.getElementById("commentInputTextField").value = "";
   }
 
+  //Attempt to create a new comment for the currently signed in user
   handleSubmit() {
+    //Get the liting price for the new comment
     fetch("/api/price?code=" + this.props.threadID, {
       method: "GET",
       headers: {
@@ -33,6 +36,7 @@ class CommentInput extends React.Component {
       if (res.status === 200) {
         res.json().then((body) => {
           this.setState({ listingPrice: body.price });
+          //Attempt to create a new comment
           fetch("/api/newComment", {
             method: "POST",
             body: JSON.stringify({
@@ -50,8 +54,8 @@ class CommentInput extends React.Component {
               if (res.status === 201) {
                 // Successful post 201
                 this.setState({ errorMessage: "Comment Submitted!" });
-                document.getElementById("commentInputTextField").value = "";
-                this.props.updateComments();
+                document.getElementById("commentInputTextField").value = ""; //Clear the textfield upon successful comment submission
+                this.props.updateComments(); //Attempt to update the list of shown comments on the discussion board
               } else if (res.status === 401) {
                 this.setState({ unauth: true });
               } else {
@@ -69,6 +73,7 @@ class CommentInput extends React.Component {
   }
 
   render() {
+    //Redirect the user back to the Sign In page if they are unauthenticated
     if (this.state.unauth || this.context.user.name === "") {
       return (
         <Redirect

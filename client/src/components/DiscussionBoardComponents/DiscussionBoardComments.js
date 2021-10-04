@@ -9,6 +9,7 @@ class DiscussionBoardComments extends React.Component {
     };
   }
 
+  //Check if props have updated or not
   componentDidUpdate(oldProps) {
     const newProps = this.props;
     if (oldProps !== newProps) {
@@ -22,7 +23,7 @@ class DiscussionBoardComments extends React.Component {
     return (
       <>
         <div className="AllComments">
-          {this.state.comments.length == 0 ? (
+          {this.state.comments.length == 0 ? ( //If there are no comments on the thread, display a message
             <div className="EmptyMessage">
               There are no comments yet on this discussion board. Be the first
               one to comment!
