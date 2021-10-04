@@ -1,6 +1,7 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
+import { Link } from "react-router-dom";
 
 class WatchlistRowPannel extends React.Component {
   constructor(props) {
@@ -105,10 +106,19 @@ class WatchlistRowPannel extends React.Component {
             <th>{this.state.industry}</th>
             <th colSpan="2">
               <div className="ButtonContainer">
-                <button className="BlueGoToCompany" onClick={this.handleBuy}>
-                  Go to {this.props.companyCode}'s page
-                </button>
+                <Link
+                  to={{
+                    pathname: "/QuoteManagement",
+                    state: { listingID: this.props.companyCode },
+                  }}
+                >
+                  <div className="BlueGoToCompany">
+                    {this.state.currentListingPrice}{" "}
+                    <span>Go to {this.props.companyCode}'s page</span>
+                  </div>
+                </Link>
               </div>
+
               <div className="ButtonContainer">
                 <button
                   className="CancelCrossButton"

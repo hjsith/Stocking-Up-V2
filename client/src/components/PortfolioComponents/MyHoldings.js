@@ -72,14 +72,6 @@ class MyHoldings extends React.Component {
     }
   }
 
-  handleBuy() {
-    console.log("Bought!!");
-  }
-
-  handleSell() {
-    console.log("Sold!!");
-  }
-
   render() {
     return (
       <div>

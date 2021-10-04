@@ -168,6 +168,59 @@
   font-weight: bold;
 }
 
+.GreenBuy {
+  height: 3em;
+  width: 6em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RedSell {
+  height: 3em;
+  width: 6em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// .BlueGoToCompanyButton {
+//   height: 3em;
+//   width: 10em;
+//   background-color: #3789fd;
+//   color: white;
+//   border-radius: 2em;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-decoration: none;
+//   border: 0px;
+//   opacity: 0.8;
+//   transition: 0.3s;
+//   display: inline-block;
+//   text-decoration: none;
+//   cursor: pointer;
+// }
+
+// // height: 3em;
+// // width: 7em;
+// // background-color: rgb(51, 51, 51);
+// // border-radius: 2em;
+// // display: flex;
+// // justify-content: center;
+// // align-items: center;
+
+// .BlueGoToCompanyButton:hover {
+//   opacity: 1;
+//   font-weight: bold;
+// }
+
 .BlueGoToCompany {
   height: 3em;
   width: 10em;
@@ -177,18 +230,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  border: 0px;
-  opacity: 0.8;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.BlueGoToCompany:hover {
-  opacity: 1;
-  font-weight: bold;
 }
 
 .GreenConfirmButton:disabled {
@@ -238,51 +279,51 @@
   font-weight: bold;
 }
 
-.GreenBuyButton {
-  height: 3em;
-  width: 5em;
-  background-color: #2ac811;
-  color: white;
-  border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border: 0px;
-  opacity: 0.8;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-}
+// .GreenBuyButton {
+//   height: 3em;
+//   width: 5em;
+//   background-color: #2ac811;
+//   color: white;
+//   border-radius: 2em;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-decoration: none;
+//   border: 0px;
+//   opacity: 0.8;
+//   transition: 0.3s;
+//   display: inline-block;
+//   text-decoration: none;
+//   cursor: pointer;
+// }
 
-.GreenBuyButton:hover {
-  opacity: 1;
-  font-weight: bold;
-}
+// .GreenBuyButton:hover {
+//   opacity: 1;
+//   font-weight: bold;
+// }
 
-.RedSellButton {
-  height: 3em;
-  width: 5em;
-  background-color: #ff4b4b;
-  color: white;
-  border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border: 0px;
-  opacity: 0.8;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-}
+// .RedSellButton {
+//   height: 3em;
+//   width: 5em;
+//   background-color: #ff4b4b;
+//   color: white;
+//   border-radius: 2em;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   text-decoration: none;
+//   border: 0px;
+//   opacity: 0.8;
+//   transition: 0.3s;
+//   display: inline-block;
+//   text-decoration: none;
+//   cursor: pointer;
+// }
 
-.RedSellButton:hover {
-  opacity: 1;
-  font-weight: bold;
-}
+// .RedSellButton:hover {
+//   opacity: 1;
+//   font-weight: bold;
+// }
 
 .GoldRankButton {
   height: 3em;
@@ -431,16 +472,6 @@
   margin-left: 1.5em;
   margin-bottom: 1.25em;
   border-radius: 0.625em;
-}
-
-.GreyCancelledState {
-  height: 3em;
-  width: 7em;
-  background-color: rgb(51, 51, 51);
-  border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .GreenCompletedState {

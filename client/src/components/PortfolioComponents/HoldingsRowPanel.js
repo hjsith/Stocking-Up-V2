@@ -1,6 +1,7 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
+import { Link } from "react-router-dom";
 
 class HoldingsRowPanel extends React.Component {
   constructor(props) {
@@ -74,17 +75,31 @@ class HoldingsRowPanel extends React.Component {
             <th>{this.props.units}</th>
             <th>{this.props.total}</th>
             <th>
-              <div className="ButtonContainer">
-                <button className="GreenBuyButton" onClick={this.handleBuy}>
-                  Buy
-                </button>
+              <div>
+                <Link
+                  to={{
+                    pathname: "/QuoteManagement",
+                    state: { listingID: this.props.companyCode },
+                  }}
+                >
+                  <div className="GreenBuy">
+                    {this.state.currentListingPrice} <span>Buy</span>
+                  </div>
+                </Link>
               </div>
             </th>
             <th>
-              <div className="ButtonContainer">
-                <button className="RedSellButton" onClick={this.handleSell}>
-                  Sell
-                </button>
+              <div>
+                <Link
+                  to={{
+                    pathname: "/QuoteManagement",
+                    state: { listingID: this.props.companyCode },
+                  }}
+                >
+                  <div className="RedSell">
+                    {this.state.currentListingPrice} <span>Sell</span>
+                  </div>
+                </Link>
               </div>
             </th>
           </tr>

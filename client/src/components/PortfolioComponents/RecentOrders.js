@@ -85,9 +85,7 @@ class RecentOrders extends React.Component {
       this.setState({
         orderArray: copyOrderArray,
       });
-      this.props.updateSnackbar(
-        "Please wait 1 minute for your order to be cancelled"
-      );
+      this.props.updateSnackbar("Your order has been cancelled");
     });
   };
 
