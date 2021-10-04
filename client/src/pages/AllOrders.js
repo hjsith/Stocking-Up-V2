@@ -2,17 +2,49 @@ import React from "react";
 import "../assets/css/PortfolioPage.scss";
 import NavBar from "../components/NavBar";
 import AllOrderRowPanel from "../components/PortfolioComponents/AllOrderRowPanel";
+import { UserContext } from "../components/UserContext";
+import { Redirect } from "react-router-dom";
 
 class Portfolio extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
       allOrdersArray: [],
+      userName: "",
+      unauth: false,
     };
   }
 
+  //Fetching and obtaining investor which is signed in to display information
+  static contextType = UserContext;
+
+  fetchUser() {
+    this.fetchUser();
+
+    fetch("/api/investor?id=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) =>
+          this.setState({
+            userName: body.InvestorFName + " " + body.InvestorLName,
+          })
+        );
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
+  }
+
+  //On page load fetch API calls to get all orders made by the investor from the investor ID from the Order database and puts it within the allOrdersArray which is mapped to the AllOrderRowPanel component.
   componentDidMount() {
-    let investorID = "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73";
+    let investorID = this.context.user.id;
     setInterval(() => {
       fetch("/api/orders/all" + "?investorID=" + investorID, {
         method: "GET",
@@ -30,8 +62,17 @@ class Portfolio extends React.Component {
     }, 500);
   }
 
-  generateRandomNumber() {
-    return Math.floor(Math.random() * 5) + 1;
+  //This render checks to see whether an investor is logged into the application to allow access to this URL, if not it redirects to the Sign In page
+  render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
   }
 
   render() {
@@ -41,10 +82,10 @@ class Portfolio extends React.Component {
         <div className="BackgroundPanel3">
           <table className="TableWatchlistTitle">
             <tr>
-              <th width="90%">
+              <th>
                 <th className="NormalPanelTitle2">All Orders</th>
               </th>
-              <th width="18%">
+              <th className="AllOrdersHeadingwidth">
                 <div className="ButtonContainer">
                   <a href="/Portfolio" className="BlueWatchlistButton">
                     Back to Portfolio
@@ -66,11 +107,11 @@ class Portfolio extends React.Component {
             </tr>
           </table>
           <div className="divallorder">
+            {/* Takes the array stored in allOrdersArray and maps the data to the props */}
             {this.state.allOrdersArray.map((allOrder, index) => {
               return (
                 <AllOrderRowPanel
                   key={allOrder.OrderID}
-                  colourNumber={this.generateRandomNumber()}
                   companyCode={allOrder.ListingID}
                   typeofOrder={allOrder.TypeOfOrder}
                   status={allOrder.Status}

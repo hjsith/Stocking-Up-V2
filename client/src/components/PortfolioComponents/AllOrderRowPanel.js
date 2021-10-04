@@ -3,6 +3,7 @@ import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
 
 class HoldingsRowPanel extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,7 @@ class HoldingsRowPanel extends React.Component {
     };
   }
 
+  //On page load fetch API calls to get listing and the current price from the Listing and Price database.
   componentDidMount() {
     fetch("/api/listing" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -20,6 +22,7 @@ class HoldingsRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the company name
           name: body.name,
         });
       });
@@ -33,6 +36,7 @@ class HoldingsRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Price model using the company code obtaining the current price
           price: body.price,
         });
       });
@@ -42,6 +46,7 @@ class HoldingsRowPanel extends React.Component {
   render() {
     return (
       <div className="AllOrderRowPanel">
+        {/* table used to map out the information within each row seen in All Order Page via props retrieved from the front end */}
         <table className="TableTitleFont2">
           <tr>
             <th>
