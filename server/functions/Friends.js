@@ -5,10 +5,7 @@ const moment = require("moment");
 async function getAllCurrentFriendsForUser(id) {
   return await Friends.findAll({
     where: {
-      [Op.or]: {
-        RequestingUsername: id,
-        AcceptingUsername: id,
-      },
+      [Op.or]: [{ RequestingUsername: id }, { AcceptingUsername: id }],
       Status: 1,
     },
   });
@@ -18,7 +15,6 @@ async function getAllPendingFriendsForUser(id) {
   return await Friends.findAll({
     where: {
       [Op.or]: {
-        RequestingUsername: id,
         AcceptingUsername: id,
       },
       Status: 0,
@@ -75,9 +71,57 @@ async function addInvestorAsFriend(rId, aId) {
   });
 }
 
+async function confirmPendingFriend(rId, aId) {
+  await Friends.findOne({
+    where: {
+      RequestingUsername: rId,
+      AcceptingUsername: aId,
+    },
+  }).then(async (friend) => {
+    friend.Status = 1;
+    await friend.save();
+  });
+}
+
+async function denyPendingFriend(rId, aId) {
+  await Friends.findOne({
+    where: {
+      RequestingUsername: rId,
+      AcceptingUsername: aId,
+    },
+  }).then(async (friend) => {
+    friend.Status = 1;
+    await friend.destroy();
+  });
+}
+
+async function checkIfFriends(user1, user2) {
+  let value = await Friends.findOne({
+    where: {
+      [Op.or]: [
+        {
+          RequestingUsername: user1,
+          AcceptingUsername: user2,
+        },
+        {
+          RequestingUsername: user2,
+          AcceptingUsername: user1,
+        },
+      ],
+    },
+  }).then((friend) => {
+    return friend != null;
+  });
+
+  return value;
+}
+
 module.exports = {
   getAllCurrentFriendsForUser,
   getAllPendingFriendsForUser,
   getInvestorModelsForFriends,
+  checkIfFriends,
   addInvestorAsFriend,
+  confirmPendingFriend,
+  denyPendingFriend,
 };

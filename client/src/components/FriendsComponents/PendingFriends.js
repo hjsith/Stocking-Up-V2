@@ -37,7 +37,7 @@ class PendingFriends extends React.Component {
         .catch((exception) => {
           console.log("Error:", exception);
         });
-    }, 300);
+    }, 500);
   }
   render() {
     return (

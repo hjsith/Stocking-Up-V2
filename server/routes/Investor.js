@@ -3,6 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const {
   getAllInvestors,
   getInvestor,
+  getInvestorUsername,
   updateInvestorPassword,
   getInvestorsWithSimilarUsernames,
 } = require("../functions/Investor");
@@ -59,7 +60,11 @@ router.get("/investor/username/similar", async (req, res) => {
   const checkAuth = await getAuthenticatedUser(req, res);
   if (checkAuth) {
     if (req.query.username == "") return res.status(StatusCodes.OK).json([]);
-    const users = await getInvestorsWithSimilarUsernames(req.query.username);
+    const users = await getInvestorsWithSimilarUsernames(
+      req.query.id,
+      req.query.currentuser,
+      req.query.username
+    );
     if (users === null) {
       return res
         .status(StatusCodes.BAD_REQUEST)

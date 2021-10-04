@@ -2,6 +2,7 @@ import React from "react";
 import FriendHeading from "./FriendHeading";
 import glass from "../../assets/images/glass.svg";
 import FriendResults from "./FriendResults";
+import { UserContext } from "../UserContext";
 
 class AddFriend extends React.Component {
   constructor(props) {
@@ -13,13 +14,23 @@ class AddFriend extends React.Component {
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
   }
 
+  static contextType = UserContext;
+
   handleSearchStringChange(event) {
-    fetch("/api/investor/username/similar?username=" + event.target.value, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      "/api/investor/username/similar?username=" +
+        event.target.value +
+        "&currentuser=" +
+        this.context.user.name +
+        "&id=" +
+        this.context.user.id,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 200) {
           // Successful login 200

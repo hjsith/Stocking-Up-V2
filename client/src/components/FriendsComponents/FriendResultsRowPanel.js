@@ -10,6 +10,8 @@ class FriendResultsRow extends React.Component {
       results: [],
     };
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleAccept = this.handleAccept.bind(this);
+    this.handleDeny = this.handleDeny.bind(this);
     this.isPending = this.isPending.bind(this);
   }
 
@@ -43,6 +45,56 @@ class FriendResultsRow extends React.Component {
       });
   }
 
+  handleAccept() {
+    fetch("/api/friends/accept", {
+      method: "PATCH",
+      body: JSON.stringify({
+        rId: this.props.acc,
+        aId: this.context.user.id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ buttonDisabled: true });
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
+        } else {
+          console.log("Something unexpected went wrong ._.");
+        }
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
+  }
+
+  handleDeny() {
+    fetch("/api/friends/deny", {
+      method: "DELETE",
+      body: JSON.stringify({
+        rId: this.props.acc,
+        aId: this.context.user.id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          this.setState({ buttonDisabled: true });
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
+        } else {
+          console.log("Something unexpected went wrong ._.");
+        }
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
+  }
+
   isPending() {
     if (!this.props.pending) {
       return (
@@ -56,7 +108,7 @@ class FriendResultsRow extends React.Component {
             disabled={this.state.buttonDisabled}
             onClick={this.handleAdd}
           >
-            {this.state.buttonDisabled ? "Fulfilled" : "Add"}
+            {this.state.buttonDisabled ? "Sent" : "Add"}
           </button>
         </div>
       );

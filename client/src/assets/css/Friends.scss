@@ -47,7 +47,7 @@
 
 .Panel3 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 80%;
+  height: 50.5em;
   width: 95%;
   border-radius: 0.625em;
   margin-top: 1%;
@@ -154,11 +154,25 @@
   width: 100%;
 }
 
-.FriendIconRow {
-  width: 10em;
+.SelectedRow {
+  width: 1em;
 }
+
+.SelectedRowIcon {
+  padding: 1em 0em 1em 2em;
+}
+
+.SelectedRowIcon > img {
+  vertical-align: middle;
+  width: 1em;
+}
+
+.FriendIconRow {
+  width: 5em;
+}
+
 .FriendIcon {
-  padding: 1em 2em 1em 4em;
+  padding: 1em 2em 1em 2em;
 }
 
 .FriendUsername {
@@ -234,15 +248,22 @@
   vertical-align: bottom;
 }
 
-.UserAchievement {
-  overflow: auto;
-  height: 12em;
+.FriendAchievementBlock {
+  margin-top: 2%;
+  margin-left: 2%;
+  height: 90%;
+  width: 90%;
+  display: inline-block;
+  vertical-align: top;
 }
 
-.AchievementHeading {
-  font-family: "Roboto", sans-serif;
+.FriendUserAchievement {
+  overflow: auto;
+  height: 13em;
+}
 
-  margin-top: 1em;
+.FriendAchievementHeading {
+  font-family: "Roboto", sans-serif;
   margin-left: 3em;
   color: white;
   font-size: 2em;
@@ -319,7 +340,7 @@
 }
 
 .FriendResults {
-  height: 34em;
+  height: auto;
   overflow: auto;
 }
 

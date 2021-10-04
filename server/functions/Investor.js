@@ -1,6 +1,7 @@
-const { Investor } = require("../db/Models");
+const { Investor, Friends } = require("../db/Models");
 const { Op } = require("sequelize");
 const moment = require("moment");
+const { checkIfFriends } = require("../functions/Friends");
 
 async function getAllInvestors() {
   return await Investor.findAll();
@@ -8,6 +9,11 @@ async function getAllInvestors() {
 
 async function getInvestor(userID) {
   return await Investor.findByPk(userID);
+}
+
+async function getInvestorUsername(userID) {
+  const investor = await Investor.findByPk(userID);
+  return investor.Username;
 }
 
 async function createInvestor(fName, lName, email, password, username) {
@@ -95,19 +101,45 @@ async function getOneInvestorWithUsername(username) {
   });
 }
 
-async function getInvestorsWithSimilarUsernames(userId, username) {
-  return Investor.findAll({
+async function getInvestorsWithSimilarUsernames(
+  userid,
+  searchingUsername,
+  username
+) {
+  const similarInvestors = await Investor.findAll({
     where: {
-      Username: {
-        [Op.substring]: username,
-      },
+      [Op.and]: [
+        {
+          Username: {
+            [Op.ne]: searchingUsername,
+          },
+        },
+        {
+          Username: {
+            [Op.substring]: username,
+          },
+        },
+      ],
     },
   });
+
+  let nonFriends = [];
+
+  for (let i = 0; i < similarInvestors.length; ++i) {
+    await checkIfFriends(userid, similarInvestors[i].InvestorID).then(
+      (result) => {
+        if (!result) nonFriends.push(similarInvestors[i]);
+      }
+    );
+  }
+
+  return nonFriends;
 }
 
 module.exports = {
   getAllInvestors,
   getInvestor,
+  getInvestorUsername,
   createInvestor,
   getInvestorPassword,
   checkUsernameExist,
