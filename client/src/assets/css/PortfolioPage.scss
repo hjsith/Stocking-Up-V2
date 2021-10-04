@@ -96,13 +96,21 @@
   padding: 1.25em 1.25em 0em 1.25em;
 }
 
+.TableTitleFont4 {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.TableTitleFont4 > tr {
+  width: 100%;
+}
+
 .TableTitleFont4 > tr > th {
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 15%;
 }
 
 .TableTitleFont5 > tr > th {
@@ -115,6 +123,8 @@
 }
 
 .ButtonContainer {
+  display: inline-block;
+  margin-right: 20px;
 }
 
 .CancelButton {
@@ -335,17 +345,23 @@
   width: 10%;
 }
 
+.TableTitleFont10 {
+  margin-left: 0.9em;
+  width: 93%;
+  table-layout: fixed;
+}
+
+.TableTitleFont10 > tr {
+  width: 100%;
+}
+
 .TableTitleFont10 > tr > th {
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 2%;
-}
-
-.TableTitleFont10 {
-  margin-left: 0.9em;
+  border: white;
 }
 
 .TableTitleFont {
@@ -383,9 +399,9 @@
 
 .WatchlistRowPannel {
   height: 4.6em;
-  width: 96%;
+  width: 98%;
   background-color: #140f37bb;
-  margin-left: 1.25em;
+  // margin-left: 1.25em;
   margin-bottom: 1em;
   border-radius: 0.625em;
 }
@@ -458,8 +474,10 @@
 
 .divwatchlist {
   height: 21.5em;
-  width: 94%;
+  margin-left: 0.9em;
+  width: 95%;
   overflow: auto;
+  overflow-y: overlay;
 }
 
 .ArrowUp {

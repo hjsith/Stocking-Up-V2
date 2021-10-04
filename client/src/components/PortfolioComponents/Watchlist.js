@@ -116,7 +116,7 @@ class Watchlist extends React.Component {
             <th>Year Low Price</th>
             <th>Year High Price</th>
             <th>Industry</th>
-            <th>Actions</th>
+            <th colspan="2">Actions</th>
           </tr>
         </table>
         <div className="divwatchlist">
