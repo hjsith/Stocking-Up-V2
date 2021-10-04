@@ -1,7 +1,6 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import WatchlistRowPannel from "./WatchlistRowPanel";
-import Popup from "../../components/Popup";
 import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
 
@@ -10,7 +9,6 @@ class Watchlist extends React.Component {
     super(props);
     this.state = {
       watchlistArray: [],
-      snackBarMessage: "",
       userName: "",
       unauth: false,
     };
@@ -86,15 +84,12 @@ class Watchlist extends React.Component {
       copyWatchlistArray.splice(index, 1);
       this.setState({
         watchlistArray: copyWatchlistArray,
-        snackBarMessage: "Your watchlist item has been successfully deleted",
-        //Ask James on how to do it when you delete multiple things
       });
+      this.props.updateSnackbar(
+        "Your watchlist item has been successfully deleted"
+      );
     });
   };
-
-  generateRandomNumber() {
-    return Math.floor(Math.random() * 5) + 1;
-  }
 
   render() {
     return (
@@ -129,7 +124,6 @@ class Watchlist extends React.Component {
             return (
               <WatchlistRowPannel
                 key={watchlist.watchlistID}
-                colourNumber={this.generateRandomNumber()}
                 companyCode={watchlist.ListingID}
                 listingID={watchlist.ListingID}
                 investorID={watchlist.InvestorID}
@@ -140,7 +134,6 @@ class Watchlist extends React.Component {
           })}
         </div>
         <br />
-        <div>{/* <Popup message={this.state.snackBarMessage} /> */}</div>
       </div>
     );
   }

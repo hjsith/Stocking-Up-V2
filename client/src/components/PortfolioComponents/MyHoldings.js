@@ -80,10 +80,6 @@ class MyHoldings extends React.Component {
     console.log("Sold!!");
   }
 
-  generateRandomNumber() {
-    return Math.floor(Math.random() * 5) + 1;
-  }
-
   render() {
     return (
       <div>
@@ -105,7 +101,6 @@ class MyHoldings extends React.Component {
             return (
               <HoldingsRowPanel
                 key={holding.OrderID}
-                colourNumber={this.generateRandomNumber()}
                 companyCode={holding.ListingID}
                 priceBought={holding.ListingPrice}
                 units={holding.QuantityOrder}

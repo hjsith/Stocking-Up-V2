@@ -1,6 +1,5 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import Popup from "../../components/Popup";
 import OrderRowPanel from "./OrderRowPanel";
 import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
@@ -10,7 +9,6 @@ class RecentOrders extends React.Component {
     super(props);
     this.state = {
       orderArray: [],
-      snackBarMessage: "",
       userName: "",
       unauth: false,
     };
@@ -86,9 +84,10 @@ class RecentOrders extends React.Component {
       copyOrderArray.splice(index, 1);
       this.setState({
         orderArray: copyOrderArray,
-        snackBarMessage: "Please wait 1 minute for your order to be cancelled",
-        //Ask James on how to do it when you delete multiple things
       });
+      this.props.updateSnackbar(
+        "Please wait 1 minute for your order to be cancelled"
+      );
     });
   };
 
@@ -105,9 +104,8 @@ class RecentOrders extends React.Component {
       const copyOrderArray = Object.assign([], this.state.orderArray);
       this.setState({
         orderArray: copyOrderArray,
-        snackBarMessage: "Your order has been confirmed",
-        //Ask James on how to do it when you delete multiple things
       });
+      this.props.updateSnackbar("Your order has been confirmed");
     });
   };
 
@@ -128,7 +126,6 @@ class RecentOrders extends React.Component {
             </th>
           </tr>
         </table>
-
         <table className="TableTitleFont">
           <tr>
             <th>Company Code</th>
@@ -145,7 +142,6 @@ class RecentOrders extends React.Component {
             return (
               <OrderRowPanel
                 key={order.OrderID}
-                colourNumber={1}
                 companyCode={order.ListingID}
                 priceBought={order.ListingPrice}
                 units={order.QuantityOrder}
@@ -157,7 +153,6 @@ class RecentOrders extends React.Component {
             );
           })}
         </div>
-        <div>{/* <Popup message={this.state.snackBarMessage} /> */}</div>
       </div>
     );
   }

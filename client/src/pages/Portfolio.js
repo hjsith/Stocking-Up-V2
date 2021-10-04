@@ -15,13 +15,26 @@ class Portfolio extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      snackBarMessage: "",
+      snackBarMessages: [],
       userName: "",
       unauth: false,
     };
+
+    this.AddNotification = this.AddNotification.bind(this);
   }
 
   static contextType = UserContext;
+
+  AddNotification(NotificationMessage) {
+    let tempArray = this.state.snackBarMessages.slice();
+    tempArray.push(NotificationMessage);
+    this.setState({ snackBarMessages: tempArray });
+    window.setTimeout(() => {
+      tempArray = this.state.snackBarMessages.slice();
+      tempArray.shift();
+      this.setState({ snackBarMessages: tempArray });
+    }, 5 * 1000);
+  }
 
   fetchUser() {
     fetch("/api/investor?id=" + this.context.user.id, {
@@ -45,11 +58,6 @@ class Portfolio extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.location.state) {
-      this.setState({
-        snackBarMessage: this.props.location.state.snackBarMessage,
-      });
-    }
     this.fetchUser();
   }
 
@@ -93,15 +101,22 @@ class Portfolio extends React.Component {
           </table>
           <PortfolioOverviewPanel />
           <WhiteLine />
-          <MyHoldings />
+          <MyHoldings updateSnackbar={this.AddNotification} />
         </div>
         <div className="BackgroundPanel2">
           {" "}
-          <RecentOrders />
+          <RecentOrders updateSnackbar={this.AddNotification} />
           <WhiteLine />
-          <Watchlist />
+          <button
+            onClick={() => {
+              this.AddNotification("Whats up!");
+            }}
+          >
+            Hello
+          </button>
+          <Watchlist updateSnackbar={this.AddNotification} />
         </div>
-        {/* <Snackbar /> */}
+        <Snackbar messages={this.state.snackBarMessages} />
       </div>
     );
   }
