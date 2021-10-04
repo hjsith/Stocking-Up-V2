@@ -79,7 +79,7 @@ describe("Watchlist endpoint", () => {
     expect(res.status).toEqual(401);
   });
 
-  //Unit tests for /api/watchlistremoved - to delete Watchlist
+  // // Unit tests for /api/watchlistremoved - to delete Watchlist
   // it("Successfully delete watchlist", async () => {
   //   // console.log(priorwatchlist.body.id);
   //   const res = await request(app)

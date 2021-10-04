@@ -12,6 +12,7 @@ import { UserContext } from "../components/UserContext";
 import { Redirect } from "react-router-dom";
 
 class Portfolio extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -23,8 +24,10 @@ class Portfolio extends React.Component {
     this.AddNotification = this.AddNotification.bind(this);
   }
 
+  //Fetching and obtaining investor which is signed in to display information
   static contextType = UserContext;
 
+  //Snackbar notification implementation whereby snackbar messages are added to snackBarMessages
   AddNotification(NotificationMessage) {
     let tempArray = this.state.snackBarMessages.slice();
     tempArray.push(NotificationMessage);
@@ -57,10 +60,12 @@ class Portfolio extends React.Component {
     });
   }
 
+  //On page load fetch API calls to get all orders made by the investor from the investor ID from the Order database and puts it within the allOrdersArray which is mapped to the AllOrderRowPanel component.
   componentDidMount() {
     this.fetchUser();
   }
 
+  //This render checks to see whether an investor is logged into the application to allow access to this URL, if not it redirects to the Sign In page
   render() {
     if (this.state.unauth || this.context.user.name === "") {
       return (
@@ -72,6 +77,7 @@ class Portfolio extends React.Component {
       );
     }
 
+    //This render checks to see whether an investor is logged into the application to allow access to this URL, if not it redirects to the Sign In page
     return (
       <div>
         <NavBar />
@@ -105,6 +111,7 @@ class Portfolio extends React.Component {
         </div>
         <div className="BackgroundPanel2">
           {" "}
+          {/* Snackbar messages from recent orders and watchlist functionalities */}
           <RecentOrders updateSnackbar={this.AddNotification} />
           <WhiteLine />
           <Watchlist updateSnackbar={this.AddNotification} />

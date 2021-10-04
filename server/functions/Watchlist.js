@@ -1,9 +1,11 @@
 const { Watchlist } = require("../db/Models");
 
+//Get all watchlist function
 async function getAllWatchlist() {
   return await Watchlist.findAll();
 }
 
+//Get all watchlist by investor
 async function getWatchlistByInvestor(investorID) {
   return await Watchlist.findAll({
     where: {
@@ -12,6 +14,7 @@ async function getWatchlistByInvestor(investorID) {
   });
 }
 
+//Create watchlist with investor and listing
 async function createWatchlist(investorID, listingID) {
   return await Watchlist.create({
     InvestorID: investorID,
@@ -19,6 +22,7 @@ async function createWatchlist(investorID, listingID) {
   });
 }
 
+//Function to check if Watchlist already exsists
 async function checkIfWatchlistExists(investorID, listingID) {
   let watchlistExist = await Watchlist.findOne({
     where: {
@@ -33,24 +37,10 @@ async function checkIfWatchlistExists(investorID, listingID) {
   return false;
 }
 
-//used destroy to remove Watchlist check if correct
-
-// async function deleteWatchlist(investorID, listingID) {
-//   return await Watchlist.destroy({
-//     InvestorID: investorID,
-//     ListingID: listingID,
-//   });
-// }
-
+//Function to delete watchlist
 async function deleteWatchlist(ID) {
   return await Watchlist.destroy({ where: { id: ID } });
 }
-
-// let watchlistdeleted = await Watchlist.findOne({ where: { id: ID } });
-// order.ExecutionTime = moment.utc();
-// await order.save();
-// return true;
-// }
 
 module.exports = {
   getAllWatchlist,

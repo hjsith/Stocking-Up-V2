@@ -1,10 +1,11 @@
 const { Holding, Order } = require("../db/Models");
 
+//Get all holdings function
 async function getAllHoldings() {
   return await Holding.findAll();
 }
 
-//Finds orders which have been executed
+//Finds current holdings which are orders that have been executed and current is 1
 async function getAllCurrentHoldingsByInvestor(investorID) {
   const currentHoldings = await Holding.findAll({
     where: {
@@ -30,6 +31,7 @@ async function getAllCurrentHoldingsByInvestor(investorID) {
   return temp;
 }
 
+//Create holding function
 async function createHolding(investorID, listingID, orderID, current) {
   return await Holding.create({
     InvestorID: investorID,
