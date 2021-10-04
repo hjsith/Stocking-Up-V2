@@ -1,34 +1,35 @@
-const express = require("express");
-const path = require("path");
+// const express = require("express");
+// const path = require("path");
 const db = require("./db/DBInstance");
 const env = require("./Environment");
-const BaseRouter = require("./routes/Router");
-const { StatusCodes } = require("http-status-codes");
+const app = require("./server.js");
+// const BaseRouter = require("./routes/Router");
+// const { StatusCodes } = require("http-status-codes");
 const cron = require("node-cron");
 const { pendingOrderCheck } = require("./functions/Order");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 
-const app = express();
+// const app = express();
 const PORT = env.port;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
-//Used to process cookies in requests for User Authentication
-app.use(cookieParser());
+// //Used to process cookies in requests for User Authentication
+// app.use(cookieParser());
 
-app.use("/api", BaseRouter);
+// app.use("/api", BaseRouter);
 
-const staticDir = path.join(__dirname, "../client/build/");
-app.use(express.static(staticDir));
+// const staticDir = path.join(__dirname, "../client/build/");
+// app.use(express.static(staticDir));
 
-app.get("*", (req, res) => {
-  if (req.url.startsWith("/api")) {
-    res.status(StatusCodes.NOT_FOUND).end();
-  } else {
-    res.sendFile("index.html", { root: staticDir });
-  }
-});
+// app.get("*", (req, res) => {
+//   if (req.url.startsWith("/api")) {
+//     res.status(StatusCodes.NOT_FOUND).end();
+//   } else {
+//     res.sendFile("index.html", { root: staticDir });
+//   }
+// });
 
 async function dbconnect() {
   try {
@@ -44,9 +45,10 @@ dbconnect();
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
-
-cron.schedule("* * * * *", async function () {
-  await pendingOrderCheck();
-});
+if (env.node_env != "test") {
+  cron.schedule("* * * * *", async function () {
+    await pendingOrderCheck();
+  });
+}
 
 module.exports = { app };

@@ -1,6 +1,5 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "../UserProfileIcon";
 
 class WatchlistRowPannel extends React.Component {
@@ -15,6 +14,7 @@ class WatchlistRowPannel extends React.Component {
     };
   }
 
+  
   componentDidMount() {
     fetch("/api/listing/industry" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -82,6 +82,10 @@ class WatchlistRowPannel extends React.Component {
     });
   }
 
+  handleBuy() {
+    console.log("Bought!!");
+  }
+
   render() {
     return (
       <div className="WatchlistRowPannel">
@@ -101,17 +105,18 @@ class WatchlistRowPannel extends React.Component {
             <th>{this.state.highPrice}</th>
             <th>{this.state.industry}</th>
             <th>
-              <GreenBuyButton />
+              <div className="ButtonContainer">
+                <button className="BlueGoToCompany" onClick={this.handleBuy}>
+                  Go to {this.props.companyCode}'s page
+                </button>
+              </div>
             </th>
             <th>
               <div className="ButtonContainer">
                 <button
                   className="CancelCrossButton"
                   onClick={() => {
-                    this.props.cancel(
-                      this.props.ID
-                      // this.props.listingID
-                    );
+                    this.props.cancel(this.props.ID);
                   }}
                 >
                   X
