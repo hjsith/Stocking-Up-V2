@@ -11,8 +11,7 @@ class DiscussionBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: [],
-      searchString: "",
+      comments: [], //Array containing all comments
       currentListingPrice: 0,
       unauth: false,
     };
@@ -21,10 +20,7 @@ class DiscussionBoard extends React.Component {
 
   static contextType = UserContext;
 
-  fetchThread() {
-    console.log("Fetched thread information!");
-  }
-
+  //Get all comments for a specific thread
   fetchAllComments() {
     fetch("/api/comments" + "?ThreadID=" + this.props.match.params.id, {
       method: "GET",
@@ -49,14 +45,7 @@ class DiscussionBoard extends React.Component {
       });
   }
 
-  fetchListingPrice() {
-    console.log("Fetched listing price!");
-  }
-
-  postNewComment() {
-    console.log("Posted new comment!");
-  }
-
+  //Used to check if the thread being looked at is real or not
   verifyPage() {
     // fetch("/api/comments" + "?ThreadID=" + this.props.match.params.id, {
     //   method: "GET",
@@ -81,6 +70,7 @@ class DiscussionBoard extends React.Component {
     //   });
   }
 
+  //Get the current listing price for the company's thread
   fetchCurrentListingPrice() {
     fetch("/api/price?code=" + this.props.match.params.id, {
       method: "GET",
@@ -105,6 +95,7 @@ class DiscussionBoard extends React.Component {
   }
 
   render() {
+    //Redirect the user to the Sign in page if they are unauthenticated
     if (this.state.unauth || this.context.user.name === "") {
       return (
         <Redirect
