@@ -1,14 +1,20 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
 const { getAllListings, getListing } = require("../functions/Listing");
+const { getAuthenticatedUser } = require("../functions/Authenticate");
 
 // Init shared
 const router = Router();
 
 router.get("/listings", async (req, res) => {
-  const listings = await getAllListings();
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const listings = await getAllListings();
 
-  return res.status(StatusCodes.OK).json(listings);
+    return res.status(StatusCodes.OK).json(listings);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
 });
 
 router.get("/listing", async (req, res) => {
