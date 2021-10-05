@@ -10,14 +10,14 @@ import { UserContext } from "../components/UserContext";
 
 class SignIn extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);          //intialising  states 
     this.state = {
       Username: "",
       Password: "",
       Redirect: false,
       ErrorMessage: ""
     };
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);            //handle input changes 
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }

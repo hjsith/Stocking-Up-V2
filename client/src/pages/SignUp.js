@@ -17,6 +17,7 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //intialising states
       FirstName: "",
       LastName: "",
       Username: "",
@@ -26,7 +27,7 @@ class SignUp extends React.Component {
       Redirect: false,
       errorMessage: ""
     };
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this); //handle input changes
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -39,6 +40,7 @@ class SignUp extends React.Component {
   static contextType = UserContext;
 
   handleFirstNameChange(event) {
+    //handles input changes
     this.setState({ FirstName: event.target.value });
   }
   handleLastNameChange(event) {

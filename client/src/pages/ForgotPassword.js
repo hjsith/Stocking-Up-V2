@@ -14,6 +14,7 @@ class ForgotPassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // intialising states
       Username: "",
       Password: "",
       ConfirmPassword: "",
