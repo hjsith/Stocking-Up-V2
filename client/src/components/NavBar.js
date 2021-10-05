@@ -7,13 +7,14 @@ import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
   const cont = useContext(UserContext);
-  const Logout = () => {             //Logout
+  const Logout = () => {
+    //Logout
     fetch("/api/logout", {
       //connects to frotnend to backend
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
     cont.updateUser({ name: "", id: "" });
   };
@@ -40,7 +41,7 @@ const NavBar = () => {
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
           <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>
-          <NavDropdown.Item href="#Leaderboard">Leaderboard</NavDropdown.Item>
+          <NavDropdown.Item href="/Leaderboard">Leaderboard</NavDropdown.Item>
           <NavDropdown.Item href="/DiscussionBoardSearch">
             Discussion Board Search
           </NavDropdown.Item>
