@@ -23,38 +23,42 @@ class Profile extends React.Component {
       userDatejoined: "",
       SimulationEndDate: "0",
       userName: "",
-      unauth: false,
+      unauth: false
     };
   }
 
   static contextType = UserContext;
 
+  //Get information about currently logged in user
   fetchUser() {
-    fetch("/api/investor?id=" + this.context.user.id, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        res.json().then((body) =>
-          this.setState({
-            userRank: body.InvestorRanking,
-            userNetWorth: "" + body.NetWorth,
-            userDifficulty: body.InvestorDifficulty,
-            userTitle: body.Title,
-            userDatejoined: body.DateJoined,
-            userName: body.InvestorFName + " " + body.InvestorLName,
-          })
-        );
-      } else if (res.status === 401) {
-        this.setState({ unauth: true });
-      } else {
-        console.log(res.status);
-      }
-    });
+    window.setTimeout(() => {
+      fetch("/api/investor?id=" + this.context.user.id, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          res.json().then(body =>
+            this.setState({
+              userRank: body.InvestorRanking,
+              userNetWorth: "" + body.NetWorth,
+              userDifficulty: body.InvestorDifficulty,
+              userTitle: body.Title,
+              userDatejoined: body.DateJoined,
+              userName: body.InvestorFName + " " + body.InvestorLName
+            })
+          );
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
+        } else {
+          console.log(res.status);
+        }
+      });
+    }, 1 * 1000);
   }
 
+  //Get the number of friends the currently signed in user has
   fetchFriendCount() {
     this.setState({ userFriendCount: 0 });
     //   fetch("/api/investor", {
@@ -69,6 +73,7 @@ class Profile extends React.Component {
     // }
   }
 
+  //Get the number of comments the currently signed in user has made
   fetchPostCount() {
     this.setState({ userPostCount: 0 });
     //   fetch("/api/investor", {
@@ -83,6 +88,7 @@ class Profile extends React.Component {
     // }
   }
 
+  //Get the currently signed in user's achievements
   fetchAchievements() {
     //   fetch("/api/investor", {
     //     method: "PUT",
@@ -99,7 +105,7 @@ class Profile extends React.Component {
   componentDidMount() {
     if (this.props.location.state) {
       this.setState({
-        snackBarMessage: this.props.location.state.snackBarMessage,
+        snackBarMessage: this.props.location.state.snackBarMessage
       });
     }
     this.fetchUser();
@@ -109,11 +115,12 @@ class Profile extends React.Component {
   }
 
   render() {
+    //Redirect if the user is not logged in
     if (this.state.unauth || this.context.user.name === "") {
       return (
         <Redirect
           to={{
-            pathname: "/SignIn",
+            pathname: "/SignIn"
           }}
         />
       );

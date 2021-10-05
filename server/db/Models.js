@@ -1,6 +1,7 @@
 const { DataTypes, Op } = require("sequelize");
 const db = require("./DBInstance");
 
+//Model definitions for all entities
 const Investor = db.define(
   "Investor",
   {
@@ -364,6 +365,8 @@ const Friends = db.define(
   { sequelize: db, tableName: "Friends", timestamps: false }
 );
 
+//Relationship Init for models
+//Investor
 Investor.hasMany(Watchlist, { foreignKey: "InvestorID" });
 Investor.hasMany(Holding, { foreignKey: "InvestorID" });
 Investor.hasMany(ObtainedAchievements, { foreignKey: "InvestorID" });
