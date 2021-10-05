@@ -29,14 +29,7 @@ router.get("/orders/pending/all", async (req, res) => {
 });
 
 router.get("/orders/pending", async (req, res) => {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .send("The request doesn't have the correct body format.");
-  }
-  let data = req.body;
-
-  const orders = await getAllPendingOrdersByInvestor(data.investorID);
+  const orders = await getAllPendingOrdersByInvestor(req.query.investorID);
 
   return res.status(StatusCodes.OK).json(orders);
 });
