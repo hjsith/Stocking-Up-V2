@@ -12,12 +12,13 @@ import Portfolio from "./pages/Portfolio";
 import MarketsOverview from "./pages/MarketsOverview";
 import DiscussionBoard from "./pages/DiscussionBoard";
 import DiscussionBoardSearch from "./pages/DiscussionBoardSearch";
+import Newsfeed from "./pages/Newsfeed";
 import { UserContext } from "./components/UserContext";
 import {
   Switch,
   Route,
   BrowserRouter as Router,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import Leaderboard from "./pages/Leaderboard";
 
@@ -28,12 +29,12 @@ class App extends React.Component {
     this.state = {
       user: JSON.parse(window.localStorage.getItem("user")) ?? {
         name: "",
-        id: ""
+        id: "",
       },
-      updateUser: newUser => {
+      updateUser: (newUser) => {
         this.setState({ user: newUser });
         window.localStorage.setItem("user", JSON.stringify(newUser));
-      }
+      },
     };
   }
 
@@ -49,9 +50,10 @@ class App extends React.Component {
             <Route path="/temp" component={temp} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/ForgotPassword" component={ForgotPassword} />
+            <Route path="/Newsfeed" component={Newsfeed} />
 
             <Route path="/Portfolio" component={Portfolio} />
-            <Route path="/Profile" render={props => <Profile {...props} />} />
+            <Route path="/Profile" render={(props) => <Profile {...props} />} />
             <Route path="/UpdatePassword" component={UpdatePassword} />
             <Route path="/MarketsOverview" component={MarketsOverview} />
             <Route

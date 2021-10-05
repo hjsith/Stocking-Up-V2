@@ -41,4 +41,20 @@ router.get("/listing/priceLow", async (req, res) => {
   return res.status(StatusCodes.OK).json({ lowPrice: listing.YearLowPrice });
 });
 
+router.get("/listing/volumeShares", async (req, res) => {
+  const listing = await getListing(req.query.code);
+
+  return res
+    .status(StatusCodes.OK)
+    .json({ volumeShares: listing.VolumeShares });
+});
+
+router.get("/listing/priceClose", async (req, res) => {
+  const listing = await getListing(req.query.code);
+
+  return res
+    .status(StatusCodes.OK)
+    .json({ closingPrice: listing.ClosingPrice });
+});
+
 module.exports = router;
