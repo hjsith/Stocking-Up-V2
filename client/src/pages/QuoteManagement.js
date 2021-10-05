@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
-import Popup from "../components/Popup";
 import Header from "../components/QuoteManagementComponents/Header";
 import ShareInfo from "../components/QuoteManagementComponents/ShareInfo";
 import Funds from "../components/QuoteManagementComponents/Funds";
@@ -9,6 +8,7 @@ import NavBar from "../components/NavBar";
 // import Change from "../components/QuoteManagementComponents/Change"; (this component will be in R2)
 import "../assets/css/QuoteManagement.scss";
 import Graph from "../components/QuoteManagementComponents/Graph";
+import Snackbar from "../components/Snackbar";
 const moment = require("moment");
 
 const QuoteManagement = () => {
@@ -19,8 +19,20 @@ const QuoteManagement = () => {
   const investorID = context.user.id; // the user ID based on the useContext is retrieved
   const [funds, setFunds] = useState(0); // the useState is used to show the current funds that a user has
   const [name, setName] = useState(""); // the useState is used to show the listing name on the page
-  const [snackBarMessage, setSnackBarMessage] = useState(""); // the snackbar message will be used to generate messages based on what button a user clicks
+  const [snackBarMessages, setSnackBarMessages] = useState([]); // the snackbar message will be used to generate messages based on what button a user clicks
   const [counter, setCounter] = useState(0); // the useState is used to show the quantity that a user selects
+
+  //Snackbar notification implementation whereby snackbar messages are added to snackBarMessages
+  const AddNotification = (NotificationMessage) => {
+    let tempArray = snackBarMessages.slice();
+    tempArray.push(NotificationMessage);
+    setSnackBarMessages(tempArray);
+    window.setTimeout(() => {
+      tempArray = snackBarMessages.slice();
+      tempArray.shift();
+      setSnackBarMessages(tempArray);
+    }, 3 * 1000);
+  };
 
   //in this section of the code, the useEffect is used to generate the information based on the listing the user selected on the company search page. The listing ID, listing name, investorID and share price is retrieved
   useEffect(() => {
@@ -79,7 +91,7 @@ const QuoteManagement = () => {
   // this section of the code handles the buy button in the page, in where the buy button will notify the user that they could not buy a share if they do have enough funds nor inputted a quantity.
   const buyButton = () => {
     if (funds < counter * sharePrice || counter == 0) {
-      setSnackBarMessage(
+      AddNotification(
         "You do not have enough funds or haven't inputted a quantity!"
       );
 
@@ -108,7 +120,7 @@ const QuoteManagement = () => {
         .then((res) => {
           if (res.status === 201) {
             // Successful orderCreation 201
-            setSnackBarMessage(
+            AddNotification(
               "Your order will be executed in 15 minutes! Go to your Portfolio to confirm or cancel this order"
             );
             //an error in the console will be shown if the order could not be created
@@ -123,7 +135,6 @@ const QuoteManagement = () => {
           console.log("Error:", exception);
         });
       setCounter(0);
-      setSnackBarMessage("");
     }
   };
   //this section of the code takes actions for when a user clicks Sell. Once a user clicks sell, the order is only created if there is no 'ERROR' which is when a user has shares for the listing in the holdings and the quantity is appropriate
@@ -151,10 +162,10 @@ const QuoteManagement = () => {
           res.json().then((body) => {
             console.log(body);
             if (body == "Error") {
-              setSnackBarMessage("You do not have shares in this company");
+              AddNotification("You do not have shares in this company");
             } else {
               setFunds(funds - body.OrderTotal);
-              setSnackBarMessage("Sell executed!");
+              AddNotification("Sell executed!");
             }
           });
         }
@@ -180,7 +191,11 @@ const QuoteManagement = () => {
       .then((res) => {
         // this section shows messages that appear if the listing is added to the watchlist.
         if (res.status === 201) {
-          setSnackBarMessage("Watchlist added succesfully");
+          console.log("Watchlist added succesfully");
+          AddNotification("Watchlist added succesfully");
+        } else if (res.status === 409) {
+          console.log("Watchlist was not added as already exist");
+          AddNotification("Watchlist was not added as already exist");
         } else {
           console.log("Something unexpeceted went wrong ._.");
         }
@@ -193,6 +208,7 @@ const QuoteManagement = () => {
   return (
     <>
       <NavBar />
+      <Snackbar messages={snackBarMessages} />
       <div className="side1">
         <div className="BackgroundPanel1">
           <Header currentPrice={sharePrice} title={listingID} company={name} />
@@ -218,11 +234,6 @@ const QuoteManagement = () => {
               <div className="button3">
                 <Button handleClick={sellButton} text="SELL" />
               </div>
-              <p>
-                <div>
-                  <Popup message={snackBarMessage} />
-                </div>
-              </p>
             </div>
           </div>
 

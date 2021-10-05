@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
+import AllOrders from "./pages/AllOrders";
 import MarketsOverview from "./pages/MarketsOverview";
 import DiscussionBoard from "./pages/DiscussionBoard";
 import DiscussionBoardSearch from "./pages/DiscussionBoardSearch";
@@ -50,6 +51,7 @@ class App extends React.Component {
             <Route path="/temp" component={temp} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/ForgotPassword" component={ForgotPassword} />
+            <Route path="/AllOrders" component={AllOrders} />
             <Route path="/Newsfeed" component={Newsfeed} />
 
             <Route path="/Portfolio" component={Portfolio} />

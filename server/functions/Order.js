@@ -12,6 +12,14 @@ async function getOrdersByInvestor(investorID) {
   });
 }
 
+async function getAllOrdersByInvestor(investorID) {
+  return await Order.findAll({
+    where: {
+      InvestorID: investorID,
+    },
+  });
+}
+
 // this section of the code retrieves all the orders that have a Status of "PENDING".
 async function getAllPendingOrders() {
   return await Order.findAll({
@@ -220,10 +228,27 @@ async function pendingOrderCheck() {
     });
 }
 
+async function cancelOrder(orderID) {
+  let order = await Order.findOne({ where: { OrderID: orderID } });
+  order.Status = "CANCELLED";
+  await order.save();
+  return true;
+}
+
+async function confirmOrder(orderID) {
+  let order = await Order.findOne({ where: { OrderID: orderID } });
+  order.ExecutionTime = moment.utc();
+  await order.save();
+  return true;
+}
+
 module.exports = {
   getOrdersByInvestor,
   createOrder,
   getAllPendingOrders,
   getAllPendingOrdersByInvestor,
   pendingOrderCheck,
+  cancelOrder,
+  confirmOrder,
+  getAllOrdersByInvestor,
 };

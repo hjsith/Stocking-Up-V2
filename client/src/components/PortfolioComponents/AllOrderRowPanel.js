@@ -1,7 +1,6 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
-import { Link } from "react-router-dom";
 
 class HoldingsRowPanel extends React.Component {
   //React constructor used to initalise local states
@@ -46,8 +45,8 @@ class HoldingsRowPanel extends React.Component {
 
   render() {
     return (
-      <div className="HoldingsRowPanel">
-        {/* table used to map out the information within each row seen via props retrieved from the front end (MyHoldings component) */}
+      <div className="AllOrderRowPanel">
+        {/* table used to map out the information within each row seen in All Order Page via props retrieved from the front end */}
         <table className="TableTitleFont2">
           <tr>
             <th>
@@ -59,40 +58,13 @@ class HoldingsRowPanel extends React.Component {
               />
             </th>
             <th>{this.state.name}</th>
-            <th>{this.props.priceBought}</th>
-            <th>{this.state.price}</th>
-            <th>{this.props.units}</th>
-            <th>{this.props.total}</th>
-            <th>
-              <div>
-                {/* link used to reroute investor the listing page on click passing through the companyCode */}
-                <Link
-                  to={{
-                    pathname: "/QuoteManagement",
-                    state: { listingID: this.props.companyCode },
-                  }}
-                >
-                  <div className="GreenBuy">
-                    {this.state.currentListingPrice} <span>Buy</span>
-                  </div>
-                </Link>
-              </div>
-            </th>
-            <th>
-              <div>
-                {/* link used to reroute investor the listing page on click passing through the companyCode */}
-                <Link
-                  to={{
-                    pathname: "/QuoteManagement",
-                    state: { listingID: this.props.companyCode },
-                  }}
-                >
-                  <div className="RedSell">
-                    {this.state.currentListingPrice} <span>Sell</span>
-                  </div>
-                </Link>
-              </div>
-            </th>
+            <th>{this.props.typeofOrder}</th>
+            <th>{this.props.status}</th>
+            <th>{this.props.listingPrice}</th>
+            <th>{this.props.quantityOrder}</th>
+            <th>{this.props.orderTotal}</th>
+            <th>{this.props.orderTime}</th>
+            <th>{this.props.executedTime}</th>
           </tr>
         </table>
       </div>

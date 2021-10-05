@@ -22,6 +22,17 @@
   vertical-align: top;
 }
 
+.BackgroundPanel3 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 100%;
+  width: 98%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 .NormalPanelTitle {
   font-family: "Roboto", sans-serif;
   font-size: 1.5em;
@@ -38,6 +49,15 @@
   font-weight: normal;
   padding: 0em 0em 0em 0.5em;
   font-weight: bold;
+  width: 90%;
+}
+
+.RecentOrdersWidth {
+  width: 78%;
+}
+
+.RecentOrdersWidth1 {
+  width: 19%;
 }
 
 .PanelTitle {
@@ -85,13 +105,21 @@
   padding: 1.25em 1.25em 0em 1.25em;
 }
 
+.TableTitleFont4 {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.TableTitleFont4 > tr {
+  width: 100%;
+}
+
 .TableTitleFont4 > tr > th {
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 15%;
 }
 
 .TableTitleFont5 > tr > th {
@@ -103,7 +131,13 @@
   width: 21%;
 }
 
+.AllOrdersHeadingwidth {
+  width: 10%;
+}
+
 .ButtonContainer {
+  display: inline-block;
+  margin-right: 20px;
 }
 
 .CancelButton {
@@ -147,6 +181,58 @@
   font-weight: bold;
 }
 
+.GreenBuy {
+  height: 3em;
+  width: 6em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.RedSell {
+  height: 3em;
+  width: 6em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.BlueGoToCompany {
+  height: 3em;
+  width: 10em;
+  background-color: #3789fd;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.GreenConfirmButton:disabled {
+  height: 3em;
+  width: 6em;
+  background-color: #5c5c5c;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: none;
+}
+
 .CancelCrossButton {
   height: 3em;
   width: 3em;
@@ -171,52 +257,6 @@
 }
 
 .CancelButton:hover {
-  opacity: 1;
-  font-weight: bold;
-}
-
-.GreenBuyButton {
-  height: 3em;
-  width: 5em;
-  background-color: #2ac811;
-  color: white;
-  border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border: 0px;
-  opacity: 0.8;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.GreenBuyButton:hover {
-  opacity: 1;
-  font-weight: bold;
-}
-
-.RedSellButton {
-  height: 3em;
-  width: 5em;
-  background-color: #ff4b4b;
-  color: white;
-  border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border: 0px;
-  opacity: 0.8;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.RedSellButton:hover {
   opacity: 1;
   font-weight: bold;
 }
@@ -282,20 +322,39 @@
   width: 10%;
 }
 
+.TableTitleFont10 {
+  margin-left: 0.9em;
+  width: 93%;
+  table-layout: fixed;
+}
+
+.TableTitleFont10 > tr {
+  width: 100%;
+}
+
 .TableTitleFont10 > tr > th {
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 2%;
-}
-
-.TableTitleFont10 {
-  margin-left: 0.9em;
+  border: white;
 }
 
 .TableTitleFont {
+  margin-left: 0.9em;
+}
+
+.TableTitleFontAllOrder > tr > th {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7em;
+  color: #c2bebe;
+  padding: 1.25em;
+  font-weight: normal;
+  width: 13.1%;
+}
+
+.TableTitleFontAllOrder {
   margin-left: 0.9em;
 }
 
@@ -317,7 +376,15 @@
 
 .WatchlistRowPannel {
   height: 4.6em;
-  width: 96%;
+  width: 98%;
+  background-color: #140f37bb;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
+}
+
+.AllOrderRowPanel {
+  height: 4.6em;
+  width: 98%;
   background-color: #140f37bb;
   margin-left: 1.25em;
   margin-bottom: 1em;
@@ -340,16 +407,6 @@
   margin-left: 1.5em;
   margin-bottom: 1.25em;
   border-radius: 0.625em;
-}
-
-.GreyCancelledState {
-  height: 3em;
-  width: 7em;
-  background-color: rgb(51, 51, 51);
-  border-radius: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .GreenCompletedState {
@@ -375,10 +432,18 @@
   overflow: auto;
 }
 
-.divwatchlist {
-  height: 21.8em;
-  width: 97%;
+.divallorder {
+  height: 50em;
+  width: 98%;
   overflow: auto;
+}
+
+.divwatchlist {
+  height: 21.5em;
+  margin-left: 0.9em;
+  width: 95%;
+  overflow: auto;
+  overflow-y: overlay;
 }
 
 .ArrowUp {
