@@ -31,7 +31,7 @@ const SearchBar = (props) => {
       />
       <ul id="results" className="list-group" ref={resultsRef}>
         {results.map((result, index) => {
-          return ( 
+          return (  //each dropdown item is a link to their respective order page where the URL is /QuoteManagement/[listing ID (shortened to three letters for each ASX code)]
             <Link to ={{pathname: "/QuoteManagement", state:{listingID:result.substring(0,3)}}}>
             <button 
               type="button" 
