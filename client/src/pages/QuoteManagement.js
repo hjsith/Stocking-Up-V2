@@ -150,13 +150,13 @@ const QuoteManagement = () => {
           // Successful orderCreation 201
           res.json().then((body) => {
             console.log(body);
-            if (body == "Error")
+            if (body == "Error") {
               setSnackBarMessage("You do not have shares in this company");
-            else setFunds(funds - body.OrderTotal);
-            setSnackBarMessage("Sell executed!");
+            } else {
+              setFunds(funds - body.OrderTotal);
+              setSnackBarMessage("Sell executed!");
+            }
           });
-        } else {
-          console.log("Something unexpeceted went wrong ._.");
         }
       })
       .catch((exception) => {
