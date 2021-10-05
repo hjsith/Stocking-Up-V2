@@ -44,7 +44,6 @@ class FriendListItem extends React.Component {
                     <div className="FriendIcon">
                       <UserProfileIcon
                         name={this.state.username}
-                        colorNumber={1}
                         company={false}
                         size={80}
                       />

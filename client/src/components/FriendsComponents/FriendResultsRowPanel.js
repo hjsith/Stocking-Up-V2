@@ -7,6 +7,7 @@ class FriendResultsRow extends React.Component {
     super(props);
     this.state = {
       buttonDisabled: false,
+      showRow: true,
       results: [],
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -59,6 +60,7 @@ class FriendResultsRow extends React.Component {
       .then((res) => {
         if (res.status === 200) {
           this.setState({ buttonDisabled: true });
+          this.setState({ showRow: false });
         } else if (res.status === 401) {
           this.setState({ unauth: true });
         } else {
@@ -84,6 +86,7 @@ class FriendResultsRow extends React.Component {
       .then((res) => {
         if (res.status === 200) {
           this.setState({ buttonDisabled: true });
+          this.setState({ showRow: false });
         } else if (res.status === 401) {
           this.setState({ unauth: true });
         } else {
@@ -127,28 +130,31 @@ class FriendResultsRow extends React.Component {
   }
 
   render() {
-    return (
-      <div className="FriendResultsRowPanel">
-        <table>
-          <tbody>
-            <tr>
-              <td className="FriendResultIcon">
-                <UserProfileIcon
-                  name={this.props.username}
-                  colorNumber={this.props.colourNumber}
-                  company={false}
-                  size={50}
-                />
-              </td>
-              <td className="FriendResultName">{this.props.username}</td>
-              <td>
-                <this.isPending />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+    if (!this.state.showRow) return <div></div>;
+    else {
+      return (
+        <div className="FriendResultsRowPanel">
+          <table>
+            <tbody>
+              <tr>
+                <td className="FriendResultIcon">
+                  <UserProfileIcon
+                    name={this.props.username}
+                    colorNumber={this.props.colourNumber}
+                    company={false}
+                    size={50}
+                  />
+                </td>
+                <td className="FriendResultName">{this.props.username}</td>
+                <td>
+                  <this.isPending />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    }
   }
 }
 

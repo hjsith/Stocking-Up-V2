@@ -468,6 +468,37 @@
   font-weight: bold;
 }
 
+.PendingLine {
+  display: flex;
+  align-items: center;
+}
+
+.PendingLine > button {
+  background-color: #3789fd;
+  color: white;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.PendingLine > button:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.PendingLine > button > img {
+  height: 5em;
+  display: inline;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

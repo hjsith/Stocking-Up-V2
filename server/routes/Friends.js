@@ -36,13 +36,13 @@ router.post("/friends/add", async (req, res) => {
 router.patch("/friends/accept", async (req, res) => {
   await confirmPendingFriend(req.body.rId, req.body.aId);
 
-  return res.status(StatusCodes.OK);
+  return res.status(StatusCodes.OK).end();
 });
 
 router.delete("/friends/deny", async (req, res) => {
   await denyPendingFriend(req.body.rId, req.body.aId);
 
-  return res.status(StatusCodes.OK);
+  return res.status(StatusCodes.OK).end();
 });
 
 module.exports = router;
