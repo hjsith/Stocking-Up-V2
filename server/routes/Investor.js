@@ -4,11 +4,9 @@ const {
   getAllInvestors,
   getInvestor,
   updateInvestorPassword,
-  getAllInvestors,
 } = require("../functions/Investor");
 const bcrypt = require("bcrypt");
 const { getAuthenticatedUser } = require("../functions/Authenticate");
-const { Investor } = require("../db/Models");
 
 // Init shared
 const router = Router();
