@@ -10,9 +10,9 @@ class DiscussionBoardSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
+      results: [], //Array containing all threads
       searchString: "",
-      toDisplay: [],
+      toDisplay: [], //Array containing threads that are to be displayed for pagination
       unauth: false,
     };
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
@@ -21,10 +21,12 @@ class DiscussionBoardSearch extends React.Component {
 
   static contextType = UserContext;
 
+  //Handle input changes for the search textbox
   handleSearchStringChange(event) {
     this.setState({ searchString: event.target.value });
   }
 
+  //Update displayed threads that match the search string
   handleSearch(event) {
     let temp = [];
     for (const element of this.state.results) {
@@ -38,6 +40,7 @@ class DiscussionBoardSearch extends React.Component {
     }
   }
 
+  //Get all threads
   fetchAllThreads() {
     fetch("/api/threads", {
       method: "GET",
@@ -67,6 +70,7 @@ class DiscussionBoardSearch extends React.Component {
   }
 
   render() {
+    //Redirect to sign in page if the user is unauthenticated
     if (this.state.unauth || this.context.user.name === "") {
       return (
         <Redirect

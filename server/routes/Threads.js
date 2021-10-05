@@ -4,16 +4,16 @@ const {
   getAllThreads,
   createThread,
   // findThreadsWithName,
-  createMissingThreads,
+  // createMissingThreads,
 } = require("../functions/Threads");
-const { getAllListings } = require("../functions/Listing");
 const { getAuthenticatedUser } = require("../functions/Authenticate");
 
 // Init shared
 const router = Router();
 
+//Returns all threads saved in the database
 router.get("/threads", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
     const threads = await getAllThreads();
     return res.status(StatusCodes.OK).json(threads);
@@ -22,7 +22,9 @@ router.get("/threads", async (req, res) => {
   }
 });
 
+//Create a new thread in the database
 router.post("/newThread", async (req, res) => {
+  //Check if the request body is empty
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -41,6 +43,7 @@ router.post("/newThread", async (req, res) => {
   return res.status(StatusCodes.CREATED).json(newThread);
 });
 
+// //Return threads with a specific search string, potentially redundant now due to better implemenatation
 // router.get("/thread", async (req, res) => {
 //   const threads = await findThreadsWithName(req.query.search);
 //   if (threads === null) {
@@ -51,6 +54,8 @@ router.post("/newThread", async (req, res) => {
 //   return res.status(StatusCodes.OK).json(threads);
 // });
 
+// //Create threads for new listings in the database, not to be called by the front-end
+// //Only used periodically manually
 // router.get("/CreateAllThreads", async (req, res) => {
 //   const listings = await getAllListings();
 //   await createMissingThreads(listings);
