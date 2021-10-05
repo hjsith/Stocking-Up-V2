@@ -29,6 +29,7 @@ class Profile extends React.Component {
 
   static contextType = UserContext;
 
+  //Get information about currently logged in user
   fetchUser() {
     fetch("/api/investor?id=" + this.context.user.id, {
       method: "GET",
@@ -55,6 +56,7 @@ class Profile extends React.Component {
     });
   }
 
+  //Get the number of friends the currently signed in user has
   fetchFriendCount() {
     this.setState({ userFriendCount: 0 });
     //   fetch("/api/investor", {
@@ -69,6 +71,7 @@ class Profile extends React.Component {
     // }
   }
 
+  //Get the number of comments the currently signed in user has made
   fetchPostCount() {
     this.setState({ userPostCount: 0 });
     //   fetch("/api/investor", {
@@ -83,6 +86,7 @@ class Profile extends React.Component {
     // }
   }
 
+  //Get the currently signed in user's achievements
   fetchAchievements() {
     //   fetch("/api/investor", {
     //     method: "PUT",
@@ -109,6 +113,7 @@ class Profile extends React.Component {
   }
 
   render() {
+    //Redirect if the user is not logged in
     if (this.state.unauth || this.context.user.name === "") {
       return (
         <Redirect

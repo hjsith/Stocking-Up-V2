@@ -3,6 +3,7 @@ import "../../assets/css/Achievement.scss";
 import Achievement from "./Achievement";
 
 class AchievementBlock extends React.Component {
+  //Create a list of achievements to display
   generateAchievementBlock() {
     let array = [];
     for (let i = 0; i < this.props.loop; i++) {

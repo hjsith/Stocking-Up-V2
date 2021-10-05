@@ -1,5 +1,6 @@
 const { Comments } = require("../db/Models");
 
+//Return all comments for a specific thread
 async function getAllComments(threadID) {
   return await Comments.findAll({
     where: {
@@ -9,6 +10,7 @@ async function getAllComments(threadID) {
   });
 }
 
+//Return the number of comments a user has
 async function getUserCommentCount(investorID) {
   var comments = await Comments.findAll({
     where: {
@@ -18,6 +20,7 @@ async function getUserCommentCount(investorID) {
   return comments.length;
 }
 
+//Create a new comment
 async function createComment(
   inputInvestorID,
   inputThreadID,
@@ -35,6 +38,7 @@ async function createComment(
   });
 }
 
+//Increase the like count of a comment by one
 async function increaseLike(commentID) {
   var commentLikes = await Comments.findOne({
     attributes: ["Likes"],
@@ -51,6 +55,8 @@ async function increaseLike(commentID) {
       },
     }
   );
+
+  //Check if the comment was successfully updated
   if (updatedComment[0] >= 1) {
     return true;
   } else {
@@ -58,6 +64,7 @@ async function increaseLike(commentID) {
   }
 }
 
+//Decrease the like count of a comment by one
 async function decreaseLike(commentID) {
   var commentLikes = await Comments.findOne({
     attributes: ["Likes"],
@@ -74,6 +81,8 @@ async function decreaseLike(commentID) {
       },
     }
   );
+
+  //Check if the comment was successfully updated
   if (updatedComment[0] >= 1) {
     return true;
   } else {
