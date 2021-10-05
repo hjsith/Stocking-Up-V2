@@ -23,7 +23,7 @@ class Profile extends React.Component {
       userDatejoined: "",
       SimulationEndDate: "0",
       userName: "",
-      unauth: false,
+      unauth: false
     };
   }
 
@@ -31,29 +31,31 @@ class Profile extends React.Component {
 
   //Get information about currently logged in user
   fetchUser() {
-    fetch("/api/investor?id=" + this.context.user.id, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        res.json().then((body) =>
-          this.setState({
-            userRank: body.InvestorRanking,
-            userNetWorth: "" + body.NetWorth,
-            userDifficulty: body.InvestorDifficulty,
-            userTitle: body.Title,
-            userDatejoined: body.DateJoined,
-            userName: body.InvestorFName + " " + body.InvestorLName,
-          })
-        );
-      } else if (res.status === 401) {
-        this.setState({ unauth: true });
-      } else {
-        console.log(res.status);
-      }
-    });
+    window.setTimeout(() => {
+      fetch("/api/investor?id=" + this.context.user.id, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          res.json().then(body =>
+            this.setState({
+              userRank: body.InvestorRanking,
+              userNetWorth: "" + body.NetWorth,
+              userDifficulty: body.InvestorDifficulty,
+              userTitle: body.Title,
+              userDatejoined: body.DateJoined,
+              userName: body.InvestorFName + " " + body.InvestorLName
+            })
+          );
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
+        } else {
+          console.log(res.status);
+        }
+      });
+    }, 1 * 1000);
   }
 
   //Get the number of friends the currently signed in user has
@@ -103,7 +105,7 @@ class Profile extends React.Component {
   componentDidMount() {
     if (this.props.location.state) {
       this.setState({
-        snackBarMessage: this.props.location.state.snackBarMessage,
+        snackBarMessage: this.props.location.state.snackBarMessage
       });
     }
     this.fetchUser();
@@ -118,7 +120,7 @@ class Profile extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: "/SignIn",
+            pathname: "/SignIn"
           }}
         />
       );
