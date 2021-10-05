@@ -21,7 +21,7 @@
   align-content: center;
 }
 
-.Panel1 {
+.FriendPanel1 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
   height: 3%;
   width: 90%;
@@ -33,7 +33,7 @@
   vertical-align: top;
 }
 
-.Panel2 {
+.FriendPanel2 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
   height: 80%;
   width: 90%;
@@ -45,7 +45,7 @@
   vertical-align: top;
 }
 
-.Panel3 {
+.FriendPanel3 {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
   height: 50.5em;
   width: 95%;
@@ -275,7 +275,7 @@
 }
 
 .achievementContainer {
-  width: 15em;
+  width: 13em;
   display: inline-block;
   margin: 1em 1em 1em;
 }
@@ -340,7 +340,7 @@
 }
 
 .FriendResults {
-  height: auto;
+  height: 33em;
   overflow: auto;
 }
 

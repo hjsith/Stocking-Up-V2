@@ -33,6 +33,21 @@ async function createInvestor(fName, lName, email, password, username) {
   });
 }
 
+async function setInvestorDifficulty(id, difficulty) {
+  const investor = await Investor.findByPk(id);
+  let funds =
+    difficulty == "Easy" ? 50000 : difficulty == "Intermediate" ? 20000 : 5000;
+  let netWorth = funds;
+  let title = "Beginner";
+
+  await investor.update({
+    InvestorDifficulty: difficulty,
+    Funds: funds,
+    NetWorth: netWorth,
+    Title: title,
+  });
+}
+
 async function updateInvestorBalanceAfterPurchase(investorID, total) {
   let investor = await Investor.findByPk(investorID);
   let balance = investor.NetWorth;
@@ -144,6 +159,7 @@ module.exports = {
   getInvestorPassword,
   checkUsernameExist,
   getInvestorsWithUsername,
+  setInvestorDifficulty,
   updateInvestorPassword,
   getOneInvestorWithUsername,
   updateInvestorBalanceAfterPurchase,

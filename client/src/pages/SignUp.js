@@ -24,16 +24,15 @@ class SignUp extends React.Component {
       Email: "",
       ConfirmPassword: "",
       Redirect: false,
-      errorMessage: ""
+      errorMessage: "",
     };
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
-      this
-    );
+    this.handleConfirmPasswordChange =
+      this.handleConfirmPasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   static contextType = UserContext;
@@ -75,28 +74,28 @@ class SignUp extends React.Component {
               this.createInvestor();
             } else {
               this.setState({
-                errorMessage: "Your passwords do not match"
+                errorMessage: "Your passwords do not match",
               });
             }
           } else {
             this.setState({
-              errorMessage: "Your username must be atleast 3 characters long"
+              errorMessage: "Your username must be atleast 3 characters long",
             });
           }
         } else {
           this.setState({
             errorMessage:
-              "This password is in the incorrect format, it must contain atleast 8 characters, 1 upper case, 1 number and 1 special character. "
+              "This password is in the incorrect format, it must contain atleast 8 characters, 1 upper case, 1 number and 1 special character. ",
           });
         }
       } else {
         this.setState({
-          errorMessage: " The email is not in the correct format"
+          errorMessage: " The email is not in the correct format",
         });
       }
     } else {
       this.setState({
-        errorMessage: "One or more fields are empty, please try again"
+        errorMessage: "One or more fields are empty, please try again",
       });
     }
     event.preventDefault();
@@ -111,29 +110,29 @@ class SignUp extends React.Component {
         lastName: this.state.LastName,
         email: this.state.Email,
         password: this.state.Password,
-        username: this.state.Username
+        username: this.state.Username,
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(res => {
+      .then((res) => {
         if (res.status === 201) {
           // Successful login 200
-          res.json().then(body => {
+          res.json().then((body) => {
             this.context.updateUser({ name: body.username, id: body.id });
           });
 
           this.setState({ Redirect: true });
         } else if (res.status === 422) {
           this.setState({
-            errorMessage: "The username already exists"
+            errorMessage: "The username already exists",
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
         }
       })
-      .catch(exception => {
+      .catch((exception) => {
         console.log("Error:", exception);
       });
   }
@@ -143,7 +142,7 @@ class SignUp extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/Profile" />;
+      return <Redirect to="/DifficultySelect" />;
     }
     return (
       <div className="SignUpContainer">

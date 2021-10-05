@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn";
 import temp from "./pages/temp";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
+import DifficultySelect from "./pages/DifficultySelect";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
 import Friends from "./pages/Friends";
@@ -47,7 +48,7 @@ class App extends React.Component {
             <Route path="/temp" component={temp} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/ForgotPassword" component={ForgotPassword} />
-
+            <Route path="/DifficultySelect" component={DifficultySelect} />
             <Route path="/Portfolio" component={Portfolio} />
             <Route path="/Profile" render={(props) => <Profile {...props} />} />
             <Route path="/Friends" component={Friends} />

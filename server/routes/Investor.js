@@ -5,6 +5,7 @@ const {
   getInvestor,
   getInvestorUsername,
   updateInvestorPassword,
+  setInvestorDifficulty,
   getInvestorsWithSimilarUsernames,
 } = require("../functions/Investor");
 const bcrypt = require("bcrypt");
@@ -74,6 +75,11 @@ router.get("/investor/username/similar", async (req, res) => {
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }
+});
+
+router.patch("/investor/difficulty", async (req, res) => {
+  await setInvestorDifficulty(req.body.id, req.body.difficulty);
+  return res.status(StatusCodes.OK).end();
 });
 
 module.exports = router;

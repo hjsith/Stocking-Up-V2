@@ -76,19 +76,19 @@ class Friends extends React.Component {
         <NavBar />
         <div className="Side1">
           <div>
-            <div className="Panel1">
+            <div className="FriendPanel1">
               <FriendsTitlePanel
                 handler={this.handler}
                 panelNumber={this.WhichPanel()}
               />
             </div>
-            <div className="Panel2">
+            <div className="FriendPanel2">
               <FriendsList />
             </div>
           </div>
         </div>
         <div className="Side2">
-          <div className="Panel3">
+          <div className="FriendPanel3">
             <this.RightPanelView />
           </div>
         </div>

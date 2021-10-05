@@ -1,7 +1,10 @@
 import React from "react";
 import FriendButton from "./FriendButton";
+import { UserContext } from "../UserContext";
 
 class FriendsTitlePanel extends React.Component {
+  static contextType = UserContext;
+
   render() {
     return (
       <div class="container" className="FriendsTitlePanel">
@@ -20,7 +23,7 @@ class FriendsTitlePanel extends React.Component {
           <div class="w-100"></div>
           <div class="col-sm d-flex justify-content-center">
             {" "}
-            <p>Your username is: Hjsith</p>
+            <p>Your username is: {this.context.user.name}</p>
           </div>
           <div class="col-sm d-flex justify-content-center">
             {" "}
