@@ -7,7 +7,7 @@ Sequelize.DATE.prototype._stringify = function _stringify(date, options) {
 };
 
 const sequelize =
-  env.node_env === "test" || env.persistent === "false"
+  env.node_env === "test" || env.persistent === "false" //Check if app is being unit tested, run on memory database if so
     ? new Sequelize("sqlite::memory:", { logging: false })
     : new Sequelize(env.db_name, env.db_username, env.db_password, {
         host: env.db_host,

@@ -3,10 +3,12 @@ const { Op } = require("sequelize");
 const moment = require("moment");
 const { checkIfFriends } = require("../functions/Friends");
 
+//Returns all investors
 async function getAllInvestors() {
   return await Investor.findAll();
 }
 
+//Find investor given a ID
 async function getInvestor(userID) {
   return await Investor.findByPk(userID);
 }
@@ -16,6 +18,7 @@ async function getInvestorUsername(userID) {
   return investor.Username;
 }
 
+//Create new investor
 async function createInvestor(fName, lName, email, password, username) {
   let date = moment.utc().startOf("date");
   return Investor.create({
@@ -48,16 +51,22 @@ async function setInvestorDifficulty(id, difficulty) {
   });
 }
 
-async function updateInvestorBalanceAfterPurchase(investorID, total) {
+async function investorBuy(investorID, total) {
   let investor = await Investor.findByPk(investorID);
-  let balance = investor.NetWorth;
+  let balance = investor.Funds;
   if (total < balance) {
-    investor.NetWorth += total;
+    investor.Funds -= total;
     await investor.save();
     return true;
   } else {
     return false;
   }
+}
+
+async function investorSell(investorID, total) {
+  let investor = await Investor.findByPk(investorID);
+  investor.Funds += total;
+  await investor.save();
 }
 
 async function getInvestorPassword(username) {
@@ -69,6 +78,7 @@ async function getInvestorPassword(username) {
   });
 }
 
+//Check if a username already exist, used to prevent duplicate usernames from being used by investors
 async function checkUsernameExist(username) {
   var searchedInvestor = await Investor.findOne({
     where: {
@@ -82,6 +92,7 @@ async function checkUsernameExist(username) {
   }
 }
 
+//Return investors given a search string
 async function getInvestorsWithUsername(username) {
   return Investor.findAll({
     where: {
@@ -92,6 +103,7 @@ async function getInvestorsWithUsername(username) {
   });
 }
 
+//Update an investor's password
 async function updateInvestorPassword(userID, username, password) {
   var updatedInvestorCount = await Investor.update(
     { InvestorPassword: password },
@@ -108,6 +120,7 @@ async function updateInvestorPassword(userID, username, password) {
   }
 }
 
+//Return an investor given a username
 async function getOneInvestorWithUsername(username) {
   return Investor.findOne({
     where: {
@@ -162,6 +175,7 @@ module.exports = {
   setInvestorDifficulty,
   updateInvestorPassword,
   getOneInvestorWithUsername,
-  updateInvestorBalanceAfterPurchase,
   getInvestorsWithSimilarUsernames,
+  investorBuy,
+  investorSell,
 };

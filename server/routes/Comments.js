@@ -13,8 +13,9 @@ const { getAuthenticatedUser } = require("../functions/Authenticate");
 // Init shared
 const router = Router();
 
+//Return all comments for a specific thread
 router.get("/comments", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
     const comments = await getAllComments("TH-" + req.query.ThreadID);
     return res.status(StatusCodes.OK).json(comments);
@@ -23,9 +24,11 @@ router.get("/comments", async (req, res) => {
   }
 });
 
+//Create a new comment for a specific thread in the database
 router.post("/newComment", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
+    //Check if the request body is empty
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -47,8 +50,9 @@ router.post("/newComment", async (req, res) => {
   }
 });
 
+//Return the number of comments a user has made
 router.get("/commentCount", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
     const commentCount = await getUserCommentCount(req.query.userID);
     return res.status(StatusCodes.OK).json(commentCount);
@@ -57,9 +61,11 @@ router.get("/commentCount", async (req, res) => {
   }
 });
 
+//Update the comment message of a comment
 router.put("/editComment", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
+    //Check if the request body is empty
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -74,6 +80,7 @@ router.put("/editComment", async (req, res) => {
     );
 
     if (commentCheck) {
+      //Check if the comment was successfully updated
       const comments = await getAllComments(data.ThreadID);
       return res.status(StatusCodes.OK).json(comments);
     }
@@ -83,9 +90,11 @@ router.put("/editComment", async (req, res) => {
   }
 });
 
+//Increase the like count of a comment by one
 router.put("/likeComment", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
+    //Check if the request body is empty
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -95,6 +104,7 @@ router.put("/likeComment", async (req, res) => {
     var data = req.body;
 
     const commentCheck = await increaseLike(data.CommentID);
+    //Check if update was successful
     if (commentCheck) {
       return res.status(StatusCodes.OK).send();
     }
@@ -104,9 +114,11 @@ router.put("/likeComment", async (req, res) => {
   }
 });
 
+//Decrease the like count of a comment by one
 router.put("/unlikeComment", async (req, res) => {
-  const checkAuth = await getAuthenticatedUser(req, res);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
+    //Check if the request body is empty
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -116,6 +128,7 @@ router.put("/unlikeComment", async (req, res) => {
     var data = req.body;
 
     const commentCheck = await decreaseLike(data.CommentID);
+    //Check if update was successful
     if (commentCheck) {
       return res.status(StatusCodes.OK).send();
     }

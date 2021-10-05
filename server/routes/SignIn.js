@@ -13,8 +13,9 @@ const {
 
 // Init shared
 const router = Router();
-
+// route for when user signs in
 router.post("/SignIn", async (req, res) => {
+  // route for when user signs in
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -25,13 +26,13 @@ router.post("/SignIn", async (req, res) => {
 
   const match = await bcrypt.compare(
     data.password,
-    userPassword.InvestorPassword
+    userPassword != null ? userPassword.InvestorPassword : ""
   ); //comparing passwords
   if (match == true) {
     const user = await getOneInvestorWithUsername(data.username);
 
     const device = req.headers.host ?? "Unknown";
-    await generateNewAuthenticationTokens(user, device, res);
+    await generateNewAuthenticationTokens(user, device, res); //create new access and refresh tokens
 
     return res
       .status(StatusCodes.OK)
@@ -46,7 +47,7 @@ router.get("/logout", async (req, res) => {
     .clearCookie("access_tokens")
     .end();
 });
-
+//Forgot Password Route
 router.post("/ForgotPassword", async (req, res) => {
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
@@ -58,7 +59,7 @@ router.post("/ForgotPassword", async (req, res) => {
   var userCheck = await checkUsernameExist(data.username);
   if (userCheck == true) {
     //checking if user exists
-    const passHash = await bcrypt.hash(data.password, 10);
+    const passHash = await bcrypt.hash(data.password, 10); // hashses password for encryption for 10 times
     const check = await updateInvestorPassword("", data.username, passHash);
     if (check == true) {
       return res.status(StatusCodes.OK).end();

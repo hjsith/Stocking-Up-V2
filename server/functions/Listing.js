@@ -1,13 +1,16 @@
 const { Listing } = require("../db/Models");
 
+//Get all listing function
 async function getAllListings() {
   return await Listing.findAll();
 }
 
+//Get listing by company code
 async function getListing(code) {
   return await Listing.findByPk(code);
 }
 
+//Create Listing
 async function createListing(
   inputListingID,
   inputListingName,

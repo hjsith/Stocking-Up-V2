@@ -2,20 +2,22 @@ import React from "react";
 import "../../assets/css/DiscussionBoardSearch.scss";
 import ThreadView from "./ThreadView";
 
+//Number of threads to show per paginated page
 const threadsPerPage = 100;
 
 class DBoardSearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allThreads: [],
-      threadsToShow: [],
+      allThreads: [], //Array containing all threads
+      threadsToShow: [], //Array containing threads that are to be displayed
       currentPage: 0,
       buttons: [],
     };
     this.handleFormButtonClick = this.handleFormButtonClick.bind(this);
   }
 
+  //Update the currently shown threads to match the selected paginated page
   handleFormButtonClick(pageNumber) {
     this.setState({
       currentPage: pageNumber,
@@ -26,6 +28,7 @@ class DBoardSearchResults extends React.Component {
     });
   }
 
+  //Pagination Controls
   createControls() {
     var rows = [];
     for (
@@ -47,6 +50,8 @@ class DBoardSearchResults extends React.Component {
 
   displayControls() {
     var rows = [];
+
+    //Create pagination controls for display
     rows.push(
       <div
         className={"FormButton"}
@@ -86,6 +91,7 @@ class DBoardSearchResults extends React.Component {
     this.createControls();
   }
 
+  //Check to see if the props have updated
   componentDidUpdate(oldProps) {
     const newProps = this.props;
     if (oldProps !== newProps) {
