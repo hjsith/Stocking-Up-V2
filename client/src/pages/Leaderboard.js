@@ -1,57 +1,25 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/Leaderboard.scss";
-import UserProfileIcon from "../components/UserProfileIcon";
-/*
-const LeaderboardTable = (props) => {
-    const { Lresults } = props;
-    const LresultsRef = useRef();
-    <div className="Ltable">
-        <table id="Lresults" ref={LresultsRef}>
-        <tr>
-            <th>
-            <UserProfileIcon
-            name={Lresults}
-            colorNumber={1}
-            company={false}
-            size={50}
-            />
-            </th>
-            <th>{Lresults.map((Lresult, index) => {
-                return (
-                    <th key={index}>
-                        {Lresult}
-                    </th>
-                );})}
-            </th>
-        </tr>
-        </table>  
-    </div>
-}
-*/
-const Leaderboard = () => {
-const [investors, setInvestors] = useState([]);  
+
+const Leaderboard = () => { //DB connection
+const [investors, setInvestors] = useState([]);  //create array investors using React useState
     {
-    fetch("/api/allInvestors", {
+    fetch("/api/allInvestors", { //HTTP get request for all investors/users on platform
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     }).then((res) => {
       res.json().then((body) => {
-        setInvestors(body);
-        console.log(investors)
+        setInvestors(body); //set investor array to be the get response
+        console.log(investors) //log response for testing purposes
       })
       
     })
   }
-
-/*function Leaderboard() {
-    const [Lresults, setresults] = useState([]);
-    setresults(LeaderboardResults);
-*/
-    return (
+    return ( //front end
         <div className="LeaderboardTitle">
         <NavBar />
         <h1 className="LeaderboadTitle">Leaderboard</h1>
@@ -62,11 +30,11 @@ const [investors, setInvestors] = useState([]);
             <th><b>Ranking</b></th>
             <th><b>Net Worth</b></th>
           </tr>
-          {investors.map((investor, index) => {
+          {investors.map((investor, index) => { //map investor to the front end display- attributes from investor table used below include Username, Ranking, NetWorth
                 return (
                     <tr>
                         <td key={index}>
-                        {investor.Username}
+                        {investor.Username} 
                     </td>
                     <td key={index}>
                         {investor.InvestorRanking}
