@@ -38,6 +38,7 @@ class DiscussionBoardSearch extends React.Component {
         temp.push(element);
       }
     }
+    this.setState({ toDisplay: temp });
   }
 
   //Get all threads
