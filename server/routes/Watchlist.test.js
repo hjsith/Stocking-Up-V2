@@ -78,18 +78,4 @@ describe("Watchlist endpoint", () => {
     );
     expect(res.status).toEqual(401);
   });
-
-  // // Unit tests for /api/watchlistremoved - to delete Watchlist
-  // it("Successfully delete watchlist", async () => {
-  //   // console.log(priorwatchlist.body.id);
-  //   const res = await request(app)
-  //     .delete("/api/watchlistremoved?ID=" + priorwatchlist.body.id)
-  //     .set("cookie", cookie);
-  //   expect(res.status).toEqual(200);
-  //   expect(res.body).toEqual(expect.any(Array));
-  // });
-  // it("Unauthorized to retrieved comments", async () => {
-  //   const res = await request(app).get("/api/watchlistremoved?ID=" + body.ID);
-  //   expect(res.status).toEqual(401);
-  // });
 });
