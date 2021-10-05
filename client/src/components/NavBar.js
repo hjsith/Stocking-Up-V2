@@ -33,7 +33,7 @@ const NavBar = () => {
           Portfolio
         </Nav.Link>
         <NavDropdown title="Markets" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#Markets Overview">
+          <NavDropdown.Item href="/MarketsOverview">
             Markets Overview
           </NavDropdown.Item>
           <NavDropdown.Item href="#Newsfeed">News Feed</NavDropdown.Item>
