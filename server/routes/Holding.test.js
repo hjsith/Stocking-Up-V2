@@ -35,6 +35,7 @@ beforeAll(async () => {
   //Create test Price for listing from Price table
   await createPrice("TLG", 7.8);
 
+  //Create cookie for user authentication
   cookie = await getAuthenticatedUserCookie("TestUser", "Password");
 
   //Create test Order
