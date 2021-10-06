@@ -1,10 +1,7 @@
 const app = require("../server.js");
 const request = require("supertest");
 const sequelize = require("../db/DBInstance");
-const {
-  getAuthenticatedUserCookie,
-  createTestUser,
-} = require("../test.config");
+const { getAuthenticatedUserCookie } = require("../test.config");
 const { createListing } = require("../functions/Listing");
 
 const { createPrice } = require("../functions/Price");
@@ -38,22 +35,27 @@ beforeAll(async () => {
   //Create test Price for listing from Price table
   await createPrice("TLG", 7.8);
 
+  cookie = await getAuthenticatedUserCookie("TestUser", "Password");
+
   //Create test Order
-  order = await request(app).post("/api/orders").send({
-    investorID: user.body.id,
-    quantityOrder: 12,
-    orderTime: "2021-10-02 12:30:36.0000000 +00:00",
-    typeOfOrder: "BUY",
-    listingID: "TLG",
-    executionTime: "2021-10-02 12:30:36.0000000 +00:00",
-  });
+  order = await request(app)
+    .post("/api/orders")
+    .send({
+      investorID: user.body.id,
+      quantityOrder: 12,
+      orderTime: "2021-10-02 12:30:36.0000000 +00:00",
+      typeOfOrder: "BUY",
+      listingID: "TLG",
+      executionTime: "2021-10-02 12:30:36.0000000 +00:00",
+    })
+    .set("cookie", cookie);
 });
 
 beforeEach(async () => {
   cookie = await getAuthenticatedUserCookie("TestUser", "Password");
 });
 
-describe("Watchlist endpoint", () => {
+describe("Holding endpoint", () => {
   //Unit tests for /api/holdings - to create Holding
   it("Successfully create holding", async () => {
     const res = await request(app)
@@ -68,24 +70,26 @@ describe("Watchlist endpoint", () => {
     expect(res.status).toEqual(201);
     expect(res.body).toEqual(expect.any(Object));
   });
-  it("Unauthorised to create watchlist", async () => {
-    const res = await request(app).post("/api/watchlist").send({
-      InvestorID: user.body.id,
-      ListingID: "TLG",
+  it("Unauthorised to create holding", async () => {
+    const res = await request(app).post("/api/holdings").send({
+      investorID: user.body.id,
+      listingID: "TLG",
+      orderID: order.body.OrderID,
+      current: 1,
     });
     expect(res.status).toEqual(401);
   });
 
   //Unit tests for /api/holdings - to get Holding
 
-  it("Successfully retrieved holdings", async () => {
+  it("Successfully retrieved holding", async () => {
     const res = await request(app)
       .get("/api/holdings?investorID=" + user.body.id)
       .set("cookie", cookie);
     expect(res.status).toEqual(200);
     expect(res.body).toEqual(expect.any(Array));
   });
-  it("Unauthorized to retrieve comments", async () => {
+  it("Unauthorized to retrieve holding", async () => {
     const res = await request(app).get(
       "/api/holdings?InvestorID=" + user.body.id
     );

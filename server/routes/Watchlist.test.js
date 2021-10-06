@@ -1,14 +1,8 @@
 const app = require("../server.js");
 const request = require("supertest");
 const sequelize = require("../db/DBInstance");
-const {
-  getAuthenticatedUserCookie,
-  createTestUser,
-} = require("../test.config");
+const { getAuthenticatedUserCookie } = require("../test.config");
 const { createListing } = require("../functions/Listing");
-
-const { createWatchlist } = require("../functions/Watchlist.js");
-const { Watchlist } = require("../db/Models.js");
 
 let user;
 let cookie = "";
@@ -72,7 +66,7 @@ describe("Watchlist endpoint", () => {
     expect(res.status).toEqual(200);
     expect(res.body).toEqual(expect.any(Array));
   });
-  it("Unauthorized to retrieved comments", async () => {
+  it("Unauthorized to retrieved watchlist", async () => {
     const res = await request(app).get(
       "/api/watchlist?InvestorID=" + user.body.id
     );
