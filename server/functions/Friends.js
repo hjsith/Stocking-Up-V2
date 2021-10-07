@@ -1,7 +1,5 @@
-const { Friends } = require("../db/Models");
+import { Friends } from "../db/Models.js";
 
-async function getAllCurrentFriends() {
+export async function getAllCurrentFriends() {
   return await Friends.findAll();
 }
-
-module.exports = { getAllCurrentFriends };

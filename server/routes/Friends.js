@@ -1,6 +1,6 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const { getAllCurrentFriends } = require("../functions/Friends");
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import { getAllCurrentFriends } from "../functions/Friends.js";
 
 // Init shared
 const router = Router();
@@ -11,4 +11,4 @@ router.get("/friends", async (req, res) => {
   return res.status(StatusCodes.OK).json(friends);
 });
 
-module.exports = router;
+export default router;

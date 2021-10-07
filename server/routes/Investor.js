@@ -1,12 +1,12 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllInvestors,
   getInvestor,
   updateInvestorPassword,
-} = require("../functions/Investor");
-const bcrypt = require("bcrypt");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Investor.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
+import bcrypt from "bcrypt";
 
 // Init shared
 const router = Router();
@@ -59,4 +59,4 @@ router.get("/investor", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

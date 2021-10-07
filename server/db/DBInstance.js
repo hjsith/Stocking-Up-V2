@@ -1,6 +1,6 @@
-const { Sequelize } = require("sequelize");
-const { tedious } = require("tedious");
-const env = require("../Environment");
+import { Sequelize } from "sequelize";
+import tedious from "tedious";
+import env from "../Environment.js";
 
 Sequelize.DATE.prototype._stringify = function _stringify(date, options) {
   return this._applyTimezone(date, options).format("YYYY-MM-DD HH:mm:ss");
@@ -21,4 +21,4 @@ sequelize.sync().then(async () => {
   // console.log("Database tables exist");
 });
 
-module.exports = sequelize;
+export default sequelize;

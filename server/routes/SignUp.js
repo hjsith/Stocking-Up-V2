@@ -1,10 +1,8 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const { createInvestor, checkUsernameExist } = require("../functions/Investor");
-const bcrypt = require("bcrypt");
-const {
-  generateNewAuthenticationTokens
-} = require("../functions/Authenticate");
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import { createInvestor, checkUsernameExist } from "../functions/Investor.js";
+import bcrypt from "bcrypt";
+import { generateNewAuthenticationTokens } from "../functions/Authenticate.js";
 // Init shared
 const router = Router();
 //route for Sign Up and adds their details to database
@@ -37,4 +35,4 @@ router.post("/SignUp", async (req, res) => {
     .json({ id: user.InvestorID, username: user.Username });
 });
 
-module.exports = router;
+export default router;
