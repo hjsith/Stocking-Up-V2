@@ -30,10 +30,15 @@ stages:
 
         steps:
           - task: Npm@1
-            displayName: "NPM Install"
+            displayName: "NPM Install Server"
             inputs:
               command: 'install'
               workingDir: 'server'
+          - task: Npm@1
+            displayName: "NPM Install Client"
+            inputs:
+              command: 'install'
+              workingDir: 'client'
           - task: Npm@1
             displayName: "NPM Build"
             inputs:
