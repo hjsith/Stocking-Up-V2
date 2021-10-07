@@ -14,11 +14,6 @@ export async function getInvestor(userID) {
   return await Investor.findByPk(userID);
 }
 
-async function getInvestorUsername(userID) {
-  const investor = await Investor.findByPk(userID);
-  return investor.Username;
-}
-
 //Create new investor
 export async function createInvestor(fName, lName, email, password, username) {
   let date = moment.utc().startOf("date");
@@ -37,7 +32,7 @@ export async function createInvestor(fName, lName, email, password, username) {
   });
 }
 
-async function setInvestorDifficulty(id, difficulty) {
+export async function setInvestorDifficulty(id, difficulty) {
   const investor = await Investor.findByPk(id);
   let funds =
     difficulty == "Easy" ? 50000 : difficulty == "Intermediate" ? 20000 : 5000;
@@ -52,7 +47,7 @@ async function setInvestorDifficulty(id, difficulty) {
   });
 }
 
-async function investorBuy(investorID, total) {
+export async function investorBuy(investorID, total) {
   let investor = await Investor.findByPk(investorID);
   let balance = investor.Funds;
   if (total < balance) {
@@ -130,7 +125,7 @@ export async function getOneInvestorWithUsername(username) {
   });
 }
 
-async function getInvestorsWithSimilarUsernames(
+export async function getInvestorsWithSimilarUsernames(
   userid,
   searchingUsername,
   username
@@ -164,19 +159,3 @@ async function getInvestorsWithSimilarUsernames(
 
   return nonFriends;
 }
-
-module.exports = {
-  getAllInvestors,
-  getInvestor,
-  getInvestorUsername,
-  createInvestor,
-  getInvestorPassword,
-  checkUsernameExist,
-  getInvestorsWithUsername,
-  setInvestorDifficulty,
-  updateInvestorPassword,
-  getOneInvestorWithUsername,
-  getInvestorsWithSimilarUsernames,
-  investorBuy,
-  investorSell,
-};

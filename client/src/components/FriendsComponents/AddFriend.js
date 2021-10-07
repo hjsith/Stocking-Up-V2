@@ -1,6 +1,5 @@
 import React from "react";
 import FriendHeading from "./FriendHeading";
-import glass from "../../assets/images/glass.svg";
 import FriendResults from "./FriendResults";
 import { UserContext } from "../UserContext";
 

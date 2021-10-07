@@ -45,4 +45,4 @@ router.delete("/friends/deny", async (req, res) => {
   return res.status(StatusCodes.OK).end();
 });
 
-module.exports = router;
+export default router;

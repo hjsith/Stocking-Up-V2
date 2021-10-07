@@ -3,7 +3,7 @@ import pkg from "sequelize";
 const { Op } = pkg;
 import moment from "moment";
 
-async function getAllCurrentFriendsForUser(id) {
+export async function getAllCurrentFriendsForUser(id) {
   return await Friends.findAll({
     where: {
       [Op.or]: [{ RequestingUsername: id }, { AcceptingUsername: id }],
@@ -12,7 +12,7 @@ async function getAllCurrentFriendsForUser(id) {
   });
 }
 
-async function getAllPendingFriendsForUser(id) {
+export async function getAllPendingFriendsForUser(id) {
   return await Friends.findAll({
     where: {
       [Op.or]: {
@@ -23,7 +23,7 @@ async function getAllPendingFriendsForUser(id) {
   });
 }
 
-async function getInvestorModelsForFriends(userId, friends) {
+export async function getInvestorModelsForFriends(userId, friends) {
   let investors = [];
 
   var results = new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ async function getInvestorModelsForFriends(userId, friends) {
   return customModel;
 }
 
-async function addInvestorAsFriend(rId, aId) {
+export async function addInvestorAsFriend(rId, aId) {
   return await Friends.create({
     RequestingUsername: rId,
     AcceptingUsername: aId,
@@ -72,7 +72,7 @@ async function addInvestorAsFriend(rId, aId) {
   });
 }
 
-async function confirmPendingFriend(rId, aId) {
+export async function confirmPendingFriend(rId, aId) {
   await Friends.findOne({
     where: {
       RequestingUsername: rId,
@@ -84,7 +84,7 @@ async function confirmPendingFriend(rId, aId) {
   });
 }
 
-async function denyPendingFriend(rId, aId) {
+export async function denyPendingFriend(rId, aId) {
   await Friends.findOne({
     where: {
       RequestingUsername: rId,
@@ -96,7 +96,7 @@ async function denyPendingFriend(rId, aId) {
   });
 }
 
-async function checkIfFriends(user1, user2) {
+export async function checkIfFriends(user1, user2) {
   let value = await Friends.findOne({
     where: {
       [Op.or]: [
@@ -116,13 +116,3 @@ async function checkIfFriends(user1, user2) {
 
   return value;
 }
-
-module.exports = {
-  getAllCurrentFriendsForUser,
-  getAllPendingFriendsForUser,
-  getInvestorModelsForFriends,
-  checkIfFriends,
-  addInvestorAsFriend,
-  confirmPendingFriend,
-  denyPendingFriend,
-};
