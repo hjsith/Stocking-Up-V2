@@ -44,7 +44,6 @@ const QuoteManagement = () => {
     }).then((res) => {
       res.json().then((body) => {
         setName(body.name);
-        console.log(body);
       });
     });
     setInterval(() => {
@@ -70,7 +69,6 @@ const QuoteManagement = () => {
       }).then((res) => {
         res.json().then((body) => {
           setFunds(body.Funds);
-          console.log(body.Funds);
         });
       });
     }, 50);
@@ -160,7 +158,6 @@ const QuoteManagement = () => {
         if (res.status === 201) {
           // Successful orderCreation 201
           res.json().then((body) => {
-            console.log(body);
             if (body == "Error") {
               // AddNotification("You do not have shares in this company");
               console.log(
