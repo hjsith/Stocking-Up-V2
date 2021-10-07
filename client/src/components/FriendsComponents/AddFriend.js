@@ -7,26 +7,27 @@ class AddFriend extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
-      searchString: "",
-      currentSearch: "",
+      results: [], //State to store the search results
+      currentSearch: "", //State to store the search string
     };
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  static contextType = UserContext;
+  static contextType = UserContext; //Current logged in user's context
 
+  //Hooks to text box change event
   handleSearchStringChange(event) {
-    this.setState({ currentSearch: event.target.value });
+    this.setState({ currentSearch: event.target.value }); //Updates state with latest results
   }
 
+  //Handles the search based on the current search string
   handleSearch() {
     fetch(
-      "/api/investor/username/similar?username=" +
-        this.state.currentSearch +
+      "/api/investor/username/similar?username=" + //Fetches API endpoint to find users with similar usernames
+        this.state.currentSearch + //Current search string
         "&currentuser=" +
-        this.context.user.name +
+        this.context.user.name + //Excludes current user
         "&id=" +
         this.context.user.id,
       {
@@ -38,12 +39,13 @@ class AddFriend extends React.Component {
     )
       .then((res) => {
         if (res.status === 200) {
-          // Successful login 200
+          //Successful retrieval of results
           res.json().then((body) => {
-            this.setState({ results: body });
+            this.setState({ results: body }); //Set results state to retrieved results
           });
         } else if (res.status === 401) {
-          this.setState({ unauth: true });
+          //Unauthorised user
+          this.setState({ unauth: true }); //Set the state to unauthorised (leads to redirect)
         } else {
           console.log("Something unexpected went wrong ._.");
         }

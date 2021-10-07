@@ -6,8 +6,8 @@ class FriendResultsRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      buttonDisabled: false,
-      showRow: true,
+      buttonDisabled: false, //State to store button disabled status
+      showRow: true, //Set to false when pending request is responded to
       results: [],
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -16,27 +16,29 @@ class FriendResultsRow extends React.Component {
     this.isPending = this.isPending.bind(this);
   }
 
-  static contextType = UserContext;
+  static contextType = UserContext; //Current logged in user's context
 
+  //Handles 'add' button click for 'Add friend'
   handleAdd() {
+    //Posts add friend request to API endpoint
     fetch("/api/friends/add", {
       method: "POST",
       body: JSON.stringify({
-        rId: this.context.user.id,
-        aId: this.props.acc,
+        rId: this.context.user.id, //Requesting user's id
+        aId: this.props.acc, //Accepting user's id
       }),
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        if (res.status === 200) {
-          // Successful login 200
+        if (res.status === 201) {
+          //Friend Request created
           res.json().then((body) => {
-            this.setState({ buttonDisabled: true });
+            this.setState({ buttonDisabled: true }); //Disables add button if successful
           });
         } else if (res.status === 401) {
-          this.setState({ unauth: true });
+          this.setState({ unauth: true }); //User is unauthorised
         } else {
           console.log("Something unexpected went wrong ._.");
         }
@@ -46,12 +48,14 @@ class FriendResultsRow extends React.Component {
       });
   }
 
+  //Handles 'Accept' button click for 'Pending friends'
   handleAccept() {
+    //Patches add friend request to API endpoint
     fetch("/api/friends/accept", {
-      method: "PATCH",
+      method: "PATCH", //
       body: JSON.stringify({
-        rId: this.props.acc,
-        aId: this.context.user.id,
+        rId: this.props.acc, //Requesting user's id
+        aId: this.context.user.id, //Accepting user's id
       }),
       headers: {
         "Content-Type": "application/json",
@@ -59,10 +63,11 @@ class FriendResultsRow extends React.Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          this.setState({ buttonDisabled: true });
-          this.setState({ showRow: false });
+          //OK
+          this.setState({ buttonDisabled: true }); //Disables button
+          this.setState({ showRow: false }); //Removes row from list
         } else if (res.status === 401) {
-          this.setState({ unauth: true });
+          this.setState({ unauth: true }); //User is unauthorised
         } else {
           console.log("Something unexpected went wrong ._.");
         }
@@ -72,12 +77,14 @@ class FriendResultsRow extends React.Component {
       });
   }
 
+  //Handles 'Deny' button click for 'Pending friends'
   handleDeny() {
+    //Deletes friend request through API endpoint
     fetch("/api/friends/deny", {
       method: "DELETE",
       body: JSON.stringify({
-        rId: this.props.acc,
-        aId: this.context.user.id,
+        rId: this.props.acc, //Requesting user's id
+        aId: this.context.user.id, //Accepting user's id
       }),
       headers: {
         "Content-Type": "application/json",
@@ -85,10 +92,10 @@ class FriendResultsRow extends React.Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          this.setState({ buttonDisabled: true });
-          this.setState({ showRow: false });
+          this.setState({ buttonDisabled: true }); //Disables button
+          this.setState({ showRow: false }); //Removes row from list
         } else if (res.status === 401) {
-          this.setState({ unauth: true });
+          this.setState({ unauth: true }); //User is unauthorised
         } else {
           console.log("Something unexpected went wrong ._.");
         }
@@ -98,6 +105,7 @@ class FriendResultsRow extends React.Component {
       });
   }
 
+  //Checks if current view is Pending, conditional rendering
   isPending() {
     if (!this.props.pending) {
       return (
@@ -140,7 +148,6 @@ class FriendResultsRow extends React.Component {
                 <td className="FriendResultIcon">
                   <UserProfileIcon
                     name={this.props.username}
-                    colorNumber={this.props.colourNumber}
                     company={false}
                     size={50}
                   />

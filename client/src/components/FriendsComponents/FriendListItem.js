@@ -7,12 +7,14 @@ class FriendListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      username: "", //Stores current friend's username
       dateAdded: this.props.dateAdded,
     };
   }
 
+  //Once the component is mounted, code below is executed
   componentDidMount() {
+    //Fetches API endpoint to get details of investor
     fetch("/api/investor" + "?id=" + this.props.userId, {
       method: "GET",
       headers: {
@@ -21,7 +23,7 @@ class FriendListItem extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
-          username: body.Username,
+          username: body.Username, //Set username state to investor username
         });
       });
     });
