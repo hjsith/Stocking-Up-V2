@@ -66,5 +66,5 @@ router.delete("/friends/deny", async (req, res) => {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }
 });
-//Hi :)
+
 export default router;

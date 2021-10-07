@@ -140,4 +140,38 @@ describe("Friends endpoint", () => {
     expect(res.status).toEqual(200);
     expect(res.body).toEqual(expect.any(Object));
   });
+
+  //Unit test that checks that an unauthorised user cannot access the API
+  it("Does not allow unauthorised connections", async () => {
+    const addResponse = await request(app).post("/api/friends/add").send({
+      rId: user1.body.id,
+      aId: user2.body.id,
+    });
+
+    const acceptResponse = await request(app)
+      .patch("/api/friends/accept")
+      .send({
+        rId: user1.body.id,
+        aId: user2.body.id,
+      });
+
+    const denyResponse = await request(app).delete("/api/friends/deny").send({
+      rId: user1.body.id,
+      aId: user2.body.id,
+    });
+
+    const pendingResponse = await request(app)
+      .get("/api/friends/pending?id=" + user2.body.id)
+      .send();
+
+    const friendsResponse = await request(app)
+      .get("/api/friends?id=" + user2.body.id)
+      .send();
+
+    expect(addResponse.status).toEqual(401);
+    expect(acceptResponse.status).toEqual(401);
+    expect(denyResponse.status).toEqual(401);
+    expect(pendingResponse.status).toEqual(401);
+    expect(friendsResponse.status).toEqual(401);
+  });
 });
