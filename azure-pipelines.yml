@@ -93,6 +93,7 @@ stages:
                     WebAppName: $(webAppName)
                     packageForLinux: "$(Pipeline.Workspace)/drop/$(Build.BuildId).zip"
                     RuntimeStack: "NODE|14-lts"
+                    RemoveAdditionalFilesFlag: true
                     StartupCommand: "npm run start"
                     ScriptType: "Inline Script"
                     InlineScript: |
