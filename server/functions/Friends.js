@@ -1,6 +1,7 @@
-const { Friends, Investor } = require("../db/Models");
-const { Op } = require("sequelize");
-const moment = require("moment");
+import { Friends } from "../db/Models.js";
+import pkg from "sequelize";
+const { Op } = pkg;
+import moment from "moment";
 
 async function getAllCurrentFriendsForUser(id) {
   return await Friends.findAll({

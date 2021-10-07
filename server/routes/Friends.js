@@ -1,13 +1,13 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllCurrentFriendsForUser,
   addInvestorAsFriend,
   getAllPendingFriendsForUser,
   getInvestorModelsForFriends,
   confirmPendingFriend,
   denyPendingFriend,
-} = require("../functions/Friends");
+} from "../functions/Friends";
 
 // Init shared
 const router = Router();

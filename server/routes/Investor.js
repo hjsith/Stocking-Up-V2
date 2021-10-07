@@ -8,8 +8,8 @@ import {
   setInvestorDifficulty,
   getInvestorsWithSimilarUsernames,
 } from "../functions/Investor";
-const bcrypt = require("bcrypt");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+import bcrypt from "bcrypt";
+import { getAuthenticatedUser } from "../functions/Authenticate";
 
 // Init shared
 const router = Router();
