@@ -106,7 +106,7 @@ class FriendResultsRow extends React.Component {
             className={
               this.state.buttonDisabled
                 ? "ConfirmButtonDisabled"
-                : "GreenConfirmButton"
+                : "GreenFriendConfirmButton"
             }
             disabled={this.state.buttonDisabled}
             onClick={this.handleAdd}
