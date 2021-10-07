@@ -359,9 +359,10 @@ export const Friends = db.define(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    RequestingUsername: DataTypes.STRING,
-    AcceptingUsername: DataTypes.STRING,
+    RequestingUsername: DataTypes.TEXT,
+    AcceptingUsername: DataTypes.TEXT,
     Status: DataTypes.BOOLEAN,
+    DateAdded: DataTypes.DATEONLY,
   },
   { sequelize: db, tableName: "Friends", timestamps: false }
 );

@@ -1,0 +1,531 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+.Side1 {
+  height: 87%;
+  width: 45%;
+  float: left;
+  font-family: "Roboto", sans-serif;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.Side2 {
+  height: 87%;
+  width: 55%;
+  border-radius: 0.625em;
+  margin-top: 2%;
+  margin-left: -2%;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  align-content: center;
+}
+
+.FriendPanel1 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 3%;
+  width: 90%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  padding: 1em 1em 1em 1em;
+  vertical-align: top;
+}
+
+.FriendPanel2 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 80%;
+  width: 90%;
+  border-radius: 0.625em;
+  margin-top: 2%;
+  margin-left: 1%;
+  padding: 1em 1em 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.FriendPanel3 {
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 50.5em;
+  width: 95%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  padding: 1em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.FriendsTitlePanel h1 {
+  font-family: "Roboto", sans-serif;
+  font-size: 4em;
+  color: white;
+  font-weight: bold;
+}
+
+.FriendsTitlePanel p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  color: rgb(100, 99, 99);
+  font-weight: bold;
+}
+
+.ButtonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.Button {
+  height: 2.5em;
+  width: 11em;
+  background-color: #3789fd;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.Button:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.Button > img {
+  width: 1em;
+  height: 1em;
+  margin-top: -0.2em;
+}
+
+.ButtonDisabled {
+  height: 2.5em;
+  width: 11em;
+  background-color: #2f2f2f;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.ButtonDisabled:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.ButtonDisabled > img {
+  width: 1em;
+  height: 1em;
+  margin-top: -0.2em;
+}
+
+.OverallFriendsList {
+  height: 38em;
+  overflow: auto;
+}
+
+.FriendLists {
+  padding: 1em 1em 1em 1em;
+  vertical-align: middle;
+}
+
+.FriendListItem {
+  width: 100%;
+}
+
+.SelectedRow {
+  width: 1em;
+}
+
+.SelectedRowIcon {
+  padding: 1em 0em 1em 2em;
+}
+
+.SelectedRowIcon > img {
+  vertical-align: middle;
+  width: 1em;
+}
+
+.FriendIconRow {
+  width: 5em;
+}
+
+.FriendIcon {
+  padding: 1em 2em 1em 2em;
+}
+
+.FriendUsername {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.8em;
+  color: white;
+  font-weight: bold;
+}
+
+.FriendDateAdded {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #848484;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.friendLine {
+  height: 0.1em;
+  margin: auto;
+  width: 80%;
+  background-color: white;
+}
+
+.vertLine {
+  border-left: 0.1em solid white;
+  height: 4em;
+  padding: 1em 0.5em 1em;
+}
+
+.FriendProfileUsername {
+  font-family: "Roboto", sans-serif;
+  font-size: 4em;
+  color: white;
+  font-weight: bold;
+}
+
+.FriendStatsTable {
+  padding: 2em 3em 2em;
+}
+
+.FriendStatsTable > table {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+  width: 95%;
+}
+
+.FriendStatsTable > table > tbody > tr > td {
+  padding-bottom: 3em;
+}
+
+.FriendStatGroup {
+  display: inline-flex;
+}
+
+.FriendStat {
+  vertical-align: middle;
+}
+
+.FriendStatTitle {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.FriendStatValue {
+  font-family: "Roboto", sans-serif;
+  font-size: 2em;
+  color: white;
+  font-weight: bold;
+  vertical-align: bottom;
+}
+
+.FriendAchievementBlock {
+  margin-top: 2%;
+  margin-left: 2%;
+  height: 90%;
+  width: 90%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.FriendUserAchievement {
+  overflow: auto;
+  height: 13em;
+}
+
+.FriendAchievementHeading {
+  font-family: "Roboto", sans-serif;
+  margin-left: 3em;
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.AchievementIcon {
+  height: 6em;
+}
+
+.achievementContainer {
+  width: 13em;
+  display: inline-block;
+  margin: 1em 1em 1em;
+}
+
+.achievementTitle {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.achievementDescription {
+  color: #b6b1b1;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.achievementIconContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.FriendHeading {
+  font-family: "Roboto", sans-serif;
+  font-size: 4em;
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 0.5em 0.5em;
+}
+
+.friendSearchInput {
+  position: relative;
+  margin: 0;
+}
+
+.friendSearch {
+  display: Block;
+  margin: auto;
+  background: #261e56;
+  color: white;
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  border: 0px;
+  font-size: 1em;
+  font-weight: bold;
+  height: 4em;
+  align-content: center;
+  width: 95%;
+  padding-left: 2em;
+}
+
+.glassButton {
+  background-image: url(../images/glass.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  outline: none;
+  position: absolute;
+  bottom: 1em;
+  right: 3em;
+  width: 2em;
+  height: 2em;
+}
+
+.glass {
+  position: absolute;
+  bottom: 1em;
+  right: 3em;
+  width: 2em;
+  height: 2em;
+}
+
+.FriendResults {
+  height: 33em;
+  overflow: auto;
+}
+
+.FriendResultsRowPanel {
+  width: 96%;
+  background-color: #140f37bb;
+  margin-left: 1.25em;
+  margin-bottom: 1em;
+  border-radius: 0.625em;
+  padding: 1em 1em 1em 1em;
+  position: relative;
+}
+
+.FriendResultIcon {
+  padding: 0em 1em 0em 1em;
+}
+
+.FriendResultName {
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.GreenConfirmButton {
+  height: 3em;
+  width: 6em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  right: 1em;
+}
+
+.GreenConfirmButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.ConfirmButtonDisabled {
+  height: 3em;
+  width: 6em;
+  background-color: #2f2f2f;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: none;
+  position: absolute;
+  right: 1em;
+}
+
+.ConfirmButtonDisabled:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.GreenAcceptButton {
+  height: 3em;
+  width: 8em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10em;
+}
+
+.GreenAcceptButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.RedDenyButton {
+  height: 3em;
+  width: 8em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  right: 1em;
+}
+
+.RedDenyButton:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.PendingLine {
+  display: flex;
+  align-items: center;
+}
+
+.PendingLine > button {
+  background-color: #3789fd;
+  color: white;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 0px;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.PendingLine > button:hover {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.PendingLine > button > img {
+  height: 5em;
+  display: inline;
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #535353;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #535353;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: white;
+}
