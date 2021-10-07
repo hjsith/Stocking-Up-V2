@@ -22,6 +22,14 @@ class UserProfileIcon extends React.Component {
     return shortenedName;
   }
 
+  hashNameintoIndex() {
+    let count = 0;
+    for (var i = 0; i < this.props.name.length; i++) {
+      count += this.props.name.charCodeAt(i);
+    }
+    return count % 7;
+  }
+
   render() {
     let shortenedName = this.makeObjectNameShorter(
       this.props.name,
@@ -42,8 +50,10 @@ class UserProfileIcon extends React.Component {
       "#D9932A",
       "#E1D245",
       "#DE3838",
+      "#DD1EB3",
     ];
-    this.myRef.current.style.backgroundColor = hexArray[this.props.colorNumber];
+    this.myRef.current.style.backgroundColor =
+      hexArray[this.hashNameintoIndex()];
     this.myRef.current.style.height = this.props.size + "px";
     this.myRef.current.style.width = this.props.size + "px";
     this.myRef.current.style.fontSize = this.props.size / 2.5 + "px";

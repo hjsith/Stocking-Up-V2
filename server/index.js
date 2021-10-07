@@ -1,26 +1,37 @@
-const express = require("express");
-const path = require("path");
-const cookieParser = require("express");
-const helmet = require("helmet");
-const db = require("./daos/DBInstance");
+// const express = require("express");
+// const path = require("path");
+const db = require("./db/DBInstance");
 const env = require("./Environment");
-const BaseRouter = require("./routes/Router");
+const app = require("./server.js");
+// const BaseRouter = require("./routes/Router");
+// const { StatusCodes } = require("http-status-codes");
+const cron = require("node-cron");
+const { pendingOrderCheck } = require("./functions/Order");
+const { updateArticles } = require("./functions/Articles");
 
-const app = express();
+// const cookieParser = require("cookie-parser");
+
+// const app = express();
 const PORT = env.port;
-const staticDir = path.join(__dirname, "../client/build/");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(staticDir));
-app.use(helmet());
-app.use(cookieParser());
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
-app.use("/api", BaseRouter);
+// //Used to process cookies in requests for User Authentication
+// app.use(cookieParser());
 
-app.get("*", (req, res) => {
-  res.sendFile("index.html", { root: staticDir });
-});
+// app.use("/api", BaseRouter);
+
+// const staticDir = path.join(__dirname, "../client/build/");
+// app.use(express.static(staticDir));
+
+// app.get("*", (req, res) => {
+//   if (req.url.startsWith("/api")) {
+//     res.status(StatusCodes.NOT_FOUND).end();
+//   } else {
+//     res.sendFile("index.html", { root: staticDir });
+//   }
+// });
 
 async function dbconnect() {
   try {
@@ -36,3 +47,13 @@ dbconnect();
 app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
+if (env.node_env != "test") {
+  cron.schedule("* * * * *", async function () {
+    await pendingOrderCheck();
+  });
+}
+
+cron.schedule("15 * * * *", async function () {
+  await updateArticles();
+});
+module.exports = { app };

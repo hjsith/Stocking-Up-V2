@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 import "../assets/css/navbar.scss";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../assets/images/LogowithoutB.png";
 import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
+  const cont = useContext(UserContext);
+  const Logout = () => {
+    //Logout
+    fetch("/api/logout", {
+      //connects to frotnend to backend
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    cont.updateUser({ name: "", id: "" });
+  };
   return (
     <Navbar className="navbar">
       <Navbar.Brand className="Logo" href="/temp">
@@ -21,21 +34,20 @@ const NavBar = () => {
           Portfolio
         </Nav.Link>
         <NavDropdown title="Markets" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#Markets Overview">
+          <NavDropdown.Item href="/MarketsOverview">
             Markets Overview
           </NavDropdown.Item>
-          <NavDropdown.Item href="#Newsfeed">News Feed</NavDropdown.Item>
+          <NavDropdown.Item href="/Newsfeed">News Feed</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
           <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>
-          <NavDropdown.Item href="#Leaderboard">Leaderboard</NavDropdown.Item>
-          <NavDropdown.Item href="#DiscussionBoard">
+          <NavDropdown.Item href="/Leaderboard">Leaderboard</NavDropdown.Item>
+          <NavDropdown.Item href="/DiscussionBoardSearch">
             Discussion Board Search
           </NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Companies" id="basic-nav-dropdown">
           <NavDropdown.Item href="/CompanySearch">Search</NavDropdown.Item>
-          <NavDropdown.Item href="/QuoteManagement">Order</NavDropdown.Item>
         </NavDropdown>
       </Nav>
       <Nav>
@@ -51,7 +63,9 @@ const NavBar = () => {
         >
           <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="/SignIn">Logout</NavDropdown.Item>
+          <NavDropdown.Item onClick={Logout} href="/SignIn">
+            Logout
+          </NavDropdown.Item>
         </NavDropdown>
       </Nav>
     </Navbar>
