@@ -1,15 +1,13 @@
-const { OneDay } = require("../db/Models");
+import { OneDay } from "../db/Models.js";
 
-async function getAllOneDayPrices() {
+export async function getAllOneDayPrices() {
   return await OneDay.findAll();
 }
 
-async function getOneDayPricesForListing(code) {
+export async function getOneDayPricesForListing(code) {
   return await OneDay.findAll({
     where: {
       ListingID: code,
     },
   });
 }
-
-module.exports = { getAllOneDayPrices, getOneDayPricesForListing };

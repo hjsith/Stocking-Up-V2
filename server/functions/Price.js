@@ -1,10 +1,10 @@
-const { Price } = require("../db/Models");
+import { Price } from "../db/Models.js";
 
-async function getAllCurrentPrices() {
+export async function getAllCurrentPrices() {
   return await Price.findAll();
 }
 
-async function getPriceForListing(code) {
+export async function getPriceForListing(code) {
   return await Price.findOne({
     where: {
       ListingID: code,
@@ -12,11 +12,9 @@ async function getPriceForListing(code) {
   });
 }
 
-async function createPrice(code, currentPrice) {
+export async function createPrice(code, currentPrice) {
   return await Price.create({
     ListingID: code,
     CurrentPrice: currentPrice,
   });
 }
-
-module.exports = { getAllCurrentPrices, getPriceForListing, createPrice };

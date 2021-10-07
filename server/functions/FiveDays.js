@@ -1,18 +1,13 @@
-const { FiveDays } = require("../db/Models");
+import { FiveDays } from "../db/Models.js";
 
-async function getAllFiveDaysPrices() {
+export async function getAllFiveDaysPrices() {
   return await FiveDays.findAll();
 }
 
-async function getFiveDaysPricesForListing(code) {
+export async function getFiveDaysPricesForListing(code) {
   return await FiveDays.findAll({
     where: {
       ListingID: code,
     },
   });
 }
-
-module.exports = {
-  getAllFiveDaysPrices,
-  getFiveDaysPricesForListing,
-};

@@ -1,6 +1,6 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getOrdersByInvestor,
   createOrder,
   getAllPendingOrders,
@@ -8,8 +8,8 @@ const {
   cancelOrder,
   confirmOrder,
   getAllOrdersByInvestor,
-} = require("../functions/Order");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Order.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -99,4 +99,4 @@ router.put("/confirmedOrders", async (req, res) => {
   return res.status(StatusCodes.CREATED).end();
 });
 
-module.exports = router;
+export default router;

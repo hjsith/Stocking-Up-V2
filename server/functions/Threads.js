@@ -1,11 +1,11 @@
-const { Threads } = require("../db/Models");
+import { Threads } from "../db/Models.js";
 
 //Return all threads
-async function getAllThreads() {
+export async function getAllThreads() {
   return await Threads.findAll();
 }
 // //Return threads given a search string, potentially redundant due to better search functionality implementation
-// async function findThreadsWithName(searchString) {
+// export async function findThreadsWithName(searchString) {
 //   return Threads.findAll({
 //     where: {
 //       Username: {
@@ -16,7 +16,7 @@ async function getAllThreads() {
 // }
 
 //Create a new thread
-async function createThread(
+export async function createThread(
   inputThreadID,
   inputListingID,
   inputTitle,
@@ -31,14 +31,14 @@ async function createThread(
 }
 
 //Delete a thread, should be used when a listing no longer exist
-async function deleteThread(threadID) {
+export async function deleteThread(threadID) {
   const thread = await Threads.findByPk(threadID);
   thread.destroy();
   return;
 }
 
 //Update the name of a thread to Archive it incase a listing no longer exists
-async function archiveThread(threadID, inputTitle) {
+export async function archiveThread(threadID, inputTitle) {
   var updatedThread = await Threads.update(
     { Title: inputTitle + " - Archived" },
     {
@@ -55,7 +55,7 @@ async function archiveThread(threadID, inputTitle) {
 }
 
 //Create threads for listings that haven't already been created
-async function createMissingThreads(listings) {
+export async function createMissingThreads(listings) {
   //Loop through all listings
   for (const element of listings) {
     await Threads.findOrCreate({
@@ -69,12 +69,3 @@ async function createMissingThreads(listings) {
     });
   }
 }
-
-module.exports = {
-  getAllThreads,
-  // findThreadsWithName,
-  createThread,
-  deleteThread,
-  archiveThread,
-  createMissingThreads,
-};

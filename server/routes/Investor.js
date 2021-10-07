@@ -1,12 +1,14 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllInvestors,
   getInvestor,
   updateInvestorPassword,
-} = require("../functions/Investor");
-const bcrypt = require("bcrypt");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+  setInvestorDifficulty,
+  getInvestorsWithSimilarUsernames,
+} from "../functions/Investor.js";
+import bcrypt from "bcrypt";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -59,4 +61,29 @@ router.get("/investor", async (req, res) => {
   }
 });
 
-module.exports = router;
+router.get("/investor/username/similar", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.query.username == "") return res.status(StatusCodes.OK).json([]);
+    const users = await getInvestorsWithSimilarUsernames(
+      req.query.id,
+      req.query.currentuser,
+      req.query.username
+    );
+    if (users === null) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: "User could not be found." });
+    }
+    return res.status(StatusCodes.OK).json(users);
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.patch("/investor/difficulty", async (req, res) => {
+  await setInvestorDifficulty(req.body.id, req.body.difficulty);
+  return res.status(StatusCodes.OK).end();
+});
+
+export default router;

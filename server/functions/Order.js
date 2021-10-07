@@ -1,10 +1,11 @@
-const { Order, Price, Holding } = require("../db/Models");
-const { investorSell, investorBuy } = require("./Investor");
-const { Op } = require("sequelize");
-const moment = require("moment");
+import { Order, Price, Holding } from "../db/Models.js";
+import { investorSell, investorBuy } from "./Investor.js";
+import pkg from "sequelize";
+const { Op } = pkg;
+import moment from "moment";
 
 // this section of the code retrieves all the orders that an investor may have. This is used for the Portfolio feature.
-async function getOrdersByInvestor(investorID) {
+export async function getOrdersByInvestor(investorID) {
   return await Order.findAll({
     where: {
       InvestorID: investorID,
@@ -12,7 +13,7 @@ async function getOrdersByInvestor(investorID) {
   });
 }
 
-async function getAllOrdersByInvestor(investorID) {
+export async function getAllOrdersByInvestor(investorID) {
   return await Order.findAll({
     where: {
       InvestorID: investorID,
@@ -21,7 +22,7 @@ async function getAllOrdersByInvestor(investorID) {
 }
 
 // this section of the code retrieves all the orders that have a Status of "PENDING".
-async function getAllPendingOrders() {
+export async function getAllPendingOrders() {
   return await Order.findAll({
     where: {
       Status: "PENDING",
@@ -33,7 +34,7 @@ async function getAllPendingOrders() {
 }
 
 // this section of the code retrieves all the orders that have a Status of "PENDING".
-async function getAllPendingOrdersByInvestor(investorID) {
+export async function getAllPendingOrdersByInvestor(investorID) {
   return await Order.findAll({
     where: {
       Status: "PENDING",
@@ -43,7 +44,7 @@ async function getAllPendingOrdersByInvestor(investorID) {
 }
 
 // this section of the code creates an order, if a user clicks buy or sell in the QuoteManagement.js page.
-async function createOrder(
+export async function createOrder(
   investorID,
   quantityOrder,
   orderTime,
@@ -90,7 +91,7 @@ async function createOrder(
 }
 
 // this section of the code checks if a user holds shares in their holdings in order to ensure they are able to sell shares if it is in their holdings.
-async function sellOrder(
+export async function sellOrder(
   investorID,
   quantityOrder,
   orderTotal,
@@ -185,7 +186,7 @@ async function sellOrder(
     });
 }
 // this section of the code checks for pending orders and shows in the console if an order is executed after 15min or if a user cancelled the order in their portfolio within the 15 min. If an order is executed, the user's funds are updated and the status of the order is 'EXECUTED'
-async function pendingOrderCheck() {
+export async function pendingOrderCheck() {
   let now = moment.utc();
   console.log(
     "Checking for pending orders prior to: " +
@@ -230,27 +231,16 @@ async function pendingOrderCheck() {
     });
 }
 
-async function cancelOrder(orderID) {
+export async function cancelOrder(orderID) {
   let order = await Order.findOne({ where: { OrderID: orderID } });
   order.Status = "CANCELLED";
   await order.save();
   return true;
 }
 
-async function confirmOrder(orderID) {
+export async function confirmOrder(orderID) {
   let order = await Order.findOne({ where: { OrderID: orderID } });
   order.ExecutionTime = moment.utc();
   await order.save();
   return true;
 }
-
-module.exports = {
-  getOrdersByInvestor,
-  createOrder,
-  getAllPendingOrders,
-  getAllPendingOrdersByInvestor,
-  pendingOrderCheck,
-  cancelOrder,
-  confirmOrder,
-  getAllOrdersByInvestor,
-};

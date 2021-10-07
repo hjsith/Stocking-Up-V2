@@ -160,12 +160,16 @@ const QuoteManagement = () => {
         if (res.status === 201) {
           // Successful orderCreation 201
           res.json().then((body) => {
-            setFunds(funds - body.OrderTotal);
-            AddNotification("Sell executed!");
-          });
-        } else if (res.status == 403) {
-          res.json().then((body) => {
-            AddNotification("You do not have shares in this company");
+            console.log(body);
+            if (body == "Error") {
+              // AddNotification("You do not have shares in this company");
+              console.log(
+                "Vishaal wanted to comment me out but I wanna stay! ):<"
+              );
+            } else {
+              setFunds(funds - body.OrderTotal);
+              // AddNotification("Sell executed!");
+            }
           });
         }
       })
