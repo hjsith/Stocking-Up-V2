@@ -8,7 +8,7 @@ class FriendProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: this.props.username,
+      username: this.props.username, //Stores username of friend
       dateAdded: "1/10/2021",
     };
   }

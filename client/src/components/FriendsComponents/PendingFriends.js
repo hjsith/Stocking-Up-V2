@@ -9,14 +9,15 @@ class PendingFriends extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
+      results: [], //State to store the pending friends
     };
     this.refresh = this.refresh.bind(this);
   }
 
-  static contextType = UserContext;
+  static contextType = UserContext; //Current logged in user's context
 
   componentDidMount() {
+    //Fetches API endpoint to find all pending friends for current user
     fetch("/api/friends/pending?id=" + this.context.user.id, {
       method: "GET",
       headers: {
@@ -25,9 +26,9 @@ class PendingFriends extends React.Component {
     })
       .then((res) => {
         if (res.status === 200) {
-          // Successful login 200
+          //OK
           res.json().then((body) => {
-            this.setState({ results: body });
+            this.setState({ results: body }); //Set results to pending friends results
           });
         } else if (res.status === 401) {
           this.setState({ unauth: true });
@@ -40,6 +41,7 @@ class PendingFriends extends React.Component {
       });
   }
 
+  //On refresh button click, refresh is called to get latest results
   refresh() {
     fetch("/api/friends/pending?id=" + this.context.user.id, {
       method: "GET",
