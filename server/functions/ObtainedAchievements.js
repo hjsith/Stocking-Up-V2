@@ -1,7 +1,5 @@
-const { ObtainedAchievements } = require("../db/Models");
+import { ObtainedAchievements } from "../db/Models.js";
 
-async function getAllObtainedAchievements() {
+export async function getAllObtainedAchievements() {
   return await ObtainedAchievements.findAll();
 }
-
-module.exports = { getAllObtainedAchievements };
