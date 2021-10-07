@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; //imports required
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
 import SignInLogo from "../components/UserAuthenticationComponents/SignInLogo";
@@ -14,6 +14,7 @@ class ForgotPassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // intialising states
       Username: "",
       Password: "",
       ConfirmPassword: "",
@@ -37,19 +38,24 @@ class ForgotPassword extends React.Component {
   }
 
   handleSubmit(event) {
+    //on submission of form below requirements
     if (
-      this.state.Username != "" &&
+      this.state.Username != "" && //if fields are not empty and are filled in
       this.state.Password != "" &&
       this.state.ConfirmPassword != ""
     ) {
       if (this.state.Username.length >= 3) {
+        //if username greater then or equal to 3 characters
         if (passwordRegex.test(this.state.Password)) {
+          //password correct format
           if (this.state.Password === this.state.ConfirmPassword) {
-            this.updatePassword();
+            //confirm password matches password
+            this.updatePassword(); //succesfully update the password
             this.setState({
-              ErrorMessage: ""
+              ErrorMessage: "" //no error
             });
           } else {
+            //otherwise display following error messages
             this.setState({
               ErrorMessage: "Your passwords do not match"
             });
@@ -72,7 +78,7 @@ class ForgotPassword extends React.Component {
   }
   updatePassword() {
     fetch("/api/ForgotPassword", {
-      //connects to frotnend to backend
+      //connects to frontend to backend
       method: "POST",
       body: JSON.stringify({
         password: this.state.Password,
@@ -84,15 +90,17 @@ class ForgotPassword extends React.Component {
     })
       .then(res => {
         if (res.status === 200) {
+          //response status
           // Successful login 200
           this.setState({ Redirect: true });
         } else if (res.status === 409) {
           this.setState({
-            ErrorMessage: "The password could not be updated,please try again"
+            ErrorMessage: "The password could not be updated,please try again" //error
           });
         } else if (res.status === 401) {
+          //response status
           this.setState({
-            ErrorMessage: " This username is incorrect"
+            ErrorMessage: " This username is incorrect" //error
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
@@ -107,9 +115,10 @@ class ForgotPassword extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/SignIn" />;
+      return <Redirect to="/SignIn" />; // goes to Sign In Page
     }
     return (
+      //layout of page with Containers, text input, forms, images  etc.
       <div className="ForgotPasswordContainer">
         <div className="ForgotPassword">
           <SignInLogo />
@@ -162,7 +171,7 @@ class ForgotPassword extends React.Component {
               <input className="SignInButton" type="submit" value="CONFIRM" />
             </form>
           </div>
-          <SignInLink
+          <SignInLink // Option back to Sign In Page
             message="Already have an account? Sign in here!"
             link="/SignIn"
           />

@@ -7,6 +7,8 @@ const app = require("./server.js");
 // const { StatusCodes } = require("http-status-codes");
 const cron = require("node-cron");
 const { pendingOrderCheck } = require("./functions/Order");
+const { updateArticles } = require("./functions/Articles");
+
 // const cookieParser = require("cookie-parser");
 
 // const app = express();
@@ -51,4 +53,7 @@ if (env.node_env != "test") {
   });
 }
 
+cron.schedule("15 * * * *", async function () {
+  await updateArticles();
+});
 module.exports = { app };

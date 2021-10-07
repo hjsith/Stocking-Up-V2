@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; //imports required
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
 import SignInLogo from "../components/UserAuthenticationComponents/SignInLogo";
@@ -10,14 +10,14 @@ import { UserContext } from "../components/UserContext";
 
 class SignIn extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);          //intialising  states 
     this.state = {
       Username: "",
       Password: "",
       Redirect: false,
       ErrorMessage: ""
     };
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);            //handle input changes 
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,9 +27,11 @@ class SignIn extends React.Component {
   }
   handleSubmit(event) {
     if (this.state.Username != "" && this.state.Password != "") {
+      //if username and password are not empty then only proceed
       this.LoginInvestor();
     } else {
       this.setState({
+        //otherwise display error message
         ErrorMessage: "One or more fields are empty, please try again"
       });
     }
@@ -41,7 +43,7 @@ class SignIn extends React.Component {
   }
   LoginInvestor() {
     fetch("/api/SignIn", {
-      //connects to frotnend to backend
+      //connects to frontend to backend
       method: "POST",
       body: JSON.stringify({
         password: this.state.Password,
@@ -53,6 +55,7 @@ class SignIn extends React.Component {
     })
       .then(res => {
         if (res.status === 200) {
+          //response status
           // Successful login 200
           res.json().then(body => {
             this.context.updateUser({
@@ -62,8 +65,9 @@ class SignIn extends React.Component {
             this.setState({ Redirect: true });
           });
         } else if (res.status === 401) {
+          //response status
           this.setState({
-            ErrorMessage: " This username or password is incorrect"
+            ErrorMessage: " This username or password is incorrect" //error message that is displayed
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
@@ -76,9 +80,10 @@ class SignIn extends React.Component {
 
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/Profile" />;
+      return <Redirect to="/Profile" />; //page redirected after completion correctly
     }
     return (
+      //layout of page with Containers, text input, forms, images  etc.
       <div className="LoginContainer">
         <div className="Login">
           <SignInLogo />
@@ -111,12 +116,15 @@ class SignIn extends React.Component {
               <input className="SignInButton" type="submit" value="SIGN IN" />
             </form>
           </div>
-          <SignInLink
+          <SignInLink //option back to Sign In page
             message="Don't have an account? Sign up here!"
             link="/SignUp"
           />
 
-          <SignInLink message=" Forgot your password?" link="/ForgotPassword" />
+          <SignInLink //option back to Forgot Password Page
+            message=" Forgot your password?"
+            link="/ForgotPassword"
+          />
         </div>
       </div>
     );
