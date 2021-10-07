@@ -3,6 +3,7 @@ import pkg from "sequelize";
 const { Op } = pkg;
 import moment from "moment";
 
+//Gets all CURRENT friends based on the corresponding user id
 export async function getAllCurrentFriendsForUser(id) {
   return await Friends.findAll({
     where: {
@@ -12,6 +13,7 @@ export async function getAllCurrentFriendsForUser(id) {
   });
 }
 
+//Gets all PENDING friends based on the corresponding user id
 export async function getAllPendingFriendsForUser(id) {
   return await Friends.findAll({
     where: {
@@ -23,9 +25,11 @@ export async function getAllPendingFriendsForUser(id) {
   });
 }
 
+//Gets all the Investor details for each of the friends
 export async function getInvestorModelsForFriends(userId, friends) {
   let investors = [];
 
+  //Gets the Investor model of each friend
   var results = new Promise((resolve, reject) => {
     friends.forEach(async (friend, index, friends) => {
       let id =
@@ -39,6 +43,7 @@ export async function getInvestorModelsForFriends(userId, friends) {
     });
   });
 
+  //Returns custom JSON model for each Investor/Friend model
   const customModel = await results.then(() => {
     var values = [];
     if (investors.length == friends.length) {
@@ -63,6 +68,7 @@ export async function getInvestorModelsForFriends(userId, friends) {
   return customModel;
 }
 
+//Creates pending friend request between two users
 export async function addInvestorAsFriend(rId, aId) {
   return await Friends.create({
     RequestingUsername: rId,
@@ -72,6 +78,7 @@ export async function addInvestorAsFriend(rId, aId) {
   });
 }
 
+//Updates pending friend request between two users to be current
 export async function confirmPendingFriend(rId, aId) {
   await Friends.findOne({
     where: {
@@ -84,6 +91,7 @@ export async function confirmPendingFriend(rId, aId) {
   });
 }
 
+//Deletes pending friend request between two users
 export async function denyPendingFriend(rId, aId) {
   await Friends.findOne({
     where: {
@@ -96,6 +104,7 @@ export async function denyPendingFriend(rId, aId) {
   });
 }
 
+//Checks if two friends are currently friends
 export async function checkIfFriends(user1, user2) {
   let value = await Friends.findOne({
     where: {
