@@ -1,4 +1,4 @@
-import { Friends } from "../db/Models.js";
+import { Investor, Friends } from "../db/Models.js";
 import pkg from "sequelize";
 const { Op } = pkg;
 import moment from "moment";
