@@ -2,7 +2,7 @@ import { Investor } from "../db/Models.js";
 import pkg from "sequelize";
 const { Op } = pkg;
 import moment from "moment";
-import { checkIfFriends } from "../functions/Friends";
+import { checkIfFriends } from "../functions/Friends.js";
 
 //Returns all investors
 export async function getAllInvestors() {
