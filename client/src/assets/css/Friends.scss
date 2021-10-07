@@ -331,6 +331,20 @@
   padding-left: 2em;
 }
 
+.glassButton {
+  background-image: url(../images/glass.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  overflow: hidden;
+  outline: none;
+  position: absolute;
+  bottom: 1em;
+  right: 3em;
+  width: 2em;
+  height: 2em;
+}
+
 .glass {
   position: absolute;
   bottom: 1em;

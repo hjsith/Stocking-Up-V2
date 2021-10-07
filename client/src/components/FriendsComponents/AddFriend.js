@@ -10,16 +10,22 @@ class AddFriend extends React.Component {
     this.state = {
       results: [],
       searchString: "",
+      currentSearch: "",
     };
     this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   static contextType = UserContext;
 
   handleSearchStringChange(event) {
+    this.setState({ currentSearch: event.target.value });
+  }
+
+  handleSearch() {
     fetch(
       "/api/investor/username/similar?username=" +
-        event.target.value +
+        this.state.currentSearch +
         "&currentuser=" +
         this.context.user.name +
         "&id=" +
@@ -48,8 +54,6 @@ class AddFriend extends React.Component {
       });
   }
 
-  handleSearch() {}
-
   render() {
     return (
       <>
@@ -62,7 +66,7 @@ class AddFriend extends React.Component {
             onChange={this.handleSearchStringChange}
             placeholder="Type in a username!"
           />
-          <img src={glass} className="glass" />
+          <button onClick={this.handleSearch} className="glassButton" />
         </div>
         <FriendResults results={this.state.results} pending={false} />
       </>
