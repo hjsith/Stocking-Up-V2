@@ -7,7 +7,7 @@ import {
   getInvestorModelsForFriends,
   confirmPendingFriend,
   denyPendingFriend,
-} from "../functions/Friends";
+} from "../functions/Friends.js";
 
 // Init shared
 const router = Router();

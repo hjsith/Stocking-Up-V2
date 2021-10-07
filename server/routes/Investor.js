@@ -3,13 +3,12 @@ import { StatusCodes } from "http-status-codes";
 import {
   getAllInvestors,
   getInvestor,
-  getInvestorUsername,
   updateInvestorPassword,
   setInvestorDifficulty,
   getInvestorsWithSimilarUsernames,
-} from "../functions/Investor";
+} from "../functions/Investor.js";
 import bcrypt from "bcrypt";
-import { getAuthenticatedUser } from "../functions/Authenticate";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
