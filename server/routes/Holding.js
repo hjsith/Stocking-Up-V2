@@ -1,10 +1,10 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllCurrentHoldingsByInvestor,
   createHolding,
-} = require("../functions/Holding");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Holding.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -45,4 +45,4 @@ router.post("/holdings", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,7 +1,7 @@
-const app = require("../server.js");
-const request = require("supertest");
-const sequelize = require("../db/DBInstance");
-const { getAuthenticatedUserCookie } = require("../test.config");
+import app from "../server.js";
+import request from "supertest";
+import sequelize from "../db/DBInstance.js";
+import { getAuthenticatedUserCookie } from "../test.config.js";
 
 let user;
 let cookie = "";
@@ -58,26 +58,21 @@ describe("Investor endpoint", () => {
     expect(res.status).toEqual(200);
   });
   it("Fail to update password on incorrect request body", async () => {
-    const res = await request(app)
-      .put("/api/updatePassword")
+    const res = await request(app).put("/api/updatePassword");
     expect(res.status).toEqual(400);
   });
   it("Fail to update password on incorrect userID and no username", async () => {
-    const res = await request(app)
-      .put("/api/updatePassword")
-      .send({
-        userID: "BLAH",
-        password: "NewPassword",
-      });
+    const res = await request(app).put("/api/updatePassword").send({
+      userID: "BLAH",
+      password: "NewPassword",
+    });
     expect(res.status).toEqual(409);
   });
   it("Fail to update password on incorrect username and no userID", async () => {
-    const res = await request(app)
-      .put("/api/updatePassword")
-      .send({
-        username: "BLAH",
-        password: "NewPassword",
-      });
+    const res = await request(app).put("/api/updatePassword").send({
+      username: "BLAH",
+      password: "NewPassword",
+    });
     expect(res.status).toEqual(409);
   });
 

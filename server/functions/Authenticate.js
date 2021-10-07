@@ -1,15 +1,15 @@
-const env = require("../Environment");
-const jwt = require("jsonwebtoken");
-const { v4 } = require("uuid");
-const {
+import env from "../Environment.js";
+import jwt from "jsonwebtoken";
+import { v4 } from "uuid";
+import {
   createAuthenticationTokens,
   getAuthenticationTokens,
   deleteAuthenticationTokens,
-} = require("./AuthenticationTokens");
-const { getInvestorsWithUsername } = require("./Investor");
-const moment = require("moment");
+} from "./AuthenticationTokens.js";
+import { getInvestorsWithUsername } from "./Investor.js";
+import moment from "moment";
 
-async function generateNewAuthenticationTokens(user, deviceName, res) {
+export async function generateNewAuthenticationTokens(user, deviceName, res) {
   const now = moment();
   const monthFromNow = moment().add(1, "months");
   let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
@@ -45,7 +45,7 @@ async function generateNewAuthenticationTokens(user, deviceName, res) {
     refresh_token: clientRefreshToken,
   });
 }
-async function getAuthenticatedUser(req, res) {
+export async function getAuthenticatedUser(req, res) {
   //checks if the user is authenticated
   const clientTokensCookie = req.cookies["access_tokens"] ?? {};
 
@@ -80,4 +80,3 @@ function verifyToken(token) {
     return jwt.verify(token, env.jwt_secret);
   } catch (err) {}
 }
-module.exports = { generateNewAuthenticationTokens, getAuthenticatedUser };

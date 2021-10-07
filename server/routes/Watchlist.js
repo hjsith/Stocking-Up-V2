@@ -1,14 +1,14 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   createWatchlist,
   getWatchlistByInvestor,
   deleteWatchlist,
   checkIfWatchlistExists,
-} = require("../functions/Watchlist");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Watchlist.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
-// Init shared
+// Ifrom
 const router = Router();
 
 //Route to get watchlist for each investor via investorID and returns the watchlist in json
@@ -64,4 +64,4 @@ router.delete("/watchlistremoved", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

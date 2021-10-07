@@ -29,6 +29,10 @@ stages:
           vmImage: $(vmImageName)
 
         steps:
+          - task: Npm@1
+            inputs:
+              command: 'install'
+              workingDir: 'server'
           - task: ArchiveFiles@2
             displayName: "Archive files"
             inputs:
