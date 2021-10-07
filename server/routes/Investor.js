@@ -1,13 +1,13 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllInvestors,
   getInvestor,
   getInvestorUsername,
   updateInvestorPassword,
   setInvestorDifficulty,
   getInvestorsWithSimilarUsernames,
-} = require("../functions/Investor");
+} from "../functions/Investor";
 const bcrypt = require("bcrypt");
 const { getAuthenticatedUser } = require("../functions/Authenticate");
 

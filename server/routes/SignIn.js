@@ -1,15 +1,13 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const bcrypt = require("bcrypt"); //hashed password
-const {
-  generateNewAuthenticationTokens
-} = require("../functions/Authenticate");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import bcrypt from "bcrypt"; //hashed password
+import { generateNewAuthenticationTokens } from "../functions/Authenticate.js";
+import {
   getInvestorPassword,
   checkUsernameExist,
   updateInvestorPassword,
-  getOneInvestorWithUsername
-} = require("../functions/Investor");
+  getOneInvestorWithUsername,
+} from "../functions/Investor.js";
 
 // Init shared
 const router = Router();
@@ -42,10 +40,7 @@ router.post("/SignIn", async (req, res) => {
   }
 });
 router.get("/logout", async (req, res) => {
-  return res
-    .status(StatusCodes.OK)
-    .clearCookie("access_tokens")
-    .end();
+  return res.status(StatusCodes.OK).clearCookie("access_tokens").end();
 });
 //Forgot Password Route
 router.post("/ForgotPassword", async (req, res) => {
@@ -71,4 +66,4 @@ router.post("/ForgotPassword", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

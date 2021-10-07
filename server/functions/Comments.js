@@ -1,7 +1,7 @@
-const { Comments } = require("../db/Models");
+import { Comments } from "../db/Models.js";
 
 //Return all comments for a specific thread
-async function getAllComments(threadID) {
+export async function getAllComments(threadID) {
   return await Comments.findAll({
     where: {
       ThreadID: threadID,
@@ -11,7 +11,7 @@ async function getAllComments(threadID) {
 }
 
 //Return the number of comments a user has
-async function getUserCommentCount(investorID) {
+export async function getUserCommentCount(investorID) {
   var comments = await Comments.findAll({
     where: {
       InvestorID: investorID,
@@ -21,7 +21,7 @@ async function getUserCommentCount(investorID) {
 }
 
 //Create a new comment
-async function createComment(
+export async function createComment(
   inputInvestorID,
   inputThreadID,
   inputDateAdded,
@@ -39,7 +39,7 @@ async function createComment(
 }
 
 //Increase the like count of a comment by one
-async function increaseLike(commentID) {
+export async function increaseLike(commentID) {
   var commentLikes = await Comments.findOne({
     attributes: ["Likes"],
     where: {
@@ -65,7 +65,7 @@ async function increaseLike(commentID) {
 }
 
 //Decrease the like count of a comment by one
-async function decreaseLike(commentID) {
+export async function decreaseLike(commentID) {
   var commentLikes = await Comments.findOne({
     attributes: ["Likes"],
     where: {
@@ -90,7 +90,7 @@ async function decreaseLike(commentID) {
   }
 }
 
-async function updateCommentMessage(commentID, newMessage) {
+export async function updateCommentMessage(commentID, newMessage) {
   var updatedComment = await Comments.update(
     { Comment: newMessage },
     {
@@ -105,12 +105,3 @@ async function updateCommentMessage(commentID, newMessage) {
     return false;
   }
 }
-
-module.exports = {
-  getAllComments,
-  getUserCommentCount,
-  createComment,
-  increaseLike,
-  decreaseLike,
-  updateCommentMessage,
-};

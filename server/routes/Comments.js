@@ -1,14 +1,14 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllComments,
   createComment,
   getUserCommentCount,
   updateCommentMessage,
   increaseLike,
   decreaseLike,
-} = require("../functions/Comments");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Comments.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -138,4 +138,4 @@ router.put("/unlikeComment", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

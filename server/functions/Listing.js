@@ -1,17 +1,17 @@
-const { Listing } = require("../db/Models");
+import { Listing } from "../db/Models.js";
 
 //Get all listing function
-async function getAllListings() {
+export async function getAllListings() {
   return await Listing.findAll();
 }
 
 //Get listing by company code
-async function getListing(code) {
+export async function getListing(code) {
   return await Listing.findByPk(code);
 }
 
 //Create Listing
-async function createListing(
+export async function createListing(
   inputListingID,
   inputListingName,
   inputListingIndustry,
@@ -32,5 +32,3 @@ async function createListing(
     YearLowPrice: inputYearLowPrice,
   });
 }
-
-module.exports = { getAllListings, getListing, createListing };

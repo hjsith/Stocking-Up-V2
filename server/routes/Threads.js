@@ -1,12 +1,12 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllThreads,
   createThread,
   // findThreadsWithName,
   // createMissingThreads,
-} = require("../functions/Threads");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Threads.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -62,4 +62,4 @@ router.post("/newThread", async (req, res) => {
 //   return res.status(StatusCodes.OK).send();
 // });
 
-module.exports = router;
+export default router;

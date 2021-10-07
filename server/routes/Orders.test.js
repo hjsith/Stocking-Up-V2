@@ -1,12 +1,12 @@
-const app = require("../server.js");
-const request = require("supertest");
-const sequelize = require("../db/DBInstance");
-const { getAuthenticatedUserCookie } = require("../test.config");
-const { createListing } = require("../functions/Listing");
-const { getInvestor } = require("../functions/Investor");
-const { getOrdersByInvestor } = require("../functions/Order.js");
-const { getAllExecutedOrdersByInvestor } = require("../functions/Holding.js");
-const { createPrice } = require("../functions/Price.js");
+import app from "../server.js";
+import request from "supertest";
+import sequelize from "../db/DBInstance.js";
+import { getAuthenticatedUserCookie } from "../test.config.js";
+import { createListing } from "../functions/Listing.js";
+import { getInvestor } from "../functions/Investor.js";
+import { getOrdersByInvestor } from "../functions/Order.js";
+import { getAllExecutedOrdersByInvestor } from "../functions/Holding.js";
+import { createPrice } from "../functions/Price.js";
 
 let user;
 let cookie = "";
@@ -57,7 +57,6 @@ describe("Orders endpoint", () => {
         executionTime: new Date(),
       })
       .set("cookie", cookie);
-    orderID = res.body.OrderID;
     expect(res.status).toEqual(201);
     expect(res.body).toEqual(expect.any(Object));
   });

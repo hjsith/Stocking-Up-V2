@@ -1,8 +1,7 @@
-
-const app = require("../server.js");
-const request = require("supertest");
-const sequelize = require("../db/DBInstance");
-const { getAuthenticatedUserCookie } = require("../test.config");
+import app from "../server.js";
+import request from "supertest";
+import sequelize from "../db/DBInstance.js";
+import { getAuthenticatedUserCookie } from "../test.config.js";
 
 let user;
 let cookie = "";
@@ -11,15 +10,13 @@ beforeAll(async () => {
   await sequelize.sync();
 
   // Create user in database
-  user = await request(app)
-    .post("/api/SignUp")
-    .send({
-      firstName: "Test",
-      lastName: "Tester",
-      email: "Testing@Email",
-      password: "Password",
-      username: "TestUser"
-    });
+  user = await request(app).post("/api/SignUp").send({
+    firstName: "Test",
+    lastName: "Tester",
+    email: "Testing@Email",
+    password: "Password",
+    username: "TestUser",
+  });
 });
 
 beforeEach(async () => {
@@ -35,23 +32,19 @@ describe("SignIn  endpoint", () => {
     expect(res.status).toEqual(400);
   });
   it("Gives correct sign in details to log in ", async () => {
-    const res = await request(app)
-      .post("/api/SignIn")
-      .send({
-        username: "TestUser", // what is sent back
-        password: "Password"
-      });
+    const res = await request(app).post("/api/SignIn").send({
+      username: "TestUser", // what is sent back
+      password: "Password",
+    });
 
     expect(res.status).toEqual(200);
   });
 
   it("Passwords do not match or username is incorrect", async () => {
-    const res = await request(app)
-      .post("/api/SignIn")
-      .send({
-        username: "Name1", // what is sent back
-        password: "Apples"
-      });
+    const res = await request(app).post("/api/SignIn").send({
+      username: "Name1", // what is sent back
+      password: "Apples",
+    });
     expect(res.status).toEqual(401);
   });
 });
