@@ -94,6 +94,7 @@ stages:
                     packageForLinux: "$(Pipeline.Workspace)/drop/$(Build.BuildId).zip"
                     RuntimeStack: "NODE|14-lts"
                     StartupCommand: "npm run start"
+                    RemoveAdditionalFilesFlag: true
                     ScriptType: "Inline Script"
                     InlineScript: |
                       npm run build
