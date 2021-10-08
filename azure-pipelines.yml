@@ -34,17 +34,6 @@ stages:
             inputs:
               command: 'install'
               workingDir: 'server'
-          - task: Npm@1
-            displayName: "NPM Install Client"
-            inputs:
-              command: 'install'
-              workingDir: 'client'
-          - task: Npm@1
-            displayName: "NPM Build"
-            inputs:
-              command: 'custom'
-              workingDir: 'client'
-              customCommand: 'run build'
           - task: ArchiveFiles@2
             displayName: "Archive files"
             inputs:
