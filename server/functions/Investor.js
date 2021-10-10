@@ -2,6 +2,7 @@ import { Investor } from "../db/Models.js";
 import pkg from "sequelize";
 const { Op } = pkg;
 import moment from "moment";
+import { checkIfFriends } from "../functions/Friends.js";
 
 //Returns all investors
 export async function getAllInvestors() {
@@ -28,6 +29,21 @@ export async function createInvestor(fName, lName, email, password, username) {
     DateJoined: date,
     Title: "NEEDED",
     Funds: 0,
+  });
+}
+
+export async function setInvestorDifficulty(id, difficulty) {
+  const investor = await Investor.findByPk(id);
+  let funds =
+    difficulty == "Easy" ? 50000 : difficulty == "Intermediate" ? 20000 : 5000;
+  let netWorth = funds;
+  let title = "Beginner";
+
+  await investor.update({
+    InvestorDifficulty: difficulty,
+    Funds: funds,
+    NetWorth: netWorth,
+    Title: title,
   });
 }
 
@@ -107,4 +123,39 @@ export async function getOneInvestorWithUsername(username) {
       Username: username,
     },
   });
+}
+
+export async function getInvestorsWithSimilarUsernames(
+  userid,
+  searchingUsername,
+  username
+) {
+  const similarInvestors = await Investor.findAll({
+    where: {
+      [Op.and]: [
+        {
+          Username: {
+            [Op.ne]: searchingUsername,
+          },
+        },
+        {
+          Username: {
+            [Op.substring]: username,
+          },
+        },
+      ],
+    },
+  });
+
+  let nonFriends = [];
+
+  for (let i = 0; i < similarInvestors.length; ++i) {
+    await checkIfFriends(userid, similarInvestors[i].InvestorID).then(
+      (result) => {
+        if (!result) nonFriends.push(similarInvestors[i]);
+      }
+    );
+  }
+
+  return nonFriends;
 }

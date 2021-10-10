@@ -109,7 +109,7 @@ class WatchlistRowPannel extends React.Component {
             <th>{this.state.highPrice}</th>
             <th>{this.state.industry}</th>
             <th colSpan="2">
-              <div className="ButtonContainer">
+              <div className="WatchlistButtonContainer">
                 {/* link used to reroute investor the listing page on click passing through the companyCode */}
                 <Link
                   to={{
@@ -124,7 +124,7 @@ class WatchlistRowPannel extends React.Component {
                 </Link>
               </div>
               {/* button to delete watchlist from investor */}
-              <div className="ButtonContainer">
+              <div className="WatchlistButtonContainer">
                 <button
                   className="CancelCrossButton"
                   onClick={() => {
