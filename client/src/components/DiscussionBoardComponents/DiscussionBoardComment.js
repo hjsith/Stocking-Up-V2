@@ -59,7 +59,6 @@ class DiscussionBoardComment extends React.Component {
         <div className="UserBlock">
           <UserProfileIcon
             name={this.state.username}
-            colorNumber={1}
             company={false}
             size={70}
           />

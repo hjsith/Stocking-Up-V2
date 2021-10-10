@@ -44,7 +44,7 @@
 
 .CompanyButtonListingPrice {
   display: inline-block;
-  padding-left: 15px;
+  padding-left: 10px;
   margin-top: 4%;
   position: absolute;
 }
@@ -54,14 +54,23 @@
   color: white;
 }
 
-.CompanyButtonListingChange {
+.GreenPrice {
   color: #00ff94;
+  display: inline-block;
+}
+
+.RedPrice {
+  color: #de3838;
+}
+
+.GrayPrice {
+  color: #818583;
 }
 
 .commentContainer {
   margin-top: 30px;
   text-align: center;
-  height: 65%;
+  height: 100%;
 }
 
 .CommentInputContainer {
@@ -174,6 +183,13 @@
   font-weight: bold;
 }
 
+.CommentSearchTitle {
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 28px;
+}
+
 #commentInputTextField {
   width: 80%;
   margin-top: 30px;
@@ -240,4 +256,36 @@
   font-size: 24px;
   position: relative;
   top: 50%;
+}
+
+.DiscussionBoardForm {
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 40%;
+}
+
+.discussionBoardSearchButton {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #1f6cd9;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border-radius: 0.725em;
+}
+
+.discussionBoardSearchButton:hover {
+  background-color: #3a88f5;
+}
+
+.CommentInputLineBlock {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  padding-top: 30px;
 }
