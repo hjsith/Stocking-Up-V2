@@ -1,7 +1,7 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const { getAllListings, getListing } = require("../functions/Listing");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import { getAllListings, getListing } from "../functions/Listing.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -74,4 +74,4 @@ router.get("/listing/priceClose", async (req, res) => {
     .json({ closingPrice: listing.ClosingPrice });
 });
 
-module.exports = router;
+export default router;
