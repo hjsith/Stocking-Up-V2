@@ -47,8 +47,12 @@ export async function increaseLike(commentID) {
     },
   });
 
+  if (commentLikes == null) {
+    return false;
+  }
+
   var updatedComment = await Comments.update(
-    { Likes: commentLikes + 1 },
+    { Likes: commentLikes.Likes + 1 },
     {
       where: {
         CommentID: commentID,
@@ -73,8 +77,12 @@ export async function decreaseLike(commentID) {
     },
   });
 
+  if (commentLikes == null) {
+    return false;
+  }
+
   var updatedComment = await Comments.update(
-    { Likes: commentLikes - 1 },
+    { Likes: commentLikes.Likes - 1 },
     {
       where: {
         CommentID: commentID,

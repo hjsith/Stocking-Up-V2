@@ -6,19 +6,39 @@ import CommentInput from "../components/DiscussionBoardComponents/CommentInput";
 import { Link } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
 import { Redirect } from "react-router-dom";
+import PriceArrow from "../components/PriceArrow";
+import ClosingPrice from "../components/ClosingPrice";
 
 class DiscussionBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       comments: [], //Array containing all comments
+      toDisplay: [],
       currentListingPrice: 0,
       unauth: false,
+      searchString: "",
     };
     this.fetchAllComments = this.fetchAllComments.bind(this);
+    this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   static contextType = UserContext;
+
+  handleSearchStringChange(event) {
+    this.setState({ searchString: event.target.value });
+  }
+
+  handleSearch(event) {
+    let temp = [];
+    for (const element of this.state.comments) {
+      if (element.Comment.includes(this.state.searchString)) {
+        temp.push(element);
+      }
+    }
+    this.setState({ toDisplay: temp });
+  }
 
   //Get all comments for a specific thread
   fetchAllComments() {
@@ -32,7 +52,7 @@ class DiscussionBoard extends React.Component {
         if (res.status === 200) {
           // Successful login 200
           res.json().then((body) => {
-            this.setState({ comments: body });
+            this.setState({ comments: body, toDisplay: body });
           });
         } else if (res.status === 401) {
           this.setState({ unauth: true });
@@ -114,7 +134,6 @@ class DiscussionBoard extends React.Component {
             Discussion Board for {this.props.match.params.id}
           </h1>
           <div className="DiscussionBoardDescription">
-            {" "}
             This is the description of the {this.props.match.params.id}. It
             gives an overview of the company.
           </div>
@@ -130,13 +149,41 @@ class DiscussionBoard extends React.Component {
             </div>
 
             <div className="CompanyButtonListingPrice">
-              ${this.state.currentListingPrice}{" "}
-              <span className="CompanyButtonListingChange"> (+0.08)</span>
+              ${this.state.currentListingPrice} &nbsp;
+              <ClosingPrice
+                currentPrice={this.state.currentListingPrice}
+                code={this.props.match.params.id}
+              />
+              <PriceArrow
+                currentPrice={this.state.currentListingPrice}
+                code={this.props.match.params.id}
+              />
             </div>
           </Link>
         </div>
+        <div className="DiscussionBoardForm">
+          <div className="CommentSearchTitle">Search through the comments!</div>
+
+          <input
+            className="searchTextfield form-control"
+            type="text"
+            value={this.state.searchString}
+            onChange={this.handleSearchStringChange}
+            placeholder="Type some text here..."
+          />
+          <br />
+          <button
+            className="discussionBoardSearchButton"
+            onClick={this.handleSearch}
+          >
+            Search
+          </button>
+        </div>
+        <div className="CommentInputLineBlock">
+          <div className="CommentInputLine"></div>
+        </div>
         <div className="commentContainer">
-          <DiscussionBoardComments comments={this.state.comments} />
+          <DiscussionBoardComments comments={this.state.toDisplay} />
         </div>
         <div className="CommentInputContainer">
           <CommentInput

@@ -3,6 +3,7 @@ import React from "react";
 import Like from "./Like";
 import { UserContext } from "../UserContext";
 import { Redirect } from "react-router-dom";
+import "../../assets/css/DiscussionBoard.scss";
 
 class DiscussionBoardComment extends React.Component {
   constructor(props) {
@@ -59,7 +60,6 @@ class DiscussionBoardComment extends React.Component {
         <div className="UserBlock">
           <UserProfileIcon
             name={this.state.username}
-            colorNumber={1}
             company={false}
             size={70}
           />
@@ -76,12 +76,7 @@ class DiscussionBoardComment extends React.Component {
             Price: {this.props.listingPrice}
           </div>
           <div className="CommentNumber">#{this.props.index}</div>
-          <div className="CommentLikes">
-            <Like
-              likeCount={this.props.likes}
-              InvestorID={this.props.investorID}
-            />
-          </div>
+          <Like likeCount={this.props.likes} CommentID={this.props.commentID} />
         </div>
       </div>
     );

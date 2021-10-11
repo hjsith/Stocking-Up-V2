@@ -143,7 +143,7 @@ class Profile extends React.Component {
             <div>
               <div className="ProfileIconContainer">
                 <UserProfileIcon
-                  name={this.state.userName}
+                  name={this.context.user.name}
                   colorNumber={1}
                   company={false}
                   size={150}
