@@ -426,7 +426,7 @@
 }
 
 .divholding {
-  height: 21.5em;
+  height: 22em;
   width: 97%;
   overflow: auto;
 }
@@ -444,7 +444,7 @@
 }
 
 .divwatchlist {
-  height: 21.5em;
+  height: 14em;
   margin-left: 0.9em;
   width: 95%;
   overflow: auto;
@@ -475,3 +475,23 @@
   border-radius: 10px;
   background: white;
 }
+
+.watchlistSearchButton {
+  height: 3em;
+  width: 5em;
+  background-color: #1f6cd9;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border-radius: 2em;
+}
+
+.watchlistSearchWidth {
+  padding: 1.25em 1.25em 0.5em 1.25em;
+  width: 60%;
+}
+
+// .watchlistSearchWidth {
+//    width: 19%;
+//  }
