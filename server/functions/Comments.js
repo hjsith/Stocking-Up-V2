@@ -47,6 +47,10 @@ export async function increaseLike(commentID) {
     },
   });
 
+  if (commentLikes == null) {
+    return false;
+  }
+
   var updatedComment = await Comments.update(
     { Likes: commentLikes.Likes + 1 },
     {
@@ -72,6 +76,10 @@ export async function decreaseLike(commentID) {
       CommentID: commentID,
     },
   });
+
+  if (commentLikes == null) {
+    return false;
+  }
 
   var updatedComment = await Comments.update(
     { Likes: commentLikes.Likes - 1 },
