@@ -4,6 +4,7 @@ import "../assets/css/navbar.scss";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../assets/images/LogowithoutB.png";
 import profileIcon from "../assets/images/ProfileIcon.png";
+import UserProfileIcon from "./UserProfileIcon";
 
 const NavBar = () => {
   const cont = useContext(UserContext);
@@ -55,7 +56,15 @@ const NavBar = () => {
           title={
             <div className="navbarProfile">
               <p id="myProfile">Profile</p>
-              <img src={profileIcon} className="ProfileIcon" alt="Profile" />
+              <div className="navbarProfileIcon">
+                <div className="navbarIcon">
+                  <UserProfileIcon
+                    name={cont.user.name}
+                    company={false}
+                    size={35}
+                  />
+                </div>
+              </div>
             </div>
           }
           id="basic-nav-dropdown-noCaret"
