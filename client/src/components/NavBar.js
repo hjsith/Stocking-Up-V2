@@ -56,19 +56,15 @@ const NavBar = () => {
           title={
             <div className="navbarProfile">
               <p id="myProfile">Profile</p>
-              {cont.user.name != "" ? (
-                <div className="navbarProfileIcon">
-                  <div className="navbarIcon">
-                    <UserProfileIcon
-                      name={cont.user.name}
-                      company={false}
-                      size={35}
-                    />
-                  </div>
+              <div className="navbarProfileIcon">
+                <div className="navbarIcon">
+                  <UserProfileIcon
+                    name={cont.user.name}
+                    company={false}
+                    size={35}
+                  />
                 </div>
-              ) : (
-                <img src={profileIcon} className="ProfileIcon" alt="Profile" />
-              )}
+              </div>
             </div>
           }
           id="basic-nav-dropdown-noCaret"

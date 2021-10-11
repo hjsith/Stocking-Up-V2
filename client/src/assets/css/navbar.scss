@@ -41,17 +41,19 @@
 
 .navbarProfile #myProfile {
   display: inline-block;
-  height: 10px;
   padding-right: 15px;
   font-size: 14px;
+  height: 100%;
+  vertical-align: top;
 }
 
 .navbarProfileIcon {
   display: inline-block;
-  background-color: red;
+  height: 100%;
 }
 
 .navbarIcon {
+  height: 100%;
   display: inline-block;
-  padding-top: 10px;
+  padding-top: 7px;
 }

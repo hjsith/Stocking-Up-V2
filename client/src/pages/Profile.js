@@ -23,7 +23,7 @@ class Profile extends React.Component {
       userDatejoined: "",
       SimulationEndDate: "0",
       userName: "",
-      unauth: false
+      unauth: false,
     };
   }
 
@@ -35,18 +35,18 @@ class Profile extends React.Component {
       fetch("/api/investor?id=" + this.context.user.id, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(res => {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         if (res.status === 200) {
-          res.json().then(body =>
+          res.json().then((body) =>
             this.setState({
               userRank: body.InvestorRanking,
               userNetWorth: "" + body.NetWorth,
               userDifficulty: body.InvestorDifficulty,
               userTitle: body.Title,
               userDatejoined: body.DateJoined,
-              userName: body.InvestorFName + " " + body.InvestorLName
+              userName: body.InvestorFName + " " + body.InvestorLName,
             })
           );
         } else if (res.status === 401) {
@@ -105,7 +105,7 @@ class Profile extends React.Component {
   componentDidMount() {
     if (this.props.location.state) {
       this.setState({
-        snackBarMessage: this.props.location.state.snackBarMessage
+        snackBarMessage: this.props.location.state.snackBarMessage,
       });
     }
     this.fetchUser();
@@ -120,7 +120,7 @@ class Profile extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: "/SignIn"
+            pathname: "/SignIn",
           }}
         />
       );
@@ -134,7 +134,7 @@ class Profile extends React.Component {
             <div>
               <div className="ProfileIconContainer">
                 <UserProfileIcon
-                  name={this.state.userName}
+                  name={this.context.user.name}
                   colorNumber={1}
                   company={false}
                   size={150}
@@ -142,7 +142,7 @@ class Profile extends React.Component {
               </div>
               <div className="NameButtonContainer">
                 <p className="ProfileTitles Username">{this.state.userName}</p>
-                <a href="#Friends" className="ProfileFriendButton">
+                <a href="/Friends" className="ProfileFriendButton">
                   My Friends &gt;
                 </a>
               </div>
