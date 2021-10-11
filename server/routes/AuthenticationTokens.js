@@ -1,14 +1,7 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const { getAllAuthenticationTokens } = require("../functions/AuthenticationTokens");
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
 
 // Init shared
 const router = Router();
 
-router.get("/AuthenticationTokens", async (req, res) => {
-  const AuthenticationTokens = await getAllAuthenticationTokens();
-
-  return res.status(StatusCodes.OK).json(AuthenticationTokens);
-});
-
-module.exports = router;
+export default router;

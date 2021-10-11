@@ -1,10 +1,10 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import GreenBuyButton from "./GreenBuyButton";
-import RedSellButton from "./RedSellButton";
 import UserProfileIcon from "../UserProfileIcon";
+import { Link } from "react-router-dom";
 
 class HoldingsRowPanel extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +13,7 @@ class HoldingsRowPanel extends React.Component {
     };
   }
 
+  //On page load fetch API calls to get listing and the current price from the Listing and Price database.
   componentDidMount() {
     fetch("/api/listing" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -22,6 +23,7 @@ class HoldingsRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the company name
           name: body.name,
         });
       });
@@ -35,23 +37,17 @@ class HoldingsRowPanel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Price model using the company code obtaining the current price
           price: body.price,
         });
       });
     });
   }
 
-  handleBuy() {
-    console.log("Bought!!");
-  }
-
-  handleSell() {
-    console.log("Sold!!");
-  }
-
   render() {
     return (
       <div className="HoldingsRowPanel">
+        {/* table used to map out the information within each row seen via props retrieved from the front end (MyHoldings component) */}
         <table className="TableTitleFont2">
           <tr>
             <th>
@@ -68,19 +64,33 @@ class HoldingsRowPanel extends React.Component {
             <th>{this.props.units}</th>
             <th>{this.props.total}</th>
             <th>
-              {/* <GreenBuyButton /> */}
-              <div className="ButtonContainer">
-                <button className="GreenBuyButton" onClick={this.handleBuy}>
-                  Buy
-                </button>
+              <div>
+                {/* link used to reroute investor the listing page on click passing through the companyCode */}
+                <Link
+                  to={{
+                    pathname: "/QuoteManagement",
+                    state: { listingID: this.props.companyCode },
+                  }}
+                >
+                  <div className="GreenBuy">
+                    {this.state.currentListingPrice} <span>Buy</span>
+                  </div>
+                </Link>
               </div>
             </th>
             <th>
-              {/* <RedSellButton /> */}
-              <div className="ButtonContainer">
-                <button className="RedSellButton" onClick={this.handleSell}>
-                  Sell
-                </button>
+              <div>
+                {/* link used to reroute investor the listing page on click passing through the companyCode */}
+                <Link
+                  to={{
+                    pathname: "/QuoteManagement",
+                    state: { listingID: this.props.companyCode },
+                  }}
+                >
+                  <div className="RedSell">
+                    {this.state.currentListingPrice} <span>Sell</span>
+                  </div>
+                </Link>
               </div>
             </th>
           </tr>
@@ -89,7 +99,5 @@ class HoldingsRowPanel extends React.Component {
     );
   }
 }
-
-// a href="/Leaderboard"
 
 export default HoldingsRowPanel;

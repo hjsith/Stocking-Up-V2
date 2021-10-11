@@ -7,13 +7,14 @@ import profileIcon from "../assets/images/ProfileIcon.png";
 
 const NavBar = () => {
   const cont = useContext(UserContext);
-  const Logout = () => {             //Logout
+  const Logout = () => {
+    //Logout
     fetch("/api/logout", {
       //connects to frotnend to backend
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
     cont.updateUser({ name: "", id: "" });
   };
@@ -33,21 +34,20 @@ const NavBar = () => {
           Portfolio
         </Nav.Link>
         <NavDropdown title="Markets" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#Markets Overview">
+          <NavDropdown.Item href="/MarketsOverview">
             Markets Overview
           </NavDropdown.Item>
-          <NavDropdown.Item href="#Newsfeed">News Feed</NavDropdown.Item>
+          <NavDropdown.Item href="/Newsfeed">News Feed</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>
-          <NavDropdown.Item href="#Leaderboard">Leaderboard</NavDropdown.Item>
-          <NavDropdown.Item href="#DiscussionBoard">
+          <NavDropdown.Item href="/Friends">Friends</NavDropdown.Item>
+          <NavDropdown.Item href="/Leaderboard">Leaderboard</NavDropdown.Item>
+          <NavDropdown.Item href="/DiscussionBoardSearch">
             Discussion Board Search
           </NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Companies" id="basic-nav-dropdown">
           <NavDropdown.Item href="/CompanySearch">Search</NavDropdown.Item>
-          <NavDropdown.Item href="/QuoteManagement">Order</NavDropdown.Item>
         </NavDropdown>
       </Nav>
       <Nav>

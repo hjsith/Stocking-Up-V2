@@ -1,6 +1,6 @@
-const { AuthenticationTokens } = require("../db/Models");
+import { AuthenticationTokens } from "../db/Models.js";
 
-async function createAuthenticationTokens(
+export async function createAuthenticationTokens( //authentication  token is made
   InputRefreshToken,
   InputInvestorID,
   InputDeviceName,
@@ -9,28 +9,22 @@ async function createAuthenticationTokens(
 ) {
   await AuthenticationTokens.destroy({
     //only one refresh token is made
-    where: { InvestorID: InputInvestorID }
+    where: { InvestorID: InputInvestorID },
   });
   return AuthenticationTokens.create({
     RefreshToken: InputRefreshToken,
     InvestorID: InputInvestorID,
     DeviceName: InputDeviceName,
     CreatedTime: InputCreatedTime,
-    ExpiryTime: InputExpiryTime
+    ExpiryTime: InputExpiryTime,
   });
 }
 
-async function getAuthenticationTokens(RefreshToken) {
+export async function getAuthenticationTokens(RefreshToken) {
   return await AuthenticationTokens.findByPk(RefreshToken);
 }
 
-async function deleteAuthenticationTokens(RefreshTokens) {
+export async function deleteAuthenticationTokens(RefreshTokens) {
   row = await getAuthenticationTokens(RefreshTokens);
   return await row.destroy();
 }
-
-module.exports = {
-  createAuthenticationTokens,
-  getAuthenticationTokens,
-  deleteAuthenticationTokens
-};

@@ -1,9 +1,10 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
-import GreenBuyButton from "./GreenBuyButton";
 import UserProfileIcon from "../UserProfileIcon";
+import { Link } from "react-router-dom";
 
 class WatchlistRowPannel extends React.Component {
+  //React constructor used to initalise local states
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +16,7 @@ class WatchlistRowPannel extends React.Component {
     };
   }
 
+  //On page load fetch API calls to get listing industry, listing name, price high, price low and current price from the Listing and Price database.
   componentDidMount() {
     fetch("/api/listing/industry" + "?code=" + this.props.companyCode, {
       method: "GET",
@@ -24,6 +26,7 @@ class WatchlistRowPannel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the industry name
           industry: body.name,
         });
       });
@@ -37,6 +40,7 @@ class WatchlistRowPannel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the company name
           name: body.name,
         });
       });
@@ -50,6 +54,7 @@ class WatchlistRowPannel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the price high
           highPrice: body.highPrice,
         });
       });
@@ -63,6 +68,7 @@ class WatchlistRowPannel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Price model using the company code obtaining the current price
           price: body.price,
         });
       });
@@ -76,6 +82,7 @@ class WatchlistRowPannel extends React.Component {
     }).then((res) => {
       res.json().then((body) => {
         this.setState({
+          //from Listing model using the company code obtaining the price low
           lowPrice: body.lowPrice,
         });
       });
@@ -85,6 +92,7 @@ class WatchlistRowPannel extends React.Component {
   render() {
     return (
       <div className="WatchlistRowPannel">
+        {/* table used to map out the information within each row seen via props retrieved from the front end (Watchlist) */}
         <table className="TableTitleFont4">
           <tr>
             <th>
@@ -100,14 +108,28 @@ class WatchlistRowPannel extends React.Component {
             <th>{this.state.lowPrice}</th>
             <th>{this.state.highPrice}</th>
             <th>{this.state.industry}</th>
-            <th>
-              <GreenBuyButton />
-            </th>
-            <th>
-              <div className="ButtonContainer">
+            <th colSpan="2">
+              <div className="WatchlistButtonContainer">
+                {/* link used to reroute investor the listing page on click passing through the companyCode */}
+                <Link
+                  to={{
+                    pathname: "/QuoteManagement",
+                    state: { listingID: this.props.companyCode },
+                  }}
+                >
+                  <div className="BlueGoToCompany">
+                    {this.state.currentListingPrice}{" "}
+                    <span>Go to {this.props.companyCode}'s page</span>
+                  </div>
+                </Link>
+              </div>
+              {/* button to delete watchlist from investor */}
+              <div className="WatchlistButtonContainer">
                 <button
                   className="CancelCrossButton"
-                  onClick={this.props.cancel}
+                  onClick={() => {
+                    this.props.cancel(this.props.ID);
+                  }}
                 >
                   X
                 </button>

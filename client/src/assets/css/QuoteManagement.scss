@@ -22,11 +22,11 @@
 }
 
 .BackgroundPanel1 h1 {
-  font-size: 72px;
+  font-size: 2.5vw;
 }
 
 .BackgroundPanel1 p {
-  font-size: 62px;
+  font-size: 2.5vw;
 }
 
 .Panel2 {
@@ -140,7 +140,7 @@
 }
 
 .button1 button {
-  background-color: green;
+  background-color: #2ac811;
   border: none;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .button2 button {
-  background-color: blue;
+  background-color: #3789fd;
   width: 33%;
   border: none;
 }
@@ -159,7 +159,7 @@
 }
 
 .button3 button {
-  background-color: red;
+  background-color: #ff4b4b;
   border: none;
 }
 
@@ -183,7 +183,6 @@
   vertical-align: top;
   color: white;
   padding-right: 1%;
-  padding-top: 1%;
   align-content: center;
   margin-left: 2%;
 }
