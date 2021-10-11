@@ -1,5 +1,6 @@
 import DiscussionBoardComment from "./DiscussionBoardComment";
 import React from "react";
+import "../../assets/css/DiscussionBoard.scss";
 
 const commentsPerPage = 50;
 
@@ -113,6 +114,7 @@ class DiscussionBoardComments extends React.Component {
             this.state.commentsToShow.map((element, index) => (
               <DiscussionBoardComment
                 key={element.CommentID}
+                commentID={element.CommentID}
                 comment={element.Comment}
                 listingPrice={element.ListingPrice}
                 likes={element.Likes}
