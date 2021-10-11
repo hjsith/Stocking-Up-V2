@@ -12,7 +12,10 @@ class ProfileStatTable extends React.Component {
               <ProfileStat title="Rank" value={this.props.rank} />
             </td>
             <td>
-              <ProfileStat title="Net Worth" value={this.props.netWorth} />
+              <ProfileStat
+                title="Net Worth"
+                value={"$" + this.props.netWorth}
+              />
             </td>
           </tr>
           <tr>

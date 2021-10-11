@@ -9,6 +9,8 @@ import VerticalLine from "../components/UserManagementComponents/VerticalLine";
 import { UserContext } from "../components/UserContext";
 import { Redirect } from "react-router-dom";
 
+const Months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,7 @@ class Profile extends React.Component {
       userDatejoined: "",
       SimulationEndDate: "0",
       userName: "",
-      unauth: false
+      unauth: false,
     };
   }
 
@@ -35,18 +37,18 @@ class Profile extends React.Component {
       fetch("/api/investor?id=" + this.context.user.id, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(res => {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
         if (res.status === 200) {
-          res.json().then(body =>
+          res.json().then((body) =>
             this.setState({
               userRank: body.InvestorRanking,
               userNetWorth: "" + body.NetWorth,
               userDifficulty: body.InvestorDifficulty,
               userTitle: body.Title,
               userDatejoined: body.DateJoined,
-              userName: body.InvestorFName + " " + body.InvestorLName
+              userName: body.InvestorFName + " " + body.InvestorLName,
             })
           );
         } else if (res.status === 401) {
@@ -76,16 +78,20 @@ class Profile extends React.Component {
   //Get the number of comments the currently signed in user has made
   fetchPostCount() {
     this.setState({ userPostCount: 0 });
-    //   fetch("/api/investor", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       userID: "BADUSERID",
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // }
+    fetch("/api/commentCount?userID=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) => this.setState({ userPostCount: body.count }));
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
   }
 
   //Get the currently signed in user's achievements
@@ -102,16 +108,19 @@ class Profile extends React.Component {
     // }
   }
 
+  determineSimulationEndDate() {}
+
   componentDidMount() {
     if (this.props.location.state) {
       this.setState({
-        snackBarMessage: this.props.location.state.snackBarMessage
+        snackBarMessage: this.props.location.state.snackBarMessage,
       });
     }
     this.fetchUser();
     this.fetchFriendCount();
     this.fetchPostCount();
     this.fetchAchievements();
+    this.determineSimulationEndDate();
   }
 
   render() {
@@ -120,7 +129,7 @@ class Profile extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: "/SignIn"
+            pathname: "/SignIn",
           }}
         />
       );
@@ -142,7 +151,7 @@ class Profile extends React.Component {
               </div>
               <div className="NameButtonContainer">
                 <p className="ProfileTitles Username">{this.state.userName}</p>
-                <a href="#Friends" className="ProfileFriendButton">
+                <a href="/Friends" className="ProfileFriendButton">
                   My Friends &gt;
                 </a>
               </div>
@@ -157,6 +166,13 @@ class Profile extends React.Component {
               postCount={this.state.userPostCount}
               simualationDate={this.state.SimulationEndDate}
             />
+
+            <div className="EditProfileButtonContainer">
+              <a href="/EditProfile" className="ProfilePasswordButton">
+                Edit your Profile
+              </a>
+            </div>
+
             <div className="PasswordButtonContainer">
               <a href="/UpdatePassword" className="ProfilePasswordButton">
                 Change your password

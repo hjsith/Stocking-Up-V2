@@ -16,6 +16,7 @@ import MarketsOverview from "./pages/MarketsOverview";
 import DiscussionBoard from "./pages/DiscussionBoard";
 import DiscussionBoardSearch from "./pages/DiscussionBoardSearch";
 import Newsfeed from "./pages/Newsfeed";
+import EditProfile from "./pages/EditProfile";
 import { UserContext } from "./components/UserContext";
 import {
   Switch,
@@ -61,6 +62,7 @@ class App extends React.Component {
             <Route path="/AllOrders" component={AllOrders} />
             <Route path="/Newsfeed" component={Newsfeed} />
             <Route path="/MarketsOverview" component={MarketsOverview} />
+            <Route path="/EditProfile" component={EditProfile} />
             <Route
               path="/DiscussionBoardSearch"
               component={DiscussionBoardSearch}
