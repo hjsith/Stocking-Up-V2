@@ -26,6 +26,10 @@ class CommentInput extends React.Component {
 
   //Attempt to create a new comment for the currently signed in user
   handleSubmit() {
+    if (document.getElementById("commentInputTextField").value == "") {
+      this.setState({ errorMessage: "A comment cannot be blank." });
+      return;
+    }
     //Get the liting price for the new comment
     fetch("/api/price?code=" + this.props.threadID, {
       method: "GET",
