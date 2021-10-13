@@ -46,6 +46,7 @@ class FriendsList extends React.Component {
                     ? friend.AcceptingUsername
                     : friend.RequestingUsername
                 }
+                colorNumber={3}
                 dateAdded={friend.DateAdded}
                 isSelected={true}
               />

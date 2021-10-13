@@ -10,6 +10,7 @@ class FriendButton extends React.Component {
     this.buttonEnabler = this.buttonEnabler.bind(this);
   }
 
+  //Based on parent components button state, validates certain buttons
   buttonValidator() {
     let results = [false, false, false];
     if (this.props.title == "Pending Requests") results = [false, false, true];
@@ -18,6 +19,7 @@ class FriendButton extends React.Component {
     this.props.handler(results);
   }
 
+  //Based on parent components button state, enables certain buttons
   buttonEnabler() {
     if (this.props.panelNumber == 0) {
       if (this.props.title == "Pending Requests") return false;
@@ -31,6 +33,7 @@ class FriendButton extends React.Component {
     }
   }
 
+  //Changes image on button based on button title
   imageResolver() {
     let isPending = this.props.title == "Pending Requests";
     let image = isPending ? circle : whiteplus;
@@ -38,7 +41,7 @@ class FriendButton extends React.Component {
   }
 
   render() {
-    let image = this.imageResolver();
+    let image = this.imageResolver(); //Assigns final image to variable
 
     return (
       <div className="ButtonContainer">
