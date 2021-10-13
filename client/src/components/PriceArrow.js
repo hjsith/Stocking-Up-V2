@@ -8,12 +8,11 @@ class PriceArrow extends React.Component {
     super(props);
     this.state = {
       arrowState: "",
-      closePrice: "",
     };
     this.determineArrow = this.determineArrow.bind(this);
   }
 
-  determineArrow(currentPrice) {
+  determineArrow() {
     fetch("/api//listing/priceClose?code=" + this.props.code, {
       method: "GET",
       headers: {
@@ -22,10 +21,9 @@ class PriceArrow extends React.Component {
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((body) => {
-          this.setState({ closePrice: body.closingPrice });
-          if (currentPrice > this.state.closePrice) {
+          if (this.props.currentPrice > body.closingPrice) {
             this.setState({ arrowState: "Up" });
-          } else if (currentPrice < this.state.closePrice) {
+          } else if (this.props.currentPrice < body.closingPrice) {
             this.setState({ arrowState: "Down" });
           } else {
             this.setState({ arrowState: "Level" });
@@ -37,7 +35,14 @@ class PriceArrow extends React.Component {
   }
 
   componentDidMount() {
-    this.determineArrow(this.props.currentPrice);
+    this.determineArrow();
+  }
+
+  componentDidUpdate(oldProps) {
+    const newProps = this.props;
+    if (oldProps !== newProps) {
+      this.determineArrow();
+    }
   }
 
   render() {
