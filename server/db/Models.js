@@ -1,7 +1,9 @@
-const { DataTypes, Op } = require("sequelize");
-const db = require("./DBInstance");
+import pkg from "sequelize";
+const { DataTypes, Op } = pkg;
+import db from "./DBInstance.js";
 
-const Investor = db.define(
+//Model definitions for all entities
+export const Investor = db.define(
   "Investor",
   {
     InvestorID: {
@@ -24,7 +26,7 @@ const Investor = db.define(
   { sequelize: db, tableName: "Investor", timestamps: false }
 );
 
-const Listing = db.define(
+export const Listing = db.define(
   "Listing",
   {
     ListingID: {
@@ -42,7 +44,7 @@ const Listing = db.define(
   { sequelize: db, tableName: "Listing", timestamps: false }
 );
 
-const Price = db.define(
+export const Price = db.define(
   "Price",
   {
     ListingID: {
@@ -57,7 +59,7 @@ const Price = db.define(
   { sequelize: db, tableName: "Price", timestamps: false }
 );
 
-const OneDay = db.define(
+export const OneDay = db.define(
   "OneDay",
   {
     id: {
@@ -78,7 +80,7 @@ const OneDay = db.define(
   { sequelize: db, tableName: "OneDay", timestamps: false }
 );
 
-const FiveDays = db.define(
+export const FiveDays = db.define(
   "FiveDays",
   {
     id: {
@@ -99,7 +101,7 @@ const FiveDays = db.define(
   { sequelize: db, tableName: "FiveDays", timestamps: false }
 );
 
-const TwoWeeks = db.define(
+export const TwoWeeks = db.define(
   "TwoWeeks",
   {
     id: {
@@ -120,7 +122,7 @@ const TwoWeeks = db.define(
   { sequelize: db, tableName: "TwoWeeks", timestamps: false }
 );
 
-const OneMonth = db.define(
+export const OneMonth = db.define(
   "OneMonth",
   {
     id: {
@@ -141,7 +143,7 @@ const OneMonth = db.define(
   { sequelize: db, tableName: "OneMonth", timestamps: false }
 );
 
-const Achievements = db.define(
+export const Achievements = db.define(
   "Achievements",
   {
     AchievementID: {
@@ -156,7 +158,7 @@ const Achievements = db.define(
   { sequelize: db, tableName: "Achievements", timestamps: false }
 );
 
-const ObtainedAchievements = db.define(
+export const ObtainedAchievements = db.define(
   "ObtainedAchievements",
   {
     AchievementID: {
@@ -174,7 +176,7 @@ const ObtainedAchievements = db.define(
   { sequelize: db, tableName: "ObtainedAchievements", timestamps: false }
 );
 
-const Watchlist = db.define(
+export const Watchlist = db.define(
   "Watchlist",
   {
     InvestorID: {
@@ -196,7 +198,7 @@ const Watchlist = db.define(
   { tableName: "Watchlist", timestamps: false }
 );
 
-const Order = db.define(
+export const Order = db.define(
   "Order",
   {
     OrderID: {
@@ -223,7 +225,7 @@ const Order = db.define(
   { sequelize: db, tableName: "Order", timestamps: false }
 );
 
-const Holding = db.define(
+export const Holding = db.define(
   "Holding",
   {
     HoldingID: {
@@ -259,7 +261,7 @@ const Holding = db.define(
   { sequelize: db, tableName: "Holding", timestamps: false }
 );
 
-const AuthenticationTokens = db.define(
+export const AuthenticationTokens = db.define(
   "AuthenticationTokens",
   {
     RefreshToken: {
@@ -282,7 +284,7 @@ const AuthenticationTokens = db.define(
   { sequelize: db, tableName: "AuthenticationTokens", timestamps: false }
 );
 
-const Threads = db.define(
+export const Threads = db.define(
   "Threads",
   {
     ThreadID: {
@@ -302,7 +304,7 @@ const Threads = db.define(
   { sequelize: db, tableName: "Threads", timestamps: false }
 );
 
-const Comments = db.define(
+export const Comments = db.define(
   "Comments",
   {
     CommentID: {
@@ -333,7 +335,7 @@ const Comments = db.define(
   { sequelize: db, tableName: "Comments", timestamps: false }
 );
 
-const Articles = db.define(
+export const Articles = db.define(
   "Articles",
   {
     ArticleID: {
@@ -352,7 +354,7 @@ const Articles = db.define(
   { sequelize: db, tableName: "Articles", timestamps: false }
 );
 
-const Friends = db.define(
+export const Friends = db.define(
   "Friends",
   {
     FriendID: {
@@ -360,13 +362,16 @@ const Friends = db.define(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    RequestingUsername: DataTypes.STRING,
-    AcceptingUsername: DataTypes.STRING,
+    RequestingUsername: DataTypes.TEXT,
+    AcceptingUsername: DataTypes.TEXT,
     Status: DataTypes.BOOLEAN,
+    DateAdded: DataTypes.DATEONLY,
   },
   { sequelize: db, tableName: "Friends", timestamps: false }
 );
 
+//Relationship Init for models
+//Investor
 Investor.hasMany(Watchlist, { foreignKey: "InvestorID" });
 Investor.hasMany(Holding, { foreignKey: "InvestorID" });
 Investor.hasMany(ObtainedAchievements, { foreignKey: "InvestorID" });
@@ -437,23 +442,3 @@ Comments.belongsTo(Investor, { foreignKey: "InvestorID" });
 //Friends
 Friends.belongsTo(Investor, { foreignKey: "RequestingUsername" });
 Friends.belongsTo(Investor, { foreignKey: "AcceptingUsername" });
-
-module.exports = {
-  Investor,
-  Listing,
-  Price,
-  OneDay,
-  FiveDays,
-  TwoWeeks,
-  OneMonth,
-  Achievements,
-  ObtainedAchievements,
-  Watchlist,
-  Order,
-  Holding,
-  AuthenticationTokens,
-  Threads,
-  Comments,
-  Articles,
-  Friends,
-};

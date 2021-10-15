@@ -2,8 +2,8 @@
 
 .Login {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 640px;
-  width: 621px;
+  height: 670px;
+  width: 645px;
   border-radius: 0.625em;
   position: absolute;
   top: 0;
@@ -17,8 +17,8 @@
 
 .SignUp {
   background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-  height: 750px;
-  width: 628px;
+  height: 935px;
+  width: 792px;
   border-radius: 0.625em;
   position: absolute;
   top: 0;
@@ -96,7 +96,7 @@
   height: 55px;
   width: 207px;
   margin: auto;
-  margin-top: 41px;
+  margin-top: 52px;
 }
 
 .Usernametext {
@@ -201,4 +201,24 @@ textarea:focus {
 }
 .SignUperrorMessage {
   color: red;
+  height: 7px;
+  width: 750px;
+  margin: auto;
+  margin-top: 15px;
+}
+
+.LoginerrorMessage {
+  color: red;
+  height: 7px;
+  width: 600px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.ForgotPassworderrorMessage {
+  color: red;
+  height: 7px;
+  width: 600px;
+  margin: auto;
+  margin-top: 30px;
 }

@@ -1,29 +1,32 @@
-const env = require("../Environment");
-const jwt = require("jsonwebtoken");
-const { v4 } = require("uuid");
-const {
+import env from "../Environment.js";
+import jwt from "jsonwebtoken";
+import { v4 } from "uuid";
+import {
   createAuthenticationTokens,
   getAuthenticationTokens,
-  deleteAuthenticationTokens
-} = require("./AuthenticationTokens");
-const { getInvestorsWithUsername } = require("./Investor");
+  deleteAuthenticationTokens,
+} from "./AuthenticationTokens.js";
+import { getInvestorsWithUsername } from "./Investor.js";
+import moment from "moment";
 
-async function generateNewAuthenticationTokens(user, deviceName, res) {
-  const now = new Date();
-  const monthFromNow = new Date();
-  monthFromNow.setDate(monthFromNow.getDate() + 30);
+export async function generateNewAuthenticationTokens(user, deviceName, res) {
+  const now = moment();
+  const monthFromNow = moment().add(1, "months");
+  let currentUTCTime = moment.utc(now, "YYYY-MM-DD HH:mm:ss");
+  let futureUTCTime = moment.utc(monthFromNow, "YYYY-MM-DD HH:mm:ss");
+
   const refreshToken = v4();
   const serverRefreshToken = await createAuthenticationTokens(
     refreshToken,
     user.InvestorID,
     deviceName,
-    now,
-    monthFromNow
+    currentUTCTime,
+    futureUTCTime
   );
   const clientRefreshToken = jwt.sign(
     {
       username: user.Username,
-      token: refreshToken
+      token: refreshToken,
     },
     env.jwt_secret,
     { expiresIn: "30 days" }
@@ -31,7 +34,7 @@ async function generateNewAuthenticationTokens(user, deviceName, res) {
   const clientAccessToken = jwt.sign(
     {
       username: user.Username,
-      token: v4()
+      token: v4(),
     },
     env.jwt_secret,
     { expiresIn: "30m" }
@@ -39,10 +42,10 @@ async function generateNewAuthenticationTokens(user, deviceName, res) {
 
   res.cookie("access_tokens", {
     access_token: clientAccessToken,
-    refresh_token: clientRefreshToken
+    refresh_token: clientRefreshToken,
   });
 }
-async function getAuthenticatedUser(req, res) {
+export async function getAuthenticatedUser(req, res) {
   //checks if the user is authenticated
   const clientTokensCookie = req.cookies["access_tokens"] ?? {};
 
@@ -77,4 +80,3 @@ function verifyToken(token) {
     return jwt.verify(token, env.jwt_secret);
   } catch (err) {}
 }
-module.exports = { generateNewAuthenticationTokens, getAuthenticatedUser };
