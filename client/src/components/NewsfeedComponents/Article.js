@@ -6,9 +6,11 @@ const Article = ({ title, description, url, publishedAt, urlToImage }) => {
   return (
     <div className="newsPanel">
       <div className="datePanel">
-        {/* <div className="image">
-          <img src={urlToImage} />
-        </div> */}
+        {
+          <div className="image">
+            <img src={urlToImage} />
+          </div>
+        }
       </div>
 
       <div className="newsContent">
