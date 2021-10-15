@@ -4,7 +4,6 @@ import "../assets/css/UpdatePassword.scss";
 import Logo from "../assets/images/stocking-up.png";
 import PasswordErrorMessage from "../components/UserManagementComponents/PasswordErrorMessage";
 import { Redirect } from "react-router-dom";
-import { UserContext } from "../components/UserContext";
 
 const passwordRegex = new RegExp(
   "(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}"
@@ -18,16 +17,13 @@ class UpdatePassword extends React.Component {
       PasswordToConfirm: "",
       initalErrorMessage: "",
       ConfirmErrorMessage: "",
-      redirect: false, //Used to tell the component whether or not to redirect back to the profile paage
+      redirect: false,
     };
     this.handleInitialPassword = this.handleInitialPassword.bind(this);
     this.handlePasswordConfirm = this.handlePasswordConfirm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static contextType = UserContext;
-
-  //Handle input changes in textfields
   handleInitialPassword(event) {
     this.setState({ InitialPassword: event.target.value });
   }
@@ -38,7 +34,6 @@ class UpdatePassword extends React.Component {
 
   handleSubmit(event) {
     var determineRedirect = true;
-    //Check if the password is of the correct format
     if (passwordRegex.test(this.state.InitialPassword)) {
       if (this.state.initalErrorMessage !== "") {
         this.setState({ initalErrorMessage: "" });
@@ -53,7 +48,6 @@ class UpdatePassword extends React.Component {
       determineRedirect = false;
     }
 
-    //Check if the password matches the second password
     if (this.state.InitialPassword === this.state.PasswordToConfirm) {
       if (this.state.ConfirmErrorMessage !== "") {
         this.setState({ ConfirmErrorMessage: "" });
@@ -69,20 +63,19 @@ class UpdatePassword extends React.Component {
     }
 
     if (determineRedirect) {
-      //attempt to update the user's password
       fetch("/api/updatePassword", {
         method: "PUT",
         body: JSON.stringify({
-          userID: this.context.user.id,
-          password: this.state.InitialPassword,
+          userID: "BADUSERID",
+          newPassword: this.state.InitialPassword,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       })
         .then((res) => {
-          // Successful login 200
           if (res.status === 200) {
+            // Successful login 200
             this.setState({ redirect: true });
           } else if (res.status === 409) {
             console.log("Failed to update password. Wat the heck?!");
@@ -97,7 +90,6 @@ class UpdatePassword extends React.Component {
     event.preventDefault();
   }
   render() {
-    //If the password was successfully updated, redirect back to the profile page
     if (this.state.redirect) {
       return (
         <Redirect
@@ -106,17 +98,6 @@ class UpdatePassword extends React.Component {
             state: {
               snackBarMessage: "Password has been successfully updated!",
             },
-          }}
-        />
-      );
-    }
-
-    //Redirect unauthenticated user back to the SignIn page
-    if (this.context.user.name == "" || this.context.user.id == "") {
-      return (
-        <Redirect
-          to={{
-            pathname: "/SignIn",
           }}
         />
       );

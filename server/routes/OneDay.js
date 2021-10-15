@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
-import {
+const { Router } = require("express");
+const { StatusCodes } = require("http-status-codes");
+const {
   getAllOneDayPrices,
   getOneDayPricesForListing,
-} from "../functions/OneDay.js";
+} = require("../functions/OneDay");
 
 // Init shared
 const router = Router();
@@ -28,4 +28,4 @@ router.get("/oneday", async (req, res) => {
   return res.status(StatusCodes.OK).json(prices);
 });
 
-export default router;
+module.exports = router;

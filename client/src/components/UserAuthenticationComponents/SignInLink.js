@@ -1,7 +1,7 @@
 import React from "react";
-import "../../assets/css/SignIn.scss";                     
+import "../../assets/css/SignIn.scss";
 class SignInLink extends React.Component {
-  render() {                                             
+  render() {
     return (
       <>
         <div className="NoAccount">

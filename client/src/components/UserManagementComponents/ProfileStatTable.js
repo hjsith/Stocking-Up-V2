@@ -9,39 +9,36 @@ class ProfileStatTable extends React.Component {
         <table className="ProfileStatTable">
           <tr>
             <td>
-              <ProfileStat title="Rank" value={this.props.rank} />
+              <ProfileStat title="Rank" value="#20" />
             </td>
             <td>
-              <ProfileStat title="Net Worth" value={this.props.netWorth} />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <ProfileStat
-                title="Difficulty"
-                value={this.props.userDifficulty}
-              />
-            </td>
-            <td>
-              <ProfileStat title="Title" value={this.props.title} />
+              <ProfileStat title="Net Worth" value="$130 Billion" />
             </td>
           </tr>
           <tr>
             <td>
-              <ProfileStat title="Friends" value={this.props.friendCount} />
+              <ProfileStat title="Difficulty" value="Easy" />{" "}
             </td>
             <td>
-              <ProfileStat title="Posts" value={this.props.postCount} />
+              <ProfileStat title="Title" value="Veteran" />
             </td>
           </tr>
           <tr>
             <td>
-              <ProfileStat title="Date Joined" value={this.props.dateJoined} />
+              <ProfileStat title="Friends" value="243" />{" "}
+            </td>
+            <td>
+              <ProfileStat title="Posts" value="51" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <ProfileStat title="Date Joined" value="01/01/2021" />{" "}
             </td>
             <td>
               <ProfileStat
                 title="Days till next simulator wipe"
-                value={this.props.simualationDate}
+                value="122 Days"
               />
             </td>
           </tr>

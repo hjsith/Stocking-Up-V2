@@ -1,22 +1,17 @@
-import { Investor } from "../db/Models.js";
-import pkg from "sequelize";
-const { Op } = pkg;
-import moment from "moment";
-import { checkIfFriends } from "../functions/Friends.js";
-
-//Returns all investors
-export async function getAllInvestors() {
+const { Investor } = require("../db/Models");
+const { Op } = require("sequelize");
+async function getAllInvestors() {
   return await Investor.findAll();
 }
 
-//Find investor given a ID
-export async function getInvestor(userID) {
+async function getInvestor(userID) {
   return await Investor.findByPk(userID);
 }
 
-//Create new investor
-export async function createInvestor(fName, lName, email, password, username) {
-  let date = moment.utc().startOf("date");
+async function createInvestor(fName, lName, email, password, username) {
+  var today = new Date();
+  var date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   return Investor.create({
     InvestorFName: fName,
     InvestorLName: lName,
@@ -28,30 +23,15 @@ export async function createInvestor(fName, lName, email, password, username) {
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
     Title: "NEEDED",
-    Funds: 0,
+    Funds: 0
   });
 }
 
-export async function setInvestorDifficulty(id, difficulty) {
-  const investor = await Investor.findByPk(id);
-  let funds =
-    difficulty == "Easy" ? 50000 : difficulty == "Intermediate" ? 20000 : 5000;
-  let netWorth = funds;
-  let title = "Beginner";
-
-  await investor.update({
-    InvestorDifficulty: difficulty,
-    Funds: funds,
-    NetWorth: netWorth,
-    Title: title,
-  });
-}
-
-export async function investorBuy(investorID, total) {
+async function updateInvestorBalanceAfterPurchase(investorID, total) {
   let investor = await Investor.findByPk(investorID);
-  let balance = investor.Funds;
+  let balance = investor.NetWorth;
   if (total < balance) {
-    investor.Funds -= total;
+    investor.NetWorth += total;
     await investor.save();
     return true;
   } else {
@@ -59,27 +39,20 @@ export async function investorBuy(investorID, total) {
   }
 }
 
-export async function investorSell(investorID, total) {
-  let investor = await Investor.findByPk(investorID);
-  investor.Funds += total;
-  await investor.save();
-}
-
-export async function getInvestorPassword(username) {
+async function getInvestorPassword(username) {
   return Investor.findOne({
     attributes: ["InvestorPassword"],
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
 }
 
-//Check if a username already exist, used to prevent duplicate usernames from being used by investors
-export async function checkUsernameExist(username) {
+async function checkUsernameExist(username) {
   var searchedInvestor = await Investor.findOne({
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
   if (searchedInvestor === null) {
     return false;
@@ -88,25 +61,23 @@ export async function checkUsernameExist(username) {
   }
 }
 
-//Return investors given a search string
-export async function getInvestorsWithUsername(username) {
+async function getInvestorsWithUsername(username) {
   return Investor.findAll({
     where: {
       Username: {
-        [Op.substring]: username,
-      },
-    },
+        [Op.substring]: username
+      }
+    }
   });
 }
 
-//Update an investor's password
-export async function updateInvestorPassword(userID, username, password) {
+async function updateInvestorPassword(userID, username, password) {
   var updatedInvestorCount = await Investor.update(
     { InvestorPassword: password },
     {
       where: {
-        [Op.or]: [{ Username: username }, { InvestorID: userID }],
-      },
+        [Op.or]: [{ Username: username }, { InvestorID: userID }]
+      }
     }
   );
   if (updatedInvestorCount[0] >= 1) {
@@ -116,46 +87,22 @@ export async function updateInvestorPassword(userID, username, password) {
   }
 }
 
-//Return an investor given a username
-export async function getOneInvestorWithUsername(username) {
+async function getOneInvestorWithUsername(username) {
   return Investor.findOne({
     where: {
-      Username: username,
-    },
+      Username: username
+    }
   });
 }
 
-export async function getInvestorsWithSimilarUsernames(
-  userid,
-  searchingUsername,
-  username
-) {
-  const similarInvestors = await Investor.findAll({
-    where: {
-      [Op.and]: [
-        {
-          Username: {
-            [Op.ne]: searchingUsername,
-          },
-        },
-        {
-          Username: {
-            [Op.substring]: username,
-          },
-        },
-      ],
-    },
-  });
-
-  let nonFriends = [];
-
-  for (let i = 0; i < similarInvestors.length; ++i) {
-    await checkIfFriends(userid, similarInvestors[i].InvestorID).then(
-      (result) => {
-        if (!result) nonFriends.push(similarInvestors[i]);
-      }
-    );
-  }
-
-  return nonFriends;
-}
+module.exports = {
+  getAllInvestors,
+  getInvestor,
+  createInvestor,
+  getInvestorPassword,
+  checkUsernameExist,
+  getInvestorsWithUsername,
+  updateInvestorPassword,
+  getOneInvestorWithUsername,
+  updateInvestorBalanceAfterPurchase
+};

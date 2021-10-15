@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
-import { getAllCurrentAchievements } from "../functions/Achievements.js";
+const { Router } = require("express");
+const { StatusCodes } = require("http-status-codes");
+const { getAllCurrentAchievements } = require("../functions/Achievements");
 
 // Init shared
 const router = Router();
@@ -11,4 +11,4 @@ router.get("/achievements", async (req, res) => {
   return res.status(StatusCodes.OK).json(achievements);
 });
 
-export default router;
+module.exports = router;

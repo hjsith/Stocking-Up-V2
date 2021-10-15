@@ -1,9 +1,9 @@
-import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
-import {
+const { Router } = require("express");
+const { StatusCodes } = require("http-status-codes");
+const {
   getAllFiveDaysPrices,
   getFiveDaysPricesForListing,
-} from "../functions/FiveDays.js";
+} = require("../functions/FiveDays");
 
 // Init shared
 const router = Router();
@@ -28,4 +28,4 @@ router.get("/fivedays", async (req, res) => {
   return res.status(StatusCodes.OK).json(prices);
 });
 
-export default router;
+module.exports = router;

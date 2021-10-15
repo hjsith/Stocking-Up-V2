@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
-import { getPriceForListing } from "../functions/Price.js";
+const { Router } = require("express");
+const { StatusCodes } = require("http-status-codes");
+const { getPriceForListing } = require("../functions/Price");
 
 // Init shared
 const router = Router();
@@ -11,4 +11,4 @@ router.get("/price", async (req, res) => {
   return res.status(StatusCodes.OK).json({ price: price.CurrentPrice });
 });
 
-export default router;
+module.exports = router;

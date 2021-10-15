@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/CompanySearch.scss";
 
+/* need to fix:
+- Navbar
+- adding links to the dropdown results
+- toggle dropdown on type, not click
+*/
 
 const SearchBar = (props) => {
   const { results, onInputChange } = props;
@@ -31,16 +35,17 @@ const SearchBar = (props) => {
       />
       <ul id="results" className="list-group" ref={resultsRef}>
         {results.map((result, index) => {
-          return (  //each dropdown item is a link to their respective order page where the URL is /QuoteManagement/[listing ID (shortened to three letters for each ASX code)]
-            <Link to ={{pathname: "/QuoteManagement", state:{listingID:result.substring(0,3)}}}>
+          return ( 
             <button 
               type="button" 
               key={index}
+              onClick={(e) => { //when dropdown result is clicked, the input bar inherits the value of that result
+                searchbarRef.current.value = result;
+              }}
               className="list-group-item list-group-item-action"
             >
               {result}
             </button>
-            </Link>
           );
         })} 
       </ul>
@@ -48,29 +53,19 @@ const SearchBar = (props) => {
   );
 };
 
-const searchresults = [] //DB Connection
+const dummyresults = [] //fake data for now, an array of strings
 {
-  fetch("/api/listings", {
-    method: "GET", //get
-    headers: {
-      "Content-Type": "application/json", //expect JSON
-    },
-  })
-  .then((res) => {
-    res.json().then((body) => {
-      for (let i=0; i<body.length; ++i) {
-        searchresults.push(`${body[i].ListingID}` + " " + `${body[i].ListingName}`); //search result format: ID Name      
-      }
-    })
-    
-  })
+  dummyresults.push('A2M The A2 Milk Company');
+  dummyresults.push('WTC WiseTech Global');
+  dummyresults.push('CBA Commonwealth Bank');
+  dummyresults.push('ANZ Australia and New Zealand Banking Group Ltd');
 }
 
 function CompanySearch() {
   const [results, setresults] = useState([]);
   const onInputChange = (event) => {
     setresults(
-      searchresults.filter((result) => result.includes(event.target.value)).slice(0,5) //filters through searchresults, limits result list to 5 entries
+      dummyresults.filter((result) => result.includes(event.target.value)) //filters through dummyresults
     );
   };
   

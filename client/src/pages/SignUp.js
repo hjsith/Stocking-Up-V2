@@ -1,4 +1,4 @@
-import React from "react"; //imports required
+import React from "react";
 import "../assets/css/SignIn.scss";
 import lock from "../assets/images/lock.png";
 import letter from "../assets/images/letter.png";
@@ -17,7 +17,6 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //intialising states
       FirstName: "",
       LastName: "",
       Username: "",
@@ -25,21 +24,21 @@ class SignUp extends React.Component {
       Email: "",
       ConfirmPassword: "",
       Redirect: false,
-      errorMessage: "",
+      errorMessage: ""
     };
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this); //handle input changes
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleConfirmPasswordChange =
-      this.handleConfirmPasswordChange.bind(this);
+    this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(
+      this
+    );
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   static contextType = UserContext;
 
   handleFirstNameChange(event) {
-    //handles input changes
     this.setState({ FirstName: event.target.value });
   }
   handleLastNameChange(event) {
@@ -58,8 +57,9 @@ class SignUp extends React.Component {
   }
 
   handleSubmit(event) {
+    //error message
     if (
-      this.state.FirstName != "" && //all fields are entered with something
+      this.state.FirstName != "" &&
       this.state.LastName != "" &&
       this.state.Username != "" &&
       this.state.Password != "" &&
@@ -67,41 +67,36 @@ class SignUp extends React.Component {
       this.state.ConfirmPassword != ""
     ) {
       if (emailRegex.test(this.state.Email)) {
-        // email in correct format
-        this.setState({ errorMessage: "" }); //no error message
+        this.setState({ errorMessage: "" });
         if (passwordRegex.test(this.state.Password)) {
-          //password in correct format
-
+          //password validation
           if (this.state.Username.length >= 3) {
-            //username 3 or more characters in length
             if (this.state.Password === this.state.ConfirmPassword) {
-              //password and confirmed password match
-              this.createInvestor(); // if all above is done correctly then create an investor
+              this.createInvestor();
             } else {
               this.setState({
-                // if below fields entered incorrectly display following errors
-                errorMessage: "Your passwords do not match",
+                errorMessage: "Your passwords do not match"
               });
             }
           } else {
             this.setState({
-              errorMessage: "Your username must be atleast 3 characters long",
+              errorMessage: "Your username must be atleast 3 characters long"
             });
           }
         } else {
           this.setState({
             errorMessage:
-              "This password is in the incorrect format, it must contain atleast 8 characters, 1 upper case, 1 number and 1 special character. ",
+              "This password is in the incorrect format, it must contain atleast 8 characters, 1 upper case, 1 number and 1 special character. "
           });
         }
       } else {
         this.setState({
-          errorMessage: " The email is not in the correct format",
+          errorMessage: " The email is not in the correct format"
         });
       }
     } else {
       this.setState({
-        errorMessage: "One or more fields are empty, please try again",
+        errorMessage: "One or more fields are empty, please try again"
       });
     }
     event.preventDefault();
@@ -109,38 +104,36 @@ class SignUp extends React.Component {
 
   createInvestor() {
     fetch("/api/SignUp", {
-      //connects to frontend to backend
+      //connects to frotnend to backend
       method: "POST",
       body: JSON.stringify({
         firstName: this.state.FirstName,
         lastName: this.state.LastName,
         email: this.state.Email,
         password: this.state.Password,
-        username: this.state.Username,
+        username: this.state.Username
       }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     })
-      .then((res) => {
+      .then(res => {
         if (res.status === 201) {
-          //response status
           // Successful login 200
-          res.json().then((body) => {
+          res.json().then(body => {
             this.context.updateUser({ name: body.username, id: body.id });
           });
 
           this.setState({ Redirect: true });
         } else if (res.status === 422) {
-          //response status
           this.setState({
-            errorMessage: "This username already exists", //error message displayed
+            errorMessage: "The username already exists"
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
         }
       })
-      .catch((exception) => {
+      .catch(exception => {
         console.log("Error:", exception);
       });
   }
@@ -150,10 +143,9 @@ class SignUp extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/DifficultySelect" />;
+      return <Redirect to="/Profile" />;
     }
     return (
-      // layout of page with Containers, text input, forms, images  etc.
       <div className="SignUpContainer">
         <div className="SignUp">
           <SignInLogo />
@@ -237,7 +229,7 @@ class SignUp extends React.Component {
               </div>
             </form>
           </div>
-          <SignInLink //link back to Sign In page
+          <SignInLink
             message="Already have an account? Sign in here!"
             link="/SignIn"
           />

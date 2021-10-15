@@ -4,18 +4,16 @@ import "../assets/css/navbar.scss";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../assets/images/LogowithoutB.png";
 import profileIcon from "../assets/images/ProfileIcon.png";
-import UserProfileIcon from "./UserProfileIcon";
 
 const NavBar = () => {
   const cont = useContext(UserContext);
-  const Logout = () => {
-    //Logout
+  const Logout = () => {             //Logout
     fetch("/api/logout", {
       //connects to frotnend to backend
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
     cont.updateUser({ name: "", id: "" });
   };
@@ -35,20 +33,21 @@ const NavBar = () => {
           Portfolio
         </Nav.Link>
         <NavDropdown title="Markets" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/MarketsOverview">
+          <NavDropdown.Item href="#Markets Overview">
             Markets Overview
           </NavDropdown.Item>
           <NavDropdown.Item href="/Newsfeed">News Feed</NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Social" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/Friends">Friends</NavDropdown.Item>
-          <NavDropdown.Item href="/Leaderboard">Leaderboard</NavDropdown.Item>
-          <NavDropdown.Item href="/DiscussionBoardSearch">
+          <NavDropdown.Item href="#Friends">Friends</NavDropdown.Item>
+          <NavDropdown.Item href="#Leaderboard">Leaderboard</NavDropdown.Item>
+          <NavDropdown.Item href="#DiscussionBoard">
             Discussion Board Search
           </NavDropdown.Item>
         </NavDropdown>
         <NavDropdown title="Companies" id="basic-nav-dropdown">
           <NavDropdown.Item href="/CompanySearch">Search</NavDropdown.Item>
+          <NavDropdown.Item href="/QuoteManagement">Order</NavDropdown.Item>
         </NavDropdown>
       </Nav>
       <Nav>
@@ -56,15 +55,7 @@ const NavBar = () => {
           title={
             <div className="navbarProfile">
               <p id="myProfile">Profile</p>
-              <div className="navbarProfileIcon">
-                <div className="navbarIcon">
-                  <UserProfileIcon
-                    name={cont.user.name}
-                    company={false}
-                    size={35}
-                  />
-                </div>
-              </div>
+              <img src={profileIcon} className="ProfileIcon" alt="Profile" />
             </div>
           }
           id="basic-nav-dropdown-noCaret"

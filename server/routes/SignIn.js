@@ -1,19 +1,20 @@
-import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
-import bcrypt from "bcrypt"; //hashed password
-import { generateNewAuthenticationTokens } from "../functions/Authenticate.js";
-import {
+const { Router } = require("express");
+const { StatusCodes } = require("http-status-codes");
+const bcrypt = require("bcrypt"); //hashed password
+const {
+  generateNewAuthenticationTokens
+} = require("../functions/Authenticate");
+const {
   getInvestorPassword,
   checkUsernameExist,
   updateInvestorPassword,
-  getOneInvestorWithUsername,
-} from "../functions/Investor.js";
+  getOneInvestorWithUsername
+} = require("../functions/Investor");
 
 // Init shared
 const router = Router();
-// route for when user signs in
+
 router.post("/SignIn", async (req, res) => {
-  // route for when user signs in
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -24,13 +25,13 @@ router.post("/SignIn", async (req, res) => {
 
   const match = await bcrypt.compare(
     data.password,
-    userPassword != null ? userPassword.InvestorPassword : ""
+    userPassword.InvestorPassword
   ); //comparing passwords
   if (match == true) {
     const user = await getOneInvestorWithUsername(data.username);
 
     const device = req.headers.host ?? "Unknown";
-    await generateNewAuthenticationTokens(user, device, res); //create new access and refresh tokens
+    await generateNewAuthenticationTokens(user, device, res);
 
     return res
       .status(StatusCodes.OK)
@@ -40,9 +41,12 @@ router.post("/SignIn", async (req, res) => {
   }
 });
 router.get("/logout", async (req, res) => {
-  return res.status(StatusCodes.OK).clearCookie("access_tokens").end();
+  return res
+    .status(StatusCodes.OK)
+    .clearCookie("access_tokens")
+    .end();
 });
-//Forgot Password Route
+
 router.post("/ForgotPassword", async (req, res) => {
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     return res
@@ -54,7 +58,7 @@ router.post("/ForgotPassword", async (req, res) => {
   var userCheck = await checkUsernameExist(data.username);
   if (userCheck == true) {
     //checking if user exists
-    const passHash = await bcrypt.hash(data.password, 10); // hashses password for encryption for 10 times
+    const passHash = await bcrypt.hash(data.password, 10);
     const check = await updateInvestorPassword("", data.username, passHash);
     if (check == true) {
       return res.status(StatusCodes.OK).end();
@@ -66,4 +70,4 @@ router.post("/ForgotPassword", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

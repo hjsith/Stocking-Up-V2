@@ -1,13 +1,18 @@
-import { TwoWeeks } from "../db/Models.js";
+const { TwoWeeks } = require("../db/Models");
 
-export async function getAllTwoWeeksPrices() {
+async function getAllTwoWeeksPrices() {
   return await TwoWeeks.findAll();
 }
 
-export async function getTwoWeeksPricesForListing(code) {
+async function getTwoWeeksPricesForListing(code) {
   return await TwoWeeks.findAll({
     where: {
       ListingID: code,
     },
   });
 }
+
+module.exports = {
+  getAllTwoWeeksPrices,
+  getTwoWeeksPricesForListing,
+};

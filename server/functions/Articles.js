@@ -5,13 +5,6 @@ const Axios = require("axios");
 async function getAllArticles() {
   return await Articles.findAll();
 }
-// this function updates articles to add to the database
-export async function updateArticles() {
-  let now = moment.utc();
-  console.log(
-    "Looking for new articles to add to the page!" +
-      moment.utc(now, "YYYY-MM-DD HH:mm:ss").format()
-  );
 
 async function updateArticles() {
   let now = moment.utc();

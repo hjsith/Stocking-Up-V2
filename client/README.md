@@ -1,57 +1,70 @@
-# Introduction
+# Getting Started with Create React App
 
-Stocking Up is a stock market application simulator system from ASD-Fri-Group-05. The scope of our project entails building a stock simulator application which will be named Stocking Up. The functionality will allow users to register and be investors in a simulated share market utilising data obtained from the ASX and users having access to a base $10,000 (easy mode) which can be used to purchase holdings and participate in a leaderboard to see how much capital can be earnt.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
----
+## Available Scripts
 
-# Feature Allocation
+In the project directory, you can run:
 
-| Name                   | Student Number | Feature 1                                     | Feature 2                                                 |
-| ---------------------- | -------------- | --------------------------------------------- | --------------------------------------------------------- |
-| Hasith Jayasekera      | 13562133       | Data Logic For Simulation                     | Friends                                                   |
-| James Lee              | 13583950       | User Management                               | Discussion Boards                                         |
-| Aiswaryalakshmi Rajeev | 13539756       | Portfolio Order Management (Holdings + Order) | Portfolio General Management (Watchlist + Today’s Change) |
-| Vishaal Kumar          | 13584127       | Company View Page and Ordering                | Realtime News Page                                        |
-| Sanya Dua              | 13538069       | User Access/Authentication                    | Markets Overview                                          |
-| Jasmin Narisetty       | 13548565       | Quote Request - Search Company Page           | Presentation Logic for Share Market Simulator             |
+### `npm start`
 
----
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# Repo Structure
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-Our repo is structured with the front-end **[client](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client)** folder and back-end **[server](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server)** folder.
+### `npm test`
 
-These two folders are contained within the root of the repo alongside the **[README.md](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/README.md)** file you are currently reading, the **[azure-pipelines.yml](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/azure-pipelines.yml)** (which defines our pipeline build, test and deploy stages) and an assortment of other files.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Client folder
+### `npm run build`
 
-Within the **[client](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client)** folder, we have our **[src](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client/src)** folder which stores all our **[assets](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client/src/assets)**, **[components](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client/src/components)** and **[pages](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client/src/pages)**.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Within the each of the **[components](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client/src/components)** and **[pages](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/client/src/pages)** alongside the React functionality, we have our API connection functionality (also known as our Backend-For-Frontend or BFFs).
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Server folder
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Finally, within the **[server](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server)** folder, we have our **[db](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/db)**, **[functions](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/functions)** and **[routes](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/routes)** folders.
+### `npm run eject`
 
-The **[db](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/db)** contains our DBInstance file and our Models file. The DBInstance file creates our database connection instance, and the Models file creates models that allow us to interface with the tables on the Database.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-The **[functions](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/functions)** folder contains a file for each of the Database Models. These files contain specific operations that allow us to retrieve certain structures of data.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-The **[routes](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/routes)** folder links these functions to accessible routes, thus providing various API endpoints for the front-end to connect to. Our tests for our functionality are included within this folder with an easy-to-follow naming convention.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-Finally, at the root of the server folder, we have two files: **[Environment.js](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/Environment.js)** and **[server.js](https://dev.azure.com/ASD-Fri-Group-05/_git/Stocking%20Up?path=/server/server.js)** which configures and launches the Express app that is binded to the routes and models.
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
----
+## Learn More
 
-# Pipelines
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Our repo is hosted on Azure DevOps, and as a result, we have our pipeline hosted on Azure Pipelines.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-Our pipeline runs are configured to run on each merge/commit to the main branch. We have three stages to our Pipeline Runs:
+### Code Splitting
 
-1. Build
-   - This runs an npm install on the server side of the repo and archives/zips the repo for deployment
-2. Test
-   - This runs the jest unit tests we have created for our functionality. If any of these tests fail, the pipeline run fails.
-3. Deploy
-   - This unzips the repo and deploys it on the Azure App Service and, as a result, is hosted on **[Stocking Up](https://stocking-up.azurewebsites.net/)**
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

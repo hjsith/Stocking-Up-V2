@@ -1,13 +1,18 @@
-import { OneMonth } from "../db/Models.js";
+const { OneMonth } = require("../db/Models");
 
-export async function getAllOneMonthPrices() {
+async function getAllOneMonthPrices() {
   return await OneMonth.findAll();
 }
 
-export async function getOneMonthPricesForListing(code) {
+async function getOneMonthPricesForListing(code) {
   return await OneMonth.findAll({
     where: {
       ListingID: code,
     },
   });
 }
+
+module.exports = {
+  getAllOneMonthPrices,
+  getOneMonthPricesForListing,
+};
