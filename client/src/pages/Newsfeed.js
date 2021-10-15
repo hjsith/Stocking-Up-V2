@@ -1,9 +1,24 @@
 import React from "react";
 import NavBar from "../components/NavBar";
-import List from "../components/NewsfeedComponents/List";
 import "../assets/css/Newsfeed.scss";
+import { useState } from "react";
+import Article from "../components/NewsfeedComponents/Article";
 // this section of the code displays the newsfeed page based on the articles from the List component
 const Newsfeed = () => {
+  const [search, setSearch] = useState([]);
+
+  const [articles, setArticles] = useState([]); // this creates an array for the articles
+  // this section fetches for all the articles from the database
+  fetch("/api/articles", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    res.json().then((body) => {
+      setArticles(body);
+    });
+  });
   return (
     <>
       <NavBar />
@@ -15,7 +30,32 @@ const Newsfeed = () => {
       </div>
 
       <div className="articleList">
-        <List />
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
+        />
+        {articles
+          .filter((article) => {
+            if (search == "") {
+              return article;
+            } else if (
+              article.ArticleName.toLowerCase().includes(search.toLowerCase())
+            ) {
+              return article;
+            }
+          })
+          .map((article) => (
+            <Article
+              title={article.ArticleName}
+              description={article.ArticleInfo}
+              url={article.ArticleURL}
+              publishedAt={article.ArticleDate}
+              urlToImage={article.ArticleImage}
+            />
+          ))}{" "}
       </div>
     </>
   );
