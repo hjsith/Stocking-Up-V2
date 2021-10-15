@@ -15,8 +15,6 @@ const List = () => {
       setArticles(body);
     });
   });
-
-  console.log(articles);
   // this section maps all the articles from the database
   return (
     <div>
