@@ -159,3 +159,17 @@ export async function getInvestorsWithSimilarUsernames(
 
   return nonFriends;
 }
+
+export async function updateUserDetails(
+  userID,
+  inputFirstName,
+  inputLastName,
+  inputEmail
+) {
+  const investor = await Investor.findByPk(userID);
+  await investor.update({
+    InvestorFName: inputFirstName,
+    InvestorLName: inputLastName,
+    InvestorEmail: inputEmail,
+  });
+}

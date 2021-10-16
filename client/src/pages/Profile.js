@@ -63,16 +63,22 @@ class Profile extends React.Component {
   //Get the number of friends the currently signed in user has
   fetchFriendCount() {
     this.setState({ userFriendCount: 0 });
-    //   fetch("/api/investor", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       userID: "BADUSERID",
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // }
+    fetch("/api/friends/count?userID=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res
+          .json()
+          .then((body) => this.setState({ userFriendCount: body.count }));
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
   }
 
   //Get the number of comments the currently signed in user has made
