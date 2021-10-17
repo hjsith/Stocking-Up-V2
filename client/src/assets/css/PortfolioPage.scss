@@ -105,6 +105,13 @@
   padding: 1.25em 1.25em 0em 1.25em;
 }
 
+.PortfolioPriceDecrease {
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #ff4b4b;
+  padding: 1.25em 1.25em 0em 1.25em;
+}
+
 .TableTitleFont4 {
   width: 100%;
   table-layout: fixed;
@@ -398,7 +405,7 @@
 
 .HoldingsRowPanel {
   height: 4.6em;
-  width: 96%;
+  width: 97%;
   background-color: #140f37bb;
   margin-left: 1.25em;
   margin-bottom: 1em;
@@ -444,7 +451,7 @@
 }
 
 .divwatchlist {
-  height: 14em;
+  height: 18em;
   margin-left: 0.9em;
   width: 95%;
   overflow: auto;
@@ -477,7 +484,7 @@
 }
 
 .watchlistSearchButton {
-  height: 3em;
+  height: 2.8em;
   width: 5em;
   background-color: #1f6cd9;
   border: none;
@@ -485,14 +492,11 @@
   color: white;
   font-family: "Roboto", sans-serif;
   border-radius: 2em;
-  display: inline-block;
+  float: left;
 }
 
 .watchlistSearchWidth {
-  padding: 1.25em 1.25em 0.5em 1.25em;
+  padding: 0.5em 1.25em 0.5em 1.25em;
   width: 60%;
+  float: left;
 }
-
-// .watchlistSearchWidth {
-//    width: 19%;
-//  }

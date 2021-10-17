@@ -198,7 +198,8 @@ class Watchlist extends React.Component {
             onChange={this.handleSearchStringChange}
             placeholder="Type an ASX-listed company code here..."
           />
-          <br />
+        </div>
+        <div>
           <button className="watchlistSearchButton" onClick={this.handleSearch}>
             +
           </button>

@@ -79,11 +79,11 @@ class OrderRowPanel extends React.Component {
             <th className>
               <div className="ButtonContainer">
                 <button
-                  disabled={this.state.disable}
+                  disabled={this.props.disable}
                   className="GreenConfirmButton"
                   onClick={() => {
                     this.props.confirm(this.props.orderID);
-                    this.setState({ disable: true });
+                    // this.setState({ disable: true });
                   }}
                 >
                   Confirm
@@ -94,7 +94,7 @@ class OrderRowPanel extends React.Component {
             <th>
               <div className="ButtonContainer">
                 <button
-                  disabled={this.state.disable}
+                  disabled={this.props.disable}
                   className="CancelButton"
                   onClick={() => {
                     this.props.cancel(this.props.orderID);
