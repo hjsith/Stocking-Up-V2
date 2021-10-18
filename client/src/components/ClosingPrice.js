@@ -6,20 +6,20 @@ class PriceArrow extends React.Component {
     super(props);
     this.state = {
       arrowState: "",
-      closePrice: "",
+      closePrice: ""
     };
     this.PriceChange = this.PriceChange.bind(this);
   }
 
   PriceChange() {
-    fetch("/api//listing/priceClose?code=" + this.props.code, {
+    fetch("/api/listing/priceClose?code=" + this.props.code, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
       if (res.status === 200) {
-        res.json().then((body) => {
+        res.json().then(body => {
           this.setState({ closePrice: body.closingPrice });
           if (this.props.currentPrice > body.closingPrice) {
             this.setState({ arrowState: "Up" });

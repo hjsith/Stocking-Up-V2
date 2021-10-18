@@ -1,6 +1,12 @@
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
-import { getAllListings, getListing } from "../functions/Listing.js";
+import {
+  getAllListings,
+  getListing,
+  getTop200,
+  getop5Gains,
+  getop5Declines
+} from "../functions/Listing.js";
 import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
@@ -72,6 +78,35 @@ router.get("/listing/priceClose", async (req, res) => {
   return res
     .status(StatusCodes.OK)
     .json({ closingPrice: listing.ClosingPrice });
+});
+
+router.get("/listing/Top200", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const top200 = await getTop200();
+    return res.status(StatusCodes.OK).json(top200); // response
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.get("/listing/Top5Gains", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const top200 = await getop5Gains();
+    return res.status(StatusCodes.OK).json(top200); // response
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+router.get("/listing/Top5Declines", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    const top200 = await getop5Declines();
+    return res.status(StatusCodes.OK).json(top200); // response
+  } else {
+    res.status(StatusCodes.UNAUTHORIZED).end();
+  }
 });
 
 export default router;

@@ -7,91 +7,27 @@ class AsxPrice extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      asxPriceArray: [
-        {
-          colourNumber: 6,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          industry: "Consumer Staples",
-          marketsCapitalisation: "$4.46B"
-        },
-        {
-          colourNumber: 4,
-          companyCode: "CBA",
-          companyName: "Commonwealth Bank",
-          currentPrice: "$64.02",
-          industry: "Banking and Financial Services",
-          marketsCapitalisation: "$185.55B"
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wisetech Global",
-          currentPrice: "$47.02",
-          industry: "Logistics",
-          marketsCapitalisation: "$17.41B"
-        },
-        {
-          colourNumber: 3,
-          companyCode: "MQG",
-          companyName: "Macquarie Group",
-          currentPrice: "$180.84",
-          industry: "Financial Services",
-          marketsCapitalisation: "$66.67B"
-        },
-        {
-          colourNumber: 5,
-          companyCode: "BRK",
-          companyName: "Brickworks",
-          currentPrice: "$25.50",
-          industry: "Materials",
-          marketsCapitalisation: "$3.93B"
-        },
-        {
-          colourNumber: 1,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          industry: "Consumer Staples",
-          marketsCapitalisation: "$4.46B"
-        },
-        {
-          colourNumber: 4,
-          companyCode: "CBA",
-          companyName: "Commonwealth Bank",
-          currentPrice: "$64.02",
-          industry: "Banking and Financial Services",
-          marketsCapitalisation: "$185.55B"
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wisetech Global",
-          currentPrice: "$47.02",
-          industry: "Logistics",
-          marketsCapitalisation: "$17.41B"
-        },
-        {
-          colourNumber: 3,
-          companyCode: "MQG",
-          companyName: "Macquarie Group",
-          currentPrice: "$180.84",
-          industry: "Financial Services",
-          marketsCapitalisation: "$66.67B"
-        },
-        {
-          colourNumber: 5,
-          companyCode: "BRK",
-          companyName: "Brickworks",
-          currentPrice: "$25.50",
-          industry: "Materials",
-          marketsCapitalisation: "$3.93B"
-        }
-      ]
+      asxPriceArray: []
     };
   }
-
+  fetchTop200() {
+    fetch("/api/listing/Top200", {
+      //connecting backend to frontend
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        res.json().then(body => {
+          this.setState({ asxPriceArray: body });
+        });
+      }
+    });
+  }
+  componentDidMount() {
+    this.fetchTop200(); //when the website loads the top 200 component is refreshed
+  }
   render() {
     return (
       <div>
@@ -107,15 +43,15 @@ class AsxPrice extends React.Component {
         </table>
         <div className="divAsx">
           {this.state.asxPriceArray.map((asxprice, index) => {
+            console.log(this.state.currentPrices);
             return (
               <AsxPricePanel
-                key={asxprice.companyCode}
-                colourNumber={asxprice.colourNumber}
-                companyCode={asxprice.companyCode}
-                companyName={asxprice.companyName}
-                currentPrice={asxprice.currentPrice}
-                industry={asxprice.industry}
-                marketsCapitalisation={asxprice.marketsCapitalisation}
+                key={asxprice.ListingID}
+                companyCode={asxprice.ListingID}
+                companyName={asxprice.ListingName}
+                currentPrice={asxprice.CurrentPrice}
+                industry={asxprice.ListingIndustry}
+                marketsCapitalisation={asxprice.MarketCap}
               />
             );
           })}
