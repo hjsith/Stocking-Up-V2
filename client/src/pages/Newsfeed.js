@@ -19,6 +19,7 @@ const Newsfeed = () => {
       setArticles(body);
     });
   });
+
   return (
     <>
       <NavBar />
@@ -28,8 +29,7 @@ const Newsfeed = () => {
       <div className="introPara">
         <p>See below for the latest business and finance related news!</p>
       </div>
-
-      <div className="articleList">
+      <div className="NewsSearch">
         <input
           type="text"
           placeholder="Search"
@@ -37,6 +37,8 @@ const Newsfeed = () => {
             setSearch(event.target.value);
           }}
         />
+      </div>
+      <div className="articleList">
         {articles
           .filter((article) => {
             if (search == "") {
@@ -44,9 +46,13 @@ const Newsfeed = () => {
             } else if (
               article.ArticleName.toLowerCase().includes(search.toLowerCase())
             ) {
+            } else if (
+              article.ArticleInfo.toLowerCase().includes(search.toLowerCase())
+            ) {
               return article;
             }
           })
+          .sort((a, b) => (a.ArticleDate < b.ArticleDate ? 1 : -1))
           .map((article) => (
             <Article
               title={article.ArticleName}
