@@ -1,12 +1,12 @@
-const { Articles } = require("../db/Models");
-const moment = require("moment");
-const Axios = require("axios");
+import { Articles } from "../db/Models.js";
+import moment from "moment";
+import Axios from "axios";
 
-async function getAllArticles() {
+export async function getAllArticles() {
   return await Articles.findAll();
 }
 
-async function updateArticles() {
+export async function updateArticles() {
   let now = moment.utc();
   console.log(
     "Looking for new articles to add to the page!" +
@@ -33,4 +33,3 @@ async function updateArticles() {
     }
   }
 }
-module.exports = { updateArticles, getAllArticles };

@@ -243,7 +243,7 @@ const QuoteManagement = () => {
         </div>
       </div>
       <div className="side2">
-        <Graph />
+        <Graph listingID={listingID} />
       </div>
     </>
   );
