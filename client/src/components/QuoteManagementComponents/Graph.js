@@ -26,14 +26,6 @@ const Graph = (props) => {
       }
       setMin(tempMin);
       setMax(tempMax);
-      var arr = [];
-
-      for (var i = tempMin - 1; i <= tempMax + 2; i++) {
-        arr.push(i);
-      }
-
-      setRange(arr);
-      console.log(arr);
     });
   });
 
@@ -87,13 +79,13 @@ const Graph = (props) => {
         data={data}
         margin={{ top: 50, right: 160, bottom: 50, left: 60 }}
         xScale={{ format: "%Y-%m-%dT%H:%M:%S.%L%Z", type: "time" }}
-        yScale={{ type: "linear", stacked: true }} // set the minimum and maximum dependent on data retrieved, set as another state
+        yScale={{ type: "linear", stacked: true, min: min - 1, max: max + 1 }} // set the minimum and maximum dependent on data retrieved, set as another state
         xFormat="time:%H:%M:%S.%L"
         yFormat=" >-.2f"
         curve="monotoneX"
         axisTop={null}
         axisRight={{
-          tickValues: 5, //5 values from minimum and maximum range that is evenly distributed
+          tickValues: 2, //5 values from minimum and maximum range that is evenly distributed
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
@@ -112,7 +104,7 @@ const Graph = (props) => {
           legendPosition: "middle",
         }}
         axisLeft={{
-          tickValues: 5, //change
+          tickValues: 2, //change
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
