@@ -19,7 +19,6 @@ class AsxPricePanel extends React.Component {
             <th>${this.props.currentPrice}</th>
             <th>{this.props.industry}</th>
             <th>${this.props.marketsCapitalisation}</th>
-            <th></th>
           </tr>
         </table>
       </div>
