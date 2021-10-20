@@ -17,7 +17,10 @@ class DeclinesPanel extends React.Component {
             </th>
             <th>{this.props.companyName}</th>
             <th>${this.props.currentPrice}</th>
-            <th>{this.props.percentageChange}%</th>
+            <th>
+              <span className="RedPriceMarkets">{this.props.percentageChange}% </span>
+            </th>
+
             <th>{this.props.industry}</th>
             <th></th>
           </tr>

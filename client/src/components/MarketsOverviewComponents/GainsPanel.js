@@ -17,7 +17,9 @@ class GainsPanel extends React.Component {
             </th>
             <th>{this.props.companyName}</th>
             <th>${this.props.currentPrice}</th>
-            <th>{this.props.percentageChange}%</th>
+            <th>
+              <span className="GreenPriceMarkets">{this.props.percentageChange}%</span>
+            </th>
             <th>{this.props.industry}</th>
             <th></th>
           </tr>
