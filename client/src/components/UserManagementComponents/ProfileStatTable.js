@@ -44,7 +44,7 @@ class ProfileStatTable extends React.Component {
             <td>
               <ProfileStat
                 title="Days till next simulator wipe"
-                value={this.props.simualationDate}
+                value={this.props.simualationDate + " Days"}
               />
             </td>
           </tr>

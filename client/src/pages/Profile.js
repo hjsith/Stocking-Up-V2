@@ -8,8 +8,7 @@ import Popup from "../components/Popup";
 import VerticalLine from "../components/UserManagementComponents/VerticalLine";
 import { UserContext } from "../components/UserContext";
 import { Redirect } from "react-router-dom";
-
-const Months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+import moment from "moment";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -100,21 +99,22 @@ class Profile extends React.Component {
     });
   }
 
-  //Get the currently signed in user's achievements
-  fetchAchievements() {
-    //   fetch("/api/investor", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       userID: "BADUSERID",
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // }
-  }
+  determineSimulationEndDate() {
+    var year = new Date().getFullYear();
+    var month = new Date().getMonth();
 
-  determineSimulationEndDate() {}
+    if ((month + 1) % 3 != 0) {
+      if ((month + 2) % 3 == 0) {
+        month = month + 2;
+      } else if ((month + 3) % 3 == 0) {
+        month = month + 3;
+      }
+    }
+
+    var EndDate = moment(new Date(year, month, 0));
+    let end = EndDate.endOf("month");
+    this.setState({ SimulationEndDate: end.diff(moment(), "days") });
+  }
 
   componentDidMount() {
     if (this.props.location.state) {
@@ -125,7 +125,6 @@ class Profile extends React.Component {
     this.fetchUser();
     this.fetchFriendCount();
     this.fetchPostCount();
-    this.fetchAchievements();
     this.determineSimulationEndDate();
   }
 
@@ -189,7 +188,7 @@ class Profile extends React.Component {
           <div className="AchievementBlock">
             <p className="ProfileTitles">Achievements!</p>
             <div className="UserAchievement">
-              <AchievementBlock loop={16} />
+              <AchievementBlock />
             </div>
           </div>
         </div>
