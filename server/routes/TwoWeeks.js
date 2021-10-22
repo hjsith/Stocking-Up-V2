@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import {
   getAllTwoWeeksPrices,
   getTwoWeeksPricesForListing,
+  getTwoWeeksGraphData,
 } from "../functions/TwoWeeks.js";
 
 // Init shared
@@ -24,6 +25,14 @@ router.get("/twoweeks", async (req, res) => {
   var data = req.body;
 
   const prices = await getTwoWeeksPricesForListing(data.code);
+
+  return res.status(StatusCodes.OK).json(prices);
+});
+
+router.get("/twoweeks/graph", async (req, res) => {
+  var code = req.query.id;
+
+  const prices = await getTwoWeeksGraphData(code);
 
   return res.status(StatusCodes.OK).json(prices);
 });

@@ -3,14 +3,14 @@ import { linearGradientDef } from "@nivo/core";
 import { ResponsiveLine } from "@nivo/line";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-const Graph = (props) => {
+const FiveDays = (props) => {
   const [data, setData] = useState([]);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
   const [range, setRange] = useState([0]);
   const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
-  fetch("/api/oneday/graph" + "?id=" + props.listingID, {
+  fetch("/api/fivedays/graph" + "?id=" + props.listingID, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const Graph = (props) => {
         margin={{ top: 50, right: 160, bottom: 50, left: 60 }}
         xScale={{ format: "%Y-%m-%dT%H:%M:%S.%L%Z", type: "time" }}
         yScale={{ type: "linear", stacked: true, min: min - 1, max: max + 1 }} // set the minimum and maximum dependent on data retrieved, set as another state
-        xFormat="time:%H:%M:%S.%L"
+        xFormat="time:%H"
         yFormat=" >-.2f"
         curve="monotoneX"
         axisTop={null}
@@ -94,11 +94,11 @@ const Graph = (props) => {
           legendOffset: 0,
         }}
         axisBottom={{
-          tickValues: "every 1 hour", // change for each one
+          tickValues: "every 5 hours", // change for each one
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          format: "%H:%M:%S.%L", // change to H.M, accoriding to 231
+          format: "%H:%M", // change to H.M, accoriding to 231
           legend: "Time",
           legendOffset: 36,
           legendPosition: "middle",
@@ -126,7 +126,7 @@ const Graph = (props) => {
         enableArea={true}
         areaOpacity={0.45}
         useMesh={true}
-        gridXValues="every 15 minutes" // change for each one
+        gridXValues="every 5 hours" // change for each one
         gridYValues="linear scale" // change
         legends={[
           {
@@ -160,4 +160,4 @@ const Graph = (props) => {
   );
 };
 
-export default Graph;
+export default FiveDays;
