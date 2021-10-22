@@ -12,11 +12,85 @@ class Watchlist extends React.Component {
       watchlistArray: [],
       userName: "",
       unauth: false,
+      searchString: "",
+      results: [],
     };
+    this.handleSearchStringChange = this.handleSearchStringChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   //Fetching and obtaining investor which is signed in to display information
   static contextType = UserContext;
+
+  //Handle input changes for the search textbox
+  handleSearchStringChange(event) {
+    this.setState({ searchString: event.target.value });
+  }
+
+  //Update displayed threads that match the search string
+  handleSearch(event) {
+    let temp = [];
+    for (const element of this.state.results) {
+      if (element.ListingID.includes(this.state.searchString)) {
+        fetch("/api/watchlist", {
+          method: "POST",
+          body: JSON.stringify({
+            investorID: this.context.user.id,
+            listingID: element.ListingID,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            // this section shows messages that appear if the listing is added to the watchlist.
+            if (res.status === 201) {
+              console.log("Watchlist added succesfully");
+              this.props.updateSnackbar(
+                "Your watchlist item has been successfully added"
+              );
+            } else if (res.status === 409) {
+              console.log("Watchlist was not added as already exist");
+              this.props.updateSnackbar(
+                "Watchlist was not added as already exist"
+              );
+            } else {
+              console.log("Something unexpeceted went wrong ._.");
+            }
+          })
+          .catch((exception) => {
+            console.log("Error:", exception);
+          });
+      }
+    }
+    this.setState({ toDisplay: temp });
+  }
+
+  //Get all listing
+
+  fetchAllListing() {
+    fetch("/api/listings", {
+      method: "GET", //get
+      headers: {
+        "Content-Type": "application/json", //expect JSON
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          // Successful login 200
+          res.json().then((body) => {
+            this.setState({ results: body, toDisplay: body });
+          });
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
+        } else {
+          console.log("Something unexpected went wrong ._.");
+        }
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
+  }
 
   fetchUser() {
     fetch("/api/investor?id=" + this.context.user.id, {
@@ -42,6 +116,7 @@ class Watchlist extends React.Component {
   //On page load fetch API calls to get all orders made by the investor from the investor ID from the Order database and puts it within the allOrdersArray which is mapped to the AllOrderRowPanel component.
   componentDidMount() {
     this.fetchUser();
+    this.fetchAllListing();
 
     let investorID = this.context.user.id;
     setInterval(() => {
@@ -96,6 +171,8 @@ class Watchlist extends React.Component {
     });
   };
 
+  handleAddtoWatchlist;
+
   render() {
     return (
       <div>
@@ -113,6 +190,20 @@ class Watchlist extends React.Component {
             </th>
           </tr>
         </table>
+        <div className="watchlistSearchWidth">
+          <input
+            className="searchTextfield form-control"
+            type="text"
+            value={this.state.searchString}
+            onChange={this.handleSearchStringChange}
+            placeholder="Type an ASX-listed company code here..."
+          />
+        </div>
+        <div>
+          <button className="watchlistSearchButton" onClick={this.handleSearch}>
+            +
+          </button>
+        </div>
         <table className="TableTitleFont10">
           <tr>
             <th>Company Code</th>
