@@ -42,7 +42,7 @@ app.listen(PORT, () => {
   console.log(`Server started on port: ${PORT}`);
 });
 
-cron.schedule("* * * * *", async function () {
+cron.schedule("30 * * * *", async function () {
   await updateArticles();
 });
 

@@ -46,6 +46,7 @@ const Newsfeed = () => {
             } else if (
               article.ArticleName.toLowerCase().includes(search.toLowerCase())
             ) {
+              return article;
             } else if (
               article.ArticleInfo.toLowerCase().includes(search.toLowerCase())
             ) {
