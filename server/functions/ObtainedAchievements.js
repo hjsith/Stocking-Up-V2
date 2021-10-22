@@ -1,4 +1,5 @@
 import { ObtainedAchievements, Achievements } from "../db/Models.js";
+import moment from "moment";
 
 export async function getAllObtainedAchievements() {
   return await ObtainedAchievements.findAll();
@@ -25,7 +26,7 @@ export async function getAllObtainedAchievementsForUser(userID) {
         allAchievements[i].AchievementID ==
         obtainedAchievements[y].AchievementID
       ) {
-        found == true;
+        found = true;
         newData.push({
           AchievementTitle: allAchievements[i].Title,
           AchievementDescription: allAchievements[i].Description,

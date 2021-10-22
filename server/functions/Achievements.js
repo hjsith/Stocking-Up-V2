@@ -20,6 +20,6 @@ export async function createAchievement(
   return Achievements.create({
     Title: achievementTitle,
     Description: achievementDescription,
-    MedalImage: null,
+    MedalImage: image,
   });
 }

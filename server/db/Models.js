@@ -153,7 +153,7 @@ export const Achievements = db.define(
     },
     Title: DataTypes.STRING,
     Description: DataTypes.STRING,
-    MedalImage: DataTypes.BLOB,
+    MedalImage: DataTypes.TEXT,
   },
   { sequelize: db, tableName: "Achievements", timestamps: false }
 );

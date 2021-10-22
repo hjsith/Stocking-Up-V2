@@ -5,6 +5,7 @@ import {
   getAchievementbyID,
   createAchievement,
 } from "../functions/Achievements.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
