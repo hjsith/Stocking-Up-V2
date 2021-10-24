@@ -7,9 +7,7 @@ import Funds from "../components/QuoteManagementComponents/Funds";
 import NavBar from "../components/NavBar";
 // import Change from "../components/QuoteManagementComponents/Change"; (this component will be in R2)
 import "../assets/css/QuoteManagement.scss";
-import OneDay from "../components/QuoteManagementComponents/OneDay";
 import Snackbar from "../components/Snackbar";
-import FiveDay from "../components/QuoteManagementComponents/FiveDay";
 import TwoWeeks from "../components/QuoteManagementComponents/TwoWeeks";
 import OneMonth from "../components/QuoteManagementComponents/OneMonth";
 const moment = require("moment");
@@ -207,8 +205,8 @@ const QuoteManagement = () => {
         console.log("Error:", exception);
       });
   };
-
-  const graphs = ["1D", "5D", "2W", "1M"];
+  // this section creates the graph variable that will be shown on the page
+  const graphs = ["2W", "1M"];
   const [graph, setGraph] = useState("");
 
   // this section of the code displays all the above functions into the user interface
@@ -258,11 +256,6 @@ const QuoteManagement = () => {
           ))}
         </div>
         <div className="graphs">
-          {graph === "1D" && <h3>One Day</h3> && (
-            <OneDay listingID={listingID} />
-          )}
-          {graph === "5D" && <FiveDay listingID={listingID} />}
-          {graph === "5D" && <h3>Five Day Prices</h3>}
           {graph === "2W" && <h3>One Month</h3> && (
             <TwoWeeks listingID={listingID} />
           )}
