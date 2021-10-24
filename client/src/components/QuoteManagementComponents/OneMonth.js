@@ -1,15 +1,12 @@
 import React from "react"; //
-import { linearGradientDef } from "@nivo/core";
 import { ResponsiveLine } from "@nivo/line";
-import { useLocation } from "react-router-dom";
 import { useState } from "react";
 const OneMonth = (props) => {
+  //this section sets the state for the data, minimum and maximum values to ensure that the correct range of data is shown on the graph
   const [data, setData] = useState([]);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
-  const [range, setRange] = useState([0]);
-  const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
-
+  // this section fetches for one month data for the listing
   fetch("/api/onemonth/graph" + "?id=" + props.listingID, {
     method: "GET",
     headers: {
@@ -28,7 +25,7 @@ const OneMonth = (props) => {
       setMax(tempMax);
     });
   });
-
+  // this section applies styling to the graph
   const theme = {
     axis: {
       fontSize: "14px",
@@ -54,8 +51,8 @@ const OneMonth = (props) => {
     },
   };
 
-  const height = 300;
-  const width = 800;
+  const height = 500;
+  const width = 900;
 
   const gradProps = {
     gradientUnits: "userSpaceOnUse",
@@ -64,7 +61,7 @@ const OneMonth = (props) => {
     x2: "0",
     y2: height,
   };
-
+  // the below section determines the y and x axis of the graph, including size and what range to present
   return (
     <div style={{ height, width }} id="axisText">
       <svg>
@@ -79,13 +76,13 @@ const OneMonth = (props) => {
         data={data}
         margin={{ top: 50, right: 160, bottom: 50, left: 60 }}
         xScale={{ format: "%Y-%m-%dT%H:%M:%S.%L%Z", type: "time" }}
-        yScale={{ type: "linear", stacked: true, min: min - 1, max: max + 1 }} // set the minimum and maximum dependent on data retrieved, set as another state
+        yScale={{ type: "linear", stacked: true, min: min - 1, max: max + 1 }}
         xFormat="time:%m-%d"
         yFormat=" >-.2f"
         curve="monotoneX"
         axisTop={null}
         axisRight={{
-          tickValues: 2, //5 values from minimum and maximum range that is evenly distributed
+          tickValues: 2,
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
@@ -94,27 +91,28 @@ const OneMonth = (props) => {
           legendOffset: 0,
         }}
         axisBottom={{
-          tickValues: "every 7 days", // change for each one
+          tickValues: "every 7 days",
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          format: "%m-%d", // change to H.M, accoriding to 231
+          format: "%m-%d",
           legend: "Time",
           legendOffset: 36,
           legendPosition: "middle",
         }}
         axisLeft={{
-          tickValues: 2, //change
+          tickValues: 2,
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
           format: ".2s",
-          legend: "volume",
+          legend: "Price",
           legendOffset: -40,
           legendPosition: "middle",
         }}
         enableGridX={true}
         theme={theme}
+        isInteractive={false}
         colors={["url(#someGradientId)"]}
         lineWidth={1}
         pointSize={6}
@@ -126,8 +124,8 @@ const OneMonth = (props) => {
         enableArea={true}
         areaOpacity={0.45}
         useMesh={true}
-        gridXValues="every 7 days" // change for each one
-        gridYValues="linear scale" // change
+        gridXValues="every 7 days"
+        gridYValues="linear scale"
         legends={[
           {
             anchor: "bottom-right",
@@ -144,11 +142,12 @@ const OneMonth = (props) => {
             symbolSize: 12,
             symbolShape: "circle",
             symbolBorderColor: "rgba(0, 0, 0, .5)",
+
             effects: [
               {
                 on: "hover",
                 style: {
-                  itemBackground: "rgba(0, 0, 0, .03)",
+                  itemBackground: "rgba(225, 0, 0, .03)",
                   itemOpacity: 1,
                 },
               },

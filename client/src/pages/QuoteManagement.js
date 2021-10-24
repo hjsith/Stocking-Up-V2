@@ -248,20 +248,21 @@ const QuoteManagement = () => {
         </div>
       </div>
       <div className="side2">
+        {graph === "2W" && <h3>Two Week Graph</h3>}
+        {graph === "1M" && <h3>One Month Graph</h3>}
+
+        <div className="graphs">
+          {graph === "2W" && <TwoWeeks listingID={listingID} />}
+          {graph === "1M" && <h3>One Month</h3> && (
+            <OneMonth listingID={listingID} />
+          )}
+        </div>
         <div className="graphHeadings">
           {graphs.map((graph) => (
             <button type="button" key={graph} onClick={() => setGraph(graph)}>
               {graph.toLocaleUpperCase()}
             </button>
           ))}
-        </div>
-        <div className="graphs">
-          {graph === "2W" && <h3>One Month</h3> && (
-            <TwoWeeks listingID={listingID} />
-          )}
-          {graph === "1M" && <h3>One Month</h3> && (
-            <OneMonth listingID={listingID} />
-          )}
         </div>
       </div>
     </>
