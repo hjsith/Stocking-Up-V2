@@ -1,12 +1,12 @@
-const { Holding, Order } = require("../db/Models");
+import { Holding, Order } from "../db/Models.js";
 
 //Get all holdings function
-async function getAllHoldings() {
+export async function getAllHoldings() {
   return await Holding.findAll();
 }
 
 //Finds current holdings which are orders that have been executed and current is 1
-async function getAllCurrentHoldingsByInvestor(investorID) {
+export async function getAllCurrentHoldingsByInvestor(investorID) {
   const currentHoldings = await Holding.findAll({
     where: {
       InvestorID: investorID,
@@ -32,7 +32,7 @@ async function getAllCurrentHoldingsByInvestor(investorID) {
 }
 
 //Create holding function
-async function createHolding(investorID, listingID, orderID, current) {
+export async function createHolding(investorID, listingID, orderID, current) {
   return await Holding.create({
     InvestorID: investorID,
     ListingID: listingID,
@@ -40,9 +40,3 @@ async function createHolding(investorID, listingID, orderID, current) {
     Current: current,
   });
 }
-
-module.exports = {
-  getAllHoldings,
-  getAllCurrentHoldingsByInvestor,
-  createHolding,
-};

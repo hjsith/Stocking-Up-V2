@@ -1,10 +1,12 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const { createInvestor, checkUsernameExist } = require("../functions/Investor");
-const bcrypt = require("bcrypt");
-const {
-  generateNewAuthenticationTokens
-} = require("../functions/Authenticate");
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
+  createInvestor,
+  checkUsernameExist,
+  checkEmailExist
+} from "../functions/Investor.js";
+import bcrypt from "bcrypt";
+import { generateNewAuthenticationTokens } from "../functions/Authenticate.js";
 // Init shared
 const router = Router();
 //route for Sign Up and adds their details to database
@@ -16,6 +18,11 @@ router.post("/SignUp", async (req, res) => {
       .send("The request doesn't have the correct body format.");
   }
   var data = req.body;
+  var checkEmail = await checkEmailExist(data.email);
+  if (checkEmail === true) {
+    return res.status(StatusCodes.UNAUTHORIZED).send();
+  }
+
   var checkUser = await checkUsernameExist(data.username);
   if (checkUser === true) {
     return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send();
@@ -37,4 +44,4 @@ router.post("/SignUp", async (req, res) => {
     .json({ id: user.InvestorID, username: user.Username });
 });
 
-module.exports = router;
+export default router;

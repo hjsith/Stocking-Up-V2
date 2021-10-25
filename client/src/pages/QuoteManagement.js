@@ -5,10 +5,10 @@ import Header from "../components/QuoteManagementComponents/Header";
 import ShareInfo from "../components/QuoteManagementComponents/ShareInfo";
 import Funds from "../components/QuoteManagementComponents/Funds";
 import NavBar from "../components/NavBar";
-// import Change from "../components/QuoteManagementComponents/Change"; (this component will be in R2)
 import "../assets/css/QuoteManagement.scss";
-import Graph from "../components/QuoteManagementComponents/Graph";
 import Snackbar from "../components/Snackbar";
+import TwoWeeks from "../components/QuoteManagementComponents/TwoWeeks";
+import OneMonth from "../components/QuoteManagementComponents/OneMonth";
 const moment = require("moment");
 
 const QuoteManagement = () => {
@@ -44,7 +44,6 @@ const QuoteManagement = () => {
     }).then((res) => {
       res.json().then((body) => {
         setName(body.name);
-        console.log(body);
       });
     });
     setInterval(() => {
@@ -70,7 +69,6 @@ const QuoteManagement = () => {
       }).then((res) => {
         res.json().then((body) => {
           setFunds(body.Funds);
-          console.log(body.Funds);
         });
       });
     }, 50);
@@ -160,12 +158,12 @@ const QuoteManagement = () => {
         if (res.status === 201) {
           // Successful orderCreation 201
           res.json().then((body) => {
-            console.log(body);
             if (body == "Error") {
-              AddNotification("You do not have shares in this company");
+              console.log(
+                "Vishaal wanted to comment me out but I wanna stay! ):<"
+              );
             } else {
               setFunds(funds - body.OrderTotal);
-              AddNotification("Sell executed!");
             }
           });
         }
@@ -204,6 +202,12 @@ const QuoteManagement = () => {
         console.log("Error:", exception);
       });
   };
+
+  // this section of the code displays the price information to two decimal points
+  parseFloat(sharePrice).toFixed(2);
+  // this section creates the graph variable that will be shown on the page
+  const graphs = ["2W", "1M"];
+  const [graph, setGraph] = useState("");
   // this section of the code displays all the above functions into the user interface
   return (
     <>
@@ -243,7 +247,23 @@ const QuoteManagement = () => {
         </div>
       </div>
       <div className="side2">
-        <Graph />
+        {graph === "" && <h3>Two Week Graph</h3>}
+        {graph === "2W" && <h3>Two Week Graph</h3>}
+        {graph === "1M" && <h3>One Month Graph</h3>}
+        <div className="graphHeadings">
+          {graphs.map((graph) => (
+            <button type="button" key={graph} onClick={() => setGraph(graph)}>
+              {graph.toLocaleUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="graphs">
+          {graph === "" && <TwoWeeks listingID={listingID} />}
+          {graph === "2W" && <TwoWeeks listingID={listingID} />}
+          {graph === "1M" && <h3>One Month</h3> && (
+            <OneMonth listingID={listingID} />
+          )}
+        </div>
       </div>
     </>
   );

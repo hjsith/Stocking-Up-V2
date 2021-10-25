@@ -135,7 +135,11 @@ class SignUp extends React.Component {
         } else if (res.status === 422) {
           //response status
           this.setState({
-            errorMessage: "This username already exists" //error message displayed
+            errorMessage: "This username already exists" //error message displayed for username
+          });
+        } else if (res.status == 401) {
+          this.setState({
+            errorMessage: "This email  already exists" //error message displayed for email
           });
         } else {
           console.log("Something unexpeceted went wrong ._.");
@@ -151,7 +155,7 @@ class SignUp extends React.Component {
   }
   render() {
     if (this.state.Redirect == true) {
-      return <Redirect to="/Profile" />; //page redirected to after completion correctly
+      return <Redirect to="/DifficultySelect" />;
     }
     return (
       // layout of page with Containers, text input, forms, images  etc.

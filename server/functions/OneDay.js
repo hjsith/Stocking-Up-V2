@@ -1,10 +1,10 @@
-const { OneDay } = require("../db/Models");
+import { OneDay } from "../db/Models.js";
 
-async function getAllOneDayPrices() {
+export async function getAllOneDayPrices() {
   return await OneDay.findAll();
 }
 
-async function getOneDayPricesForListing(code) {
+export async function getOneDayPricesForListing(code) {
   return await OneDay.findAll({
     where: {
       ListingID: code,
@@ -12,4 +12,26 @@ async function getOneDayPricesForListing(code) {
   });
 }
 
-module.exports = { getAllOneDayPrices, getOneDayPricesForListing };
+export async function getOneDayGraphData(code) {
+  const prices = await OneDay.findAll({
+    where: {
+      ListingID: code,
+    },
+  });
+
+  var newData = [
+    {
+      id: code,
+      data: [],
+    },
+  ];
+
+  for (let i = 0; i < prices.length; ++i) {
+    newData[0].data.push({
+      x: prices[i].DateTimeOfPrice,
+      y: prices[i].PastPrice,
+    });
+  }
+
+  return newData;
+}

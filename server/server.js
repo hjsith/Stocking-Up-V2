@@ -1,8 +1,9 @@
-const express = require("express");
-const path = require("path");
-const BaseRouter = require("./routes/Router");
-const { StatusCodes } = require("http-status-codes");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import path from "path";
+const __dirname = path.resolve();
+import BaseRouter from "./routes/Router.js";
+import { StatusCodes } from "http-status-codes";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -25,4 +26,4 @@ app.get("*", (req, res) => {
   }
 });
 
-module.exports = app;
+export default app;

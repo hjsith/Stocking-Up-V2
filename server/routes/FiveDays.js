@@ -1,9 +1,10 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllFiveDaysPrices,
   getFiveDaysPricesForListing,
-} = require("../functions/FiveDays");
+  getFiveDaysGraphData,
+} from "../functions/FiveDays.js";
 
 // Init shared
 const router = Router();
@@ -28,4 +29,12 @@ router.get("/fivedays", async (req, res) => {
   return res.status(StatusCodes.OK).json(prices);
 });
 
-module.exports = router;
+router.get("/fivedays/graph", async (req, res) => {
+  var code = req.query.id;
+
+  const prices = await getFiveDaysGraphData(code);
+
+  return res.status(StatusCodes.OK).json(prices);
+});
+
+export default router;

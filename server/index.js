@@ -1,37 +1,11 @@
-// const express = require("express");
-// const path = require("path");
-const db = require("./db/DBInstance");
-const env = require("./Environment");
-const app = require("./server.js");
-// const BaseRouter = require("./routes/Router");
-// const { StatusCodes } = require("http-status-codes");
-const cron = require("node-cron");
-const { pendingOrderCheck } = require("./functions/Order");
-const { updateArticles } = require("./functions/Articles");
+import db from "./db/DBInstance.js";
+import env from "./Environment.js";
+import app from "./server.js";
+import cron from "node-cron";
+import { pendingOrderCheck } from "./functions/Order.js";
+import { updateArticles } from "./functions/Articles.js";
 
-// const cookieParser = require("cookie-parser");
-
-// const app = express();
 const PORT = env.port;
-
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-
-// //Used to process cookies in requests for User Authentication
-// app.use(cookieParser());
-
-// app.use("/api", BaseRouter);
-
-// const staticDir = path.join(__dirname, "../client/build/");
-// app.use(express.static(staticDir));
-
-// app.get("*", (req, res) => {
-//   if (req.url.startsWith("/api")) {
-//     res.status(StatusCodes.NOT_FOUND).end();
-//   } else {
-//     res.sendFile("index.html", { root: staticDir });
-//   }
-// });
 
 async function dbconnect() {
   try {
@@ -53,7 +27,6 @@ if (env.node_env != "test") {
   });
 }
 
-cron.schedule("15 * * * *", async function () {
+cron.schedule("* * * * *", async function () {
   await updateArticles();
 });
-module.exports = { app };

@@ -1,8 +1,8 @@
-const sequelize = require("./db/DBInstance");
-const request = require("supertest");
-const app = require("./server.js");
+import sequelize from "./db/DBInstance";
+import request from "supertest";
+import app from "./server.js";
 
-async function createTestUser(
+export async function createTestUser(
   inputFirstName,
   inputLastName,
   inputEmail,
@@ -19,12 +19,10 @@ async function createTestUser(
   return resLogin.body;
 }
 
-async function getAuthenticatedUserCookie(inputUsername, inputPassword) {
+export async function getAuthenticatedUserCookie(inputUsername, inputPassword) {
   const resLogin = await request(app).post("/api/SignIn").send({
     username: inputUsername,
     password: inputPassword,
   });
   return resLogin.headers["set-cookie"];
 }
-
-module.exports = { getAuthenticatedUserCookie, createTestUser };

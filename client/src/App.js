@@ -7,13 +7,16 @@ import SignIn from "./pages/SignIn";
 import temp from "./pages/temp";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
+import DifficultySelect from "./pages/DifficultySelect";
 import QuoteManagement from "./pages/QuoteManagement";
 import Portfolio from "./pages/Portfolio";
+import Friends from "./pages/Friends";
 import AllOrders from "./pages/AllOrders";
 import MarketsOverview from "./pages/MarketsOverview";
 import DiscussionBoard from "./pages/DiscussionBoard";
 import DiscussionBoardSearch from "./pages/DiscussionBoardSearch";
 import Newsfeed from "./pages/Newsfeed";
+import EditProfile from "./pages/EditProfile";
 import { UserContext } from "./components/UserContext";
 import {
   Switch,
@@ -51,13 +54,15 @@ class App extends React.Component {
             <Route path="/temp" component={temp} />
             <Route path="/SignUp" component={SignUp} />
             <Route path="/ForgotPassword" component={ForgotPassword} />
-            <Route path="/AllOrders" component={AllOrders} />
-            <Route path="/Newsfeed" component={Newsfeed} />
-
+            <Route path="/DifficultySelect" component={DifficultySelect} />
             <Route path="/Portfolio" component={Portfolio} />
             <Route path="/Profile" render={(props) => <Profile {...props} />} />
+            <Route path="/Friends" component={Friends} />
             <Route path="/UpdatePassword" component={UpdatePassword} />
+            <Route path="/AllOrders" component={AllOrders} />
+            <Route path="/Newsfeed" component={Newsfeed} />
             <Route path="/MarketsOverview" component={MarketsOverview} />
+            <Route path="/EditProfile" component={EditProfile} />
             <Route
               path="/DiscussionBoardSearch"
               component={DiscussionBoardSearch}

@@ -1,12 +1,15 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllInvestors,
   getInvestor,
   updateInvestorPassword,
-} = require("../functions/Investor");
-const bcrypt = require("bcrypt");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+  setInvestorDifficulty,
+  getInvestorsWithSimilarUsernames,
+  updateUserDetails,
+} from "../functions/Investor.js";
+import bcrypt from "bcrypt";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -55,8 +58,57 @@ router.get("/investor", async (req, res) => {
     }
     return res.status(StatusCodes.OK).json(user);
   } else {
-    res.status(StatusCodes.UNAUTHORIZED).end();
+    return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 });
 
-module.exports = router;
+router.get("/investor/username/similar", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    if (req.query.username == "") return res.status(StatusCodes.OK).json([]);
+    const users = await getInvestorsWithSimilarUsernames(
+      req.query.id,
+      req.query.currentuser,
+      req.query.username
+    );
+    if (users === null) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ errors: "User could not be found." });
+    }
+    return res.status(StatusCodes.OK).json(users);
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.patch("/investor/difficulty", async (req, res) => {
+  await setInvestorDifficulty(req.body.id, req.body.difficulty);
+  return res.status(StatusCodes.OK).end();
+});
+
+router.put("/investor/updateUser", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    //Check if the request body is empty
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .send("The request doesn't have the correct body format.");
+    }
+
+    var data = req.body;
+
+    await updateUserDetails(
+      data.investorID,
+      data.firstname,
+      data.lastname,
+      data.email
+    );
+    return res.status(StatusCodes.OK).end();
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+export default router;

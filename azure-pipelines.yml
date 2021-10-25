@@ -11,7 +11,7 @@ variables:
   azureSubscription: "b3bd7b6a-6344-4a1a-b66d-9967c2c17d9b"
 
   # Web app name
-  webAppName: "stocking-up"
+  webAppName: "stockingup"
 
   # Environment name
   environmentName: "stocking-up"
@@ -29,6 +29,11 @@ stages:
           vmImage: $(vmImageName)
 
         steps:
+          - task: Npm@1
+            displayName: "NPM Install Server"
+            inputs:
+              command: 'install'
+              workingDir: 'server'
           - task: ArchiveFiles@2
             displayName: "Archive files"
             inputs:

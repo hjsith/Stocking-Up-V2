@@ -1,7 +1,25 @@
-const { Achievements } = require("../db/Models");
+import { Achievements } from "../db/Models.js";
 
-async function getAllCurrentAchievements() {
+export async function getAllCurrentAchievements() {
   return await Achievements.findAll();
 }
 
-module.exports = { getAllCurrentAchievements };
+export async function getAchievementbyID(achievementID) {
+  return await Achievements.findAll({
+    where: {
+      AchievementID: achievementID,
+    },
+  });
+}
+
+export async function createAchievement(
+  achievementTitle,
+  achievementDescription,
+  image
+) {
+  return Achievements.create({
+    Title: achievementTitle,
+    Description: achievementDescription,
+    MedalImage: image,
+  });
+}

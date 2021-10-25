@@ -1,11 +1,8 @@
-const app = require("../server.js");
-const request = require("supertest");
-const sequelize = require("../db/DBInstance");
-const {
-  getAuthenticatedUserCookie,
-  createTestUser,
-} = require("../test.config");
-const { createListing } = require("../functions/Listing");
+import app from "../server.js";
+import request from "supertest";
+import sequelize from "../db/DBInstance.js";
+import { getAuthenticatedUserCookie, createTestUser } from "../test.config.js";
+import { createListing } from "../functions/Listing.js";
 
 let user;
 let cookie = "";
@@ -92,7 +89,7 @@ describe("Comments endpoint", () => {
       .get("/api/commentCount?userID=" + user.body.id)
       .set("cookie", cookie);
     expect(res.status).toEqual(200);
-    expect(res.body).toEqual(1);
+    expect(res.body.count).toEqual(1);
   });
   it("Unauthorized to retrieve comment count", async () => {
     const res = await request(app).get(

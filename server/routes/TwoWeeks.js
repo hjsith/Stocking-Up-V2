@@ -1,9 +1,10 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllTwoWeeksPrices,
   getTwoWeeksPricesForListing,
-} = require("../functions/TwoWeeks");
+  getTwoWeeksGraphData,
+} from "../functions/TwoWeeks.js";
 
 // Init shared
 const router = Router();
@@ -28,4 +29,12 @@ router.get("/twoweeks", async (req, res) => {
   return res.status(StatusCodes.OK).json(prices);
 });
 
-module.exports = router;
+router.get("/twoweeks/graph", async (req, res) => {
+  var code = req.query.id;
+
+  const prices = await getTwoWeeksGraphData(code);
+
+  return res.status(StatusCodes.OK).json(prices);
+});
+
+export default router;

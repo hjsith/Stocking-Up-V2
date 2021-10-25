@@ -1,14 +1,14 @@
-const { Router } = require("express");
-const { StatusCodes } = require("http-status-codes");
-const {
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+import {
   getAllComments,
   createComment,
   getUserCommentCount,
   updateCommentMessage,
   increaseLike,
   decreaseLike,
-} = require("../functions/Comments");
-const { getAuthenticatedUser } = require("../functions/Authenticate");
+} from "../functions/Comments.js";
+import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
 // Init shared
 const router = Router();
@@ -55,7 +55,7 @@ router.get("/commentCount", async (req, res) => {
   const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
     const commentCount = await getUserCommentCount(req.query.userID);
-    return res.status(StatusCodes.OK).json(commentCount);
+    return res.status(StatusCodes.OK).json({ count: commentCount });
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }
@@ -138,4 +138,4 @@ router.put("/unlikeComment", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
