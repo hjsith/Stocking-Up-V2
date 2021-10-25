@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useLocation, Redirect } from "react-router-dom";
 import { UserContext } from "../components/UserContext";
 import Header from "../components/QuoteManagementComponents/Header";
 import ShareInfo from "../components/QuoteManagementComponents/ShareInfo";
@@ -9,6 +9,7 @@ import "../assets/css/QuoteManagement.scss";
 import Snackbar from "../components/Snackbar";
 import TwoWeeks from "../components/QuoteManagementComponents/TwoWeeks";
 import OneMonth from "../components/QuoteManagementComponents/OneMonth";
+
 const moment = require("moment");
 
 const QuoteManagement = () => {
@@ -21,6 +22,7 @@ const QuoteManagement = () => {
   const [name, setName] = useState(""); // the useState is used to show the listing name on the page
   const [snackBarMessages, setSnackBarMessages] = useState([]); // the snackbar message will be used to generate messages based on what button a user clicks
   const [counter, setCounter] = useState(0); // the useState is used to show the quantity that a user selects
+  const [unauth, setunauth] = useState(false);
 
   //Snackbar notification implementation whereby snackbar messages are added to snackBarMessages
   const AddNotification = (NotificationMessage) => {
@@ -42,9 +44,13 @@ const QuoteManagement = () => {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      res.json().then((body) => {
-        setName(body.name);
-      });
+      if (res.status === 200) {
+        res.json().then((body) => {
+          setName(body.name);
+        });
+      } else if (res.status === 401) {
+        setunauth(true);
+      }
     });
     setInterval(() => {
       // the setInterval will retrive the shareprice, funds and investor ID as intervals, in this case it is every 50ms
@@ -54,9 +60,13 @@ const QuoteManagement = () => {
           "Content-Type": "application/json",
         },
       }).then((res) => {
-        res.json().then((body) => {
-          setSharePrice(body.price);
-        });
+        if (res.status === 200) {
+          res.json().then((body) => {
+            setSharePrice(body.price);
+          });
+        } else if (res.status === 401) {
+          setunauth(true);
+        }
       });
     }, 50);
 
@@ -67,9 +77,13 @@ const QuoteManagement = () => {
           "Content-Type": "application/json",
         },
       }).then((res) => {
-        res.json().then((body) => {
-          setFunds(body.Funds);
-        });
+        if (res.status === 200) {
+          res.json().then((body) => {
+            setFunds(body.Funds);
+          });
+        } else if (res.status === 401) {
+          setunauth(true);
+        }
       });
     }, 50);
   }, []);
@@ -194,6 +208,8 @@ const QuoteManagement = () => {
         } else if (res.status === 409) {
           console.log("Watchlist was not added as already exist");
           AddNotification("Watchlist was not added as already exist");
+        } else if (res.status === 401) {
+          setunauth(true);
         } else {
           console.log("Something unexpeceted went wrong ._.");
         }
@@ -209,6 +225,17 @@ const QuoteManagement = () => {
   const graphs = ["2W", "1M"];
   const [graph, setGraph] = useState("");
   // this section of the code displays all the above functions into the user interface
+
+  if (unauth || context.user.name === "") {
+    return (
+      <Redirect
+        to={{
+          pathname: "/SignIn",
+        }}
+      />
+    );
+  }
+
   return (
     <>
       <NavBar />
