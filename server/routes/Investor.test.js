@@ -57,6 +57,15 @@ describe("Investor endpoint", () => {
       });
     expect(res.status).toEqual(200);
   });
+
+  // it("Succesfully retrieve all investors", async () => {
+  //   const res = await request(app)
+  //     .get("/api/allInvestors")
+  //     .set("cookie", cookie);
+  //   expect(res.status).toEqual(200);
+  //   expect(res.body).toEqual(expect.any(Array));
+  // });
+
   it("Fail to update password on incorrect request body", async () => {
     const res = await request(app).put("/api/updatePassword");
     expect(res.status).toEqual(400);
@@ -74,11 +83,5 @@ describe("Investor endpoint", () => {
       password: "NewPassword",
     });
     expect(res.status).toEqual(409);
-  });
-
-  it("Succesfully retrieve all investors", async () => {
-    const res = await request(app).get("/api/allInvestors");
-    expect(res.status).toEqual(200);
-    expect(res.body).toEqual(expect.any(Array));
   });
 });
