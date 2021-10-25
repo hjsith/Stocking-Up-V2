@@ -7,53 +7,27 @@ class Gains extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gainsArray: [
-        {
-          colourNumber: 1,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          percentageChange: "+2.10%",
-          industry: "Consumer Staples"
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wistech Global",
-          currentPrice: "$47.02",
-          percentageChange: "-1.21%",
-          industry: "Logistics"
-        },
-        {
-          colourNumber: 4,
-          companyCode: "CBA",
-          companyName: "Commonwealth Bank",
-          currentPrice: "$64.02",
-          percentageChange: "+3.10%",
-          industry: "Banking and Financial Services"
-        },
-        {
-          colourNumber: 1,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          percentageChange: "+2.10%",
-          industry: "Consumer Staples"
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wistech Global",
-          currentPrice: "$47.02",
-          percentageChange: "-1.21%",
-          industry: "Logistics"
-        }
-
-        
-      ]
+      gainsArray: []
     };
   }
-
+  fetchTop5Gains() {
+    fetch("/api/listing/Top5Gains", {
+      //connecting backend to frontend
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        res.json().then(body => {
+          this.setState({ gainsArray: body });
+        });
+      }
+    });
+  }
+  componentDidMount() {
+    this.fetchTop5Gains(); //when the website loads the top 5 Gains  is refreshed
+  }
   render() {
     return (
       <div>
@@ -71,13 +45,12 @@ class Gains extends React.Component {
           {this.state.gainsArray.map((gains, index) => {
             return (
               <GainsPanel
-                key={gains.companyCode}
-                colourNumber={gains.colourNumber}
-                companyCode={gains.companyCode}
-                companyName={gains.companyName}
-                currentPrice={gains.currentPrice}
-                percentageChange={gains.percentageChange}
-                industry={gains.industry}
+                key={gains.ListingID}
+                companyCode={gains.ListingID}
+                companyName={gains.ListingName}
+                currentPrice={gains.CurrentPrice}
+                percentageChange={gains.change}
+                industry={gains.ListingIndustry}
               />
             );
           })}
