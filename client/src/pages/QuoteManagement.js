@@ -159,13 +159,11 @@ const QuoteManagement = () => {
           // Successful orderCreation 201
           res.json().then((body) => {
             if (body == "Error") {
-              // AddNotification("You do not have shares in this company");
               console.log(
                 "Vishaal wanted to comment me out but I wanna stay! ):<"
               );
             } else {
               setFunds(funds - body.OrderTotal);
-              // AddNotification("Sell executed!");
             }
           });
         }
