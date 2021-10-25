@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import {
   getAllOneMonthPrices,
   getOneMonthPricesForListing,
+  getOneMonthGraphData,
 } from "../functions/OneMonth.js";
 
 // Init shared
@@ -24,6 +25,14 @@ router.get("/onemonth", async (req, res) => {
   var data = req.body;
 
   const prices = await getOneMonthPricesForListing(data.code);
+
+  return res.status(StatusCodes.OK).json(prices);
+});
+
+router.get("/onemonth/graph", async (req, res) => {
+  var code = req.query.id;
+
+  const prices = await getOneMonthGraphData(code);
 
   return res.status(StatusCodes.OK).json(prices);
 });

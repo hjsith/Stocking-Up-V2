@@ -6,14 +6,14 @@ const Article = ({ title, description, url, publishedAt, urlToImage }) => {
   return (
     <div className="newsPanel">
       <div className="datePanel">
-        {/* <div className="image">
+        <div className="image">
           <img src={urlToImage} />
-        </div> */}
+        </div>
       </div>
 
       <div className="newsContent">
         <h3>
-          <a>{title}</a>
+          <a href={url}>{title}</a>
         </h3>
         <h4>{date}</h4>
         <p>{description}</p>

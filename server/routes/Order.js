@@ -65,8 +65,13 @@ router.post("/orders", async (req, res) => {
       data.listingID,
       data.executionTime
     );
-
-    return res.status(StatusCodes.CREATED).json(order);
+    if (order == "Error") {
+      return res
+        .status(StatusCodes.FORBIDDEN)
+        .json({ message: "You do not have shares in this company" });
+    } else {
+      return res.status(StatusCodes.CREATED).json(order);
+    }
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }
