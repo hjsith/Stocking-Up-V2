@@ -7,7 +7,6 @@ const router = Router();
 
 router.get("/articles", async (req, res) => {
   const articles = await getAllArticles();
-
   return res.status(StatusCodes.OK).json(articles);
 });
 
