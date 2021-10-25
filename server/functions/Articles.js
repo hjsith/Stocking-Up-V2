@@ -21,7 +21,7 @@ export async function updateArticles() {
         ArticleName: res.data.articles[i].title,
       },
     });
-    if (articleFound == null) {
+    if (articleFound == null && res.data.articles[i].url != null) {
       await Articles.create({
         ArticleName: res.data.articles[i].title,
         ArticleDate: res.data.articles[i].publishedAt,
