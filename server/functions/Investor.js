@@ -28,7 +28,7 @@ export async function createInvestor(fName, lName, email, password, username) {
     InvestorDifficulty: "NEEDED",
     DateJoined: date,
     Title: "NEEDED",
-    Funds: 0
+    Funds: 0,
   });
 }
 
@@ -43,7 +43,7 @@ export async function setInvestorDifficulty(id, difficulty) {
     InvestorDifficulty: difficulty,
     Funds: funds,
     NetWorth: netWorth,
-    Title: title
+    Title: title,
   });
 }
 
@@ -69,8 +69,8 @@ export async function getInvestorPassword(username) {
   return Investor.findOne({
     attributes: ["InvestorPassword"],
     where: {
-      Username: username
-    }
+      Username: username,
+    },
   });
 }
 
@@ -78,8 +78,8 @@ export async function getInvestorPassword(username) {
 export async function checkUsernameExist(username) {
   var searchedInvestor = await Investor.findOne({
     where: {
-      Username: username
-    }
+      Username: username,
+    },
   });
   if (searchedInvestor === null) {
     return false;
@@ -93,9 +93,9 @@ export async function getInvestorsWithUsername(username) {
   return Investor.findAll({
     where: {
       Username: {
-        [Op.substring]: username
-      }
-    }
+        [Op.substring]: username,
+      },
+    },
   });
 }
 
@@ -105,8 +105,8 @@ export async function updateInvestorPassword(userID, username, password) {
     { InvestorPassword: password },
     {
       where: {
-        [Op.or]: [{ Username: username }, { InvestorID: userID }]
-      }
+        [Op.or]: [{ Username: username }, { InvestorID: userID }],
+      },
     }
   );
   if (updatedInvestorCount[0] >= 1) {
@@ -120,8 +120,8 @@ export async function updateInvestorPassword(userID, username, password) {
 export async function getOneInvestorWithUsername(username) {
   return Investor.findOne({
     where: {
-      Username: username
-    }
+      Username: username,
+    },
   });
 }
 
@@ -135,23 +135,23 @@ export async function getInvestorsWithSimilarUsernames(
       [Op.and]: [
         {
           Username: {
-            [Op.ne]: searchingUsername
-          }
+            [Op.ne]: searchingUsername,
+          },
         },
         {
           Username: {
-            [Op.substring]: username
-          }
-        }
-      ]
-    }
+            [Op.substring]: username,
+          },
+        },
+      ],
+    },
   });
 
   let nonFriends = [];
 
   for (let i = 0; i < similarInvestors.length; ++i) {
     await checkIfFriends(userid, similarInvestors[i].InvestorID).then(
-      result => {
+      (result) => {
         if (!result) nonFriends.push(similarInvestors[i]);
       }
     );
@@ -163,14 +163,16 @@ export async function getInvestorsWithSimilarUsernames(
 export async function checkEmailExist(email) {
   var searchedInvestor = await Investor.findOne({
     where: {
-      InvestorEmail: email
-    }
+      InvestorEmail: email,
+    },
   });
   if (searchedInvestor === null) {
     return false;
   } else {
     return true;
   }
+}
+
 export async function updateUserDetails(
   userID,
   inputFirstName,
