@@ -8,8 +8,10 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       Redirect: false,
+      unauth: false,
     };
   }
+
   static contextType = UserContext;
 
   SetDifficulty(value) {
@@ -27,6 +29,8 @@ class SignIn extends React.Component {
       .then((res) => {
         if (res.status == 200) {
           this.setState({ Redirect: true });
+        } else if (res.status === 401) {
+          this.setState({ unauth: true });
         }
       })
       .catch((exception) => {
@@ -38,6 +42,18 @@ class SignIn extends React.Component {
     if (this.state.Redirect == true) {
       return <Redirect to="/Profile" />;
     }
+
+    //Redirect if the user is not logged in
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+
     return (
       <div className="Buttons">
         <table>

@@ -16,8 +16,13 @@ const router = Router();
 
 //Return a list of all saved investors
 router.get("/allInvestors", async (req, res) => {
-  const investors = await getAllInvestors();
-  return res.status(StatusCodes.OK).json(investors);
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
+  if (checkAuth) {
+    const investors = await getAllInvestors();
+    return res.status(StatusCodes.OK).json(investors);
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
 });
 
 //Update the password of an investor
@@ -83,8 +88,13 @@ router.get("/investor/username/similar", async (req, res) => {
 });
 
 router.patch("/investor/difficulty", async (req, res) => {
-  await setInvestorDifficulty(req.body.id, req.body.difficulty);
-  return res.status(StatusCodes.OK).end();
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    await setInvestorDifficulty(req.body.id, req.body.difficulty);
+    return res.status(StatusCodes.OK).end();
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
 });
 
 router.put("/investor/updateUser", async (req, res) => {

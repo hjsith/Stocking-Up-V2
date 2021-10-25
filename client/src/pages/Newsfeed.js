@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavBar from "../components/NavBar";
 import "../assets/css/Newsfeed.scss";
 import { useState } from "react";
 import Article from "../components/NewsfeedComponents/Article";
+import { UserContext } from "../components/UserContext";
+import { Redirect } from "react-router-dom";
+
 // this section of the code displays the newsfeed page based on the articles from the List component
 const Newsfeed = () => {
+  const cont = useContext(UserContext);
   const [search, setSearch] = useState([]); //this section creates the variable used to generate the search results based on user input
   const [articles, setArticles] = useState([]); // this creates an array for the articles
+  const [unauth, setunauth] = useState(false);
   // this section fetches for all the articles from the database
   fetch("/api/articles", {
     method: "GET",
@@ -14,10 +19,24 @@ const Newsfeed = () => {
       "Content-Type": "application/json",
     },
   }).then((res) => {
-    res.json().then((body) => {
-      setArticles(body);
-    });
+    if (res.status === 200) {
+      res.json().then((body) => {
+        setArticles(body);
+      });
+    } else if (res.status === 401) {
+      setunauth(true);
+    }
   });
+
+  if (unauth || cont.user.name === "") {
+    return (
+      <Redirect
+        to={{
+          pathname: "/SignIn",
+        }}
+      />
+    );
+  }
 
   return (
     <>

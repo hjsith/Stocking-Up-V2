@@ -6,6 +6,8 @@ import FriendsList from "../components/FriendsComponents/FriendsList";
 import FriendProfile from "../components/FriendsComponents/FriendProfile";
 import AddFriend from "../components/FriendsComponents/AddFriend";
 import PendingFriends from "../components/FriendsComponents/PendingFriends";
+import { UserContext } from "../components/UserContext";
+import { Redirect } from "react-router-dom";
 
 class Friends extends React.Component {
   constructor(props) {
@@ -44,11 +46,14 @@ class Friends extends React.Component {
         },
       ],
       rightView: [true, false, false],
+      unauth: false,
     };
     this.handler = this.handler.bind(this);
     this.RightPanelView = this.RightPanelView.bind(this);
     this.WhichPanel = this.WhichPanel.bind(this);
   }
+
+  static contextType = UserContext;
 
   handler(props) {
     this.setState({ rightView: [false, false, false] });
@@ -71,6 +76,16 @@ class Friends extends React.Component {
   }
 
   render() {
+    if (this.state.unauth || this.context.user.name === "") {
+      return (
+        <Redirect
+          to={{
+            pathname: "/SignIn",
+          }}
+        />
+      );
+    }
+
     return (
       <div>
         <NavBar />
