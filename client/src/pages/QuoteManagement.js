@@ -5,7 +5,6 @@ import Header from "../components/QuoteManagementComponents/Header";
 import ShareInfo from "../components/QuoteManagementComponents/ShareInfo";
 import Funds from "../components/QuoteManagementComponents/Funds";
 import NavBar from "../components/NavBar";
-// import Change from "../components/QuoteManagementComponents/Change"; (this component will be in R2)
 import "../assets/css/QuoteManagement.scss";
 import Snackbar from "../components/Snackbar";
 import TwoWeeks from "../components/QuoteManagementComponents/TwoWeeks";
@@ -205,10 +204,12 @@ const QuoteManagement = () => {
         console.log("Error:", exception);
       });
   };
+
+  // this section of the code displays the price information to two decimal points
+  parseFloat(sharePrice).toFixed(2);
   // this section creates the graph variable that will be shown on the page
   const graphs = ["2W", "1M"];
   const [graph, setGraph] = useState("");
-
   // this section of the code displays all the above functions into the user interface
   return (
     <>
@@ -248,21 +249,22 @@ const QuoteManagement = () => {
         </div>
       </div>
       <div className="side2">
+        {graph === "" && <h3>Two Week Graph</h3>}
         {graph === "2W" && <h3>Two Week Graph</h3>}
         {graph === "1M" && <h3>One Month Graph</h3>}
-
-        <div className="graphs">
-          {graph === "2W" && <TwoWeeks listingID={listingID} />}
-          {graph === "1M" && <h3>One Month</h3> && (
-            <OneMonth listingID={listingID} />
-          )}
-        </div>
         <div className="graphHeadings">
           {graphs.map((graph) => (
             <button type="button" key={graph} onClick={() => setGraph(graph)}>
               {graph.toLocaleUpperCase()}
             </button>
           ))}
+        </div>
+        <div className="graphs">
+          {graph === "" && <TwoWeeks listingID={listingID} />}
+          {graph === "2W" && <TwoWeeks listingID={listingID} />}
+          {graph === "1M" && <h3>One Month</h3> && (
+            <OneMonth listingID={listingID} />
+          )}
         </div>
       </div>
     </>

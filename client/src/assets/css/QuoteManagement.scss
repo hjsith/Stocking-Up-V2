@@ -281,12 +281,17 @@
   margin-left: 30px;
 }
 
+.graphHeadings button:focus {
+  font-weight: bold;
+  color: black;
+}
+
 .side2 h3 {
-  font-size: 55px;
-  color: lightgray;
+  font-size: 40px;
+  color: white;
   font-family: "Roboto", sans-serif;
-  padding-left: 2px;
-  padding-top: 2px;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 
 .side2 {
@@ -295,8 +300,6 @@
 }
 
 .graphHeadings {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
   align-content: center;
+  position: relative;
 }
