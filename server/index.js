@@ -27,6 +27,6 @@ if (env.node_env != "test") {
   });
 }
 
-cron.schedule("* * * * *", async function () {
+cron.schedule("30 * * * *", async function () {
   await updateArticles();
 });
