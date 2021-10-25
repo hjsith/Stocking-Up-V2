@@ -55,7 +55,7 @@ router.get("/commentCount", async (req, res) => {
   const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
   if (checkAuth) {
     const commentCount = await getUserCommentCount(req.query.userID);
-    return res.status(StatusCodes.OK).json(commentCount);
+    return res.status(StatusCodes.OK).json({ count: commentCount });
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }

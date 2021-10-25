@@ -171,4 +171,16 @@ export async function checkEmailExist(email) {
   } else {
     return true;
   }
+export async function updateUserDetails(
+  userID,
+  inputFirstName,
+  inputLastName,
+  inputEmail
+) {
+  const investor = await Investor.findByPk(userID);
+  await investor.update({
+    InvestorFName: inputFirstName,
+    InvestorLName: inputLastName,
+    InvestorEmail: inputEmail,
+  });
 }

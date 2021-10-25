@@ -8,6 +8,7 @@ import Popup from "../components/Popup";
 import VerticalLine from "../components/UserManagementComponents/VerticalLine";
 import { UserContext } from "../components/UserContext";
 import { Redirect } from "react-router-dom";
+import moment from "moment";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -61,45 +62,58 @@ class Profile extends React.Component {
   //Get the number of friends the currently signed in user has
   fetchFriendCount() {
     this.setState({ userFriendCount: 0 });
-    //   fetch("/api/investor", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       userID: "BADUSERID",
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // }
+    fetch("/api/friends/count?userID=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res
+          .json()
+          .then((body) => this.setState({ userFriendCount: body.count }));
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
   }
 
   //Get the number of comments the currently signed in user has made
   fetchPostCount() {
     this.setState({ userPostCount: 0 });
-    //   fetch("/api/investor", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       userID: "BADUSERID",
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // }
+    fetch("/api/commentCount?userID=" + this.context.user.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        res.json().then((body) => this.setState({ userPostCount: body.count }));
+      } else if (res.status === 401) {
+        this.setState({ unauth: true });
+      } else {
+        console.log(res.status);
+      }
+    });
   }
 
-  //Get the currently signed in user's achievements
-  fetchAchievements() {
-    //   fetch("/api/investor", {
-    //     method: "PUT",
-    //     body: JSON.stringify({
-    //       userID: "BADUSERID",
-    //     }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // }
+  determineSimulationEndDate() {
+    var year = new Date().getFullYear();
+    var month = new Date().getMonth();
+
+    if ((month + 1) % 3 != 0) {
+      if ((month + 2) % 3 == 0) {
+        month = month + 2;
+      } else if ((month + 3) % 3 == 0) {
+        month = month + 3;
+      }
+    }
+
+    var EndDate = moment(new Date(year, month, 0));
+    let end = EndDate.endOf("month");
+    this.setState({ SimulationEndDate: end.diff(moment(), "days") });
   }
 
   componentDidMount() {
@@ -111,7 +125,7 @@ class Profile extends React.Component {
     this.fetchUser();
     this.fetchFriendCount();
     this.fetchPostCount();
-    this.fetchAchievements();
+    this.determineSimulationEndDate();
   }
 
   render() {
@@ -157,6 +171,13 @@ class Profile extends React.Component {
               postCount={this.state.userPostCount}
               simualationDate={this.state.SimulationEndDate}
             />
+
+            <div className="EditProfileButtonContainer">
+              <a href="/EditProfile" className="ProfilePasswordButton">
+                Edit your Profile
+              </a>
+            </div>
+
             <div className="PasswordButtonContainer">
               <a href="/UpdatePassword" className="ProfilePasswordButton">
                 Change your password
@@ -167,7 +188,7 @@ class Profile extends React.Component {
           <div className="AchievementBlock">
             <p className="ProfileTitles">Achievements!</p>
             <div className="UserAchievement">
-              <AchievementBlock loop={16} />
+              <AchievementBlock />
             </div>
           </div>
         </div>

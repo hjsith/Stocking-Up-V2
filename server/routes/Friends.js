@@ -7,6 +7,7 @@ import {
   getInvestorModelsForFriends,
   confirmPendingFriend,
   denyPendingFriend,
+  countFriends,
 } from "../functions/Friends.js";
 import { getAuthenticatedUser } from "../functions/Authenticate.js";
 
@@ -64,6 +65,16 @@ router.delete("/friends/deny", async (req, res) => {
     return res.status(StatusCodes.OK).end();
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.get("/friends/count", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res);
+  if (checkAuth) {
+    let friendCount = await countFriends(req.query.userID);
+    return res.status(StatusCodes.OK).json({ count: friendCount });
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
   }
 });
 

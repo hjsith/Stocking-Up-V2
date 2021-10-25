@@ -1,6 +1,8 @@
 import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
+import PriceArrow from "../PriceArrow";
+import ClosingPrice from "../ClosingPrice";
 
 class OrderRowPanel extends React.Component {
   //React constructor used to initalise local states
@@ -60,18 +62,28 @@ class OrderRowPanel extends React.Component {
             </th>
             <th>{this.state.name}</th>
             <th>{this.props.priceBought}</th>
-            <th>{this.state.price}</th>
+            <th>
+              {this.state.price}
+              <ClosingPrice
+                currentPrice={this.state.price}
+                code={this.props.companyCode}
+              />
+              <PriceArrow
+                currentPrice={this.state.price}
+                code={this.props.companyCode}
+              />
+            </th>
             <th>{this.props.units}</th>
             <th>{this.props.total}</th>
             {/* button functionality to confirm order and upon confirmation to disable the button */}
             <th className>
               <div className="ButtonContainer">
                 <button
-                  disabled={this.state.disable}
+                  disabled={this.props.disable}
                   className="GreenConfirmButton"
                   onClick={() => {
                     this.props.confirm(this.props.orderID);
-                    this.setState({ disable: true });
+                    // this.setState({ disable: true });
                   }}
                 >
                   Confirm
@@ -82,7 +94,7 @@ class OrderRowPanel extends React.Component {
             <th>
               <div className="ButtonContainer">
                 <button
-                  disabled={this.state.disable}
+                  disabled={this.props.disable}
                   className="CancelButton"
                   onClick={() => {
                     this.props.cancel(this.props.orderID);
