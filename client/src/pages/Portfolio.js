@@ -19,6 +19,7 @@ class Portfolio extends React.Component {
       snackBarMessages: [],
       userName: "",
       unauth: false,
+      userRank: "",
     };
 
     this.AddNotification = this.AddNotification.bind(this);
@@ -50,6 +51,7 @@ class Portfolio extends React.Component {
         res.json().then((body) =>
           this.setState({
             userName: body.InvestorFName + " " + body.InvestorLName,
+            userRank: body.InvestorRanking,
           })
         );
       } else if (res.status === 401) {
@@ -99,7 +101,7 @@ class Portfolio extends React.Component {
               <th width="20%">
                 <div className="ButtonContainer">
                   <a href="/Leaderboard" className="GoldRankButton">
-                    Current Rank: 152
+                    Current Rank: {this.state.userRank}
                   </a>
                 </div>
               </th>

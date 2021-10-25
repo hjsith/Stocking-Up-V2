@@ -244,3 +244,8 @@ export async function confirmOrder(orderID) {
   await order.save();
   return true;
 }
+
+export async function getOrderByOrderID(orderID) {
+  let order = await Order.findOne({ where: { OrderID: orderID } });
+  return order;
+}

@@ -5,6 +5,8 @@ import {
   createHolding,
 } from "../functions/Holding.js";
 import { getAuthenticatedUser } from "../functions/Authenticate.js";
+import { getOrderByOrderID } from "../functions/Order.js";
+import { getPriceForListing } from "../functions/Price.js";
 
 // Init shared
 const router = Router();
@@ -20,6 +22,21 @@ router.get("/holdings", async (req, res) => {
   } else {
     res.status(StatusCodes.UNAUTHORIZED).end();
   }
+});
+
+//Calculate holdings profit
+router.get("/holdingsprofit", async (req, res) => {
+  const holdingsprofit = await getAllCurrentHoldingsByInvestor(req.query.id);
+  let sum = 0;
+  for (let i = 0; i < holdingsprofit.length; i++) {
+    let order = await getOrderByOrderID(holdingsprofit[i].OrderID);
+    let priceBought = order.ListingPrice;
+    let quantity = order.QuantityOrder;
+    let currentPrice = await getPriceForListing(order.ListingID);
+    let profit = priceBought * quantity - currentPrice.CurrentPrice * quantity;
+    sum += profit;
+  }
+  return res.status(StatusCodes.OK).json({ profit: sum });
 });
 
 //Route to post or create holdings for each investor
