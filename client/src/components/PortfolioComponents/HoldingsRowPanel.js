@@ -2,6 +2,8 @@ import React from "react";
 import "../../assets/css/PortfolioPage.scss";
 import UserProfileIcon from "../UserProfileIcon";
 import { Link } from "react-router-dom";
+import PriceArrow from "../PriceArrow";
+import ClosingPrice from "../ClosingPrice";
 
 class HoldingsRowPanel extends React.Component {
   //React constructor used to initalise local states
@@ -60,7 +62,17 @@ class HoldingsRowPanel extends React.Component {
             </th>
             <th>{this.state.name}</th>
             <th>{this.props.priceBought}</th>
-            <th>{this.state.price}</th>
+            <th>
+              {this.state.price}
+              <ClosingPrice
+                currentPrice={this.state.price}
+                code={this.props.companyCode}
+              />
+              <PriceArrow
+                currentPrice={this.state.price}
+                code={this.props.companyCode}
+              />
+            </th>
             <th>{this.props.units}</th>
             <th>{this.props.total}</th>
             <th>

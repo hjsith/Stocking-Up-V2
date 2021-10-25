@@ -12,6 +12,7 @@ class RecentOrders extends React.Component {
       orderArray: [],
       userName: "",
       unauth: false,
+      disable: [],
     };
   }
 
@@ -55,8 +56,22 @@ class RecentOrders extends React.Component {
           this.setState({
             orderArray: body,
           });
+          let temp = [];
+          temp = this.state.disable;
+          for (let i = 0; i < body.length; i++) {
+            console.log(body[i].ExecutionTime < new Date());
+            if (Date.parse(body[i].ExecutionTime) < new Date()) {
+              temp.push(true);
+            } else {
+              temp.push(false);
+            }
+          }
+          this.setState({
+            disable: temp,
+          });
         });
       });
+
       console.log(this.state.orderArray);
     }, 500);
   }
@@ -109,6 +124,11 @@ class RecentOrders extends React.Component {
       this.setState({
         orderArray: copyOrderArray,
       });
+      let temp = this.state.disable;
+      temp[index] = true;
+      this.setState({
+        disable: temp,
+      });
       this.props.updateSnackbar("Your order has been confirmed");
     });
   };
@@ -153,6 +173,7 @@ class RecentOrders extends React.Component {
                 total={order.OrderTotal}
                 cancel={this.cancelEvent.bind(this, index)}
                 confirm={this.confirmEvent.bind(this, index)}
+                disable={this.state.disable[index]}
                 orderID={order.OrderID}
               />
             );
