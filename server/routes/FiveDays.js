@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import {
   getAllFiveDaysPrices,
   getFiveDaysPricesForListing,
+  getFiveDaysGraphData,
 } from "../functions/FiveDays.js";
 
 // Init shared
@@ -24,6 +25,14 @@ router.get("/fivedays", async (req, res) => {
   var data = req.body;
 
   const prices = await getFiveDaysPricesForListing(data.code);
+
+  return res.status(StatusCodes.OK).json(prices);
+});
+
+router.get("/fivedays/graph", async (req, res) => {
+  var code = req.query.id;
+
+  const prices = await getFiveDaysGraphData(code);
 
   return res.status(StatusCodes.OK).json(prices);
 });

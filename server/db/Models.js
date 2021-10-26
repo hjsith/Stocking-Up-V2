@@ -153,7 +153,7 @@ export const Achievements = db.define(
     },
     Title: DataTypes.STRING,
     Description: DataTypes.STRING,
-    MedalImage: DataTypes.BLOB,
+    MedalImage: DataTypes.TEXT,
   },
   { sequelize: db, tableName: "Achievements", timestamps: false }
 );
@@ -347,6 +347,9 @@ export const Articles = db.define(
     ArticleName: DataTypes.TEXT,
     ArticleDate: DataTypes.DATE,
     ArticleInfo: DataTypes.TEXT,
+    ArticleImage: DataTypes.TEXT,
+    ArticleURL: DataTypes.TEXT,
+    ArticleSource: DataTypes.TEXT,
   },
   { sequelize: db, tableName: "Articles", timestamps: false }
 );

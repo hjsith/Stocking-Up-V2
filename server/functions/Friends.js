@@ -125,3 +125,20 @@ export async function checkIfFriends(user1, user2) {
 
   return value;
 }
+
+export async function countFriends(userID) {
+  const friends = await Friends.findAll({
+    where: {
+      [Op.or]: [
+        {
+          [Op.and]: [{ RequestingUsername: userID }, { Status: 1 }],
+        },
+        {
+          [Op.and]: [{ AcceptingUsername: userID }, { Status: 1 }],
+        },
+      ],
+    },
+  });
+
+  return friends.length;
+}

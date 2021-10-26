@@ -28,57 +28,107 @@
   color: white;
   padding: 1.25em 1.25em 0em 1.25em;
   font-weight: bold;
-  
-  
 }
 
 .GainsPanel {
   height: 4.6em;
-  width: 96%;
+  width: 98%;
   background-color: #140f37bb;
-  margin-left: 1.25em;
   margin-bottom: 1em;
   border-radius: 0.625em;
 }
+
+.TitleTableFont2 {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.TitleTableFont2 > tr {
+  width: 100%;
+}
+
 .TitleTableFont2 > tr > th {
   font-family: "Roboto", sans-serif;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
   font-size: 0.7em;
-  width: 20%;
-  text-align:center;
+  text-align: center;
 }
+
+// .TitleTableFont2 > tr > th {
+//   font-family: "Roboto", sans-serif;
+//   color: #c2bebe;
+//   padding: 1.25em;
+//   font-weight: normal;
+//   font-size: 0.7em;
+//   width: 20%;
+//   text-align: center;
+// }
 
 .DeclinesPanel {
   height: 4.6em;
-  width: 96%;
+  width: 98%;
   background-color: #140f37bb;
-  margin-left: 1.25em;
   margin-bottom: 1em;
   border-radius: 0.625em;
+}
+
+.TitleTableFont3 {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.TitleTableFont3 > tr {
+  width: 100%;
 }
 
 .TitleTableFont3 > tr > th {
   font-family: "Roboto", sans-serif;
   color: #c2bebe;
   padding: 1.25em;
-  text-align: center;
   font-weight: normal;
   font-size: 0.7em;
-  width:20%
- 
+  text-align: center;
+}
+
+.TableTitleFont {
+  margin-left: 0.9em;
+  width: 93%;
+  table-layout: fixed;
+}
+
+.TableTitleFont > tr {
+  width: 100%;
 }
 
 .TableTitleFont > tr > th {
+  text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 10%;
-  
 }
+
+// .TableTitleFont {
+//   margin-left: 0.9em;
+//   width: 93%;
+//   table-layout: fixed;
+// }
+
+// .TableTitleFont > tr {
+//   width: 100%;
+// }
+
+// .TableTitleFont > tr > th {
+//   text-align: center;
+//   font-family: "Roboto", sans-serif;
+//   font-size: 0.7em;
+//   color: #c2bebe;
+//   padding: 1.25em;
+//   font-weight: normal;
+// }
 
 .WhiteLine {
   height: 0.05em;
@@ -86,29 +136,38 @@
   width: 97%;
   background-color: white;
 }
-.TableTitleFont {
-  margin-left: 0.9em;
-
-}
 
 .divGains {
   height: 16em;
-  width: 97%;
+  margin-left: 0.9em;
+  width: 95%;
   overflow: auto;
+  overflow-y: overlay;
 }
-.divDecline{
-  height: 16em;
-  width: 97%;
-  overflow: auto;
 
+.divDecline {
+  height: 16em;
+  margin-left: 0.9em;
+  width: 95%;
+  overflow: auto;
+  overflow-y: overlay;
 }
+
 .AsxPricePanel {
   height: 4.6em;
-  width: 96%;
+  width: 98%;
   background-color: #140f37bb;
-  margin-left: 1.25em;
   margin-bottom: 1em;
   border-radius: 0.625em;
+}
+
+.TitleTableFont4 {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.TitleTableFont4 > tr {
+  width: 100%;
 }
 
 .TitleTableFont4 > tr > th {
@@ -117,30 +176,34 @@
   padding: 1.25em;
   font-weight: normal;
   font-size: 0.7em;
+  text-align: center;
+}
 
-  width:23%
- 
-  
-  
-  
-  
+.TitleTableFontAsx {
+  margin-left: 0.9em;
+  width: 93%;
+  table-layout: fixed;
+}
+
+.TitleTableFontAsx > tr {
+  width: 100%;
 }
 
 .TitleTableFontAsx > tr > th {
+  text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 0.7em;
   color: #c2bebe;
   padding: 1.25em;
   font-weight: normal;
-  width: 10%;
-  text-align:center;
-  
 }
 
 .divAsx {
   height: 44.5em;
-  width: 97%;
+  margin-left: 0.9em;
+  width: 95%;
   overflow: auto;
+  overflow-y: overlay;
 }
 
 .UpArrow {
@@ -152,4 +215,11 @@
 }
 ::-webkit-scrollbar {
   width: 10px;
+}
+.GreenPriceMarkets {
+  color: #00ff94;
+}
+
+.RedPriceMarkets {
+  color: #de3838;
 }

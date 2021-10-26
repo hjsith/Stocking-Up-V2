@@ -4,6 +4,10 @@ import UnlockedAchievement from "./UnlockedAchievement";
 import LockedAchievement from "./LockedAchievement";
 
 class Achievement extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     let icon;
     if (this.props.achievementStatus) {

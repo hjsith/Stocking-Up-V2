@@ -7,53 +7,27 @@ class Declines extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      declinesArray: [
-        {
-          colourNumber: 1,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          percentageChange: "+2.10%",
-          industry: "Consumer Staples"
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wistech Global",
-          currentPrice: "$47.02",
-          percentageChange: "-1.21%",
-          industry: "Logistics"
-        },
-        {
-          colourNumber: 4,
-          companyCode: "CBA",
-          companyName: "Commonwealth Bank",
-          currentPrice: "$64.02",
-          percentageChange: "+3.10%",
-          industry: "Banking and Financial Services"
-        },
-
-        {
-          colourNumber: 1,
-          companyCode: "A2M",
-          companyName: "A2 Milk",
-          currentPrice: "$7.02",
-          percentageChange: "+2.10%",
-          industry: "Consumer Staples"
-        },
-        {
-          colourNumber: 2,
-          companyCode: "WIS",
-          companyName: "Wistech Global",
-          currentPrice: "$47.02",
-          percentageChange: "-1.21%",
-          industry: "Logistics"
-        }
-        
-      ]
+      declinesArray: []
     };
   }
-
+  fetchTop5Declines() {
+    fetch("/api/listing/Top5Declines", {
+      //connecting backend to frontend
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      if (res.status === 200) {
+        res.json().then(body => {
+          this.setState({ declinesArray: body });
+        });
+      }
+    });
+  }
+  componentDidMount() {
+    this.fetchTop5Declines(); //when the website loads the top 5 Declines  is refreshed
+  }
   render() {
     return (
       <div>
@@ -71,13 +45,12 @@ class Declines extends React.Component {
           {this.state.declinesArray.map((declines, index) => {
             return (
               <DeclinesPanel
-                key={declines.companyCode}
-                colourNumber={declines.colourNumber}
-                companyCode={declines.companyCode}
-                companyName={declines.companyName}
-                currentPrice={declines.currentPrice}
-                percentageChange={declines.percentageChange}
-                industry={declines.industry}
+                key={declines.ListingID}
+                companyCode={declines.ListingID}
+                companyName={declines.ListingName}
+                currentPrice={declines.CurrentPrice}
+                percentageChange={declines.change}
+                industry={declines.ListingIndustry}
               />
             );
           })}

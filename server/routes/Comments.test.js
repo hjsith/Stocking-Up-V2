@@ -89,7 +89,7 @@ describe("Comments endpoint", () => {
       .get("/api/commentCount?userID=" + user.body.id)
       .set("cookie", cookie);
     expect(res.status).toEqual(200);
-    expect(res.body).toEqual(1);
+    expect(res.body.count).toEqual(1);
   });
   it("Unauthorized to retrieve comment count", async () => {
     const res = await request(app).get(

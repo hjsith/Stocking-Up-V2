@@ -159,3 +159,30 @@ export async function getInvestorsWithSimilarUsernames(
 
   return nonFriends;
 }
+
+export async function checkEmailExist(email) {
+  var searchedInvestor = await Investor.findOne({
+    where: {
+      InvestorEmail: email,
+    },
+  });
+  if (searchedInvestor === null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+export async function updateUserDetails(
+  userID,
+  inputFirstName,
+  inputLastName,
+  inputEmail
+) {
+  const investor = await Investor.findByPk(userID);
+  await investor.update({
+    InvestorFName: inputFirstName,
+    InvestorLName: inputLastName,
+    InvestorEmail: inputEmail,
+  });
+}
