@@ -10,8 +10,9 @@ const Leaderboard = () => {
   const cont = useContext(UserContext);
   const [unauth, setunauth] = useState(false);
   const [investors, setInvestors] = useState([]); //create array investors using React useState
+  const [selectedDifficulty, setSelectedDifficulty] = useState("Easy");
   {
-    fetch("/api/allInvestors", {
+    fetch("/api/allInvestors/Leaderboard?difficulty=" + selectedDifficulty, {
       //HTTP get request for all investors/users on platform
       method: "GET",
       headers: {
@@ -21,13 +22,18 @@ const Leaderboard = () => {
       if (res.status === 200) {
         res.json().then((body) => {
           setInvestors(body); //set investor array to be the get response
-          console.log(investors); //log response for testing purposes
         });
       } else if (res.status === 401) {
         setunauth(true);
       }
     });
   }
+
+  const handleButtonClick = (difficulty) => {
+    console.log("Hello");
+    setInvestors([]);
+    setSelectedDifficulty(difficulty);
+  };
 
   if (unauth || cont.user.name === "") {
     return (
@@ -43,7 +49,34 @@ const Leaderboard = () => {
     //front end
     <div className="LeaderboardTitle">
       <NavBar />
-      <h1 className="LeaderboadTitle">Leaderboard</h1>
+      <h1 className="LeaderboadTitleTitle">Leaderboard</h1>
+
+      <div className="DifficultySelect">
+        <div
+          className="EasyButtonContainer"
+          onClick={() => {
+            handleButtonClick("Easy");
+          }}
+        >
+          Easy
+        </div>
+        <div
+          className="IntermediateButtonContainer"
+          onClick={() => {
+            handleButtonClick("Intermediate");
+          }}
+        >
+          Intermediate
+        </div>
+        <div
+          className="DifficultyButtonContainer"
+          onClick={() => {
+            handleButtonClick("Difficult");
+          }}
+        >
+          Difficult
+        </div>
+      </div>
       <div className="BackgroundPanel">
         <table className="TableRows">
           <tr className="TableHeadings">
@@ -60,7 +93,7 @@ const Leaderboard = () => {
           {investors.map((investor, index) => {
             //map investor to the front end display- attributes from investor table used below include Username, Ranking, NetWorth
             return (
-              <tr>
+              <tr className="InvestorRow">
                 <td key={index}>{investor.Username}</td>
                 <td key={index}>{investor.InvestorRanking}</td>
                 <td key={index}>{investor.NetWorth}</td>

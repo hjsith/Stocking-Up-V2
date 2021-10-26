@@ -186,3 +186,84 @@ export async function updateUserDetails(
     InvestorEmail: inputEmail,
   });
 }
+
+export async function getInvestorsLeaderboard(inputDifficulty) {
+  return await Investor.findAll({
+    order: [["NetWorth", "DESC"]],
+    where: {
+      InvestorDifficulty: inputDifficulty,
+    },
+  });
+}
+
+export async function updateInvestorRankings() {
+  const easyInvestors = await Investor.findAll({
+    order: [["NetWorth", "DESC"]],
+    where: {
+      InvestorDifficulty: "Easy",
+    },
+  });
+
+  if (easyInvestors.length != 0) {
+    easyInvestors[0].InvestorRanking = 1;
+    easyInvestors[0].save();
+    for (let i = 1; i < easyInvestors.length; ++i) {
+      if (easyInvestors[i].NetWorth == easyInvestors[i - 1].NetWorth) {
+        easyInvestors[i].InvestorRanking = easyInvestors[i - 1].InvestorRanking;
+        easyInvestors[i].save();
+      } else {
+        easyInvestors[i].InvestorRanking = i + 1;
+        easyInvestors[i].save();
+      }
+    }
+  }
+
+  const intermediateInvestors = await Investor.findAll({
+    order: [["NetWorth", "DESC"]],
+    where: {
+      InvestorDifficulty: "Intermediate",
+    },
+  });
+
+  if (intermediateInvestors.length != 0) {
+    intermediateInvestors[0].InvestorRanking = 1;
+    intermediateInvestors[0].save();
+    for (let i = 1; i < intermediateInvestors.length; ++i) {
+      if (
+        intermediateInvestors[i].NetWorth ==
+        intermediateInvestors[i - 1].NetWorth
+      ) {
+        intermediateInvestors[i].InvestorRanking =
+          intermediateInvestors[i - 1].InvestorRanking;
+        intermediateInvestors[i].save();
+      } else {
+        intermediateInvestors[i].InvestorRanking = i + 1;
+        intermediateInvestors[i].save();
+      }
+    }
+  }
+
+  const difficultInvestors = await Investor.findAll({
+    order: [["NetWorth", "DESC"]],
+    where: {
+      InvestorDifficulty: "Difficult",
+    },
+  });
+
+  if (difficultInvestors.length != 0) {
+    difficultInvestors[0].InvestorRanking = 1;
+    difficultInvestors[0].save();
+    for (let i = 1; i < difficultInvestors.length; ++i) {
+      if (
+        difficultInvestors[i].NetWorth == difficultInvestors[i - 1].NetWorth
+      ) {
+        difficultInvestors[i].InvestorRanking =
+          difficultInvestors[i - 1].InvestorRanking;
+        difficultInvestors[i].save();
+      } else {
+        difficultInvestors[i].InvestorRanking = i + 1;
+        difficultInvestors[i].save();
+      }
+    }
+  }
+}

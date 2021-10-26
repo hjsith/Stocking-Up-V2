@@ -32,6 +32,25 @@ class SignIn extends React.Component {
         } else if (res.status === 401) {
           this.setState({ unauth: true });
         }
+        this.SetRanking();
+      })
+      .catch((exception) => {
+        console.log("Error:", exception);
+      });
+  }
+
+  SetRanking() {
+    fetch("/api/determineInvestorRankings", {
+      //connects to frotnend to backend
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.status === 401) {
+          this.setState({ unauth: true });
+        }
       })
       .catch((exception) => {
         console.log("Error:", exception);
@@ -44,7 +63,7 @@ class SignIn extends React.Component {
     }
 
     //Redirect if the user is not logged in
-    if (this.state.unauth || this.context.user.name === "") {
+    if (this.state.unauth) {
       return (
         <Redirect
           to={{
