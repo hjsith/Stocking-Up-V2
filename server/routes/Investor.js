@@ -7,6 +7,8 @@ import {
   setInvestorDifficulty,
   getInvestorsWithSimilarUsernames,
   updateUserDetails,
+  getInvestorsLeaderboard,
+  updateInvestorRankings,
 } from "../functions/Investor.js";
 import bcrypt from "bcrypt";
 import { getAuthenticatedUser } from "../functions/Authenticate.js";
@@ -115,6 +117,26 @@ router.put("/investor/updateUser", async (req, res) => {
       data.lastname,
       data.email
     );
+    return res.status(StatusCodes.OK).end();
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.get("/allInvestors/Leaderboard", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
+  if (checkAuth) {
+    const investors = await getInvestorsLeaderboard(req.query.difficulty);
+    return res.status(StatusCodes.OK).json(investors);
+  } else {
+    return res.status(StatusCodes.UNAUTHORIZED).end();
+  }
+});
+
+router.get("/determineInvestorRankings", async (req, res) => {
+  const checkAuth = await getAuthenticatedUser(req, res); //Check if the user is authenticated via their cookies
+  if (checkAuth) {
+    await updateInvestorRankings();
     return res.status(StatusCodes.OK).end();
   } else {
     return res.status(StatusCodes.UNAUTHORIZED).end();

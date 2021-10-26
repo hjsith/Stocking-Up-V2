@@ -1,27 +1,100 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
 .LeaderboardTitle {
-    color: #fff;
-    font-family: "Roboto", sans-serif;
-    text-align: center;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.LeaderboadTitleTitle {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .BackgroundPanel {
-    background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
-    height: 100%;
-    width: 70%;
-    border-radius: 0.625em;
-    margin-top: 1%;
-    margin-left: 1%;
-    display: inline-block;
-    vertical-align: top;
-  }
+  background-image: linear-gradient(#2b1f66, #130f4b, #1e1a55);
+  height: 100%;
+  width: 70%;
+  border-radius: 0.625em;
+  margin-top: 1%;
+  margin-left: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
 
 .TableRows > tr > th {
-    font-family: "Roboto", sans-serif;
-    font-size: 1em;
-    color: #c2bebe;
-    font-weight: normal;
-    padding: 0.2em;
-    width: 5%;
-  }
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  color: #c2bebe;
+  font-weight: normal;
+  padding: 0.2em;
+  width: 5%;
+}
+
+.DifficultySelect {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.EasyButtonContainer {
+  height: 3em;
+  width: 13em;
+  background-color: #2ac811;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.EasyButtonContainer:hover {
+  background-color: #22a50e;
+  cursor: pointer;
+}
+
+.IntermediateButtonContainer {
+  height: 3em;
+  width: 13em;
+  background-color: #ffba4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.IntermediateButtonContainer:hover {
+  background-color: #ce9740;
+  cursor: pointer;
+}
+
+.DifficultyButtonContainer {
+  height: 3em;
+  width: 13em;
+  background-color: #ff4b4b;
+  color: white;
+  border-radius: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.DifficultyButtonContainer:hover {
+  background-color: #c23a3a;
+  cursor: pointer;
+}
+
+.InvestorRow {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
