@@ -30,7 +30,6 @@ const Leaderboard = () => {
   }
 
   const handleButtonClick = (difficulty) => {
-    console.log("Hello");
     setInvestors([]);
     setSelectedDifficulty(difficulty);
   };
