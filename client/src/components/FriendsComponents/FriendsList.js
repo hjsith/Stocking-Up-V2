@@ -48,7 +48,13 @@ class FriendsList extends React.Component {
                 }
                 colorNumber={3}
                 dateAdded={friend.DateAdded}
-                isSelected={true}
+                isSelected={
+                  this.props.selectedUser ==
+                  (friend.RequestingUsername == this.context.user.id
+                    ? friend.AcceptingUsername
+                    : friend.RequestingUsername)
+                }
+                selectedUserHandler={this.props.selectedUserHandler}
               />
             </div>
           ))}

@@ -14,14 +14,18 @@ class FriendProfile extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <FriendProfileIconPair username={this.state.username} />
-        <FriendProfileStats />
-        <FriendWhiteLine />
-        <FriendAchievements />
-      </>
-    );
+    if (this.props.username == "") {
+      return <h1>No user selected!</h1>;
+    } else {
+      return (
+        <>
+          <FriendProfileIconPair username={this.state.username} />
+          <FriendProfileStats />
+          <FriendWhiteLine />
+          <FriendAchievements />
+        </>
+      );
+    }
   }
 }
 
