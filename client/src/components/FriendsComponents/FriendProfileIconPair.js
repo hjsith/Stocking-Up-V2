@@ -10,6 +10,15 @@ class FriendProfile extends React.Component {
     };
   }
 
+  componentDidUpdate(oldProps) {
+    const newProps = this.props;
+    if (oldProps !== newProps) {
+      this.setState({
+        username: newProps.username,
+      });
+    }
+  }
+
   render() {
     return (
       <div className="FriendBlock">

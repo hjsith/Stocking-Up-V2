@@ -32,7 +32,10 @@ class FriendListItem extends React.Component {
   }
 
   selectUser() {
-    this.props.selectedUserHandler(this.props.userId);
+    this.props.selectedUserHandler({
+      id: this.props.userId,
+      date: this.props.dateAdded,
+    });
   }
 
   selectIcon() {

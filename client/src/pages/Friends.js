@@ -14,9 +14,10 @@ class Friends extends React.Component {
     super(props);
     this.state = {
       friends: [],
-      rightView: [true, false, false],
+      rightView: [false, true, false],
       unauth: false,
       selectedUser: "",
+      selectedDateAdded: "",
     };
     this.selectedUserHandler = this.selectedUserHandler.bind(this);
     this.handler = this.handler.bind(this);
@@ -27,19 +28,16 @@ class Friends extends React.Component {
   static contextType = UserContext;
 
   handler(props) {
-    this.setState({ rightView: [false, false, false] });
     this.setState({
       rightView: props,
     });
   }
 
   selectedUserHandler(props) {
-    this.setState({ rightView: [false, false, false] });
     this.setState({
-      selectedUser: props,
+      selectedUser: props.id,
+      selectedDateAdded: props.date,
     });
-    console.log(props);
-    console.log(this.state.selectedUser);
     this.setState({
       rightView: [true, false, false],
     });
@@ -47,7 +45,12 @@ class Friends extends React.Component {
 
   RightPanelView() {
     if (this.state.rightView[0])
-      return <FriendProfile username={this.state.selectedUser} />;
+      return (
+        <FriendProfile
+          username={this.state.selectedUser}
+          dateAdded={this.state.selectedDateAdded}
+        />
+      );
     else if (this.state.rightView[1]) return <AddFriend />;
     else if (this.state.rightView[2]) return <PendingFriends />;
   }
