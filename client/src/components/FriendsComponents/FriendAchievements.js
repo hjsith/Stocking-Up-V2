@@ -11,7 +11,7 @@ class FriendAchievements extends React.Component {
       <div className="FriendAchievementBlock">
         <p className="FriendAchievementHeading">Achievements!</p>
         <div className="FriendUserAchievement">
-          <AchievementBlock loop={16} />
+          <AchievementBlock />
         </div>
       </div>
     );

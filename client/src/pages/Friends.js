@@ -13,41 +13,13 @@ class Friends extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      friends: [
-        {
-          InvestorID: "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73",
-          Username: "Admin",
-          DateAdded: "01/10/2021",
-        },
-        {
-          InvestorID: "09cdd9ca-8240-45b3-8ec8-56b1c1e2cb73",
-          Username: "Jem",
-          DateAdded: "02/10/2021",
-        },
-        {
-          InvestorID: "09ddd9ca-8240-45b3-8ec8-56b1c1e2cb73",
-          Username: "Ash",
-          DateAdded: "03/10/2021",
-        },
-        {
-          InvestorID: "09bdd9ca-8240-45b3-8ec8-56b1c1e2cb73",
-          Username: "Admin",
-          DateAdded: "01/10/2021",
-        },
-        {
-          InvestorID: "09cdd9ca-8240-45b3-8ec8-56b1c1e2cb73",
-          Username: "Jem",
-          DateAdded: "02/10/2021",
-        },
-        {
-          InvestorID: "09ddd9ca-8240-45b3-8ec8-56b1c1e2cb73",
-          Username: "Ash",
-          DateAdded: "03/10/2021",
-        },
-      ],
-      rightView: [true, false, false],
+      friends: [],
+      rightView: [false, true, false],
       unauth: false,
+      selectedUser: "",
+      selectedDateAdded: "",
     };
+    this.selectedUserHandler = this.selectedUserHandler.bind(this);
     this.handler = this.handler.bind(this);
     this.RightPanelView = this.RightPanelView.bind(this);
     this.WhichPanel = this.WhichPanel.bind(this);
@@ -56,15 +28,29 @@ class Friends extends React.Component {
   static contextType = UserContext;
 
   handler(props) {
-    this.setState({ rightView: [false, false, false] });
     this.setState({
       rightView: props,
     });
   }
 
+  selectedUserHandler(props) {
+    this.setState({
+      selectedUser: props.id,
+      selectedDateAdded: props.date,
+    });
+    this.setState({
+      rightView: [true, false, false],
+    });
+  }
+
   RightPanelView() {
     if (this.state.rightView[0])
-      return <FriendProfile username={this.state.friends[0].Username} />;
+      return (
+        <FriendProfile
+          username={this.state.selectedUser}
+          dateAdded={this.state.selectedDateAdded}
+        />
+      );
     else if (this.state.rightView[1]) return <AddFriend />;
     else if (this.state.rightView[2]) return <PendingFriends />;
   }
@@ -98,7 +84,10 @@ class Friends extends React.Component {
               />
             </div>
             <div className="FriendPanel2">
-              <FriendsList />
+              <FriendsList
+                selectedUserHandler={this.selectedUserHandler}
+                selectedUser={this.state.selectedUser}
+              />
             </div>
           </div>
         </div>
